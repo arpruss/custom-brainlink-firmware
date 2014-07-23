@@ -1,0 +1,764 @@
+Archive member included because of file (symbol)
+
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_divmodhi4.o)
+                              mainFirmware.o (__divmodhi4)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o (exit)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_clear_bss.o)
+                              mainFirmware.o (__do_clear_bss)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_udivmodhi4.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_divmodhi4.o) (__udivmodhi4)
+
+Allocating common symbols
+Common symbol       size              file
+
+BT_data             0x104             mainFirmware.o
+_acc                0x4               mainFirmware.o
+aux                 0xe               mainFirmware.o
+robotData           0xf0              mainFirmware.o
+captured_signal     0xbf              mainFirmware.o
+startUpCounter      0x2               mainFirmware.o
+twiMaster           0x11              mainFirmware.o
+bt                  0xe               mainFirmware.o
+AUX_data            0x104             mainFirmware.o
+bitCounter          0x1               mainFirmware.o
+onOffTracker        0x2               mainFirmware.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00100000         xr
+data             0x00802000         0x0000ffa0         rw !x
+eeprom           0x00810000         0x00010000         rw !x
+fuse             0x00820000         0x00000400         rw !x
+lock             0x00830000         0x00000400         rw !x
+signature        0x00840000         0x00000400         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+LOAD mainFirmware.o
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2\libm.a
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2\libc.a
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00000000     0x2bc0
+ *(.vectors)
+ .vectors       0x00000000      0x178 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+                0x00000000                __vectors
+                0x00000000                __vector_default
+ *(.vectors)
+ *(.progmem.gcc*)
+ *(.progmem*)
+                0x00000178                . = ALIGN (0x2)
+                0x00000178                __trampolines_start = .
+ *(.trampolines)
+ .trampolines   0x00000178        0x0 linker stubs
+ *(.trampolines*)
+                0x00000178                __trampolines_end = .
+ *(.jumptables)
+ *(.jumptables*)
+ *(.lowtext)
+ *(.lowtext*)
+                0x00000178                __ctors_start = .
+ *(.ctors)
+                0x00000178                __ctors_end = .
+                0x00000178                __dtors_start = .
+ *(.dtors)
+                0x00000178                __dtors_end = .
+ SORT(*)(.ctors)
+ SORT(*)(.dtors)
+ *(.init0)
+ .init0         0x00000178        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+                0x00000178                __init
+ *(.init0)
+ *(.init1)
+ *(.init1)
+ *(.init2)
+ .init2         0x00000178        0xc c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+ *(.init2)
+ *(.init3)
+ *(.init3)
+ *(.init4)
+ .init4         0x00000184       0x10 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_clear_bss.o)
+                0x00000184                __do_clear_bss
+ *(.init4)
+ *(.init5)
+ *(.init5)
+ *(.init6)
+ *(.init6)
+ *(.init7)
+ *(.init7)
+ *(.init8)
+ *(.init8)
+ *(.init9)
+ .init9         0x00000194        0x8 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+ *(.init9)
+ *(.text)
+ .text          0x0000019c        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+                0x0000019c                __vector_38
+                0x0000019c                __vector_22
+                0x0000019c                __vector_63
+                0x0000019c                __vector_28
+                0x0000019c                __vector_67
+                0x0000019c                __vector_1
+                0x0000019c                __vector_32
+                0x0000019c                __vector_75
+                0x0000019c                __vector_71
+                0x0000019c                __vector_34
+                0x0000019c                __vector_62
+                0x0000019c                __vector_77
+                0x0000019c                __vector_24
+                0x0000019c                __vector_12
+                0x0000019c                __vector_55
+                0x0000019c                __vector_69
+                0x0000019c                __vector_81
+                0x0000019c                __vector_90
+                0x0000019c                __bad_interrupt
+                0x0000019c                __vector_72
+                0x0000019c                __vector_6
+                0x0000019c                __vector_31
+                0x0000019c                __vector_92
+                0x0000019c                __vector_35
+                0x0000019c                __vector_78
+                0x0000019c                __vector_74
+                0x0000019c                __vector_39
+                0x0000019c                __vector_3
+                0x0000019c                __vector_23
+                0x0000019c                __vector_68
+                0x0000019c                __vector_30
+                0x0000019c                __vector_73
+                0x0000019c                __vector_45
+                0x0000019c                __vector_93
+                0x0000019c                __vector_61
+                0x0000019c                __vector_11
+                0x0000019c                __vector_54
+                0x0000019c                __vector_13
+                0x0000019c                __vector_17
+                0x0000019c                __vector_19
+                0x0000019c                __vector_56
+                0x0000019c                __vector_7
+                0x0000019c                __vector_41
+                0x0000019c                __vector_86
+                0x0000019c                __vector_64
+                0x0000019c                __vector_88
+                0x0000019c                __vector_43
+                0x0000019c                __vector_27
+                0x0000019c                __vector_5
+                0x0000019c                __vector_33
+                0x0000019c                __vector_76
+                0x0000019c                __vector_52
+                0x0000019c                __vector_37
+                0x0000019c                __vector_89
+                0x0000019c                __vector_4
+                0x0000019c                __vector_44
+                0x0000019c                __vector_82
+                0x0000019c                __vector_51
+                0x0000019c                __vector_9
+                0x0000019c                __vector_2
+                0x0000019c                __vector_21
+                0x0000019c                __vector_15
+                0x0000019c                __vector_66
+                0x0000019c                __vector_36
+                0x0000019c                __vector_79
+                0x0000019c                __vector_58
+                0x0000019c                __vector_70
+                0x0000019c                __vector_83
+                0x0000019c                __vector_29
+                0x0000019c                __vector_60
+                0x0000019c                __vector_40
+                0x0000019c                __vector_85
+                0x0000019c                __vector_8
+                0x0000019c                __vector_26
+                0x0000019c                __vector_48
+                0x0000019c                __vector_80
+                0x0000019c                __vector_14
+                0x0000019c                __vector_84
+                0x0000019c                __vector_57
+                0x0000019c                __vector_53
+                0x0000019c                __vector_10
+                0x0000019c                __vector_50
+                0x0000019c                __vector_16
+                0x0000019c                __vector_59
+                0x0000019c                __vector_18
+                0x0000019c                __vector_42
+                0x0000019c                __vector_87
+                0x0000019c                __vector_65
+ .text          0x000001a0     0x29ce mainFirmware.o
+                0x000008f4                init_BT
+                0x000013ba                EEPROM_ReadByte
+                0x00000a18                TWI_MasterArbitrationLostBusErrorHandler
+                0x000005f8                stop_ir_timer
+                0x00000e8e                turn_off_pwm0
+                0x00000950                TWI_MasterReady
+                0x00000324                uart_getchar_timeout
+                0x0000040c                __vector_91
+                0x000005a8                set_ir0
+                0x0000166c                write_data_to_eeprom
+                0x000015c2                EEPROM_WaitForNVM
+                0x00000958                TWI_MasterWriteRead
+                0x00001746                EEPROM_LoadByte
+                0x000001c2                init_led
+                0x00000d42                __vector_46
+                0x00000fbc                read_input
+                0x000009fa                TWI_MasterRead
+                0x000001a0                init_clock
+                0x00000a0c                TWI_MasterWrite
+                0x000003ce                USART_RXComplete
+                0x00001414                print_data_from_eeprom
+                0x00000e0e                disable_dac0
+                0x0000020e                init_bt_uart
+                0x000001fa                set_led
+                0x00000e72                set_pwm
+                0x0000045c                __vector_25
+                0x00001170                ir_fail
+                0x00000dd6                set_dac0
+                0x000002ba                set_aux_baud_rate
+                0x00000300                uart_getchar
+                0x00000942                TWI_MasterState
+                0x00001820                EEPROM_SplitWritePage
+                0x0000126e                __vector_49
+                0x00000596                set_ir100
+                0x0000178c                EEPROM_AtomicWritePage
+                0x00000b72                TWI_MasterTransactionFinished
+                0x000011a0                disable_ir_read
+                0x00001764                EEPROM_LoadPage
+                0x0000186a                EEPROM_EraseAll
+                0x00000ea6                set_pwm0
+                0x00000536                read_internal_temperature
+                0x000008d0                BT_reset
+                0x000004ac                init_adc
+                0x000002dc                uart_getchar_nb
+                0x000011fe                __vector_47
+                0x00000b8c                newAccelData
+                0x00000aba                TWI_MasterReadHandler
+                0x00000880                BT_default_reset
+                0x000015cc                EEPROM_FlushBuffer
+                0x00001898                main
+                0x00000260                init_aux_uart
+                0x000017d6                EEPROM_ErasePage
+                0x00000e9a                turn_off_pwm1
+                0x000005c4                start_ir_timer
+                0x00000df2                set_dac1
+                0x00001602                EEPROM_WriteByte
+                0x00001114                init_ir_read
+                0x00000b7a                getAccelData
+                0x00000a42                TWI_MasterWriteHandler
+                0x00000e26                init_buzzer
+                0x000003a2                USART_RXBufferData_Available
+                0x000005b6                set_ir_carrier
+                0x000003b6                USART_RXBuffer_GetByte
+                0x00000eee                set_output
+                0x00000c08                initAccel
+                0x00000d8e                init_dac
+                0x000014dc                read_data_from_eeprom
+                0x00000bb0                updateAccel
+                0x00000378                aux_uart_getchar
+                0x00000b2c                TWI_MasterInterruptHandler
+                0x0000055a                init_ir
+                0x00000e5c                turn_off_buzzer
+                0x00000922                TWI_MasterInit
+                0x00000eca                set_pwm1
+                0x00000504                read_analog
+                0x00000392                USART_InterruptDriver_Initialize
+                0x000011b4                dump_data
+                0x00000e1a                disable_dac1
+                0x0000060c                __vector_20
+                0x000002d0                uart_putchar
+                0x00000580                set_ir50
+                0x0000133e                read_data_from_serial
+                0x00000e44                set_buzzer
+ .text          0x00002b6e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_divmodhi4.o)
+ .text          0x00002b6e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
+ .text          0x00002b6e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_clear_bss.o)
+ .text          0x00002b6e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_udivmodhi4.o)
+                0x00002b6e                . = ALIGN (0x2)
+ *(.text.*)
+ .text.libgcc   0x00002b6e       0x26 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_divmodhi4.o)
+                0x00002b6e                __divmodhi4
+                0x00002b6e                _div
+ .text.libgcc   0x00002b94        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
+ .text.libgcc   0x00002b94        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x00002b94       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_udivmodhi4.o)
+                0x00002b94                __udivmodhi4
+                0x00002bbc                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x00002bbc        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
+                0x00002bbc                exit
+                0x00002bbc                _exit
+ *(.fini9)
+ *(.fini8)
+ *(.fini8)
+ *(.fini7)
+ *(.fini7)
+ *(.fini6)
+ *(.fini6)
+ *(.fini5)
+ *(.fini5)
+ *(.fini4)
+ *(.fini4)
+ *(.fini3)
+ *(.fini3)
+ *(.fini2)
+ *(.fini2)
+ *(.fini1)
+ *(.fini1)
+ *(.fini0)
+ .fini0         0x00002bbc        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
+ *(.fini0)
+                0x00002bc0                _etext = .
+
+.data           0x00802000        0x0 load address 0x00002bc0
+                0x00802000                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x00802000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+ .data          0x00802000        0x0 mainFirmware.o
+ .data          0x00802000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_divmodhi4.o)
+ .data          0x00802000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
+ .data          0x00802000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_clear_bss.o)
+ .data          0x00802000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_udivmodhi4.o)
+ *(.data*)
+ *(.rodata)
+ *(.rodata*)
+ *(.gnu.linkonce.d*)
+                0x00802000                . = ALIGN (0x2)
+                0x00802000                _edata = .
+                0x00802000                PROVIDE (__data_end, .)
+
+.bss            0x00802000      0x3f2
+                0x00802000                PROVIDE (__bss_start, .)
+ *(.bss)
+ .bss           0x00802000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+ .bss           0x00802000        0x5 mainFirmware.o
+                0x00802000                pwm_frequency
+                0x00802002                signal_count
+                0x00802004                ir_read_flag
+                0x00802003                ir_read_time_out
+ .bss           0x00802005        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_divmodhi4.o)
+ .bss           0x00802005        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
+ .bss           0x00802005        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_clear_bss.o)
+ .bss           0x00802005        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_udivmodhi4.o)
+ *(.bss*)
+ *(COMMON)
+ COMMON         0x00802005      0x3ed mainFirmware.o
+                0x00802005                BT_data
+                0x00802109                _acc
+                0x0080210d                aux
+                0x0080211b                robotData
+                0x0080220b                captured_signal
+                0x008022ca                startUpCounter
+                0x008022cc                twiMaster
+                0x008022dd                bt
+                0x008022eb                AUX_data
+                0x008023ef                bitCounter
+                0x008023f0                onOffTracker
+                0x008023f2                PROVIDE (__bss_end, .)
+                0x00002bc0                __data_load_start = LOADADDR (.data)
+                0x00002bc0                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x008023f2        0x0
+                0x008023f2                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x008023f2                PROVIDE (__noinit_end, .)
+                0x008023f2                _end = .
+                0x008023f2                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.fuse
+ *(.fuse)
+ *(.lfuse)
+ *(.hfuse)
+ *(.efuse)
+
+.lock
+ *(.lock*)
+
+.signature
+ *(.signature*)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment
+ *(.comment)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000       0x20
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x20 mainFirmware.o
+
+.debug_pubnames
+                0x00000000      0x72b
+ *(.debug_pubnames)
+ .debug_pubnames
+                0x00000000      0x72b mainFirmware.o
+
+.debug_info     0x00000000     0x596f
+ *(.debug_info)
+ .debug_info    0x00000000     0x596f mainFirmware.o
+ *(.gnu.linkonce.wi.*)
+
+.debug_abbrev   0x00000000      0x466
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000      0x466 mainFirmware.o
+
+.debug_line     0x00000000     0x3080
+ *(.debug_line)
+ .debug_line    0x00000000     0x3080 mainFirmware.o
+
+.debug_frame    0x00000000      0x540
+ *(.debug_frame)
+ .debug_frame   0x00000000      0x540 mainFirmware.o
+
+.debug_str      0x00000000     0x2d6e
+ *(.debug_str)
+ .debug_str     0x00000000     0x2d6e mainFirmware.o
+                               0x2e22 (size before relaxing)
+
+.debug_loc      0x00000000     0x196b
+ *(.debug_loc)
+ .debug_loc     0x00000000     0x196b mainFirmware.o
+
+.debug_macinfo
+ *(.debug_macinfo)
+OUTPUT(mainFirmware.elf elf32-avr)
+LOAD linker stubs
+
+.debug_ranges   0x00000000      0x180
+ .debug_ranges  0x00000000      0x180 mainFirmware.o
+
+Cross Reference Table
+
+Symbol                                            File
+AUX_data                                          mainFirmware.o
+BT_data                                           mainFirmware.o
+BT_default_reset                                  mainFirmware.o
+BT_reset                                          mainFirmware.o
+EEPROM_AtomicWritePage                            mainFirmware.o
+EEPROM_EraseAll                                   mainFirmware.o
+EEPROM_ErasePage                                  mainFirmware.o
+EEPROM_FlushBuffer                                mainFirmware.o
+EEPROM_LoadByte                                   mainFirmware.o
+EEPROM_LoadPage                                   mainFirmware.o
+EEPROM_ReadByte                                   mainFirmware.o
+EEPROM_SplitWritePage                             mainFirmware.o
+EEPROM_WaitForNVM                                 mainFirmware.o
+EEPROM_WriteByte                                  mainFirmware.o
+TWI_MasterArbitrationLostBusErrorHandler          mainFirmware.o
+TWI_MasterInit                                    mainFirmware.o
+TWI_MasterInterruptHandler                        mainFirmware.o
+TWI_MasterRead                                    mainFirmware.o
+TWI_MasterReadHandler                             mainFirmware.o
+TWI_MasterReady                                   mainFirmware.o
+TWI_MasterState                                   mainFirmware.o
+TWI_MasterTransactionFinished                     mainFirmware.o
+TWI_MasterWrite                                   mainFirmware.o
+TWI_MasterWriteHandler                            mainFirmware.o
+TWI_MasterWriteRead                               mainFirmware.o
+USART_InterruptDriver_Initialize                  mainFirmware.o
+USART_RXBufferData_Available                      mainFirmware.o
+USART_RXBuffer_GetByte                            mainFirmware.o
+USART_RXComplete                                  mainFirmware.o
+__bad_interrupt                                   c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__bss_end                                         c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_clear_bss.o)
+__bss_start                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_clear_bss.o)
+__divmodhi4                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_divmodhi4.o)
+                                                  mainFirmware.o
+__do_clear_bss                                    c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_clear_bss.o)
+                                                  mainFirmware.o
+__heap_end                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__init                                            c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__stack                                           c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__udivmodhi4                                      c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_udivmodhi4.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_divmodhi4.o)
+__vector_1                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_10                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_11                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_12                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_13                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_14                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_15                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_16                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_17                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_18                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_19                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_2                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_20                                       mainFirmware.o
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_21                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_22                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_23                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_24                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_25                                       mainFirmware.o
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_26                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_27                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_28                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_29                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_3                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_30                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_31                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_32                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_33                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_34                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_35                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_36                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_37                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_38                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_39                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_4                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_40                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_41                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_42                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_43                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_44                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_45                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_46                                       mainFirmware.o
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_47                                       mainFirmware.o
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_48                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_49                                       mainFirmware.o
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_5                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_50                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_51                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_52                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_53                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_54                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_55                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_56                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_57                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_58                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_59                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_6                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_60                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_61                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_62                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_63                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_64                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_65                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_66                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_67                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_68                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_69                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_7                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_70                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_71                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_72                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_73                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_74                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_75                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_76                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_77                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_78                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_79                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_8                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_80                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_81                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_82                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_83                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_84                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_85                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_86                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_87                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_88                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_89                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_9                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_90                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_91                                       mainFirmware.o
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_92                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_93                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vector_default                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+__vectors                                         c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+_acc                                              mainFirmware.o
+_div                                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_divmodhi4.o)
+_exit                                             c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
+aux                                               mainFirmware.o
+aux_uart_getchar                                  mainFirmware.o
+bitCounter                                        mainFirmware.o
+bt                                                mainFirmware.o
+captured_signal                                   mainFirmware.o
+disable_dac0                                      mainFirmware.o
+disable_dac1                                      mainFirmware.o
+disable_ir_read                                   mainFirmware.o
+dump_data                                         mainFirmware.o
+exit                                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+getAccelData                                      mainFirmware.o
+initAccel                                         mainFirmware.o
+init_BT                                           mainFirmware.o
+init_adc                                          mainFirmware.o
+init_aux_uart                                     mainFirmware.o
+init_bt_uart                                      mainFirmware.o
+init_buzzer                                       mainFirmware.o
+init_clock                                        mainFirmware.o
+init_dac                                          mainFirmware.o
+init_ir                                           mainFirmware.o
+init_ir_read                                      mainFirmware.o
+init_led                                          mainFirmware.o
+ir_fail                                           mainFirmware.o
+ir_read_flag                                      mainFirmware.o
+ir_read_time_out                                  mainFirmware.o
+main                                              mainFirmware.o
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
+newAccelData                                      mainFirmware.o
+onOffTracker                                      mainFirmware.o
+print_data_from_eeprom                            mainFirmware.o
+pwm_frequency                                     mainFirmware.o
+read_analog                                       mainFirmware.o
+read_data_from_eeprom                             mainFirmware.o
+read_data_from_serial                             mainFirmware.o
+read_input                                        mainFirmware.o
+read_internal_temperature                         mainFirmware.o
+robotData                                         mainFirmware.o
+set_aux_baud_rate                                 mainFirmware.o
+set_buzzer                                        mainFirmware.o
+set_dac0                                          mainFirmware.o
+set_dac1                                          mainFirmware.o
+set_ir0                                           mainFirmware.o
+set_ir100                                         mainFirmware.o
+set_ir50                                          mainFirmware.o
+set_ir_carrier                                    mainFirmware.o
+set_led                                           mainFirmware.o
+set_output                                        mainFirmware.o
+set_pwm                                           mainFirmware.o
+set_pwm0                                          mainFirmware.o
+set_pwm1                                          mainFirmware.o
+signal_count                                      mainFirmware.o
+startUpCounter                                    mainFirmware.o
+start_ir_timer                                    mainFirmware.o
+stop_ir_timer                                     mainFirmware.o
+turn_off_buzzer                                   mainFirmware.o
+turn_off_pwm0                                     mainFirmware.o
+turn_off_pwm1                                     mainFirmware.o
+twiMaster                                         mainFirmware.o
+uart_getchar                                      mainFirmware.o
+uart_getchar_nb                                   mainFirmware.o
+uart_getchar_timeout                              mainFirmware.o
+uart_putchar                                      mainFirmware.o
+updateAccel                                       mainFirmware.o
+write_data_to_eeprom                              mainFirmware.o

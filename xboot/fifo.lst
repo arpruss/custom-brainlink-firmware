@@ -1,0 +1,324 @@
+   1               		.file	"fifo.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   9               		.text
+  10               	.Ltext0:
+ 397               	.global	fifo_init
+ 399               	fifo_init:
+   1:fifo.c        **** /************************************************************************/
+   2:fifo.c        **** /* XBoot Extensible AVR Bootloader                                      */
+   3:fifo.c        **** /*                                                                      */
+   4:fifo.c        **** /* FT245/2232 asynchronous Fifo Module                                  */
+   5:fifo.c        **** /*                                                                      */
+   6:fifo.c        **** /* fifo.c                                                               */
+   7:fifo.c        **** /*                                                                      */
+   8:fifo.c        **** /* Uwe Bonnes bon@elektron.ikp.physik.tu-darmstadt.de                   */
+   9:fifo.c        **** /*                                                                      */
+  10:fifo.c        **** /* Copyright (c) 2011 Uwe Bonnes                                        */
+  11:fifo.c        **** /*                                                                      */
+  12:fifo.c        **** /* Permission is hereby granted, free of charge, to any person          */
+  13:fifo.c        **** /* obtaining a copy of this software and associated documentation       */
+  14:fifo.c        **** /* files(the "Software"), to deal in the Software without restriction,  */
+  15:fifo.c        **** /* including without limitation the rights to use, copy, modify, merge, */
+  16:fifo.c        **** /* publish, distribute, sublicense, and/or sell copies of the Software, */
+  17:fifo.c        **** /* and to permit persons to whom the Software is furnished to do so,    */
+  18:fifo.c        **** /* subject to the following conditions:                                 */
+  19:fifo.c        **** /*                                                                      */
+  20:fifo.c        **** /* The above copyright notice and this permission notice shall be       */
+  21:fifo.c        **** /* included in all copies or substantial portions of the Software.      */
+  22:fifo.c        **** /*                                                                      */
+  23:fifo.c        **** /* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,      */
+  24:fifo.c        **** /* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF   */
+  25:fifo.c        **** /* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND                */
+  26:fifo.c        **** /* NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS  */
+  27:fifo.c        **** /* BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN   */
+  28:fifo.c        **** /* ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN    */
+  29:fifo.c        **** /* CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE     */
+  30:fifo.c        **** /* SOFTWARE.                                                            */
+  31:fifo.c        **** /*                                                                      */
+  32:fifo.c        **** /************************************************************************/
+  33:fifo.c        **** 
+  34:fifo.c        **** #include "fifo.h"
+  35:fifo.c        **** /* As discussed in
+  36:fifo.c        ****  * http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&t=41613
+  37:fifo.c        ****  * Accessing a bitrev table in bootloader flash will not be faster, as 
+  38:fifo.c        ****  * a our character needs to be added to the table converted to a far address
+  39:fifo.c        ****  * and probaly also the NVM needs to be cared about
+  40:fifo.c        ****  */ 
+  41:fifo.c        **** 
+  42:fifo.c        **** #define REVERSE(a) do                     \
+  43:fifo.c        **** {                                         \
+  44:fifo.c        ****   a=((a>>1)&0x55)|((a<<1)&0xaa);          \
+  45:fifo.c        ****   a=((a>>2)&0x33)|((a<<2)&0xcc);          \
+  46:fifo.c        ****   asm volatile("swap %0":"=r"(a):"0"(a)); \
+  47:fifo.c        **** } while(0)
+  48:fifo.c        **** 
+  49:fifo.c        **** // Initialize FIFO
+  50:fifo.c        **** void __attribute__ ((always_inline)) fifo_init(void)
+  51:fifo.c        **** {
+ 400               	68,0,51,.LM0-.LFBB1
+ 401               	.LM0:
+ 402               	.LFBB1:
+ 403               	/* prologue: function */
+ 404               	/* frame size = 0 */
+  52:fifo.c        **** .DIR = 0;
+  53:fifo.c        ****         FIFO_CTL_PORT.OUTSET = FIFO_RD_N_bm | FIFO_WR_N_bm;
+ 405               	bn	68,0,53,.LM1-.LFBB1
+ 406               	.LM1:
+ 407 0000 1092 4006 		sts 1600,__zero_reg__
+  54:fifo.c        **** O_CTL_PORT.OUTSET = FIFO_RD_N_bm | FIFO_WR_N_bm;
+ 408               	tabn	68,0,54,.LM2-.LFBB1
+ 409               	.LM2:
+ 410 0004 E0E6      		ldi r30,lo8(1632)
+ 411 0006 F6E0      		ldi r31,hi8(1632)
+ 412 0008 83E0      		ldi r24,lo8(3)
+ 413 000a 8583      		std Z+5,r24
+  55:fifo.c        **** O_CTL_PORT.OUTSET = FIFO_RD_N_bm | FIFO_WR_N_bm;
+ 414               	n	68,0,55,.LM3-.LFBB1
+ 415               	.LM3:
+ 416 000c 8183      		std Z+1,r24
+ 417               	/* epilogue start */
+  56:fifo.c        **** O_CTL_PORT.OUTSET = FIFO_RD_N_bm | FIFO_WR_N_bm;
+  57:fifo.c        ****         FIFO_CTL_PORT.DIRSET = FIFO_RD_N_bm | FIFO_WR_N_bm;
+ 418               	abn	68,0,57,.LM4-.LFBB1
+ 419               	.LM4:
+ 420 000e 0895      		ret
+ 422               	.Lscope1:
+ 424               	.global	fifo_deinit
+ 426               	fifo_deinit:
+  58:fifo.c        **** _CTL_PORT.DIRSET = FIFO_RD_N_bm | FIFO_WR_N_bm;
+  59:fifo.c        ****         #endif // __AVR_XMEGA__
+  60:fifo.c        **** }
+  61:fifo.c        **** 
+ 427               	.LM3:
+ 428               		std Z+1,r24
+ 429               	/* epilogue start */
+ 431               	.LM4:
+  62:fifo.c        **** _WR_N_bm;
+  63:fifo.c        ****         #endif // __AVR_XMEGA__
+ 433               	.Lscope1:
+ 435 0012 8093 4006 	.global	fifo_deinit
+  64:fifo.c        ****  FIFO_WR_N_bm;
+ 436               	(3)
+ 437               		std Z+5,r24
+ 439 0018 F6E0      	.LM3:
+ 440 001a 83E0      		std Z+1,r24
+ 441 001c 8683      	/* epilogue start */
+  65:fifo.c        **** _CTL_PORT.DIRSET = FIFO_RD_N_bm | FIFO_WR_N_bm;
+ 442               	n	68,0,57,.LM4-.LFBB1
+ 443               	.LM4:
+ 444 001e 8283      		ret
+  66:fifo.c        **** _CTL_PORT.DIRSET = FIFO_RD_N_bm | FIFO_WR_N_bm;
+  67:fifo.c        ****         #endif // __AVR_XMEGA__
+ 446               	stabn	68,0,54,.LM2-.LFBB1
+ 447               	.LM2:
+ 448 0020 0895      		ldi r30,lo8(1632)
+ 449               		ldi r31,hi8(1632)
+ 450               		ldi r24,lo8(3)
+ 451               		std Z+5,r24
+ 453               	.LM3:
+ 454               		std Z+1,r24
+  68:fifo.c        ****  FIFO_WR_N_bm;
+  69:fifo.c        ****         #endif // __AVR_XMEGA__
+  70:fifo.c        **** }
+ 455               	ue start */
+ 457               	.LM4:
+ 458               		ret
+  71:fifo.c        **** FO_WR_N_bm;
+  72:fifo.c        ****         #endif // __AVR_XMEGA__
+ 460               	stabn	68,0,54,.LM2-.LFBB1
+ 461               	.LM2:
+ 462 0022 A0E6      		ldi r30,lo8(1632)
+ 463 0024 B6E0      		ldi r31,hi8(1632)
+ 464 0026 22E0      		ldi r24,lo8(3)
+ 465 0028 1696      		std Z+5,r24
+ 467 002c 1697      	.LM3:
+  73:fifo.c        ****  FIFO_WR_N_bm;
+ 468               	,r24
+ 469               	/* epilogue start */
+ 471 0030 F6E0      	.LM4:
+ 472 0032 8085      		ret
+  74:fifo.c        **** _CTL_PORT.DIRSET = FIFO_RD_N_bm | FIFO_WR_N_bm;
+  75:fifo.c        ****         #endif // __AVR_XMEGA__
+ 473               	e	fifo_init, .-fifo_init
+ 474               	.Lscope1:
+ 476 0036 990F      	.global	fifo_deinit
+ 478 003a 8695      	fifo_deinit:
+ 480 003e 982B      	.LM5:
+ 481 0040 892F      	.LFBB2:
+ 482 0042 880F      	/* prologue: function */
+ 483 0044 880F      	/* frame size = 0 */
+ 485 0048 9695      	.LM6:
+ 486 004a 9695      		ldi r24,lo8(-1)
+ 487 004c 9373      		sts 1600,r24
+ 489               	.LM7:
+ 490               		ldi r30,lo8(1632)
+ 491 0050 8295      		ldi r31,hi8(1632)
+ 492               		ldi r24,lo8(3)
+  76:fifo.c        ****  FIFO_WR_N_bm;
+  77:fifo.c        ****         #endif // __AVR_XMEGA__
+ 493               	BB2
+ 494               	.LM5:
+ 495               	.LFBB2:
+ 496 0052 1596      	/* prologue: function */
+ 497 0054 2C93      	/* frame size = 0 */
+  78:fifo.c        ****  FIFO_WR_N_bm;
+  79:fifo.c        ****         #endif // __AVR_XMEGA__
+ 499               	tabs	"fifo_deinit:F(0,15)",36,0,0,fifo_deinit
+ 500               	.global	fifo_deinit
+ 502               	fifo_deinit:
+ 504               	.LM5:
+ 505               	.LFBB2:
+ 506               	/* prologue: function */
+ 507               	/* frame size = 0 */
+ 509               	.LM6:
+ 510               		ldi r24,lo8(-1)
+ 511               		sts 1600,r24
+  80:fifo.c        ****  FIFO_WR_N_bm;
+  81:fifo.c        ****         #endif // __AVR_XMEGA__
+  82:fifo.c        **** }
+ 512               	einit
+ 513               	.global	fifo_deinit
+ 515               	fifo_deinit:
+ 517 0058 982F      	.LM5:
+  83:fifo.c        **** FO_WR_N_bm;
+ 518               	 */
+ 520 005a A0E6      	.LM4:
+ 521 005c B6E0      		ret
+ 523 0062 82FD      	.Lscope1:
+  84:fifo.c        **** _CTL_PORT.DIRSET = FIFO_RD_N_bm | FIFO_WR_N_bm;
+  85:fifo.c        ****         #endif // __AVR_XMEGA__
+ 525               	i8(1632)
+ 526               		ldi r24,lo8(3)
+ 527 0066 2FEF      		std Z+5,r24
+  86:fifo.c        ****  FIFO_WR_N_bm;
+  87:fifo.c        ****         #endif // __AVR_XMEGA__
+ 529               	:
+ 530               		std Z+1,r24
+ 531 006c 892F      	/* epilogue start */
+ 533 0070 8A7A      	.LM4:
+ 534 0072 9695      		ret
+ 536 0076 892B      	.Lscope1:
+ 538 007a 990F      	.global	fifo_deinit
+ 540 007e 9C7C      	fifo_deinit:
+ 542 0082 8695      	.LM5:
+ 543 0084 8373      	.LFBB2:
+ 544 0086 982B      	/* prologue: function */
+ 545               	/* frame size = 0 */
+ 547 0088 9295      	.LM6:
+ 548               		ldi r24,lo8(-1)
+  88:fifo.c        ****  FIFO_WR_N_bm;
+  89:fifo.c        ****         #endif // __AVR_XMEGA__
+ 549               	n	68,0,64,.LM7-.LFBB2
+ 550               	.LM7:
+ 551               		ldi r30,lo8(1632)
+ 552 008a E0E4      		ldi r31,hi8(1632)
+ 553 008c F6E0      		ldi r24,lo8(3)
+ 554 008e 9483      		std Z+6,r24
+  90:fifo.c        ****  FIFO_WR_N_bm;
+ 555               	B2:
+ 556               	/* prologue: function */
+ 557 0090 2093 4006 	/* frame size = 0 */
+  91:fifo.c        **** _CTL_PORT.DIRSET = FIFO_RD_N_bm | FIFO_WR_N_bm;
+ 558               	it, .-fifo_init
+ 559               	.Lscope1:
+ 561 0096 1696      	.global	fifo_deinit
+ 563 009a 1697      	fifo_deinit:
+  92:fifo.c        **** _CTL_PORT.DIRSET = FIFO_RD_N_bm | FIFO_WR_N_bm;
+ 564               	.LM3:
+ 565               		std Z+1,r24
+ 566 009c 1092 4006 	/* epilogue start */
+  93:fifo.c        **** _CTL_PORT.DIRSET = FIFO_RD_N_bm | FIFO_WR_N_bm;
+ 567               	tabn	68,0,57,.LM4-.LFBB1
+ 568               	.LM4:
+ 569 00a0 1596      		ret
+ 571               	.Lscope1:
+ 573               	.global	fifo_deinit
+ 575               	fifo_deinit:
+ 577               	.LM5:
+ 578               	.LFBB2:
+ 579               	/* prologue: function */
+  94:fifo.c        **** _CTL_PORT.DIRSET = FIFO_RD_N_bm | FIFO_WR_N_bm;
+  95:fifo.c        ****         #endif // __AVR_XMEGA__
+  96:fifo.c        **** }
+  97:fifo.c        **** 
+  98:fifo.c        **** // Shut down UART
+ 580               	4:
+ 581               		ret
+ 583               	.Lscope1:
+ 585 00a6 982F      	.global	fifo_deinit
+  99:fifo.c        **** endif // __AVR_XMEGA__
+ 587               	5,.LM3-.LFBB1
+ 588               	.LM3:
+ 589 00a8 A0E6      		std Z+1,r24
+ 590 00aa B6E0      	/* epilogue start */
+ 592 00b0 82FD      	.LM4:
+ 593 00b2 00C0      		ret
+ 595               	.Lscope1:
+ 597               	.global	fifo_deinit
+ 599 00b8 82FD      	fifo_deinit:
+ 601               	.LM5:
+ 602               	.LFBB2:
+ 603 00bc 2FEF      	/* prologue: function */
+ 604 00be 2093 4006 	/* frame size = 0 */
+ 606               	.LM6:
+ 607 00c2 892F      		ldi r24,lo8(-1)
+ 608 00c4 880F      		sts 1600,r24
+ 610 00c8 9695      	.LM7:
+ 611 00ca 9575      		ldi r30,lo8(1632)
+ 612 00cc 892B      		ldi r31,hi8(1632)
+ 613 00ce 982F      		ldi r24,lo8(3)
+ 614 00d0 990F      		std Z+6,r24
+ 616 00d4 9C7C      	.LM8:
+ 617 00d6 8695      		std Z+2,r24
+ 618 00d8 8695      	/* epilogue start */
+ 620 00dc 982B      	.LM9:
+ 621               		ret
+ 623 00de 9295      	.Lscope2:
+ 625               	.global	fifo_cur_char
+ 627               	fifo_cur_char:
+ 629 00e2 F6E0      	.LM10:
+ 630 00e4 9483      	.LFBB3:
+ 631               	/* prologue: function */
+ 632               	/* frame size = 0 */
+ 634               	.LM11:
+ 635               		ldi r26,lo8(1632)
+ 636 00ea 81E0      		ldi r27,hi8(1632)
+ 637 00ec 1696      		ldi r18,lo8(2)
+ 638 00ee 8C93      		adiw r26,6
+ 639 00f0 1697      		st X,r18
+ 640               		sbiw r26,6
+ 642 00f2 1092 4006 	.LM12:
+ 643               		ldi r30,lo8(1600)
+ 644               		ldi r31,hi8(1600)
+ 645 00f6 1596      		ldd r24,Z+8
+ 647               	.LM13:
+ 648 00fa 0895      		mov r25,r24
+ 649               		lsl r25
+ 650               		andi r25,lo8(-86)
+ 651               		lsr r24
+ 652               		andi r24,lo8(85)
+ 653               		or r25,r24
+ 654               		mov r24,r25
+ 655               		lsl r24
+ 656               		lsl r24
+ 657               		andi r24,lo8(-52)
+DEFINED SYMBOLS
+                            *ABS*:00000000 fifo.c
+C:\Users\tlauwers\AppData\Local\Temp/cccGB9o7.s:2      *ABS*:0000003f __SREG__
+C:\Users\tlauwers\AppData\Local\Temp/cccGB9o7.s:3      *ABS*:0000003e __SP_H__
+C:\Users\tlauwers\AppData\Local\Temp/cccGB9o7.s:4      *ABS*:0000003d __SP_L__
+C:\Users\tlauwers\AppData\Local\Temp/cccGB9o7.s:5      *ABS*:00000034 __CCP__
+C:\Users\tlauwers\AppData\Local\Temp/cccGB9o7.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\tlauwers\AppData\Local\Temp/cccGB9o7.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\tlauwers\AppData\Local\Temp/cccGB9o7.s:399    .text:00000000 fifo_init
+C:\Users\tlauwers\AppData\Local\Temp/cccGB9o7.s:426    .text:00000010 fifo_deinit
+C:\Users\tlauwers\AppData\Local\Temp/cccGB9o7.s:454    .text:00000022 fifo_cur_char
+C:\Users\tlauwers\AppData\Local\Temp/cccGB9o7.s:511    .text:00000058 fifo_send_char
+C:\Users\tlauwers\AppData\Local\Temp/cccGB9o7.s:579    .text:000000a6 fifo_send_char_blocking
+
+NO UNDEFINED SYMBOLS

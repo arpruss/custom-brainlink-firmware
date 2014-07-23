@@ -1,0 +1,2721 @@
+
+xboot.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000cca  00004000  00004000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .BOOT         0000003a  00004cca  00004cca  00000d3e  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000001  00802000  00802000  00000d78  2**0
+                  ALLOC
+  3 .stab         00003258  00000000  00000000  00000d78  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      0000b5f6  00000000  00000000  00003fd0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00004000 <__vectors>:
+    4000:	0c 94 bc 20 	jmp	0x4178	; 0x4178 <__ctors_end>
+    4004:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4008:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    400c:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4010:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4014:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4018:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    401c:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4020:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4024:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4028:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    402c:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4030:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4034:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4038:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    403c:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4040:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4044:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4048:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    404c:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4050:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4054:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4058:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    405c:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4060:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4064:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4068:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    406c:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4070:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4074:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4078:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    407c:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4080:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4084:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4088:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    408c:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4090:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4094:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4098:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    409c:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40a0:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40a4:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40a8:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40ac:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40b0:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40b4:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40b8:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40bc:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40c0:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40c4:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40c8:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40cc:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40d0:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40d4:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40d8:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40dc:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40e0:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40e4:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40e8:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40ec:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40f0:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40f4:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40f8:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    40fc:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4100:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4104:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4108:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    410c:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4110:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4114:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4118:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    411c:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4120:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4124:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4128:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    412c:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4130:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4134:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4138:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    413c:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4140:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4144:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4148:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    414c:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4150:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4154:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4158:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    415c:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4160:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4164:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4168:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    416c:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4170:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+    4174:	0c 94 ce 20 	jmp	0x419c	; 0x419c <__bad_interrupt>
+
+00004178 <__ctors_end>:
+    4178:	11 24       	eor	r1, r1
+    417a:	1f be       	out	0x3f, r1	; 63
+    417c:	cf ef       	ldi	r28, 0xFF	; 255
+    417e:	d7 e2       	ldi	r29, 0x27	; 39
+    4180:	de bf       	out	0x3e, r29	; 62
+    4182:	cd bf       	out	0x3d, r28	; 61
+
+00004184 <__do_clear_bss>:
+    4184:	10 e2       	ldi	r17, 0x20	; 32
+    4186:	a0 e0       	ldi	r26, 0x00	; 0
+    4188:	b0 e2       	ldi	r27, 0x20	; 32
+    418a:	01 c0       	rjmp	.+2      	; 0x418e <.do_clear_bss_start>
+
+0000418c <.do_clear_bss_loop>:
+    418c:	1d 92       	st	X+, r1
+
+0000418e <.do_clear_bss_start>:
+    418e:	a1 30       	cpi	r26, 0x01	; 1
+    4190:	b1 07       	cpc	r27, r17
+    4192:	e1 f7       	brne	.-8      	; 0x418c <.do_clear_bss_loop>
+    4194:	0e 94 59 22 	call	0x44b2	; 0x44b2 <main>
+    4198:	0c 94 63 26 	jmp	0x4cc6	; 0x4cc6 <_exit>
+
+0000419c <__bad_interrupt>:
+    419c:	0c 94 00 20 	jmp	0x4000	; 0x4000 <__vectors>
+
+000041a0 <get_char>:
+        
+        while (1)
+        {
+                #ifdef USE_UART
+                // Get next character
+                if (comm_mode == MODE_UNDEF || comm_mode == MODE_UART)
+    41a0:	90 91 00 20 	lds	r25, 0x2000
+    41a4:	92 30       	cpi	r25, 0x02	; 2
+    41a6:	50 f4       	brcc	.+20     	; 0x41bc <get_char+0x1c>
+                {
+                        #ifdef __AVR_XMEGA__
+                        if (uart_char_received())
+    41a8:	80 91 b1 09 	lds	r24, 0x09B1
+    41ac:	87 ff       	sbrs	r24, 7
+    41ae:	fa cf       	rjmp	.-12     	; 0x41a4 <get_char+0x4>
+                        {
+                                comm_mode = MODE_UART;
+    41b0:	81 e0       	ldi	r24, 0x01	; 1
+    41b2:	80 93 00 20 	sts	0x2000, r24
+                                return uart_cur_char();
+    41b6:	80 91 b0 09 	lds	r24, 0x09B0
+                #endif // USE_FIFO
+                
+        }
+        
+        return ret;
+}
+    41ba:	08 95       	ret
+    41bc:	ff cf       	rjmp	.-2      	; 0x41bc <get_char+0x1c>
+
+000041be <send_char>:
+
+void __attribute__ ((noinline)) send_char(unsigned char c)
+{
+    41be:	98 2f       	mov	r25, r24
+        unsigned char tmp;
+        #endif
+        
+        #ifdef USE_UART
+        // Send character
+        if (comm_mode == MODE_UNDEF || comm_mode == MODE_UART)
+    41c0:	80 91 00 20 	lds	r24, 0x2000
+    41c4:	82 30       	cpi	r24, 0x02	; 2
+    41c6:	60 f4       	brcc	.+24     	; 0x41e0 <send_char+0x22>
+        {
+                #ifdef __AVR_XMEGA__
+                uart_send_char_blocking(c);
+    41c8:	90 93 b0 09 	sts	0x09B0, r25
+    41cc:	80 91 b1 09 	lds	r24, 0x09B1
+    41d0:	86 ff       	sbrs	r24, 6
+    41d2:	fc cf       	rjmp	.-8      	; 0x41cc <send_char+0xe>
+    41d4:	80 91 b1 09 	lds	r24, 0x09B1
+    41d8:	80 64       	ori	r24, 0x40	; 64
+    41da:	e0 eb       	ldi	r30, 0xB0	; 176
+    41dc:	f9 e0       	ldi	r31, 0x09	; 9
+    41de:	81 83       	std	Z+1, r24	; 0x01
+    41e0:	08 95       	ret
+
+000041e2 <get_2bytes>:
+
+unsigned int __attribute__ ((noinline)) get_2bytes()
+{
+        // return (get_char() << 8) | get_char();
+        unsigned int result;
+        asm volatile (
+    41e2:	0e 94 d0 20 	call	0x41a0	; 0x41a0 <get_char>
+    41e6:	38 2f       	mov	r19, r24
+    41e8:	0e 94 d0 20 	call	0x41a0	; 0x41a0 <get_char>
+    41ec:	28 2f       	mov	r18, r24
+                "mov  %A0,r24"     "\n\t"
+                : "=r" (result)
+                :
+        );
+        return result;
+}
+    41ee:	c9 01       	movw	r24, r18
+    41f0:	08 95       	ret
+
+000041f2 <BlockRead>:
+}
+
+
+
+void BlockRead(unsigned int size, unsigned char mem, ADDR_T *address)
+{
+    41f2:	ef 92       	push	r14
+    41f4:	ff 92       	push	r15
+    41f6:	1f 93       	push	r17
+    41f8:	cf 93       	push	r28
+    41fa:	df 93       	push	r29
+    41fc:	7c 01       	movw	r14, r24
+    41fe:	16 2f       	mov	r17, r22
+    4200:	ea 01       	movw	r28, r20
+        // EEPROM memory type.
+        
+        if (mem == MEM_EEPROM) // Read EEPROM
+    4202:	65 34       	cpi	r22, 0x45	; 69
+    4204:	59 f5       	brne	.+86     	; 0x425c <BlockRead+0x6a>
+        {
+                unsigned char byteAddr, pageAddr;
+                
+                EEPROM_DisableMapping();
+    4206:	80 91 cc 01 	lds	r24, 0x01CC
+    420a:	87 7f       	andi	r24, 0xF7	; 247
+    420c:	e0 ec       	ldi	r30, 0xC0	; 192
+    420e:	f1 e0       	ldi	r31, 0x01	; 1
+    4210:	84 87       	std	Z+12, r24	; 0x0c
+                EEPROM_FlushBuffer();
+    4212:	0e 94 46 24 	call	0x488c	; 0x488c <EEPROM_FlushBuffer>
+                
+                do
+                {
+                        pageAddr = (unsigned char)(*address / EEPROM_PAGE_SIZE);
+    4216:	88 81       	ld	r24, Y
+    4218:	99 81       	ldd	r25, Y+1	; 0x01
+    421a:	aa 81       	ldd	r26, Y+2	; 0x02
+    421c:	bb 81       	ldd	r27, Y+3	; 0x03
+                        byteAddr = (unsigned char)(*address & EEPROM_BYTE_ADDRESS_MASK);
+                        
+                        send_char( EEPROM_ReadByte( pageAddr, byteAddr ) );
+    421e:	68 2f       	mov	r22, r24
+    4220:	6f 71       	andi	r22, 0x1F	; 31
+    4222:	45 e0       	ldi	r20, 0x05	; 5
+    4224:	b6 95       	lsr	r27
+    4226:	a7 95       	ror	r26
+    4228:	97 95       	ror	r25
+    422a:	87 95       	ror	r24
+    422c:	4a 95       	dec	r20
+    422e:	d1 f7       	brne	.-12     	; 0x4224 <BlockRead+0x32>
+    4230:	0e 94 1a 24 	call	0x4834	; 0x4834 <EEPROM_ReadByte>
+    4234:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+                        // Select next EEPROM byte
+                        (*address)++;
+    4238:	88 81       	ld	r24, Y
+    423a:	99 81       	ldd	r25, Y+1	; 0x01
+    423c:	aa 81       	ldd	r26, Y+2	; 0x02
+    423e:	bb 81       	ldd	r27, Y+3	; 0x03
+    4240:	01 96       	adiw	r24, 0x01	; 1
+    4242:	a1 1d       	adc	r26, r1
+    4244:	b1 1d       	adc	r27, r1
+    4246:	88 83       	st	Y, r24
+    4248:	99 83       	std	Y+1, r25	; 0x01
+    424a:	aa 83       	std	Y+2, r26	; 0x02
+    424c:	bb 83       	std	Y+3, r27	; 0x03
+                        size--; // Decrease number of bytes to read
+    424e:	08 94       	sec
+    4250:	e1 08       	sbc	r14, r1
+    4252:	f1 08       	sbc	r15, r1
+                } while (size); // Repeat until all block has been read
+    4254:	e1 14       	cp	r14, r1
+    4256:	f1 04       	cpc	r15, r1
+    4258:	f1 f6       	brne	.-68     	; 0x4216 <BlockRead+0x24>
+    425a:	60 c0       	rjmp	.+192    	; 0x431c <BlockRead+0x12a>
+        }
+        
+        // Flash memory type.
+        else if (mem == MEM_FLASH || mem == MEM_USERSIG || mem == MEM_PRODSIG)
+    425c:	66 34       	cpi	r22, 0x46	; 70
+    425e:	29 f0       	breq	.+10     	; 0x426a <BlockRead+0x78>
+    4260:	65 35       	cpi	r22, 0x55	; 85
+    4262:	19 f0       	breq	.+6      	; 0x426a <BlockRead+0x78>
+    4264:	60 35       	cpi	r22, 0x50	; 80
+    4266:	09 f0       	breq	.+2      	; 0x426a <BlockRead+0x78>
+    4268:	59 c0       	rjmp	.+178    	; 0x431c <BlockRead+0x12a>
+        {
+                (*address) <<= 1; // Convert address to bytes temporarily.
+    426a:	88 81       	ld	r24, Y
+    426c:	99 81       	ldd	r25, Y+1	; 0x01
+    426e:	aa 81       	ldd	r26, Y+2	; 0x02
+    4270:	bb 81       	ldd	r27, Y+3	; 0x03
+    4272:	88 0f       	add	r24, r24
+    4274:	99 1f       	adc	r25, r25
+    4276:	aa 1f       	adc	r26, r26
+    4278:	bb 1f       	adc	r27, r27
+    427a:	88 83       	st	Y, r24
+    427c:	99 83       	std	Y+1, r25	; 0x01
+    427e:	aa 83       	std	Y+2, r26	; 0x02
+    4280:	bb 83       	std	Y+3, r27	; 0x03
+                
+                do
+                {
+                        if (mem == MEM_FLASH)
+    4282:	16 34       	cpi	r17, 0x46	; 70
+    4284:	99 f4       	brne	.+38     	; 0x42ac <BlockRead+0xba>
+                        {
+                                send_char( SP_ReadByte( *address) );
+    4286:	68 81       	ld	r22, Y
+    4288:	79 81       	ldd	r23, Y+1	; 0x01
+    428a:	8a 81       	ldd	r24, Y+2	; 0x02
+    428c:	9b 81       	ldd	r25, Y+3	; 0x03
+    428e:	0e 94 cb 25 	call	0x4b96	; 0x4b96 <SP_ReadByte>
+    4292:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+                                send_char( SP_ReadByte( (*address)+1) );
+    4296:	68 81       	ld	r22, Y
+    4298:	79 81       	ldd	r23, Y+1	; 0x01
+    429a:	8a 81       	ldd	r24, Y+2	; 0x02
+    429c:	9b 81       	ldd	r25, Y+3	; 0x03
+    429e:	6f 5f       	subi	r22, 0xFF	; 255
+    42a0:	7f 4f       	sbci	r23, 0xFF	; 255
+    42a2:	8f 4f       	sbci	r24, 0xFF	; 255
+    42a4:	9f 4f       	sbci	r25, 0xFF	; 255
+    42a6:	0e 94 cb 25 	call	0x4b96	; 0x4b96 <SP_ReadByte>
+    42aa:	19 c0       	rjmp	.+50     	; 0x42de <BlockRead+0xec>
+                        }
+                        else if (mem == MEM_USERSIG)
+    42ac:	15 35       	cpi	r17, 0x55	; 85
+    42ae:	61 f4       	brne	.+24     	; 0x42c8 <BlockRead+0xd6>
+                        {
+                                send_char( SP_ReadUserSignatureByte( *address) );
+    42b0:	88 81       	ld	r24, Y
+    42b2:	99 81       	ldd	r25, Y+1	; 0x01
+    42b4:	0e 94 da 25 	call	0x4bb4	; 0x4bb4 <SP_ReadUserSignatureByte>
+    42b8:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+                                send_char( SP_ReadUserSignatureByte( (*address)+1) );
+    42bc:	88 81       	ld	r24, Y
+    42be:	99 81       	ldd	r25, Y+1	; 0x01
+    42c0:	01 96       	adiw	r24, 0x01	; 1
+    42c2:	0e 94 da 25 	call	0x4bb4	; 0x4bb4 <SP_ReadUserSignatureByte>
+    42c6:	0b c0       	rjmp	.+22     	; 0x42de <BlockRead+0xec>
+                        }
+                        else if (mem == MEM_PRODSIG)
+    42c8:	10 35       	cpi	r17, 0x50	; 80
+    42ca:	59 f4       	brne	.+22     	; 0x42e2 <BlockRead+0xf0>
+                        {
+                                send_char( SP_ReadCalibrationByte( *address) );
+    42cc:	88 81       	ld	r24, Y
+    42ce:	0e 94 d8 25 	call	0x4bb0	; 0x4bb0 <SP_ReadCalibrationByte>
+    42d2:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+                                send_char( SP_ReadCalibrationByte( (*address)+1) );
+    42d6:	88 81       	ld	r24, Y
+    42d8:	8f 5f       	subi	r24, 0xFF	; 255
+    42da:	0e 94 d8 25 	call	0x4bb0	; 0x4bb0 <SP_ReadCalibrationByte>
+    42de:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+                        }
+                        
+                        SP_WaitForSPM();
+    42e2:	0e 94 46 26 	call	0x4c8c	; 0x4c8c <SP_WaitForSPM>
+                        
+                        (*address) += 2;    // Select next word in memory.
+    42e6:	88 81       	ld	r24, Y
+    42e8:	99 81       	ldd	r25, Y+1	; 0x01
+    42ea:	aa 81       	ldd	r26, Y+2	; 0x02
+    42ec:	bb 81       	ldd	r27, Y+3	; 0x03
+    42ee:	02 96       	adiw	r24, 0x02	; 2
+    42f0:	a1 1d       	adc	r26, r1
+    42f2:	b1 1d       	adc	r27, r1
+    42f4:	88 83       	st	Y, r24
+    42f6:	99 83       	std	Y+1, r25	; 0x01
+    42f8:	aa 83       	std	Y+2, r26	; 0x02
+    42fa:	bb 83       	std	Y+3, r27	; 0x03
+                        size -= 2;          // Subtract two bytes from number of bytes to read
+    42fc:	2e ef       	ldi	r18, 0xFE	; 254
+    42fe:	3f ef       	ldi	r19, 0xFF	; 255
+    4300:	e2 0e       	add	r14, r18
+    4302:	f3 1e       	adc	r15, r19
+                } while (size);         // Repeat until all block has been read
+    4304:	e1 14       	cp	r14, r1
+    4306:	f1 04       	cpc	r15, r1
+    4308:	09 f0       	breq	.+2      	; 0x430c <BlockRead+0x11a>
+    430a:	bb cf       	rjmp	.-138    	; 0x4282 <BlockRead+0x90>
+                
+                (*address) >>= 1;       // Convert address back to Flash words again.
+    430c:	b6 95       	lsr	r27
+    430e:	a7 95       	ror	r26
+    4310:	97 95       	ror	r25
+    4312:	87 95       	ror	r24
+    4314:	88 83       	st	Y, r24
+    4316:	99 83       	std	Y+1, r25	; 0x01
+    4318:	aa 83       	std	Y+2, r26	; 0x02
+    431a:	bb 83       	std	Y+3, r27	; 0x03
+        }
+}
+    431c:	df 91       	pop	r29
+    431e:	cf 91       	pop	r28
+    4320:	1f 91       	pop	r17
+    4322:	ff 90       	pop	r15
+    4324:	ef 90       	pop	r14
+    4326:	08 95       	ret
+
+00004328 <BlockLoad>:
+        );
+        return result;
+}
+
+unsigned char BlockLoad(unsigned int size, unsigned char mem, ADDR_T *address)
+{
+    4328:	5f 92       	push	r5
+    432a:	6f 92       	push	r6
+    432c:	7f 92       	push	r7
+    432e:	8f 92       	push	r8
+    4330:	9f 92       	push	r9
+    4332:	af 92       	push	r10
+    4334:	bf 92       	push	r11
+    4336:	cf 92       	push	r12
+    4338:	df 92       	push	r13
+    433a:	ef 92       	push	r14
+    433c:	ff 92       	push	r15
+    433e:	0f 93       	push	r16
+    4340:	1f 93       	push	r17
+    4342:	df 93       	push	r29
+    4344:	cf 93       	push	r28
+    4346:	cd b7       	in	r28, 0x3d	; 61
+    4348:	de b7       	in	r29, 0x3e	; 62
+    434a:	c0 50       	subi	r28, 0x00	; 0
+    434c:	d1 40       	sbci	r29, 0x01	; 1
+    434e:	cd bf       	out	0x3d, r28	; 61
+    4350:	de bf       	out	0x3e, r29	; 62
+    4352:	3c 01       	movw	r6, r24
+    4354:	56 2e       	mov	r5, r22
+    4356:	4a 01       	movw	r8, r20
+	#ifdef USE_WATCHDOG
+	WDT_Reset();
+	#endif // USE_WATCHDOG
+
+        // EEPROM memory type.
+        if(mem == MEM_EEPROM)
+    4358:	85 e4       	ldi	r24, 0x45	; 69
+    435a:	68 17       	cp	r22, r24
+    435c:	e9 f5       	brne	.+122    	; 0x43d8 <BlockLoad+0xb0>
+        {
+                unsigned char pageAddr, byteAddr, value;
+                unsigned char buffer[APP_SECTION_PAGE_SIZE];
+                
+                EEPROM_FlushBuffer();
+    435e:	0e 94 46 24 	call	0x488c	; 0x488c <EEPROM_FlushBuffer>
+                // disable mapping of EEPROM into data space (enable IO mapped access)
+                EEPROM_DisableMapping();
+    4362:	80 91 cc 01 	lds	r24, 0x01CC
+    4366:	87 7f       	andi	r24, 0xF7	; 247
+    4368:	e0 ec       	ldi	r30, 0xC0	; 192
+    436a:	f1 e0       	ldi	r31, 0x01	; 1
+    436c:	84 87       	std	Z+12, r24	; 0x0c
+    436e:	7e 01       	movw	r14, r28
+    4370:	08 94       	sec
+    4372:	e1 1c       	adc	r14, r1
+    4374:	f1 1c       	adc	r15, r1
+    4376:	67 01       	movw	r12, r14
+                
+                // Fill buffer first, as EEPROM is too slow to copy with UART speed 
+                for(tempaddress=0;tempaddress<size;tempaddress++){
+    4378:	57 01       	movw	r10, r14
+    437a:	a6 0c       	add	r10, r6
+    437c:	b7 1c       	adc	r11, r7
+    437e:	05 c0       	rjmp	.+10     	; 0x438a <BlockLoad+0x62>
+                        buffer[tempaddress] = get_char();
+    4380:	0e 94 d0 20 	call	0x41a0	; 0x41a0 <get_char>
+    4384:	f6 01       	movw	r30, r12
+    4386:	81 93       	st	Z+, r24
+    4388:	6f 01       	movw	r12, r30
+                EEPROM_FlushBuffer();
+                // disable mapping of EEPROM into data space (enable IO mapped access)
+                EEPROM_DisableMapping();
+                
+                // Fill buffer first, as EEPROM is too slow to copy with UART speed 
+                for(tempaddress=0;tempaddress<size;tempaddress++){
+    438a:	ca 14       	cp	r12, r10
+    438c:	db 04       	cpc	r13, r11
+    438e:	c1 f7       	brne	.-16     	; 0x4380 <BlockLoad+0x58>
+    4390:	1f c0       	rjmp	.+62     	; 0x43d0 <BlockLoad+0xa8>
+                
+                // Then program the EEPROM
+                for( tempaddress=0; tempaddress < size; tempaddress++)
+                {
+                        // void EEPROM_WriteByte( uint8_t pageAddr, uint8_t byteAddr, uint8_t value )
+                        pageAddr = (unsigned char)( (*address) / EEPROM_PAGE_SIZE);
+    4392:	f4 01       	movw	r30, r8
+    4394:	80 81       	ld	r24, Z
+    4396:	91 81       	ldd	r25, Z+1	; 0x01
+    4398:	a2 81       	ldd	r26, Z+2	; 0x02
+    439a:	b3 81       	ldd	r27, Z+3	; 0x03
+                        byteAddr = (unsigned char)( (*address) & EEPROM_BYTE_ADDRESS_MASK);
+                        value = buffer[tempaddress];
+                        
+                        EEPROM_WriteByte(pageAddr, byteAddr, value);
+    439c:	68 2f       	mov	r22, r24
+    439e:	6f 71       	andi	r22, 0x1F	; 31
+    43a0:	75 e0       	ldi	r23, 0x05	; 5
+    43a2:	b6 95       	lsr	r27
+    43a4:	a7 95       	ror	r26
+    43a6:	97 95       	ror	r25
+    43a8:	87 95       	ror	r24
+    43aa:	7a 95       	dec	r23
+    43ac:	d1 f7       	brne	.-12     	; 0x43a2 <BlockLoad+0x7a>
+    43ae:	f7 01       	movw	r30, r14
+    43b0:	41 91       	ld	r20, Z+
+    43b2:	7f 01       	movw	r14, r30
+    43b4:	0e 94 5b 24 	call	0x48b6	; 0x48b6 <EEPROM_WriteByte>
+                        
+                        (*address)++; // Select next EEPROM byte
+    43b8:	f4 01       	movw	r30, r8
+    43ba:	80 81       	ld	r24, Z
+    43bc:	91 81       	ldd	r25, Z+1	; 0x01
+    43be:	a2 81       	ldd	r26, Z+2	; 0x02
+    43c0:	b3 81       	ldd	r27, Z+3	; 0x03
+    43c2:	01 96       	adiw	r24, 0x01	; 1
+    43c4:	a1 1d       	adc	r26, r1
+    43c6:	b1 1d       	adc	r27, r1
+    43c8:	80 83       	st	Z, r24
+    43ca:	91 83       	std	Z+1, r25	; 0x01
+    43cc:	a2 83       	std	Z+2, r26	; 0x02
+    43ce:	b3 83       	std	Z+3, r27	; 0x03
+                for(tempaddress=0;tempaddress<size;tempaddress++){
+                        buffer[tempaddress] = get_char();
+                }
+                
+                // Then program the EEPROM
+                for( tempaddress=0; tempaddress < size; tempaddress++)
+    43d0:	ec 14       	cp	r14, r12
+    43d2:	fd 04       	cpc	r15, r13
+    43d4:	f1 f6       	brne	.-68     	; 0x4392 <BlockLoad+0x6a>
+    43d6:	58 c0       	rjmp	.+176    	; 0x4488 <BlockLoad+0x160>
+                
+                return REPLY_ACK; // Report programming OK
+        } 
+        
+        // Flash memory type
+        else if (mem == MEM_FLASH || mem == MEM_USERSIG)
+    43d8:	f6 e4       	ldi	r31, 0x46	; 70
+    43da:	6f 17       	cp	r22, r31
+    43dc:	29 f0       	breq	.+10     	; 0x43e8 <BlockLoad+0xc0>
+    43de:	85 e5       	ldi	r24, 0x55	; 85
+    43e0:	68 17       	cp	r22, r24
+    43e2:	11 f0       	breq	.+4      	; 0x43e8 <BlockLoad+0xc0>
+    43e4:	8f e3       	ldi	r24, 0x3F	; 63
+    43e6:	51 c0       	rjmp	.+162    	; 0x448a <BlockLoad+0x162>
+        {
+                // NOTE: For flash programming, 'address' is given in words.
+                (*address) <<= 1; // Convert address to bytes temporarily.
+    43e8:	f4 01       	movw	r30, r8
+    43ea:	c0 80       	ld	r12, Z
+    43ec:	d1 80       	ldd	r13, Z+1	; 0x01
+    43ee:	e2 80       	ldd	r14, Z+2	; 0x02
+    43f0:	f3 80       	ldd	r15, Z+3	; 0x03
+    43f2:	cc 0c       	add	r12, r12
+    43f4:	dd 1c       	adc	r13, r13
+    43f6:	ee 1c       	adc	r14, r14
+    43f8:	ff 1c       	adc	r15, r15
+    43fa:	c0 82       	st	Z, r12
+    43fc:	d1 82       	std	Z+1, r13	; 0x01
+    43fe:	e2 82       	std	Z+2, r14	; 0x02
+    4400:	f3 82       	std	Z+3, r15	; 0x03
+                tempaddress = (*address);  // Store address in page.
+                
+                do
+                {
+                        data = get_char();
+    4402:	0e 94 d0 20 	call	0x41a0	; 0x41a0 <get_char>
+    4406:	08 2f       	mov	r16, r24
+    4408:	10 e0       	ldi	r17, 0x00	; 0
+                        data |= (get_char() << 8);
+    440a:	0e 94 d0 20 	call	0x41a0	; 0x41a0 <get_char>
+                        SP_LoadFlashWord(*address, data);
+    440e:	b8 2e       	mov	r11, r24
+    4410:	aa 24       	eor	r10, r10
+    4412:	0a 29       	or	r16, r10
+    4414:	1b 29       	or	r17, r11
+    4416:	f4 01       	movw	r30, r8
+    4418:	80 81       	ld	r24, Z
+    441a:	91 81       	ldd	r25, Z+1	; 0x01
+    441c:	b8 01       	movw	r22, r16
+    441e:	0e 94 03 26 	call	0x4c06	; 0x4c06 <SP_LoadFlashWord>
+                        (*address)+=2; // Select next word in memory.
+    4422:	f4 01       	movw	r30, r8
+    4424:	80 81       	ld	r24, Z
+    4426:	91 81       	ldd	r25, Z+1	; 0x01
+    4428:	a2 81       	ldd	r26, Z+2	; 0x02
+    442a:	b3 81       	ldd	r27, Z+3	; 0x03
+    442c:	02 96       	adiw	r24, 0x02	; 2
+    442e:	a1 1d       	adc	r26, r1
+    4430:	b1 1d       	adc	r27, r1
+    4432:	80 83       	st	Z, r24
+    4434:	91 83       	std	Z+1, r25	; 0x01
+    4436:	a2 83       	std	Z+2, r26	; 0x02
+    4438:	b3 83       	std	Z+3, r27	; 0x03
+                        size -= 2; // Reduce number of bytes to write by two.
+    443a:	8e ef       	ldi	r24, 0xFE	; 254
+    443c:	9f ef       	ldi	r25, 0xFF	; 255
+    443e:	68 0e       	add	r6, r24
+    4440:	79 1e       	adc	r7, r25
+                } while(size); // Loop until all bytes written.
+    4442:	61 14       	cp	r6, r1
+    4444:	71 04       	cpc	r7, r1
+    4446:	e9 f6       	brne	.-70     	; 0x4402 <BlockLoad+0xda>
+                
+                if (mem == MEM_FLASH)
+    4448:	96 e4       	ldi	r25, 0x46	; 70
+    444a:	59 16       	cp	r5, r25
+    444c:	29 f4       	brne	.+10     	; 0x4458 <BlockLoad+0x130>
+                {
+                        SP_WriteApplicationPage(tempaddress);
+    444e:	c7 01       	movw	r24, r14
+    4450:	b6 01       	movw	r22, r12
+    4452:	0e 94 19 26 	call	0x4c32	; 0x4c32 <SP_WriteApplicationPage>
+    4456:	09 c0       	rjmp	.+18     	; 0x446a <BlockLoad+0x142>
+                }
+                else if (mem == MEM_USERSIG)
+    4458:	e5 e5       	ldi	r30, 0x55	; 85
+    445a:	5e 16       	cp	r5, r30
+    445c:	31 f4       	brne	.+12     	; 0x446a <BlockLoad+0x142>
+                {
+                        SP_EraseUserSignatureRow();
+    445e:	0e 94 ee 25 	call	0x4bdc	; 0x4bdc <SP_EraseUserSignatureRow>
+                        SP_WaitForSPM();
+    4462:	0e 94 46 26 	call	0x4c8c	; 0x4c8c <SP_WaitForSPM>
+                        SP_WriteUserSignatureRow();
+    4466:	0e 94 f2 25 	call	0x4be4	; 0x4be4 <SP_WriteUserSignatureRow>
+                }
+                
+                SP_WaitForSPM();
+    446a:	0e 94 46 26 	call	0x4c8c	; 0x4c8c <SP_WaitForSPM>
+                
+                (*address) >>= 1; // Convert address back to Flash words again.
+    446e:	f4 01       	movw	r30, r8
+    4470:	80 81       	ld	r24, Z
+    4472:	91 81       	ldd	r25, Z+1	; 0x01
+    4474:	a2 81       	ldd	r26, Z+2	; 0x02
+    4476:	b3 81       	ldd	r27, Z+3	; 0x03
+    4478:	b6 95       	lsr	r27
+    447a:	a7 95       	ror	r26
+    447c:	97 95       	ror	r25
+    447e:	87 95       	ror	r24
+    4480:	80 83       	st	Z, r24
+    4482:	91 83       	std	Z+1, r25	; 0x01
+    4484:	a2 83       	std	Z+2, r26	; 0x02
+    4486:	b3 83       	std	Z+3, r27	; 0x03
+    4488:	8d e0       	ldi	r24, 0x0D	; 13
+        // Invalid memory type?
+        else
+        {
+                return REPLY_ERROR;
+        }
+}
+    448a:	c0 50       	subi	r28, 0x00	; 0
+    448c:	df 4f       	sbci	r29, 0xFF	; 255
+    448e:	cd bf       	out	0x3d, r28	; 61
+    4490:	de bf       	out	0x3e, r29	; 62
+    4492:	cf 91       	pop	r28
+    4494:	df 91       	pop	r29
+    4496:	1f 91       	pop	r17
+    4498:	0f 91       	pop	r16
+    449a:	ff 90       	pop	r15
+    449c:	ef 90       	pop	r14
+    449e:	df 90       	pop	r13
+    44a0:	cf 90       	pop	r12
+    44a2:	bf 90       	pop	r11
+    44a4:	af 90       	pop	r10
+    44a6:	9f 90       	pop	r9
+    44a8:	8f 90       	pop	r8
+    44aa:	7f 90       	pop	r7
+    44ac:	6f 90       	pop	r6
+    44ae:	5f 90       	pop	r5
+    44b0:	08 95       	ret
+
+000044b2 <main>:
+unsigned char comm_mode;
+#endif // USE_INTERRUPTS
+
+// Main code
+int main(void)
+{
+    44b2:	3f 92       	push	r3
+    44b4:	4f 92       	push	r4
+    44b6:	5f 92       	push	r5
+    44b8:	6f 92       	push	r6
+    44ba:	7f 92       	push	r7
+    44bc:	8f 92       	push	r8
+    44be:	9f 92       	push	r9
+    44c0:	af 92       	push	r10
+    44c2:	bf 92       	push	r11
+    44c4:	cf 92       	push	r12
+    44c6:	df 92       	push	r13
+    44c8:	ef 92       	push	r14
+    44ca:	ff 92       	push	r15
+    44cc:	0f 93       	push	r16
+    44ce:	1f 93       	push	r17
+    44d0:	df 93       	push	r29
+    44d2:	cf 93       	push	r28
+    44d4:	cd b7       	in	r28, 0x3d	; 61
+    44d6:	de b7       	in	r29, 0x3e	; 62
+    44d8:	25 97       	sbiw	r28, 0x05	; 5
+    44da:	cd bf       	out	0x3d, r28	; 61
+    44dc:	de bf       	out	0x3e, r29	; 62
+        
+        #ifdef USE_I2C_ADDRESS_NEGOTIATION
+        unsigned short devid_bit;
+        #endif // USE_I2C_ADDRESS_NEGOTIATION
+        
+        comm_mode = MODE_UNDEF;
+    44de:	10 92 00 20 	sts	0x2000, r1
+        #ifdef USE_32MHZ_RC
+        #if (F_CPU != 32000000L)
+        #error F_CPU must match oscillator setting!
+        #endif
+        #ifdef __AVR_XMEGA__
+        OSC.CTRL |= OSC_RC32MEN_bm; // turn on 32 MHz oscillator
+    44e2:	80 91 50 00 	lds	r24, 0x0050
+    44e6:	82 60       	ori	r24, 0x02	; 2
+    44e8:	80 93 50 00 	sts	0x0050, r24
+        while (!(OSC.STATUS & OSC_RC32MRDY_bm)) { }; // wait for it to start
+    44ec:	80 91 51 00 	lds	r24, 0x0051
+    44f0:	81 ff       	sbrs	r24, 1
+    44f2:	fc cf       	rjmp	.-8      	; 0x44ec <main+0x3a>
+        CCP = CCP_IOREG_gc;
+    44f4:	88 ed       	ldi	r24, 0xD8	; 216
+    44f6:	84 bf       	out	0x34, r24	; 52
+        CLK.CTRL = CLK_SCLKSEL_RC32M_gc;
+    44f8:	81 e0       	ldi	r24, 0x01	; 1
+    44fa:	80 93 40 00 	sts	0x0040, r24
+        #ifdef USE_DFLL
+        DFLLRC32M.CTRL = DFLL_ENABLE_bm;
+    44fe:	80 93 60 00 	sts	0x0060, r24
+        #endif // USE_INTERRUPTS
+        #endif // NEED_INTERRUPTS
+        
+        #ifdef USE_LED
+        // Initialize LED pin
+        LED_PORT.DIRSET = (1 << LED_PIN);
+    4502:	e0 e6       	ldi	r30, 0x60	; 96
+    4504:	f6 e0       	ldi	r31, 0x06	; 6
+    4506:	82 e0       	ldi	r24, 0x02	; 2
+    4508:	81 83       	std	Z+1, r24	; 0x01
+        #if LED_PIN_INV
+        LED_PORT.OUTCLR = (1 << LED_PIN);
+        #else
+        LED_PORT.OUTSET = (1 << LED_PIN);
+    450a:	85 83       	std	Z+5, r24	; 0x05
+        #endif // USE_ATTACH_LED
+        #endif // USE_I2C_ADDRESS_NEGOTIATION
+        
+        #ifdef USE_ENTER_PIN
+        // Make sure it's an input
+        ENTER_PORT.DIRCLR = (1 << ENTER_PIN);
+    450c:	e0 e8       	ldi	r30, 0x80	; 128
+    450e:	f6 e0       	ldi	r31, 0x06	; 6
+    4510:	84 e0       	ldi	r24, 0x04	; 4
+    4512:	82 83       	std	Z+2, r24	; 0x02
+        #if ENTER_PIN_PUEN
+        // Enable bootloader entry pin pullup
+        ENTER_PIN_CTRL = 0x18;
+    4514:	88 e1       	ldi	r24, 0x18	; 24
+    4516:	82 8b       	std	Z+18, r24	; 0x12
+// Main code
+int main(void)
+{
+        ADDR_T address = 0;
+        unsigned char in_bootloader = 0;
+        unsigned char val = 0;
+    4518:	19 82       	std	Y+1, r1	; 0x01
+#endif // USE_INTERRUPTS
+
+// Main code
+int main(void)
+{
+        ADDR_T address = 0;
+    451a:	1a 82       	std	Y+2, r1	; 0x02
+    451c:	1b 82       	std	Y+3, r1	; 0x03
+    451e:	1c 82       	std	Y+4, r1	; 0x04
+    4520:	1d 82       	std	Y+5, r1	; 0x05
+        #endif // ENTER_PIN_PUEN
+        #endif // USE_ENTER_PIN
+        
+        #ifdef USE_UART
+        // Initialize UART
+        uart_init();
+    4522:	0e 94 1b 25 	call	0x4a36	; 0x4a36 <uart_init>
+	...
+                // Checked when USE_ENTER_DELAY is selected
+                // --------------------------------------------------
+                
+                #ifdef USE_ENTER_PIN
+                // Check entry pin state
+                if ((ENTER_PORT.IN & (1 << ENTER_PIN)) == (ENTER_PIN_STATE ? (1 << ENTER_PIN) : 0))
+    452e:	10 91 88 06 	lds	r17, 0x0688
+    4532:	16 95       	lsr	r17
+    4534:	16 95       	lsr	r17
+    4536:	10 95       	com	r17
+    4538:	11 70       	andi	r17, 0x01	; 1
+        #endif // USE_WATCHDOG
+
+        // Main bootloader        
+        while (in_bootloader) {
+                #ifdef USE_LED
+                LED_PORT.OUTTGL = (1 << LED_PIN);
+    453a:	20 e6       	ldi	r18, 0x60	; 96
+    453c:	42 2e       	mov	r4, r18
+    453e:	26 e0       	ldi	r18, 0x06	; 6
+    4540:	52 2e       	mov	r5, r18
+    4542:	92 e0       	ldi	r25, 0x02	; 2
+    4544:	39 2e       	mov	r3, r25
+                        // Block size
+                        i = get_2bytes();
+                        // Memory type
+                        val = get_char();
+                        // Read it
+                        BlockRead(i, val, &address);
+    4546:	82 e0       	ldi	r24, 0x02	; 2
+    4548:	88 2e       	mov	r8, r24
+    454a:	91 2c       	mov	r9, r1
+    454c:	8c 0e       	add	r8, r28
+    454e:	9d 1e       	adc	r9, r29
+                        #else // USE_WATCHDOG
+                        SP_WaitForSPM();
+                        #endif // USE_WATCHDOG
+                        
+                        // Randomize page buffer
+                        EEPROM_LoadPage(&val);
+    4550:	3e 01       	movw	r6, r28
+    4552:	08 94       	sec
+    4554:	61 1c       	adc	r6, r1
+    4556:	71 1c       	adc	r7, r1
+    4558:	49 c1       	rjmp	.+658    	; 0x47ec <main+0x33a>
+        #endif // USE_WATCHDOG
+
+        // Main bootloader        
+        while (in_bootloader) {
+                #ifdef USE_LED
+                LED_PORT.OUTTGL = (1 << LED_PIN);
+    455a:	f2 01       	movw	r30, r4
+    455c:	37 82       	std	Z+7, r3	; 0x07
+                #endif // USE_LED
+                
+                val = get_char();
+    455e:	0e 94 d0 20 	call	0x41a0	; 0x41a0 <get_char>
+    4562:	98 2f       	mov	r25, r24
+    4564:	89 83       	std	Y+1, r24	; 0x01
+                WDT_Reset();
+                #endif // USE_WATCHDOG
+
+                // Main bootloader parser
+                // check autoincrement status
+                if (val == CMD_CHECK_AUTOINCREMENT)
+    4566:	81 36       	cpi	r24, 0x61	; 97
+    4568:	11 f4       	brne	.+4      	; 0x456e <main+0xbc>
+                {
+                        // yes, it is supported
+                        send_char(REPLY_YES);
+    456a:	89 e5       	ldi	r24, 0x59	; 89
+    456c:	3a c1       	rjmp	.+628    	; 0x47e2 <main+0x330>
+                }
+                // Set address
+                else if (val == CMD_SET_ADDRESS)
+    456e:	81 34       	cpi	r24, 0x41	; 65
+    4570:	29 f4       	brne	.+10     	; 0x457c <main+0xca>
+                {
+                        // Read address high then low
+                        address = get_2bytes();
+    4572:	0e 94 f1 20 	call	0x41e2	; 0x41e2 <get_2bytes>
+    4576:	a0 e0       	ldi	r26, 0x00	; 0
+    4578:	b0 e0       	ldi	r27, 0x00	; 0
+    457a:	08 c0       	rjmp	.+16     	; 0x458c <main+0xda>
+                        // acknowledge
+                        send_char(REPLY_ACK);
+                }
+                // Extended address
+                else if (val == CMD_SET_EXT_ADDRESS)
+    457c:	88 34       	cpi	r24, 0x48	; 72
+    457e:	59 f4       	brne	.+22     	; 0x4596 <main+0xe4>
+                {
+                        // Read address high then low
+                        //address = ((ADDR_T)get_char() << 16) | get_2bytes();
+                        asm volatile (
+    4580:	0e 94 d0 20 	call	0x41a0	; 0x41a0 <get_char>
+    4584:	a8 2f       	mov	r26, r24
+    4586:	0e 94 f1 20 	call	0x41e2	; 0x41e2 <get_2bytes>
+    458a:	bb 27       	eor	r27, r27
+    458c:	8a 83       	std	Y+2, r24	; 0x02
+    458e:	9b 83       	std	Y+3, r25	; 0x03
+    4590:	ac 83       	std	Y+4, r26	; 0x04
+    4592:	bd 83       	std	Y+5, r27	; 0x05
+    4594:	0b c0       	rjmp	.+22     	; 0x45ac <main+0xfa>
+                        
+                        // acknowledge
+                        send_char(REPLY_ACK);
+                }
+                // Chip erase
+                else if (val == CMD_CHIP_ERASE)
+    4596:	85 36       	cpi	r24, 0x65	; 101
+    4598:	59 f4       	brne	.+22     	; 0x45b0 <main+0xfe>
+                {
+                        // Erase the application section
+                        SP_EraseApplicationSection();
+    459a:	0e 94 f6 25 	call	0x4bec	; 0x4bec <SP_EraseApplicationSection>
+                        {
+                                // reset watchdog while waiting for erase completion
+                                WDT_Reset();
+                        }
+                        #else // USE_WATCHDOG
+                        SP_WaitForSPM();
+    459e:	0e 94 46 26 	call	0x4c8c	; 0x4c8c <SP_WaitForSPM>
+                        #endif // USE_WATCHDOG
+                        
+                        // Randomize page buffer
+                        EEPROM_LoadPage(&val);
+    45a2:	c3 01       	movw	r24, r6
+    45a4:	0e 94 99 24 	call	0x4932	; 0x4932 <EEPROM_LoadPage>
+                        // Erase EEPROM
+                        EEPROM_EraseAll();
+    45a8:	0e 94 0a 25 	call	0x4a14	; 0x4a14 <EEPROM_EraseAll>
+                        
+                        // acknowledge
+                        send_char(REPLY_ACK);
+    45ac:	8d e0       	ldi	r24, 0x0D	; 13
+    45ae:	19 c1       	rjmp	.+562    	; 0x47e2 <main+0x330>
+                }
+                #ifdef ENABLE_BLOCK_SUPPORT
+                // Check block load support
+                else if (val == CMD_CHECK_BLOCK_SUPPORT )
+    45b0:	82 36       	cpi	r24, 0x62	; 98
+    45b2:	29 f4       	brne	.+10     	; 0x45be <main+0x10c>
+                {
+                        // yes, it is supported
+                        send_char(REPLY_YES);
+    45b4:	89 e5       	ldi	r24, 0x59	; 89
+    45b6:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+                        // Send block size (page size)
+                        send_char((APP_SECTION_PAGE_SIZE >> 8) & 0xFF);
+    45ba:	81 e0       	ldi	r24, 0x01	; 1
+    45bc:	dc c0       	rjmp	.+440    	; 0x4776 <main+0x2c4>
+                        send_char(APP_SECTION_PAGE_SIZE & 0xFF);
+                }
+                // Block load
+                else if (val == CMD_BLOCK_LOAD)
+    45be:	82 34       	cpi	r24, 0x42	; 66
+    45c0:	91 f4       	brne	.+36     	; 0x45e6 <main+0x134>
+                {
+                        // Block size
+                        i = get_2bytes();
+    45c2:	0e 94 f1 20 	call	0x41e2	; 0x41e2 <get_2bytes>
+    45c6:	18 2f       	mov	r17, r24
+    45c8:	09 2f       	mov	r16, r25
+    45ca:	28 2f       	mov	r18, r24
+    45cc:	39 2f       	mov	r19, r25
+    45ce:	c9 01       	movw	r24, r18
+    45d0:	6c 01       	movw	r12, r24
+                        // Memory type
+                        val = get_char();
+    45d2:	0e 94 d0 20 	call	0x41a0	; 0x41a0 <get_char>
+    45d6:	68 2f       	mov	r22, r24
+    45d8:	89 83       	std	Y+1, r24	; 0x01
+                        // Load it
+                        send_char(BlockLoad(i, val, &address));
+    45da:	81 2f       	mov	r24, r17
+    45dc:	90 2f       	mov	r25, r16
+    45de:	a4 01       	movw	r20, r8
+    45e0:	0e 94 94 21 	call	0x4328	; 0x4328 <BlockLoad>
+    45e4:	fe c0       	rjmp	.+508    	; 0x47e2 <main+0x330>
+                }
+                // Block read
+                else if (val == CMD_BLOCK_READ)
+    45e6:	87 36       	cpi	r24, 0x67	; 103
+    45e8:	91 f4       	brne	.+36     	; 0x460e <main+0x15c>
+                {
+                        // Block size
+                        i = get_2bytes();
+    45ea:	0e 94 f1 20 	call	0x41e2	; 0x41e2 <get_2bytes>
+    45ee:	18 2f       	mov	r17, r24
+    45f0:	09 2f       	mov	r16, r25
+    45f2:	28 2f       	mov	r18, r24
+    45f4:	39 2f       	mov	r19, r25
+    45f6:	c9 01       	movw	r24, r18
+    45f8:	6c 01       	movw	r12, r24
+                        // Memory type
+                        val = get_char();
+    45fa:	0e 94 d0 20 	call	0x41a0	; 0x41a0 <get_char>
+    45fe:	68 2f       	mov	r22, r24
+    4600:	89 83       	std	Y+1, r24	; 0x01
+                        // Read it
+                        BlockRead(i, val, &address);
+    4602:	81 2f       	mov	r24, r17
+    4604:	90 2f       	mov	r25, r16
+    4606:	a4 01       	movw	r20, r8
+    4608:	0e 94 f9 20 	call	0x41f2	; 0x41f2 <BlockRead>
+    460c:	ec c0       	rjmp	.+472    	; 0x47e6 <main+0x334>
+                }
+                #endif // ENABLE_BLOCK_SUPPORT
+                #ifdef ENABLE_FLASH_BYTE_SUPPORT
+                // Read program memory byte
+                else if (val == CMD_READ_BYTE)
+    460e:	82 35       	cpi	r24, 0x52	; 82
+    4610:	d9 f4       	brne	.+54     	; 0x4648 <main+0x196>
+                {
+                        send_char(SP_ReadByte((address << 1)+1));
+    4612:	6a 81       	ldd	r22, Y+2	; 0x02
+    4614:	7b 81       	ldd	r23, Y+3	; 0x03
+    4616:	8c 81       	ldd	r24, Y+4	; 0x04
+    4618:	9d 81       	ldd	r25, Y+5	; 0x05
+    461a:	66 0f       	add	r22, r22
+    461c:	77 1f       	adc	r23, r23
+    461e:	88 1f       	adc	r24, r24
+    4620:	99 1f       	adc	r25, r25
+    4622:	6f 5f       	subi	r22, 0xFF	; 255
+    4624:	7f 4f       	sbci	r23, 0xFF	; 255
+    4626:	8f 4f       	sbci	r24, 0xFF	; 255
+    4628:	9f 4f       	sbci	r25, 0xFF	; 255
+    462a:	0e 94 cb 25 	call	0x4b96	; 0x4b96 <SP_ReadByte>
+    462e:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+                        send_char(SP_ReadByte((address << 1)+0));
+    4632:	6a 81       	ldd	r22, Y+2	; 0x02
+    4634:	7b 81       	ldd	r23, Y+3	; 0x03
+    4636:	8c 81       	ldd	r24, Y+4	; 0x04
+    4638:	9d 81       	ldd	r25, Y+5	; 0x05
+    463a:	66 0f       	add	r22, r22
+    463c:	77 1f       	adc	r23, r23
+    463e:	88 1f       	adc	r24, r24
+    4640:	99 1f       	adc	r25, r25
+    4642:	0e 94 cb 25 	call	0x4b96	; 0x4b96 <SP_ReadByte>
+    4646:	5b c0       	rjmp	.+182    	; 0x46fe <main+0x24c>
+                        
+                        address++;
+                }
+                // Write program memory low byte
+                else if (val == CMD_WRITE_LOW_BYTE)
+    4648:	83 36       	cpi	r24, 0x63	; 99
+    464a:	29 f4       	brne	.+10     	; 0x4656 <main+0x1a4>
+                {
+                        // get low byte
+                        i = get_char();
+    464c:	0e 94 d0 20 	call	0x41a0	; 0x41a0 <get_char>
+    4650:	c8 2e       	mov	r12, r24
+    4652:	dd 24       	eor	r13, r13
+    4654:	ab cf       	rjmp	.-170    	; 0x45ac <main+0xfa>
+                        send_char(REPLY_ACK);
+                }
+                // Write program memory high byte
+                else if (val == CMD_WRITE_HIGH_BYTE)
+    4656:	83 34       	cpi	r24, 0x43	; 67
+    4658:	a9 f4       	brne	.+42     	; 0x4684 <main+0x1d2>
+                {
+                        // get high byte; combine
+                        i |= (get_char() << 8);
+    465a:	0e 94 d0 20 	call	0x41a0	; 0x41a0 <get_char>
+    465e:	b8 2e       	mov	r11, r24
+    4660:	aa 24       	eor	r10, r10
+    4662:	ca 28       	or	r12, r10
+    4664:	db 28       	or	r13, r11
+                        SP_LoadFlashWord((address << 1), i);
+    4666:	8a 81       	ldd	r24, Y+2	; 0x02
+    4668:	9b 81       	ldd	r25, Y+3	; 0x03
+    466a:	88 0f       	add	r24, r24
+    466c:	99 1f       	adc	r25, r25
+    466e:	b6 01       	movw	r22, r12
+    4670:	0e 94 03 26 	call	0x4c06	; 0x4c06 <SP_LoadFlashWord>
+                        address++;
+    4674:	8a 81       	ldd	r24, Y+2	; 0x02
+    4676:	9b 81       	ldd	r25, Y+3	; 0x03
+    4678:	ac 81       	ldd	r26, Y+4	; 0x04
+    467a:	bd 81       	ldd	r27, Y+5	; 0x05
+    467c:	01 96       	adiw	r24, 0x01	; 1
+    467e:	a1 1d       	adc	r26, r1
+    4680:	b1 1d       	adc	r27, r1
+    4682:	84 cf       	rjmp	.-248    	; 0x458c <main+0xda>
+                        send_char(REPLY_ACK);
+                }
+                // Write page
+                else if (val == CMD_WRITE_PAGE)
+    4684:	8d 36       	cpi	r24, 0x6D	; 109
+    4686:	a1 f4       	brne	.+40     	; 0x46b0 <main+0x1fe>
+                {
+                        if (address >= (APP_SECTION_SIZE>>1))
+    4688:	6a 81       	ldd	r22, Y+2	; 0x02
+    468a:	7b 81       	ldd	r23, Y+3	; 0x03
+    468c:	8c 81       	ldd	r24, Y+4	; 0x04
+    468e:	9d 81       	ldd	r25, Y+5	; 0x05
+    4690:	60 30       	cpi	r22, 0x00	; 0
+    4692:	f0 e2       	ldi	r31, 0x20	; 32
+    4694:	7f 07       	cpc	r23, r31
+    4696:	f0 e0       	ldi	r31, 0x00	; 0
+    4698:	8f 07       	cpc	r24, r31
+    469a:	f0 e0       	ldi	r31, 0x00	; 0
+    469c:	9f 07       	cpc	r25, r31
+    469e:	08 f0       	brcs	.+2      	; 0x46a2 <main+0x1f0>
+    46a0:	9f c0       	rjmp	.+318    	; 0x47e0 <main+0x32e>
+                                // don't allow bootloader overwrite
+                                send_char(REPLY_ERROR);
+                        }
+                        else
+                        {
+                                SP_WriteApplicationPage( address << 1);
+    46a2:	66 0f       	add	r22, r22
+    46a4:	77 1f       	adc	r23, r23
+    46a6:	88 1f       	adc	r24, r24
+    46a8:	99 1f       	adc	r25, r25
+    46aa:	0e 94 19 26 	call	0x4c32	; 0x4c32 <SP_WriteApplicationPage>
+    46ae:	7e cf       	rjmp	.-260    	; 0x45ac <main+0xfa>
+                        }
+                }
+                #endif // ENABLE_FLASH_BYTE_SUPPORT
+                #ifdef ENABLE_EEPROM_BYTE_SUPPORT
+                // Write EEPROM memory
+                else if (val == CMD_WRITE_EEPROM_BYTE)
+    46b0:	84 34       	cpi	r24, 0x44	; 68
+    46b2:	a1 f4       	brne	.+40     	; 0x46dc <main+0x22a>
+                {
+                        EEPROM_WriteByte( (unsigned char)(address / EEPROM_PAGE_SIZE), (unsigned char) (address & EEPROM_BYTE_ADDRESS_MASK), get_char() );
+    46b4:	ea 80       	ldd	r14, Y+2	; 0x02
+    46b6:	fb 80       	ldd	r15, Y+3	; 0x03
+    46b8:	0c 81       	ldd	r16, Y+4	; 0x04
+    46ba:	1d 81       	ldd	r17, Y+5	; 0x05
+    46bc:	0e 94 d0 20 	call	0x41a0	; 0x41a0 <get_char>
+    46c0:	48 2f       	mov	r20, r24
+    46c2:	6e 2d       	mov	r22, r14
+    46c4:	6f 71       	andi	r22, 0x1F	; 31
+    46c6:	f5 e0       	ldi	r31, 0x05	; 5
+    46c8:	16 95       	lsr	r17
+    46ca:	07 95       	ror	r16
+    46cc:	f7 94       	ror	r15
+    46ce:	e7 94       	ror	r14
+    46d0:	fa 95       	dec	r31
+    46d2:	d1 f7       	brne	.-12     	; 0x46c8 <main+0x216>
+    46d4:	8e 2d       	mov	r24, r14
+    46d6:	0e 94 5b 24 	call	0x48b6	; 0x48b6 <EEPROM_WriteByte>
+    46da:	13 c0       	rjmp	.+38     	; 0x4702 <main+0x250>
+                        address++;
+                }
+                // Read EEPROM memory
+                else if (val == CMD_READ_EEPROM_BYTE)
+    46dc:	84 36       	cpi	r24, 0x64	; 100
+    46de:	e9 f4       	brne	.+58     	; 0x471a <main+0x268>
+                {
+                        send_char( EEPROM_ReadByte( (unsigned char)(address / EEPROM_PAGE_SIZE), (unsigned char) (address & EEPROM_BYTE_ADDRESS_MASK) ) );
+    46e0:	8a 81       	ldd	r24, Y+2	; 0x02
+    46e2:	9b 81       	ldd	r25, Y+3	; 0x03
+    46e4:	ac 81       	ldd	r26, Y+4	; 0x04
+    46e6:	bd 81       	ldd	r27, Y+5	; 0x05
+    46e8:	68 2f       	mov	r22, r24
+    46ea:	6f 71       	andi	r22, 0x1F	; 31
+    46ec:	e5 e0       	ldi	r30, 0x05	; 5
+    46ee:	b6 95       	lsr	r27
+    46f0:	a7 95       	ror	r26
+    46f2:	97 95       	ror	r25
+    46f4:	87 95       	ror	r24
+    46f6:	ea 95       	dec	r30
+    46f8:	d1 f7       	brne	.-12     	; 0x46ee <main+0x23c>
+    46fa:	0e 94 1a 24 	call	0x4834	; 0x4834 <EEPROM_ReadByte>
+    46fe:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+                        address++;
+    4702:	8a 81       	ldd	r24, Y+2	; 0x02
+    4704:	9b 81       	ldd	r25, Y+3	; 0x03
+    4706:	ac 81       	ldd	r26, Y+4	; 0x04
+    4708:	bd 81       	ldd	r27, Y+5	; 0x05
+    470a:	01 96       	adiw	r24, 0x01	; 1
+    470c:	a1 1d       	adc	r26, r1
+    470e:	b1 1d       	adc	r27, r1
+    4710:	8a 83       	std	Y+2, r24	; 0x02
+    4712:	9b 83       	std	Y+3, r25	; 0x03
+    4714:	ac 83       	std	Y+4, r26	; 0x04
+    4716:	bd 83       	std	Y+5, r27	; 0x05
+    4718:	66 c0       	rjmp	.+204    	; 0x47e6 <main+0x334>
+                }
+                #endif // ENABLE_EEPROM_BYTE_SUPPORT
+                #ifdef ENABLE_LOCK_BITS
+                // Write lockbits
+                else if (val == CMD_WRITE_LOCK_BITS)
+    471a:	8c 36       	cpi	r24, 0x6C	; 108
+    471c:	29 f4       	brne	.+10     	; 0x4728 <main+0x276>
+                {
+                        SP_WriteLockBits( get_char() );
+    471e:	0e 94 d0 20 	call	0x41a0	; 0x41a0 <get_char>
+    4722:	0e 94 e7 25 	call	0x4bce	; 0x4bce <SP_WriteLockBits>
+    4726:	42 cf       	rjmp	.-380    	; 0x45ac <main+0xfa>
+                        send_char(REPLY_ACK);
+                }
+                // Read lockbits
+                else if (val == CMD_READ_LOCK_BITS)
+    4728:	82 37       	cpi	r24, 0x72	; 114
+    472a:	19 f4       	brne	.+6      	; 0x4732 <main+0x280>
+                {
+                        send_char(SP_ReadLockBits());
+    472c:	0e 94 eb 25 	call	0x4bd6	; 0x4bd6 <SP_ReadLockBits>
+    4730:	58 c0       	rjmp	.+176    	; 0x47e2 <main+0x330>
+                }
+                #endif // ENABLE_LOCK_BITS
+                #ifdef ENABLE_FUSE_BITS
+                // Read low fuse bits
+                else if (val == CMD_READ_LOW_FUSE_BITS)
+    4732:	86 34       	cpi	r24, 0x46	; 70
+    4734:	11 f4       	brne	.+4      	; 0x473a <main+0x288>
+                {
+                        send_char(SP_ReadFuseByte(0));
+    4736:	80 e0       	ldi	r24, 0x00	; 0
+    4738:	07 c0       	rjmp	.+14     	; 0x4748 <main+0x296>
+                }
+                // Read high fuse bits
+                else if (val == CMD_READ_HIGH_FUSE_BITS)
+    473a:	8e 34       	cpi	r24, 0x4E	; 78
+    473c:	11 f4       	brne	.+4      	; 0x4742 <main+0x290>
+                {
+                        send_char(SP_ReadFuseByte(1));
+    473e:	81 e0       	ldi	r24, 0x01	; 1
+    4740:	03 c0       	rjmp	.+6      	; 0x4748 <main+0x296>
+                }
+                // Read extended fuse bits
+                else if (val == CMD_READ_EXT_FUSE_BITS)
+    4742:	81 35       	cpi	r24, 0x51	; 81
+    4744:	21 f4       	brne	.+8      	; 0x474e <main+0x29c>
+                {
+                        send_char(SP_ReadFuseByte(2));
+    4746:	82 e0       	ldi	r24, 0x02	; 2
+    4748:	0e 94 dc 25 	call	0x4bb8	; 0x4bb8 <SP_ReadFuseByte>
+    474c:	4a c0       	rjmp	.+148    	; 0x47e2 <main+0x330>
+                }
+                #endif // ENABLE_FUSE_BITS
+                // Enter and leave programming mode
+                else if ((val == CMD_ENTER_PROG_MODE) || (val == CMD_LEAVE_PROG_MODE))
+    474e:	80 35       	cpi	r24, 0x50	; 80
+    4750:	09 f4       	brne	.+2      	; 0x4754 <main+0x2a2>
+    4752:	2c cf       	rjmp	.-424    	; 0x45ac <main+0xfa>
+    4754:	8c 34       	cpi	r24, 0x4C	; 76
+    4756:	09 f4       	brne	.+2      	; 0x475a <main+0x2a8>
+    4758:	29 cf       	rjmp	.-430    	; 0x45ac <main+0xfa>
+                {
+                        // just acknowledge
+                        send_char(REPLY_ACK);
+                }
+                // Exit bootloader
+                else if (val == CMD_EXIT_BOOTLOADER)
+    475a:	85 34       	cpi	r24, 0x45	; 69
+    475c:	29 f4       	brne	.+10     	; 0x4768 <main+0x2b6>
+                {
+                        in_bootloader = 0;
+                        send_char(REPLY_ACK);
+    475e:	8d e0       	ldi	r24, 0x0D	; 13
+    4760:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+    4764:	10 e0       	ldi	r17, 0x00	; 0
+    4766:	40 c0       	rjmp	.+128    	; 0x47e8 <main+0x336>
+                }
+                // Get programmer type
+                else if (val == CMD_PROGRAMMER_TYPE)
+    4768:	80 37       	cpi	r24, 0x70	; 112
+    476a:	11 f4       	brne	.+4      	; 0x4770 <main+0x2be>
+                {
+                        // serial
+                        send_char('S');
+    476c:	83 e5       	ldi	r24, 0x53	; 83
+    476e:	39 c0       	rjmp	.+114    	; 0x47e2 <main+0x330>
+                }
+                // Return supported device codes
+                else if (val == CMD_DEVICE_CODE)
+    4770:	84 37       	cpi	r24, 0x74	; 116
+    4772:	29 f4       	brne	.+10     	; 0x477e <main+0x2cc>
+                {
+                        // send only this device
+                        send_char(123); // TODO
+    4774:	8b e7       	ldi	r24, 0x7B	; 123
+    4776:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+                        // terminator
+                        send_char(0);
+    477a:	80 e0       	ldi	r24, 0x00	; 0
+    477c:	32 c0       	rjmp	.+100    	; 0x47e2 <main+0x330>
+                }
+                // Set LED, clear LED, and set device type
+                else if ((val == CMD_SET_LED) || (val == CMD_CLEAR_LED) || (val == CMD_SET_TYPE))
+    477e:	88 57       	subi	r24, 0x78	; 120
+    4780:	82 30       	cpi	r24, 0x02	; 2
+    4782:	10 f0       	brcs	.+4      	; 0x4788 <main+0x2d6>
+    4784:	94 35       	cpi	r25, 0x54	; 84
+    4786:	19 f4       	brne	.+6      	; 0x478e <main+0x2dc>
+                {
+                        // discard parameter
+                        get_char();
+    4788:	0e 94 d0 20 	call	0x41a0	; 0x41a0 <get_char>
+    478c:	0f cf       	rjmp	.-482    	; 0x45ac <main+0xfa>
+                        send_char(REPLY_ACK);
+                }
+                // Return program identifier
+                else if (val == CMD_PROGRAM_ID)
+    478e:	93 35       	cpi	r25, 0x53	; 83
+    4790:	a1 f4       	brne	.+40     	; 0x47ba <main+0x308>
+                {
+                        send_char('X');
+    4792:	88 e5       	ldi	r24, 0x58	; 88
+    4794:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+                        send_char('B');
+    4798:	82 e4       	ldi	r24, 0x42	; 66
+    479a:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+                        send_char('o');
+    479e:	8f e6       	ldi	r24, 0x6F	; 111
+    47a0:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+                        send_char('o');
+    47a4:	8f e6       	ldi	r24, 0x6F	; 111
+    47a6:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+                        send_char('t');
+    47aa:	84 e7       	ldi	r24, 0x74	; 116
+    47ac:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+                        send_char('+');
+    47b0:	8b e2       	ldi	r24, 0x2B	; 43
+    47b2:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+                        send_char('+');
+    47b6:	8b e2       	ldi	r24, 0x2B	; 43
+    47b8:	14 c0       	rjmp	.+40     	; 0x47e2 <main+0x330>
+                }
+                // Read software version
+                else if (val == CMD_VERSION)
+    47ba:	96 35       	cpi	r25, 0x56	; 86
+    47bc:	29 f4       	brne	.+10     	; 0x47c8 <main+0x316>
+                {
+                        send_char('1');
+    47be:	81 e3       	ldi	r24, 0x31	; 49
+    47c0:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+                        send_char('6');
+    47c4:	86 e3       	ldi	r24, 0x36	; 54
+    47c6:	0d c0       	rjmp	.+26     	; 0x47e2 <main+0x330>
+                }
+                // Read signature bytes
+                else if (val == CMD_READ_SIGNATURE)
+    47c8:	93 37       	cpi	r25, 0x73	; 115
+    47ca:	41 f4       	brne	.+16     	; 0x47dc <main+0x32a>
+                {
+                        send_char(SIGNATURE_2);
+    47cc:	81 e4       	ldi	r24, 0x41	; 65
+    47ce:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+                        send_char(SIGNATURE_1);
+    47d2:	84 e9       	ldi	r24, 0x94	; 148
+    47d4:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+                        send_char(SIGNATURE_0);
+    47d8:	8e e1       	ldi	r24, 0x1E	; 30
+    47da:	03 c0       	rjmp	.+6      	; 0x47e2 <main+0x330>
+                }
+                #endif // USE_I2C_ADDRESS_NEGOTIATION
+                #endif // USE_I2C
+                // ESC (0x1b) to sync
+                // otherwise, error
+                else if (val != CMD_SYNC)
+    47dc:	9b 31       	cpi	r25, 0x1B	; 27
+    47de:	19 f0       	breq	.+6      	; 0x47e6 <main+0x334>
+                {
+                        send_char(REPLY_ERROR);
+    47e0:	8f e3       	ldi	r24, 0x3F	; 63
+    47e2:	0e 94 df 20 	call	0x41be	; 0x41be <send_char>
+    47e6:	11 e0       	ldi	r17, 0x01	; 1
+                }
+                
+                // Wait for any lingering SPM instructions to finish
+                SP_WaitForSPM();
+    47e8:	0e 94 46 26 	call	0x4c8c	; 0x4c8c <SP_WaitForSPM>
+        #ifdef USE_WATCHDOG
+        WDT_EnableAndSetTimeout();
+        #endif // USE_WATCHDOG
+
+        // Main bootloader        
+        while (in_bootloader) {
+    47ec:	11 23       	and	r17, r17
+    47ee:	09 f0       	breq	.+2      	; 0x47f2 <main+0x340>
+    47f0:	b4 ce       	rjmp	.-664    	; 0x455a <main+0xa8>
+        i2c_deinit();
+        #endif // USE_I2C
+        
+        #ifdef USE_UART
+        // Shut down UART
+        uart_deinit();
+    47f2:	0e 94 29 25 	call	0x4a52	; 0x4a52 <uart_deinit>
+        SP_LockSPM();
+        #endif // LOCK_SPM_ON_EXIT
+        
+        #ifdef USE_LED
+        // Turn off LED on exit
+        LED_PORT.DIRCLR = (1 << LED_PIN);
+    47f6:	82 e0       	ldi	r24, 0x02	; 2
+    47f8:	e0 e6       	ldi	r30, 0x60	; 96
+    47fa:	f6 e0       	ldi	r31, 0x06	; 6
+    47fc:	82 83       	std	Z+2, r24	; 0x02
+        
+        // --------------------------------------------------
+        // End bootloader exit section
+        
+        // Jump into main code
+        EIND = 0x00;
+    47fe:	1c be       	out	0x3c, r1	; 60
+        reset_vect();
+    4800:	e0 e0       	ldi	r30, 0x00	; 0
+    4802:	f0 e0       	ldi	r31, 0x00	; 0
+    4804:	09 95       	icall
+}
+    4806:	80 e0       	ldi	r24, 0x00	; 0
+    4808:	90 e0       	ldi	r25, 0x00	; 0
+    480a:	25 96       	adiw	r28, 0x05	; 5
+    480c:	cd bf       	out	0x3d, r28	; 61
+    480e:	de bf       	out	0x3e, r29	; 62
+    4810:	cf 91       	pop	r28
+    4812:	df 91       	pop	r29
+    4814:	1f 91       	pop	r17
+    4816:	0f 91       	pop	r16
+    4818:	ff 90       	pop	r15
+    481a:	ef 90       	pop	r14
+    481c:	df 90       	pop	r13
+    481e:	cf 90       	pop	r12
+    4820:	bf 90       	pop	r11
+    4822:	af 90       	pop	r10
+    4824:	9f 90       	pop	r9
+    4826:	8f 90       	pop	r8
+    4828:	7f 90       	pop	r7
+    482a:	6f 90       	pop	r6
+    482c:	5f 90       	pop	r5
+    482e:	4f 90       	pop	r4
+    4830:	3f 90       	pop	r3
+    4832:	08 95       	ret
+
+00004834 <EEPROM_ReadByte>:
+ *  \param  byteAddr  EEPROM Byte address, between 0 and EEPROM_PAGE_SIZE.
+ *
+ *  \return  Byte value read from EEPROM.
+ */
+uint8_t EEPROM_ReadByte( uint8_t pageAddr, uint8_t byteAddr )
+{
+    4834:	98 2f       	mov	r25, r24
+ */
+void EEPROM_WaitForNVM( void )
+{
+	do {
+		/* Block execution while waiting for the NVM to be ready. */
+	} while ((NVM.STATUS & NVM_NVMBUSY_bm) == NVM_NVMBUSY_bm);
+    4836:	e0 ec       	ldi	r30, 0xC0	; 192
+    4838:	f1 e0       	ldi	r31, 0x01	; 1
+    483a:	80 91 cf 01 	lds	r24, 0x01CF
+    483e:	87 fd       	sbrc	r24, 7
+    4840:	fa cf       	rjmp	.-12     	; 0x4836 <EEPROM_ReadByte+0x2>
+	/* Wait until NVM is not busy. */
+	EEPROM_WaitForNVM();
+
+	/* Calculate address */
+	uint16_t address = (uint16_t)(pageAddr*EEPROM_PAGE_SIZE)
+	                            |(byteAddr & (EEPROM_PAGE_SIZE-1));
+    4842:	26 2f       	mov	r18, r22
+    4844:	30 e0       	ldi	r19, 0x00	; 0
+    4846:	2f 71       	andi	r18, 0x1F	; 31
+    4848:	30 70       	andi	r19, 0x00	; 0
+    484a:	89 2f       	mov	r24, r25
+    484c:	90 e0       	ldi	r25, 0x00	; 0
+    484e:	45 e0       	ldi	r20, 0x05	; 5
+    4850:	88 0f       	add	r24, r24
+    4852:	99 1f       	adc	r25, r25
+    4854:	4a 95       	dec	r20
+    4856:	e1 f7       	brne	.-8      	; 0x4850 <EEPROM_ReadByte+0x1c>
+    4858:	28 2b       	or	r18, r24
+    485a:	39 2b       	or	r19, r25
+
+	/* Set address to read from. */
+	NVM.ADDR0 = address & 0xFF;
+    485c:	20 93 c0 01 	sts	0x01C0, r18
+	NVM.ADDR1 = (address >> 8) & 0x1F;
+    4860:	83 2f       	mov	r24, r19
+    4862:	8f 71       	andi	r24, 0x1F	; 31
+    4864:	81 83       	std	Z+1, r24	; 0x01
+	NVM.ADDR2 = 0x00;
+    4866:	12 82       	std	Z+2, r1	; 0x02
+
+	/* Issue EEPROM Read command. */
+        NVM.CMD = NVM_CMD_READ_EEPROM_gc;
+    4868:	86 e0       	ldi	r24, 0x06	; 6
+    486a:	82 87       	std	Z+10, r24	; 0x0a
+
+static inline void NVM_EXEC(void)
+{
+        void *z = (void *)&NVM_CTRLA;
+        
+        __asm__ volatile("out %[ccp], %[ioreg]"  "\n\t"
+    486c:	eb ec       	ldi	r30, 0xCB	; 203
+    486e:	f1 e0       	ldi	r31, 0x01	; 1
+    4870:	21 e0       	ldi	r18, 0x01	; 1
+    4872:	30 e0       	ldi	r19, 0x00	; 0
+    4874:	88 ed       	ldi	r24, 0xD8	; 216
+    4876:	90 e0       	ldi	r25, 0x00	; 0
+    4878:	84 bf       	out	0x34, r24	; 52
+    487a:	20 83       	st	Z, r18
+
+	/* Issue EEPROM Read command. */
+        NVM.CMD = NVM_CMD_READ_EEPROM_gc;
+        NVM_EXEC();
+
+	return NVM.DATA0;
+    487c:	80 91 c4 01 	lds	r24, 0x01C4
+}
+    4880:	08 95       	ret
+
+00004882 <EEPROM_WaitForNVM>:
+ */
+void EEPROM_WaitForNVM( void )
+{
+	do {
+		/* Block execution while waiting for the NVM to be ready. */
+	} while ((NVM.STATUS & NVM_NVMBUSY_bm) == NVM_NVMBUSY_bm);
+    4882:	80 91 cf 01 	lds	r24, 0x01CF
+    4886:	87 fd       	sbrc	r24, 7
+    4888:	fc cf       	rjmp	.-8      	; 0x4882 <EEPROM_WaitForNVM>
+}
+    488a:	08 95       	ret
+
+0000488c <EEPROM_FlushBuffer>:
+ */
+void EEPROM_WaitForNVM( void )
+{
+	do {
+		/* Block execution while waiting for the NVM to be ready. */
+	} while ((NVM.STATUS & NVM_NVMBUSY_bm) == NVM_NVMBUSY_bm);
+    488c:	80 91 cf 01 	lds	r24, 0x01CF
+    4890:	87 fd       	sbrc	r24, 7
+    4892:	fc cf       	rjmp	.-8      	; 0x488c <EEPROM_FlushBuffer>
+{
+	/* Wait until NVM is not busy. */
+	EEPROM_WaitForNVM();
+
+	/* Flush EEPROM page buffer if necessary. */
+	if ((NVM.STATUS & NVM_EELOAD_bm) != 0) {
+    4894:	80 91 cf 01 	lds	r24, 0x01CF
+    4898:	81 ff       	sbrs	r24, 1
+    489a:	0c c0       	rjmp	.+24     	; 0x48b4 <EEPROM_FlushBuffer+0x28>
+                NVM.CMD = NVM_CMD_ERASE_EEPROM_BUFFER_gc;
+    489c:	86 e3       	ldi	r24, 0x36	; 54
+    489e:	e0 ec       	ldi	r30, 0xC0	; 192
+    48a0:	f1 e0       	ldi	r31, 0x01	; 1
+    48a2:	82 87       	std	Z+10, r24	; 0x0a
+
+static inline void NVM_EXEC(void)
+{
+        void *z = (void *)&NVM_CTRLA;
+        
+        __asm__ volatile("out %[ccp], %[ioreg]"  "\n\t"
+    48a4:	eb ec       	ldi	r30, 0xCB	; 203
+    48a6:	f1 e0       	ldi	r31, 0x01	; 1
+    48a8:	21 e0       	ldi	r18, 0x01	; 1
+    48aa:	30 e0       	ldi	r19, 0x00	; 0
+    48ac:	88 ed       	ldi	r24, 0xD8	; 216
+    48ae:	90 e0       	ldi	r25, 0x00	; 0
+    48b0:	84 bf       	out	0x34, r24	; 52
+    48b2:	20 83       	st	Z, r18
+    48b4:	08 95       	ret
+
+000048b6 <EEPROM_WriteByte>:
+ *  \param  pageAddr  EEPROM Page address, between 0 and EEPROM_SIZE/EEPROM_PAGE_SIZE
+ *  \param  byteAddr  EEPROM Byte address, between 0 and EEPROM_PAGE_SIZE.
+ *  \param  value     Byte value to write to EEPROM.
+ */
+void EEPROM_WriteByte( uint8_t pageAddr, uint8_t byteAddr, uint8_t value )
+{
+    48b6:	df 92       	push	r13
+    48b8:	ef 92       	push	r14
+    48ba:	ff 92       	push	r15
+    48bc:	0f 93       	push	r16
+    48be:	1f 93       	push	r17
+    48c0:	e8 2e       	mov	r14, r24
+    48c2:	06 2f       	mov	r16, r22
+    48c4:	d4 2e       	mov	r13, r20
+	/*  Flush buffer to make sure no unintetional data is written and load
+	 *  the "Page Load" command into the command register.
+	 */
+	EEPROM_FlushBuffer();
+    48c6:	0e 94 46 24 	call	0x488c	; 0x488c <EEPROM_FlushBuffer>
+	NVM.CMD = NVM_CMD_LOAD_EEPROM_BUFFER_gc;
+    48ca:	e0 ec       	ldi	r30, 0xC0	; 192
+    48cc:	f1 e0       	ldi	r31, 0x01	; 1
+    48ce:	83 e3       	ldi	r24, 0x33	; 51
+    48d0:	82 87       	std	Z+10, r24	; 0x0a
+
+	/* Calculate address */
+	uint16_t address = (uint16_t)(pageAddr*EEPROM_PAGE_SIZE)
+	                            |(byteAddr & (EEPROM_PAGE_SIZE-1));
+    48d2:	10 e0       	ldi	r17, 0x00	; 0
+    48d4:	0f 71       	andi	r16, 0x1F	; 31
+    48d6:	10 70       	andi	r17, 0x00	; 0
+    48d8:	ff 24       	eor	r15, r15
+    48da:	55 e0       	ldi	r21, 0x05	; 5
+    48dc:	ee 0c       	add	r14, r14
+    48de:	ff 1c       	adc	r15, r15
+    48e0:	5a 95       	dec	r21
+    48e2:	e1 f7       	brne	.-8      	; 0x48dc <EEPROM_WriteByte+0x26>
+    48e4:	0e 29       	or	r16, r14
+    48e6:	1f 29       	or	r17, r15
+
+	/* Set address to write to. */
+	NVM.ADDR0 = address & 0xFF;
+    48e8:	00 83       	st	Z, r16
+	NVM.ADDR1 = (address >> 8) & 0x1F;
+    48ea:	81 2f       	mov	r24, r17
+    48ec:	8f 71       	andi	r24, 0x1F	; 31
+    48ee:	81 83       	std	Z+1, r24	; 0x01
+	NVM.ADDR2 = 0x00;
+    48f0:	12 82       	std	Z+2, r1	; 0x02
+
+	/* Load data to write, which triggers the loading of EEPROM page buffer. */
+	NVM.DATA0 = value;
+    48f2:	d4 82       	std	Z+4, r13	; 0x04
+
+	/*  Issue EEPROM Atomic Write (Erase&Write) command. Load command, write
+	 *  the protection signature and execute command.
+	 */
+	NVM.CMD = NVM_CMD_ERASE_WRITE_EEPROM_PAGE_gc;
+    48f4:	85 e3       	ldi	r24, 0x35	; 53
+    48f6:	82 87       	std	Z+10, r24	; 0x0a
+
+static inline void NVM_EXEC(void)
+{
+        void *z = (void *)&NVM_CTRLA;
+        
+        __asm__ volatile("out %[ccp], %[ioreg]"  "\n\t"
+    48f8:	eb ec       	ldi	r30, 0xCB	; 203
+    48fa:	f1 e0       	ldi	r31, 0x01	; 1
+    48fc:	21 e0       	ldi	r18, 0x01	; 1
+    48fe:	30 e0       	ldi	r19, 0x00	; 0
+    4900:	88 ed       	ldi	r24, 0xD8	; 216
+    4902:	90 e0       	ldi	r25, 0x00	; 0
+    4904:	84 bf       	out	0x34, r24	; 52
+    4906:	20 83       	st	Z, r18
+	/*  Issue EEPROM Atomic Write (Erase&Write) command. Load command, write
+	 *  the protection signature and execute command.
+	 */
+	NVM.CMD = NVM_CMD_ERASE_WRITE_EEPROM_PAGE_gc;
+        NVM_EXEC_WRAPPER();
+}
+    4908:	1f 91       	pop	r17
+    490a:	0f 91       	pop	r16
+    490c:	ff 90       	pop	r15
+    490e:	ef 90       	pop	r14
+    4910:	df 90       	pop	r13
+    4912:	08 95       	ret
+
+00004914 <EEPROM_LoadByte>:
+ *
+ *  \param  byteAddr  EEPROM Byte address, between 0 and EEPROM_PAGE_SIZE.
+ *  \param  value     Byte value to write to buffer.
+ */
+void EEPROM_LoadByte( uint8_t byteAddr, uint8_t value )
+{
+    4914:	98 2f       	mov	r25, r24
+ */
+void EEPROM_WaitForNVM( void )
+{
+	do {
+		/* Block execution while waiting for the NVM to be ready. */
+	} while ((NVM.STATUS & NVM_NVMBUSY_bm) == NVM_NVMBUSY_bm);
+    4916:	e0 ec       	ldi	r30, 0xC0	; 192
+    4918:	f1 e0       	ldi	r31, 0x01	; 1
+    491a:	80 91 cf 01 	lds	r24, 0x01CF
+    491e:	87 fd       	sbrc	r24, 7
+    4920:	fa cf       	rjmp	.-12     	; 0x4916 <EEPROM_LoadByte+0x2>
+ */
+void EEPROM_LoadByte( uint8_t byteAddr, uint8_t value )
+{
+	/* Wait until NVM is not busy and prepare NVM command.*/
+	EEPROM_WaitForNVM();
+	NVM.CMD = NVM_CMD_LOAD_EEPROM_BUFFER_gc;
+    4922:	83 e3       	ldi	r24, 0x33	; 51
+    4924:	82 87       	std	Z+10, r24	; 0x0a
+
+	/* Set address. */
+	NVM.ADDR0 = byteAddr & 0xFF;
+    4926:	90 93 c0 01 	sts	0x01C0, r25
+	NVM.ADDR1 = 0x00;
+    492a:	11 82       	std	Z+1, r1	; 0x01
+	NVM.ADDR2 = 0x00;
+    492c:	12 82       	std	Z+2, r1	; 0x02
+
+	/* Set data, which triggers loading of EEPROM page buffer. */
+	NVM.DATA0 = value;
+    492e:	64 83       	std	Z+4, r22	; 0x04
+}
+    4930:	08 95       	ret
+
+00004932 <EEPROM_LoadPage>:
+ *        EEPROM write page operation.
+ *
+ *  \param  values   Pointer to SRAM buffer containing an entire page.
+ */
+void EEPROM_LoadPage( const uint8_t * values )
+{
+    4932:	dc 01       	movw	r26, r24
+ */
+void EEPROM_WaitForNVM( void )
+{
+	do {
+		/* Block execution while waiting for the NVM to be ready. */
+	} while ((NVM.STATUS & NVM_NVMBUSY_bm) == NVM_NVMBUSY_bm);
+    4934:	e0 ec       	ldi	r30, 0xC0	; 192
+    4936:	f1 e0       	ldi	r31, 0x01	; 1
+    4938:	80 91 cf 01 	lds	r24, 0x01CF
+    493c:	87 fd       	sbrc	r24, 7
+    493e:	fa cf       	rjmp	.-12     	; 0x4934 <EEPROM_LoadPage+0x2>
+ */
+void EEPROM_LoadPage( const uint8_t * values )
+{
+	/* Wait until NVM is not busy. */
+	EEPROM_WaitForNVM();
+	NVM.CMD = NVM_CMD_LOAD_EEPROM_BUFFER_gc;
+    4940:	83 e3       	ldi	r24, 0x33	; 51
+    4942:	82 87       	std	Z+10, r24	; 0x0a
+
+	/*  Set address to zero, as only the lower bits matters. ADDR0 is
+	 *  maintained inside the loop below.
+	 */
+	NVM.ADDR1 = 0x00;
+    4944:	11 82       	std	Z+1, r1	; 0x01
+	NVM.ADDR2 = 0x00;
+    4946:	12 82       	std	Z+2, r1	; 0x02
+    4948:	90 e0       	ldi	r25, 0x00	; 0
+
+	/* Load multible bytes into page buffer. */
+	for (uint8_t i = 0; i < EEPROM_PAGE_SIZE; ++i) {
+		NVM.ADDR0 = i;
+    494a:	90 93 c0 01 	sts	0x01C0, r25
+		NVM.DATA0 = *values;
+    494e:	8d 91       	ld	r24, X+
+    4950:	84 83       	std	Z+4, r24	; 0x04
+	 */
+	NVM.ADDR1 = 0x00;
+	NVM.ADDR2 = 0x00;
+
+	/* Load multible bytes into page buffer. */
+	for (uint8_t i = 0; i < EEPROM_PAGE_SIZE; ++i) {
+    4952:	9f 5f       	subi	r25, 0xFF	; 255
+    4954:	90 32       	cpi	r25, 0x20	; 32
+    4956:	c9 f7       	brne	.-14     	; 0x494a <EEPROM_LoadPage+0x18>
+		NVM.ADDR0 = i;
+		NVM.DATA0 = *values;
+		++values;
+	}
+}
+    4958:	08 95       	ret
+
+0000495a <EEPROM_AtomicWritePage>:
+ *  locations that have not been loaded will be left untouched in EEPROM.
+ *
+ *  \param  pageAddr  EEPROM Page address, between 0 and EEPROM_SIZE/EEPROM_PAGE_SIZE
+ */
+void EEPROM_AtomicWritePage( uint8_t pageAddr )
+{
+    495a:	98 2f       	mov	r25, r24
+ */
+void EEPROM_WaitForNVM( void )
+{
+	do {
+		/* Block execution while waiting for the NVM to be ready. */
+	} while ((NVM.STATUS & NVM_NVMBUSY_bm) == NVM_NVMBUSY_bm);
+    495c:	e0 ec       	ldi	r30, 0xC0	; 192
+    495e:	f1 e0       	ldi	r31, 0x01	; 1
+    4960:	80 91 cf 01 	lds	r24, 0x01CF
+    4964:	87 fd       	sbrc	r24, 7
+    4966:	fa cf       	rjmp	.-12     	; 0x495c <EEPROM_AtomicWritePage+0x2>
+{
+	/* Wait until NVM is not busy. */
+	EEPROM_WaitForNVM();
+
+	/* Calculate page address */
+	uint16_t address = (uint16_t)(pageAddr*EEPROM_PAGE_SIZE);
+    4968:	89 2f       	mov	r24, r25
+    496a:	90 e0       	ldi	r25, 0x00	; 0
+    496c:	65 e0       	ldi	r22, 0x05	; 5
+    496e:	88 0f       	add	r24, r24
+    4970:	99 1f       	adc	r25, r25
+    4972:	6a 95       	dec	r22
+    4974:	e1 f7       	brne	.-8      	; 0x496e <EEPROM_AtomicWritePage+0x14>
+
+	/* Set address. */
+	NVM.ADDR0 = address & 0xFF;
+    4976:	80 93 c0 01 	sts	0x01C0, r24
+	NVM.ADDR1 = (address >> 8) & 0x1F;
+    497a:	89 2f       	mov	r24, r25
+    497c:	8f 71       	andi	r24, 0x1F	; 31
+    497e:	81 83       	std	Z+1, r24	; 0x01
+	NVM.ADDR2 = 0x00;
+    4980:	12 82       	std	Z+2, r1	; 0x02
+
+	/* Issue EEPROM Atomic Write (Erase&Write) command. */
+        NVM.CMD = NVM_CMD_ERASE_WRITE_EEPROM_PAGE_gc;
+    4982:	85 e3       	ldi	r24, 0x35	; 53
+    4984:	82 87       	std	Z+10, r24	; 0x0a
+
+static inline void NVM_EXEC(void)
+{
+        void *z = (void *)&NVM_CTRLA;
+        
+        __asm__ volatile("out %[ccp], %[ioreg]"  "\n\t"
+    4986:	eb ec       	ldi	r30, 0xCB	; 203
+    4988:	f1 e0       	ldi	r31, 0x01	; 1
+    498a:	21 e0       	ldi	r18, 0x01	; 1
+    498c:	30 e0       	ldi	r19, 0x00	; 0
+    498e:	88 ed       	ldi	r24, 0xD8	; 216
+    4990:	90 e0       	ldi	r25, 0x00	; 0
+    4992:	84 bf       	out	0x34, r24	; 52
+    4994:	20 83       	st	Z, r18
+	NVM.ADDR2 = 0x00;
+
+	/* Issue EEPROM Atomic Write (Erase&Write) command. */
+        NVM.CMD = NVM_CMD_ERASE_WRITE_EEPROM_PAGE_gc;
+        NVM_EXEC();
+}
+    4996:	08 95       	ret
+
+00004998 <EEPROM_ErasePage>:
+ *  This function erases one EEPROM page, so that every location reads 0xFF.
+ *
+ *  \param  pageAddr  EEPROM Page address, between 0 and EEPROM_SIZE/EEPROM_PAGE_SIZE
+ */
+void EEPROM_ErasePage( uint8_t pageAddr )
+{
+    4998:	98 2f       	mov	r25, r24
+ */
+void EEPROM_WaitForNVM( void )
+{
+	do {
+		/* Block execution while waiting for the NVM to be ready. */
+	} while ((NVM.STATUS & NVM_NVMBUSY_bm) == NVM_NVMBUSY_bm);
+    499a:	e0 ec       	ldi	r30, 0xC0	; 192
+    499c:	f1 e0       	ldi	r31, 0x01	; 1
+    499e:	80 91 cf 01 	lds	r24, 0x01CF
+    49a2:	87 fd       	sbrc	r24, 7
+    49a4:	fa cf       	rjmp	.-12     	; 0x499a <EEPROM_ErasePage+0x2>
+{
+	/* Wait until NVM is not busy. */
+	EEPROM_WaitForNVM();
+
+	/* Calculate page address */
+	uint16_t address = (uint16_t)(pageAddr*EEPROM_PAGE_SIZE);
+    49a6:	89 2f       	mov	r24, r25
+    49a8:	90 e0       	ldi	r25, 0x00	; 0
+    49aa:	75 e0       	ldi	r23, 0x05	; 5
+    49ac:	88 0f       	add	r24, r24
+    49ae:	99 1f       	adc	r25, r25
+    49b0:	7a 95       	dec	r23
+    49b2:	e1 f7       	brne	.-8      	; 0x49ac <EEPROM_ErasePage+0x14>
+
+	/* Set address. */
+	NVM.ADDR0 = address & 0xFF;
+    49b4:	80 93 c0 01 	sts	0x01C0, r24
+	NVM.ADDR1 = (address >> 8) & 0x1F;
+    49b8:	89 2f       	mov	r24, r25
+    49ba:	8f 71       	andi	r24, 0x1F	; 31
+    49bc:	81 83       	std	Z+1, r24	; 0x01
+	NVM.ADDR2 = 0x00;
+    49be:	12 82       	std	Z+2, r1	; 0x02
+
+	/* Issue EEPROM Erase command. */
+        NVM.CMD = NVM_CMD_ERASE_EEPROM_PAGE_gc;
+    49c0:	82 e3       	ldi	r24, 0x32	; 50
+    49c2:	82 87       	std	Z+10, r24	; 0x0a
+
+static inline void NVM_EXEC(void)
+{
+        void *z = (void *)&NVM_CTRLA;
+        
+        __asm__ volatile("out %[ccp], %[ioreg]"  "\n\t"
+    49c4:	eb ec       	ldi	r30, 0xCB	; 203
+    49c6:	f1 e0       	ldi	r31, 0x01	; 1
+    49c8:	21 e0       	ldi	r18, 0x01	; 1
+    49ca:	30 e0       	ldi	r19, 0x00	; 0
+    49cc:	88 ed       	ldi	r24, 0xD8	; 216
+    49ce:	90 e0       	ldi	r25, 0x00	; 0
+    49d0:	84 bf       	out	0x34, r24	; 52
+    49d2:	20 83       	st	Z, r18
+	NVM.ADDR2 = 0x00;
+
+	/* Issue EEPROM Erase command. */
+        NVM.CMD = NVM_CMD_ERASE_EEPROM_PAGE_gc;
+        NVM_EXEC_WRAPPER();
+}
+    49d4:	08 95       	ret
+
+000049d6 <EEPROM_SplitWritePage>:
+ *  before writing.
+ *
+ *  \param  pageAddr  EEPROM Page address, between 0 and EEPROM_SIZE/EEPROM_PAGE_SIZE
+ */
+void EEPROM_SplitWritePage( uint8_t pageAddr )
+{
+    49d6:	98 2f       	mov	r25, r24
+ */
+void EEPROM_WaitForNVM( void )
+{
+	do {
+		/* Block execution while waiting for the NVM to be ready. */
+	} while ((NVM.STATUS & NVM_NVMBUSY_bm) == NVM_NVMBUSY_bm);
+    49d8:	e0 ec       	ldi	r30, 0xC0	; 192
+    49da:	f1 e0       	ldi	r31, 0x01	; 1
+    49dc:	80 91 cf 01 	lds	r24, 0x01CF
+    49e0:	87 fd       	sbrc	r24, 7
+    49e2:	fa cf       	rjmp	.-12     	; 0x49d8 <EEPROM_SplitWritePage+0x2>
+{
+	/* Wait until NVM is not busy. */
+	EEPROM_WaitForNVM();
+
+	/* Calculate page address */
+	uint16_t address = (uint16_t)(pageAddr*EEPROM_PAGE_SIZE);
+    49e4:	89 2f       	mov	r24, r25
+    49e6:	90 e0       	ldi	r25, 0x00	; 0
+    49e8:	a5 e0       	ldi	r26, 0x05	; 5
+    49ea:	88 0f       	add	r24, r24
+    49ec:	99 1f       	adc	r25, r25
+    49ee:	aa 95       	dec	r26
+    49f0:	e1 f7       	brne	.-8      	; 0x49ea <EEPROM_SplitWritePage+0x14>
+
+	/* Set address. */
+	NVM.ADDR0 = address & 0xFF;
+    49f2:	80 93 c0 01 	sts	0x01C0, r24
+	NVM.ADDR1 = (address >> 8) & 0x1F;
+    49f6:	89 2f       	mov	r24, r25
+    49f8:	8f 71       	andi	r24, 0x1F	; 31
+    49fa:	81 83       	std	Z+1, r24	; 0x01
+	NVM.ADDR2 = 0x00;
+    49fc:	12 82       	std	Z+2, r1	; 0x02
+
+	/* Issue EEPROM Split Write command. */
+        NVM.CMD = NVM_CMD_WRITE_EEPROM_PAGE_gc;
+    49fe:	84 e3       	ldi	r24, 0x34	; 52
+    4a00:	82 87       	std	Z+10, r24	; 0x0a
+
+static inline void NVM_EXEC(void)
+{
+        void *z = (void *)&NVM_CTRLA;
+        
+        __asm__ volatile("out %[ccp], %[ioreg]"  "\n\t"
+    4a02:	eb ec       	ldi	r30, 0xCB	; 203
+    4a04:	f1 e0       	ldi	r31, 0x01	; 1
+    4a06:	21 e0       	ldi	r18, 0x01	; 1
+    4a08:	30 e0       	ldi	r19, 0x00	; 0
+    4a0a:	88 ed       	ldi	r24, 0xD8	; 216
+    4a0c:	90 e0       	ldi	r25, 0x00	; 0
+    4a0e:	84 bf       	out	0x34, r24	; 52
+    4a10:	20 83       	st	Z, r18
+	NVM.ADDR2 = 0x00;
+
+	/* Issue EEPROM Split Write command. */
+        NVM.CMD = NVM_CMD_WRITE_EEPROM_PAGE_gc;
+        NVM_EXEC_WRAPPER();
+}
+    4a12:	08 95       	ret
+
+00004a14 <EEPROM_EraseAll>:
+ */
+void EEPROM_WaitForNVM( void )
+{
+	do {
+		/* Block execution while waiting for the NVM to be ready. */
+	} while ((NVM.STATUS & NVM_NVMBUSY_bm) == NVM_NVMBUSY_bm);
+    4a14:	80 91 cf 01 	lds	r24, 0x01CF
+    4a18:	87 fd       	sbrc	r24, 7
+    4a1a:	fc cf       	rjmp	.-8      	; 0x4a14 <EEPROM_EraseAll>
+{
+	/* Wait until NVM is not busy. */
+	EEPROM_WaitForNVM();
+
+	/* Issue EEPROM Erase All command. */
+        NVM.CMD = NVM_CMD_ERASE_EEPROM_gc;
+    4a1c:	80 e3       	ldi	r24, 0x30	; 48
+    4a1e:	e0 ec       	ldi	r30, 0xC0	; 192
+    4a20:	f1 e0       	ldi	r31, 0x01	; 1
+    4a22:	82 87       	std	Z+10, r24	; 0x0a
+
+static inline void NVM_EXEC(void)
+{
+        void *z = (void *)&NVM_CTRLA;
+        
+        __asm__ volatile("out %[ccp], %[ioreg]"  "\n\t"
+    4a24:	eb ec       	ldi	r30, 0xCB	; 203
+    4a26:	f1 e0       	ldi	r31, 0x01	; 1
+    4a28:	21 e0       	ldi	r18, 0x01	; 1
+    4a2a:	30 e0       	ldi	r19, 0x00	; 0
+    4a2c:	88 ed       	ldi	r24, 0xD8	; 216
+    4a2e:	90 e0       	ldi	r25, 0x00	; 0
+    4a30:	84 bf       	out	0x34, r24	; 52
+    4a32:	20 83       	st	Z, r18
+	EEPROM_WaitForNVM();
+
+	/* Issue EEPROM Erase All command. */
+        NVM.CMD = NVM_CMD_ERASE_EEPROM_gc;
+        NVM_EXEC_WRAPPER();
+}
+    4a34:	08 95       	ret
+
+00004a36 <uart_init>:
+
+// Initialize UART
+void __attribute__ ((always_inline)) uart_init(void)
+{
+        #ifdef __AVR_XMEGA__
+        UART_PORT.DIRSET |= (1 << UART_TX_PIN);
+    4a36:	e0 e6       	ldi	r30, 0x60	; 96
+    4a38:	f6 e0       	ldi	r31, 0x06	; 6
+    4a3a:	81 81       	ldd	r24, Z+1	; 0x01
+    4a3c:	80 68       	ori	r24, 0x80	; 128
+    4a3e:	81 83       	std	Z+1, r24	; 0x01
+        UART_DEVICE.BAUDCTRLA = (UART_BSEL_VALUE & USART_BSEL_gm);
+    4a40:	e0 eb       	ldi	r30, 0xB0	; 176
+    4a42:	f9 e0       	ldi	r31, 0x09	; 9
+    4a44:	87 e1       	ldi	r24, 0x17	; 23
+    4a46:	86 83       	std	Z+6, r24	; 0x06
+        UART_DEVICE.BAUDCTRLB = ((UART_BSCALE_VALUE << USART_BSCALE_gp) & USART_BSCALE_gm) | ((UART_BSEL_VALUE >> 8) & ~USART_BSCALE_gm);
+    4a48:	84 ea       	ldi	r24, 0xA4	; 164
+    4a4a:	87 83       	std	Z+7, r24	; 0x07
+        #if UART_CLK2X
+        UART_DEVICE.CTRLB = USART_RXEN_bm | USART_CLK2X_bm | USART_TXEN_bm;
+        #else
+        UART_DEVICE.CTRLB = USART_RXEN_bm | USART_TXEN_bm;
+    4a4c:	88 e1       	ldi	r24, 0x18	; 24
+    4a4e:	84 83       	std	Z+4, r24	; 0x04
+        #endif // UART_CLK2X
+        #ifdef USE_INTERRUPTS
+        UART_DEVICE.CTRLA = USART_RXCINTLVL0_bm | USART_TXCINTLVL0_bm;
+        #endif // USE_INTERRUPTS
+        #endif // __AVR_XMEGA__
+}
+    4a50:	08 95       	ret
+
+00004a52 <uart_deinit>:
+
+// Shut down UART
+void __attribute__ ((always_inline)) uart_deinit(void)
+{
+        #ifdef __AVR_XMEGA__
+        UART_DEVICE.CTRLB = 0;
+    4a52:	e0 eb       	ldi	r30, 0xB0	; 176
+    4a54:	f9 e0       	ldi	r31, 0x09	; 9
+    4a56:	14 82       	std	Z+4, r1	; 0x04
+        #ifdef USE_INTERRUPTS
+        UART_DEVICE.CTRLA = 0;
+        #endif // USE_INTERRUPTS
+        #endif // __AVR_XMEGA__
+}
+    4a58:	08 95       	ret
+
+00004a5a <i2c_init>:
+#endif // USE_INTERRUPTS
+
+void __attribute__ ((always_inline)) i2c_init(void)
+{
+        #ifdef __AVR_XMEGA__
+        I2C_DEVICE.CTRL = 0;
+    4a5a:	e0 ea       	ldi	r30, 0xA0	; 160
+    4a5c:	f4 e0       	ldi	r31, 0x04	; 4
+    4a5e:	10 82       	st	Z, r1
+        #if I2C_MATCH_ANY
+        #ifdef USE_INTERRUPTS
+        I2C_DEVICE.SLAVE.CTRLA = TWI_SLAVE_ENABLE_bm | TWI_SLAVE_PMEN_bm | TWI_SLAVE_INTLVL0_bm;
+        #else
+        I2C_DEVICE.SLAVE.CTRLA = TWI_SLAVE_ENABLE_bm | TWI_SLAVE_PMEN_bm;
+    4a60:	8a e0       	ldi	r24, 0x0A	; 10
+    4a62:	80 87       	std	Z+8, r24	; 0x08
+        #else
+        I2C_DEVICE.SLAVE.CTRLA = TWI_SLAVE_ENABLE_bm;
+        #endif // USE_INTERRUPTS
+        #endif
+        #if I2C_GC_ENABLE
+        I2C_DEVICE.SLAVE.ADDR = I2C_ADDRESS | 1;
+    4a64:	81 e1       	ldi	r24, 0x11	; 17
+    4a66:	83 87       	std	Z+11, r24	; 0x0b
+        #else
+        I2C_DEVICE.SLAVE.ADDR = I2C_ADDRESS;
+        #endif
+        I2C_DEVICE.SLAVE.ADDRMASK = 0;
+    4a68:	15 86       	std	Z+13, r1	; 0x0d
+        #endif // __AVR_XMEGA__
+}
+    4a6a:	08 95       	ret
+
+00004a6c <i2c_deinit>:
+
+void __attribute__ ((always_inline)) i2c_deinit(void)
+{
+        // Shut down I2C module and turn off interrupt
+        #ifdef __AVR_XMEGA__
+        I2C_DEVICE.SLAVE.CTRLA = 0;
+    4a6c:	e0 ea       	ldi	r30, 0xA0	; 160
+    4a6e:	f4 e0       	ldi	r31, 0x04	; 4
+    4a70:	10 86       	std	Z+8, r1	; 0x08
+        #endif // __AVR_XMEGA__
+}
+    4a72:	08 95       	ret
+
+00004a74 <fifo_init>:
+
+// Initialize FIFO
+void __attribute__ ((always_inline)) fifo_init(void)
+{
+        #ifdef __AVR_XMEGA__
+        FIFO_DATA_PORT.DIR = 0;
+    4a74:	10 92 40 06 	sts	0x0640, r1
+        FIFO_CTL_PORT.OUTSET = FIFO_RD_N_bm | FIFO_WR_N_bm;
+    4a78:	e0 e6       	ldi	r30, 0x60	; 96
+    4a7a:	f6 e0       	ldi	r31, 0x06	; 6
+    4a7c:	83 e0       	ldi	r24, 0x03	; 3
+    4a7e:	85 83       	std	Z+5, r24	; 0x05
+        FIFO_CTL_PORT.DIRSET = FIFO_RD_N_bm | FIFO_WR_N_bm;
+    4a80:	81 83       	std	Z+1, r24	; 0x01
+        #endif // __AVR_XMEGA__
+}
+    4a82:	08 95       	ret
+
+00004a84 <fifo_deinit>:
+
+// Shut down UART
+void __attribute__ ((always_inline)) fifo_deinit(void)
+{
+        #ifdef __AVR_XMEGA__
+        FIFO_DATA_PORT.DIR = 0xff;
+    4a84:	8f ef       	ldi	r24, 0xFF	; 255
+    4a86:	80 93 40 06 	sts	0x0640, r24
+        FIFO_CTL_PORT.OUTCLR = FIFO_RD_N_bm | FIFO_WR_N_bm;
+    4a8a:	e0 e6       	ldi	r30, 0x60	; 96
+    4a8c:	f6 e0       	ldi	r31, 0x06	; 6
+    4a8e:	83 e0       	ldi	r24, 0x03	; 3
+    4a90:	86 83       	std	Z+6, r24	; 0x06
+        FIFO_CTL_PORT.DIRCLR = FIFO_RD_N_bm | FIFO_WR_N_bm;
+    4a92:	82 83       	std	Z+2, r24	; 0x02
+        #endif // __AVR_XMEGA__
+}
+    4a94:	08 95       	ret
+
+00004a96 <fifo_cur_char>:
+
+uint8_t __attribute__ ((always_inline)) fifo_cur_char(void)
+{
+    uint8_t ret;
+    FIFO_CTL_PORT.OUTCLR = FIFO_RD_N_bm;
+    4a96:	a0 e6       	ldi	r26, 0x60	; 96
+    4a98:	b6 e0       	ldi	r27, 0x06	; 6
+    4a9a:	22 e0       	ldi	r18, 0x02	; 2
+    4a9c:	16 96       	adiw	r26, 0x06	; 6
+    4a9e:	2c 93       	st	X, r18
+    4aa0:	16 97       	sbiw	r26, 0x06	; 6
+    ret = FIFO_DATA_PORT.IN;
+    4aa2:	e0 e4       	ldi	r30, 0x40	; 64
+    4aa4:	f6 e0       	ldi	r31, 0x06	; 6
+    4aa6:	80 85       	ldd	r24, Z+8	; 0x08
+#ifdef  FIFO_BIT_REVERSE
+    REVERSE(ret);
+    4aa8:	98 2f       	mov	r25, r24
+    4aaa:	99 0f       	add	r25, r25
+    4aac:	9a 7a       	andi	r25, 0xAA	; 170
+    4aae:	86 95       	lsr	r24
+    4ab0:	85 75       	andi	r24, 0x55	; 85
+    4ab2:	98 2b       	or	r25, r24
+    4ab4:	89 2f       	mov	r24, r25
+    4ab6:	88 0f       	add	r24, r24
+    4ab8:	88 0f       	add	r24, r24
+    4aba:	8c 7c       	andi	r24, 0xCC	; 204
+    4abc:	96 95       	lsr	r25
+    4abe:	96 95       	lsr	r25
+    4ac0:	93 73       	andi	r25, 0x33	; 51
+    4ac2:	89 2b       	or	r24, r25
+    4ac4:	82 95       	swap	r24
+#endif
+    FIFO_CTL_PORT.OUTSET = FIFO_RD_N_bm;
+    4ac6:	15 96       	adiw	r26, 0x05	; 5
+    4ac8:	2c 93       	st	X, r18
+    return ret;
+}
+    4aca:	08 95       	ret
+
+00004acc <fifo_send_char>:
+
+void __attribute__ ((always_inline))  fifo_send_char(uint8_t c)
+{
+    4acc:	98 2f       	mov	r25, r24
+    if ((FIFO_CTL_PORT.IN & FIFO_TXE_N_bm) !=  FIFO_TXE_N_bm)
+    4ace:	a0 e6       	ldi	r26, 0x60	; 96
+    4ad0:	b6 e0       	ldi	r27, 0x06	; 6
+    4ad2:	80 91 68 06 	lds	r24, 0x0668
+    4ad6:	82 fd       	sbrc	r24, 2
+    4ad8:	1f c0       	rjmp	.+62     	; 0x4b18 <fifo_send_char+0x4c>
+    {
+        FIFO_DATA_PORT.DIR = 0xff;
+    4ada:	2f ef       	ldi	r18, 0xFF	; 255
+    4adc:	20 93 40 06 	sts	0x0640, r18
+#ifdef  FIFO_BIT_REVERSE
+        REVERSE(c);
+    4ae0:	89 2f       	mov	r24, r25
+    4ae2:	88 0f       	add	r24, r24
+    4ae4:	8a 7a       	andi	r24, 0xAA	; 170
+    4ae6:	96 95       	lsr	r25
+    4ae8:	95 75       	andi	r25, 0x55	; 85
+    4aea:	89 2b       	or	r24, r25
+    4aec:	98 2f       	mov	r25, r24
+    4aee:	99 0f       	add	r25, r25
+    4af0:	99 0f       	add	r25, r25
+    4af2:	9c 7c       	andi	r25, 0xCC	; 204
+    4af4:	86 95       	lsr	r24
+    4af6:	86 95       	lsr	r24
+    4af8:	83 73       	andi	r24, 0x33	; 51
+    4afa:	98 2b       	or	r25, r24
+    4afc:	92 95       	swap	r25
+#endif
+        FIFO_DATA_PORT.OUT = c;
+    4afe:	e0 e4       	ldi	r30, 0x40	; 64
+    4b00:	f6 e0       	ldi	r31, 0x06	; 6
+    4b02:	94 83       	std	Z+4, r25	; 0x04
+        FIFO_DATA_PORT.DIR = 0xff;
+    4b04:	20 93 40 06 	sts	0x0640, r18
+        FIFO_CTL_PORT.OUTCLR = FIFO_WR_N_bm;
+    4b08:	81 e0       	ldi	r24, 0x01	; 1
+    4b0a:	16 96       	adiw	r26, 0x06	; 6
+    4b0c:	8c 93       	st	X, r24
+    4b0e:	16 97       	sbiw	r26, 0x06	; 6
+        FIFO_DATA_PORT.DIR = 0;
+    4b10:	10 92 40 06 	sts	0x0640, r1
+        FIFO_CTL_PORT.OUTSET = FIFO_WR_N_bm;
+    4b14:	15 96       	adiw	r26, 0x05	; 5
+    4b16:	8c 93       	st	X, r24
+    4b18:	08 95       	ret
+
+00004b1a <fifo_send_char_blocking>:
+    }
+}
+
+void __attribute__ ((always_inline))  fifo_send_char_blocking(uint8_t c)
+{
+    4b1a:	98 2f       	mov	r25, r24
+    while(FIFO_CTL_PORT.IN & FIFO_TXE_N_bm)
+    4b1c:	a0 e6       	ldi	r26, 0x60	; 96
+    4b1e:	b6 e0       	ldi	r27, 0x06	; 6
+    4b20:	80 91 68 06 	lds	r24, 0x0668
+    4b24:	82 fd       	sbrc	r24, 2
+    4b26:	fa cf       	rjmp	.-12     	; 0x4b1c <fifo_send_char_blocking+0x2>
+    return ret;
+}
+
+void __attribute__ ((always_inline))  fifo_send_char(uint8_t c)
+{
+    if ((FIFO_CTL_PORT.IN & FIFO_TXE_N_bm) !=  FIFO_TXE_N_bm)
+    4b28:	80 91 68 06 	lds	r24, 0x0668
+    4b2c:	82 fd       	sbrc	r24, 2
+    4b2e:	1f c0       	rjmp	.+62     	; 0x4b6e <fifo_send_char_blocking+0x54>
+    {
+        FIFO_DATA_PORT.DIR = 0xff;
+    4b30:	2f ef       	ldi	r18, 0xFF	; 255
+    4b32:	20 93 40 06 	sts	0x0640, r18
+#ifdef  FIFO_BIT_REVERSE
+        REVERSE(c);
+    4b36:	89 2f       	mov	r24, r25
+    4b38:	88 0f       	add	r24, r24
+    4b3a:	8a 7a       	andi	r24, 0xAA	; 170
+    4b3c:	96 95       	lsr	r25
+    4b3e:	95 75       	andi	r25, 0x55	; 85
+    4b40:	89 2b       	or	r24, r25
+    4b42:	98 2f       	mov	r25, r24
+    4b44:	99 0f       	add	r25, r25
+    4b46:	99 0f       	add	r25, r25
+    4b48:	9c 7c       	andi	r25, 0xCC	; 204
+    4b4a:	86 95       	lsr	r24
+    4b4c:	86 95       	lsr	r24
+    4b4e:	83 73       	andi	r24, 0x33	; 51
+    4b50:	98 2b       	or	r25, r24
+    4b52:	92 95       	swap	r25
+#endif
+        FIFO_DATA_PORT.OUT = c;
+    4b54:	e0 e4       	ldi	r30, 0x40	; 64
+    4b56:	f6 e0       	ldi	r31, 0x06	; 6
+    4b58:	94 83       	std	Z+4, r25	; 0x04
+        FIFO_DATA_PORT.DIR = 0xff;
+    4b5a:	20 93 40 06 	sts	0x0640, r18
+        FIFO_CTL_PORT.OUTCLR = FIFO_WR_N_bm;
+    4b5e:	81 e0       	ldi	r24, 0x01	; 1
+    4b60:	16 96       	adiw	r26, 0x06	; 6
+    4b62:	8c 93       	st	X, r24
+    4b64:	16 97       	sbiw	r26, 0x06	; 6
+        FIFO_DATA_PORT.DIR = 0;
+    4b66:	10 92 40 06 	sts	0x0640, r1
+        FIFO_CTL_PORT.OUTSET = FIFO_WR_N_bm;
+    4b6a:	15 96       	adiw	r26, 0x05	; 5
+    4b6c:	8c 93       	st	X, r24
+    4b6e:	08 95       	ret
+
+00004b70 <WDT_EnableAndSetTimeout>:
+#include "watchdog.h"
+
+void __attribute__ ((always_inline)) WDT_EnableAndSetTimeout( void )
+{
+        uint8_t temp = WDT_ENABLE_bm | WDT_CEN_bm | WATCHDOG_TIMEOUT;
+        CCP = CCP_IOREG_gc;
+    4b70:	88 ed       	ldi	r24, 0xD8	; 216
+    4b72:	84 bf       	out	0x34, r24	; 52
+        WDT.CTRL = temp;
+    4b74:	8f e1       	ldi	r24, 0x1F	; 31
+    4b76:	80 93 80 00 	sts	0x0080, r24
+        
+        /* Wait for WD to synchronize with new settings. */
+        while(WDT_IsSyncBusy());
+    4b7a:	80 91 82 00 	lds	r24, 0x0082
+    4b7e:	80 fd       	sbrc	r24, 0
+    4b80:	fc cf       	rjmp	.-8      	; 0x4b7a <WDT_EnableAndSetTimeout+0xa>
+}
+    4b82:	08 95       	ret
+
+00004b84 <WDT_Disable>:
+
+void __attribute__ ((always_inline)) WDT_Disable( void )
+{
+        uint8_t temp = (WDT.CTRL & ~WDT_ENABLE_bm) | WDT_CEN_bm;
+    4b84:	e0 e8       	ldi	r30, 0x80	; 128
+    4b86:	f0 e0       	ldi	r31, 0x00	; 0
+    4b88:	80 81       	ld	r24, Z
+    4b8a:	8c 7f       	andi	r24, 0xFC	; 252
+    4b8c:	81 60       	ori	r24, 0x01	; 1
+        CCP = CCP_IOREG_gc;
+    4b8e:	98 ed       	ldi	r25, 0xD8	; 216
+    4b90:	94 bf       	out	0x34, r25	; 52
+        WDT.CTRL = temp;
+    4b92:	80 83       	st	Z, r24
+}
+    4b94:	08 95       	ret
+
+00004b96 <SP_ReadByte>:
+
+.section .text
+.global SP_ReadByte
+
+SP_ReadByte:
+	in	r19, RAMPZ      ; Save RAMPZ.
+    4b96:	3b b7       	in	r19, 0x3b	; 59
+	out	RAMPZ, r24      ; Load RAMPZ with the MSB of the address.
+    4b98:	8b bf       	out	0x3b, r24	; 59
+	movw	ZL, r22         ; Move the low bytes to the Z pointer
+    4b9a:	fb 01       	movw	r30, r22
+	elpm	r24, Z          ; Extended load byte from address pointed to by Z.
+    4b9c:	86 91       	elpm	r24, Z+
+	out	RAMPZ, r19      ; Restore RAMPZ register.
+    4b9e:	3b bf       	out	0x3b, r19	; 59
+	ret
+    4ba0:	08 95       	ret
+
+00004ba2 <SP_ReadWord>:
+
+.section .text
+.global SP_ReadWord
+
+SP_ReadWord:
+	in	r19, RAMPZ      ; Save RAMPZ.
+    4ba2:	3b b7       	in	r19, 0x3b	; 59
+	out	RAMPZ, r24      ; Load RAMPZ with the MSB of the address.
+    4ba4:	8b bf       	out	0x3b, r24	; 59
+	movw	ZL, r22         ; Move the low bytes to the Z pointer
+    4ba6:	fb 01       	movw	r30, r22
+	elpm	r24, Z+         ; Extended load byte from address pointed to by Z.
+    4ba8:	87 91       	elpm	r24, Z+
+	elpm	r25, Z          ; Extended load byte from address pointed to by Z.
+    4baa:	96 91       	elpm	r25, Z+
+	out	RAMPZ, r19      ; Restore RAMPZ register.
+    4bac:	3b bf       	out	0x3b, r19	; 59
+	ret
+    4bae:	08 95       	ret
+
+00004bb0 <SP_ReadCalibrationByte>:
+
+.section .text
+.global SP_ReadCalibrationByte	
+
+SP_ReadCalibrationByte:
+	ldi	r20, NVM_CMD_READ_CALIB_ROW_gc    ; Prepare NVM command in R20.
+    4bb0:	42 e0       	ldi	r20, 0x02	; 2
+	rjmp	SP_CommonLPM                      ; Jump to common LPM code.
+    4bb2:	84 c0       	rjmp	.+264    	; 0x4cbc <SP_CommonLPM>
+
+00004bb4 <SP_ReadUserSignatureByte>:
+
+.section .text	
+.global SP_ReadUserSignatureByte
+
+SP_ReadUserSignatureByte:
+	ldi	r20, NVM_CMD_READ_USER_SIG_ROW_gc  ; Prepare NVM command in R20.
+    4bb4:	41 e0       	ldi	r20, 0x01	; 1
+	rjmp	SP_CommonLPM                       ; Jump to common LPM code.
+    4bb6:	82 c0       	rjmp	.+260    	; 0x4cbc <SP_CommonLPM>
+
+00004bb8 <SP_ReadFuseByte>:
+
+.section .text	
+.global SP_ReadFuseByte
+
+SP_ReadFuseByte:
+	sts	NVM_ADDR0, r24              ; Load fuse byte index into NVM Address Register 0.
+    4bb8:	80 93 c0 01 	sts	0x01C0, r24
+	clr	r24                         ; Prepare a zero.
+    4bbc:	88 27       	eor	r24, r24
+	sts	NVM_ADDR1, r24              ; Load zero into NVM Address Register 1.
+    4bbe:	80 93 c1 01 	sts	0x01C1, r24
+	sts	NVM_ADDR2, r24              ; Load zero into NVM Address Register 2.
+    4bc2:	80 93 c2 01 	sts	0x01C2, r24
+	ldi	r20, NVM_CMD_READ_FUSES_gc  ; Prepare NVM command in R20.
+    4bc6:	47 e0       	ldi	r20, 0x07	; 7
+	rcall	SP_CommonCMD                ; Jump to common NVM Action code.
+    4bc8:	69 d0       	rcall	.+210    	; 0x4c9c <SP_CommonCMD>
+	movw	r24, r22                    ; Move low byte to 1 byte return address.
+    4bca:	cb 01       	movw	r24, r22
+	ret
+    4bcc:	08 95       	ret
+
+00004bce <SP_WriteLockBits>:
+
+.section .text	
+.global SP_WriteLockBits
+
+SP_WriteLockBits:
+	sts	NVM_DATA0, r24                  ; Load lock bits into NVM Data Register 0.
+    4bce:	80 93 c4 01 	sts	0x01C4, r24
+	ldi	r20, NVM_CMD_WRITE_LOCK_BITS_gc ; Prepare NVM command in R20.
+    4bd2:	48 e0       	ldi	r20, 0x08	; 8
+	rjmp	SP_CommonCMD                    ; Jump to common NVM Action code.
+    4bd4:	63 c0       	rjmp	.+198    	; 0x4c9c <SP_CommonCMD>
+
+00004bd6 <SP_ReadLockBits>:
+
+.section .text		
+.global SP_ReadLockBits
+
+SP_ReadLockBits:
+	lds	r24, NVM_LOCKBITS       ; Read IO-mapped lock bits.
+    4bd6:	80 91 d0 01 	lds	r24, 0x01D0
+	ret
+    4bda:	08 95       	ret
+
+00004bdc <SP_EraseUserSignatureRow>:
+
+.section .text
+.global SP_EraseUserSignatureRow
+
+SP_EraseUserSignatureRow:
+	in	r19, RAMPZ                         ; Save RAMPZ, which is restored in SP_CommonSPM.
+    4bdc:	3b b7       	in	r19, 0x3b	; 59
+	ldi	r20, NVM_CMD_ERASE_USER_SIG_ROW_gc ; Prepare NVM command in R20.
+    4bde:	48 e1       	ldi	r20, 0x18	; 24
+	jmp 	SP_CommonSPM                       ; Jump to common SPM code.
+    4be0:	0c 94 78 26 	jmp	0x4cf0	; 0x4cf0 <SP_CommonSPM>
+
+00004be4 <SP_WriteUserSignatureRow>:
+
+.section .text
+.global SP_WriteUserSignatureRow
+
+SP_WriteUserSignatureRow:
+	in	r19, RAMPZ                          ; Save RAMPZ, which is restored in SP_CommonSPM.
+    4be4:	3b b7       	in	r19, 0x3b	; 59
+	ldi	r20, NVM_CMD_WRITE_USER_SIG_ROW_gc  ; Prepare NVM command in R20.
+    4be6:	4a e1       	ldi	r20, 0x1A	; 26
+	jmp	SP_CommonSPM                        ; Jump to common SPM code.
+    4be8:	0c 94 78 26 	jmp	0x4cf0	; 0x4cf0 <SP_CommonSPM>
+
+00004bec <SP_EraseApplicationSection>:
+
+.section .text
+.global SP_EraseApplicationSection
+
+SP_EraseApplicationSection:
+	in	r19, RAMPZ                 ; Save RAMPZ, which is restored in SP_CommonSPM.
+    4bec:	3b b7       	in	r19, 0x3b	; 59
+	clr	r24                        ; Prepare a zero.
+    4bee:	88 27       	eor	r24, r24
+	clr	r25
+    4bf0:	99 27       	eor	r25, r25
+	out	RAMPZ, r24                 ; Point into Application area.
+    4bf2:	8b bf       	out	0x3b, r24	; 59
+	ldi	r20, NVM_CMD_ERASE_APP_gc  ; Prepare NVM command in R20.
+    4bf4:	40 e2       	ldi	r20, 0x20	; 32
+	jmp	SP_CommonSPM               ; Jump to common SPM code.
+    4bf6:	0c 94 78 26 	jmp	0x4cf0	; 0x4cf0 <SP_CommonSPM>
+
+00004bfa <SP_EraseApplicationPage>:
+
+.section .text	
+.global SP_EraseApplicationPage
+
+SP_EraseApplicationPage:
+	in	r19, RAMPZ                      ; Save RAMPZ, which is restored in SP_CommonSPM.
+    4bfa:	3b b7       	in	r19, 0x3b	; 59
+	out	RAMPZ, r24                      ; Load RAMPZ with the MSB of the address.
+    4bfc:	8b bf       	out	0x3b, r24	; 59
+	movw    r24, r22                        ; Move low bytes for ZH:ZL to R25:R24
+    4bfe:	cb 01       	movw	r24, r22
+	ldi	r20, NVM_CMD_ERASE_APP_PAGE_gc  ; Prepare NVM command in R20.
+    4c00:	42 e2       	ldi	r20, 0x22	; 34
+	jmp	SP_CommonSPM                    ; Jump to common SPM code.
+    4c02:	0c 94 78 26 	jmp	0x4cf0	; 0x4cf0 <SP_CommonSPM>
+
+00004c06 <SP_LoadFlashWord>:
+
+.section .text
+.global SP_LoadFlashWord
+
+SP_LoadFlashWord:
+	in	r19, RAMPZ                         ; Save RAMPZ, which is restored in SP_CommonSPM.
+    4c06:	3b b7       	in	r19, 0x3b	; 59
+	movw	r0, r22                            ; Prepare flash word in R1:R0.
+    4c08:	0b 01       	movw	r0, r22
+	ldi	r20, NVM_CMD_LOAD_FLASH_BUFFER_gc  ; Prepare NVM command in R20.
+    4c0a:	43 e2       	ldi	r20, 0x23	; 35
+	jmp	SP_CommonSPM                       ; Jump to common SPM code.
+    4c0c:	0c 94 78 26 	jmp	0x4cf0	; 0x4cf0 <SP_CommonSPM>
+
+00004c10 <SP_ReadFlashPage>:
+    4c10:	3b b7       	in	r19, 0x3b	; 59
+    4c12:	6b bf       	out	0x3b, r22	; 59
+    4c14:	fa 01       	movw	r30, r20
+    4c16:	19 be       	out	0x39, r1	; 57
+    4c18:	dc 01       	movw	r26, r24
+    4c1a:	40 e0       	ldi	r20, 0x00	; 0
+    4c1c:	40 93 ca 01 	sts	0x01CA, r20
+    4c20:	50 e0       	ldi	r21, 0x00	; 0
+
+00004c22 <SP_ReadFlashPage_1>:
+    4c22:	87 91       	elpm	r24, Z+
+    4c24:	97 91       	elpm	r25, Z+
+    4c26:	8d 93       	st	X+, r24
+    4c28:	9d 93       	st	X+, r25
+    4c2a:	5a 95       	dec	r21
+    4c2c:	d1 f7       	brne	.-12     	; 0x4c22 <SP_ReadFlashPage_1>
+    4c2e:	3b bf       	out	0x3b, r19	; 59
+    4c30:	08 95       	ret
+
+00004c32 <SP_WriteApplicationPage>:
+    4c32:	3b b7       	in	r19, 0x3b	; 59
+    4c34:	8b bf       	out	0x3b, r24	; 59
+    4c36:	cb 01       	movw	r24, r22
+    4c38:	44 e2       	ldi	r20, 0x24	; 36
+    4c3a:	0c 94 78 26 	jmp	0x4cf0	; 0x4cf0 <SP_CommonSPM>
+
+00004c3e <SP_EraseWriteApplicationPage>:
+    4c3e:	3b b7       	in	r19, 0x3b	; 59
+    4c40:	8b bf       	out	0x3b, r24	; 59
+    4c42:	cb 01       	movw	r24, r22
+    4c44:	45 e2       	ldi	r20, 0x25	; 37
+    4c46:	0c 94 78 26 	jmp	0x4cf0	; 0x4cf0 <SP_CommonSPM>
+
+00004c4a <SP_EraseFlashBuffer>:
+    4c4a:	3b b7       	in	r19, 0x3b	; 59
+    4c4c:	46 e2       	ldi	r20, 0x26	; 38
+    4c4e:	0c 94 78 26 	jmp	0x4cf0	; 0x4cf0 <SP_CommonSPM>
+
+00004c52 <SP_EraseBootPage>:
+    4c52:	3b b7       	in	r19, 0x3b	; 59
+    4c54:	8b bf       	out	0x3b, r24	; 59
+    4c56:	cb 01       	movw	r24, r22
+    4c58:	4a e2       	ldi	r20, 0x2A	; 42
+    4c5a:	0c 94 78 26 	jmp	0x4cf0	; 0x4cf0 <SP_CommonSPM>
+
+00004c5e <SP_WriteBootPage>:
+    4c5e:	3b b7       	in	r19, 0x3b	; 59
+    4c60:	8b bf       	out	0x3b, r24	; 59
+    4c62:	cb 01       	movw	r24, r22
+    4c64:	4c e2       	ldi	r20, 0x2C	; 44
+    4c66:	0c 94 78 26 	jmp	0x4cf0	; 0x4cf0 <SP_CommonSPM>
+
+00004c6a <SP_EraseWriteBootPage>:
+    4c6a:	3b b7       	in	r19, 0x3b	; 59
+    4c6c:	8b bf       	out	0x3b, r24	; 59
+    4c6e:	cb 01       	movw	r24, r22
+    4c70:	4d e2       	ldi	r20, 0x2D	; 45
+    4c72:	0c 94 78 26 	jmp	0x4cf0	; 0x4cf0 <SP_CommonSPM>
+
+00004c76 <SP_ApplicationCRC>:
+    4c76:	48 e3       	ldi	r20, 0x38	; 56
+    4c78:	11 c0       	rjmp	.+34     	; 0x4c9c <SP_CommonCMD>
+
+00004c7a <SP_BootCRC>:
+    4c7a:	49 e3       	ldi	r20, 0x39	; 57
+    4c7c:	0f c0       	rjmp	.+30     	; 0x4c9c <SP_CommonCMD>
+
+00004c7e <SP_LockSPM>:
+    4c7e:	28 ed       	ldi	r18, 0xD8	; 216
+    4c80:	20 93 34 00 	sts	0x0034, r18
+    4c84:	21 e0       	ldi	r18, 0x01	; 1
+    4c86:	20 93 cc 01 	sts	0x01CC, r18
+    4c8a:	08 95       	ret
+
+00004c8c <SP_WaitForSPM>:
+    4c8c:	20 91 cf 01 	lds	r18, 0x01CF
+    4c90:	27 fd       	sbrc	r18, 7
+    4c92:	fc cf       	rjmp	.-8      	; 0x4c8c <SP_WaitForSPM>
+    4c94:	22 27       	eor	r18, r18
+    4c96:	20 93 ca 01 	sts	0x01CA, r18
+    4c9a:	08 95       	ret
+
+00004c9c <SP_CommonCMD>:
+    4c9c:	40 93 ca 01 	sts	0x01CA, r20
+    4ca0:	28 ed       	ldi	r18, 0xD8	; 216
+    4ca2:	31 e0       	ldi	r19, 0x01	; 1
+    4ca4:	20 93 34 00 	sts	0x0034, r18
+    4ca8:	30 93 cb 01 	sts	0x01CB, r19
+    4cac:	60 91 c4 01 	lds	r22, 0x01C4
+    4cb0:	70 91 c5 01 	lds	r23, 0x01C5
+    4cb4:	80 91 c6 01 	lds	r24, 0x01C6
+    4cb8:	99 27       	eor	r25, r25
+    4cba:	08 95       	ret
+
+00004cbc <SP_CommonLPM>:
+    4cbc:	fc 01       	movw	r30, r24
+    4cbe:	40 93 ca 01 	sts	0x01CA, r20
+    4cc2:	84 91       	lpm	r24, Z+
+    4cc4:	08 95       	ret
+
+00004cc6 <_exit>:
+    4cc6:	f8 94       	cli
+
+00004cc8 <__stop_program>:
+    4cc8:	ff cf       	rjmp	.-2      	; 0x4cc8 <__stop_program>
+
+Disassembly of section .BOOT:
+
+00004cca <SP_LoadFlashPage>:
+		
+.section .BOOT, "ax"
+.global SP_LoadFlashPage
+
+SP_LoadFlashPage:
+	clr	ZL              ; Clear low byte of Z, to indicate start of page.
+    4cca:	ee 27       	eor	r30, r30
+	clr	ZH              ; Clear high byte of Z, to indicate start of page.
+    4ccc:	ff 27       	eor	r31, r31
+
+	out	RAMPX, r1       ; Clear RAMPX pointer.
+    4cce:	19 be       	out	0x39, r1	; 57
+	movw	XL, r24         ; Load X with data buffer address.
+    4cd0:	dc 01       	movw	r26, r24
+
+	ldi 	r20, NVM_CMD_LOAD_FLASH_BUFFER_gc  ; Prepare NVM command code in R20.
+    4cd2:	43 e2       	ldi	r20, 0x23	; 35
+	sts	NVM_CMD, r20                       ; Load it into NVM command register.
+    4cd4:	40 93 ca 01 	sts	0x01CA, r20
+
+#if APP_SECTION_PAGE_SIZE > 512
+	ldi	r22, ((APP_SECTION_PAGE_SIZE/2) >> 8)
+#endif
+
+	ldi	r21, ((APP_SECTION_PAGE_SIZE/2)&0xFF)    ; Load R21 with page word count.
+    4cd8:	50 e8       	ldi	r21, 0x80	; 128
+	ldi	r18, CCP_SPM_gc                    ; Prepare Protect SPM signature in R16.
+    4cda:	2d e9       	ldi	r18, 0x9D	; 157
+
+00004cdc <SP_LoadFlashPage_1>:
+
+SP_LoadFlashPage_1:
+	ld	r0, X+         ; Load low byte from buffer into R0.
+    4cdc:	0d 90       	ld	r0, X+
+	ld	r1, X+         ; Load high byte from buffer into R1.
+    4cde:	1d 90       	ld	r1, X+
+	sts	CCP, r18       ; Enable SPM operation (this disables interrupts for 4 cycles).
+    4ce0:	20 93 34 00 	sts	0x0034, r18
+	spm                    ; Self-program.
+    4ce4:	e8 95       	spm
+	adiw	ZL, 2          ; Move Z to next Flash word.
+    4ce6:	32 96       	adiw	r30, 0x02	; 2
+
+#if APP_SECTION_PAGE_SIZE > 512
+	subi	r21, 1         ; Decrement word count.
+	sbci	r22, 0
+#else
+	dec	r21            ; Decrement word count.
+    4ce8:	5a 95       	dec	r21
+#endif
+
+	brne	SP_LoadFlashPage_1   ; Repeat until word cont is zero.
+    4cea:	c1 f7       	brne	.-16     	; 0x4cdc <SP_LoadFlashPage_1>
+
+	clr	r1                   ; Clear R1 for GCC _zero_reg_ to function properly.
+    4cec:	11 24       	eor	r1, r1
+
+SP_CommonLPM:
+	movw	ZL, r24             ; Load index into Z.
+	sts	NVM_CMD, r20        ; Load prepared command into NVM Command register.
+	lpm	r24,Z
+	ret
+    4cee:	08 95       	ret
+
+00004cf0 <SP_CommonSPM>:
+; ---
+
+.section .BOOT, "ax"
+
+SP_CommonSPM:
+	movw	ZL, r24          ; Load R25:R24 into Z.
+    4cf0:	fc 01       	movw	r30, r24
+	sts	NVM_CMD, r20     ; Load prepared command into NVM Command register.
+    4cf2:	40 93 ca 01 	sts	0x01CA, r20
+	ldi	r18, CCP_SPM_gc  ; Prepare Protect SPM signature in R18
+    4cf6:	2d e9       	ldi	r18, 0x9D	; 157
+	sts	CCP, r18         ; Enable SPM operation (this disables interrupts for 4 cycles).
+    4cf8:	20 93 34 00 	sts	0x0034, r18
+	spm                      ; Self-program.
+    4cfc:	e8 95       	spm
+	clr	r1               ; Clear R1 for GCC _zero_reg_ to function properly.
+    4cfe:	11 24       	eor	r1, r1
+	out	RAMPZ, r19       ; Restore RAMPZ register.
+    4d00:	3b bf       	out	0x3b, r19	; 59
+	ret
+    4d02:	08 95       	ret
