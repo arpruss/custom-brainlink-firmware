@@ -134,7 +134,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x2bc0
+.text           0x00000000     0x2c30
  *(.vectors)
  .vectors       0x00000000      0x178 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
                 0x00000000                __vectors
@@ -276,7 +276,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a
                 0x0000019c                __vector_42
                 0x0000019c                __vector_87
                 0x0000019c                __vector_65
- .text          0x000001a0     0x29ce mainFirmware.o
+ .text          0x000001a0     0x2a3e mainFirmware.o
                 0x000008f4                init_BT
                 0x000013ba                EEPROM_ReadByte
                 0x00000a18                TWI_MasterArbitrationLostBusErrorHandler
@@ -360,24 +360,24 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a
                 0x00000580                set_ir50
                 0x0000133e                read_data_from_serial
                 0x00000e44                set_buzzer
- .text          0x00002b6e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_divmodhi4.o)
- .text          0x00002b6e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
- .text          0x00002b6e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_clear_bss.o)
- .text          0x00002b6e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_udivmodhi4.o)
-                0x00002b6e                . = ALIGN (0x2)
+ .text          0x00002bde        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_divmodhi4.o)
+ .text          0x00002bde        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
+ .text          0x00002bde        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_clear_bss.o)
+ .text          0x00002bde        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_udivmodhi4.o)
+                0x00002bde                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x00002b6e       0x26 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_divmodhi4.o)
-                0x00002b6e                __divmodhi4
-                0x00002b6e                _div
- .text.libgcc   0x00002b94        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
- .text.libgcc   0x00002b94        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_clear_bss.o)
- .text.libgcc   0x00002b94       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_udivmodhi4.o)
-                0x00002b94                __udivmodhi4
-                0x00002bbc                . = ALIGN (0x2)
+ .text.libgcc   0x00002bde       0x26 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_divmodhi4.o)
+                0x00002bde                __divmodhi4
+                0x00002bde                _div
+ .text.libgcc   0x00002c04        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
+ .text.libgcc   0x00002c04        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x00002c04       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_udivmodhi4.o)
+                0x00002c04                __udivmodhi4
+                0x00002c2c                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00002bbc        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
-                0x00002bbc                exit
-                0x00002bbc                _exit
+ .fini9         0x00002c2c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
+                0x00002c2c                exit
+                0x00002c2c                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -396,11 +396,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00002bbc        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
+ .fini0         0x00002c2c        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
  *(.fini0)
-                0x00002bc0                _etext = .
+                0x00002c30                _etext = .
 
-.data           0x00802000        0x0 load address 0x00002bc0
+.data           0x00802000        0x0 load address 0x00002c30
                 0x00802000                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00802000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
@@ -445,8 +445,8 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a
                 0x008023ef                bitCounter
                 0x008023f0                onOffTracker
                 0x008023f2                PROVIDE (__bss_end, .)
-                0x00002bc0                __data_load_start = LOADADDR (.data)
-                0x00002bc0                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00002c30                __data_load_start = LOADADDR (.data)
+                0x00002c30                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x008023f2        0x0
                 0x008023f2                PROVIDE (__noinit_start, .)
@@ -515,31 +515,31 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a
  .debug_pubnames
                 0x00000000      0x72b mainFirmware.o
 
-.debug_info     0x00000000     0x596f
+.debug_info     0x00000000     0x5a7e
  *(.debug_info)
- .debug_info    0x00000000     0x596f mainFirmware.o
+ .debug_info    0x00000000     0x5a7e mainFirmware.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev   0x00000000      0x466
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x466 mainFirmware.o
 
-.debug_line     0x00000000     0x3080
+.debug_line     0x00000000     0x3108
  *(.debug_line)
- .debug_line    0x00000000     0x3080 mainFirmware.o
+ .debug_line    0x00000000     0x3108 mainFirmware.o
 
 .debug_frame    0x00000000      0x540
  *(.debug_frame)
  .debug_frame   0x00000000      0x540 mainFirmware.o
 
-.debug_str      0x00000000     0x2d6e
+.debug_str      0x00000000     0x2d35
  *(.debug_str)
- .debug_str     0x00000000     0x2d6e mainFirmware.o
-                               0x2e22 (size before relaxing)
+ .debug_str     0x00000000     0x2d35 mainFirmware.o
+                               0x2de9 (size before relaxing)
 
-.debug_loc      0x00000000     0x196b
+.debug_loc      0x00000000     0x1a20
  *(.debug_loc)
- .debug_loc     0x00000000     0x196b mainFirmware.o
+ .debug_loc     0x00000000     0x1a20 mainFirmware.o
 
 .debug_macinfo
  *(.debug_macinfo)

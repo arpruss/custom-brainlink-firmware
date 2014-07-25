@@ -74,9 +74,10 @@ int main(void)
 				choice = USART_RXBuffer_GetByte(&BT_data);
 				uart_putchar(&BT_USART, choice);
 			}
-			_delay_ms(500);
+			if (choice != 42)
+                            _delay_ms(500);
 		}
-	
+
 		// Active part of the program - listens for commands and responds as necessary
 		while(exit == 0) {
 			// Checks if we haven't heard anything for a long time, in which case we exit loop and go back to idle mode
@@ -99,7 +100,7 @@ int main(void)
 				time_out = 0;
 				// Return the command so the host knows we got it
 				uart_putchar(&BT_USART, choice);
-				
+
 				// Giant switch statement to decide what to do with the command
 				switch(choice) {
 					// Return the currect accelerometer data - X, Y, Z, and status (contains tapped and shaken bits)
@@ -750,7 +751,17 @@ int main(void)
 						uart_putchar(&BT_USART, scale);
 						set_aux_baud_rate(baud, scale);
 						break;
-					// Transmits over bluetooth characters received by auxiliary serial
+					// BT-serial high speed bridge mode
+					case 'Z':
+                                                while(1) {
+                                                    while (USART_RXBufferData_Available(&AUX_data)) {
+							uart_putchar(&BT_USART, USART_RXBuffer_GetByte(&AUX_data));
+						    }
+						    while (USART_RXBufferData_Available(&BT_data)) {
+				                        uart_putchar(&AUX_USART, USART_RXBuffer_GetByte(&BT_data));
+				                    }
+                                                }
+                                                // break;
 					case 'r':
 						count_buff = 0;
 						while(USART_RXBufferData_Available(&AUX_data)) {

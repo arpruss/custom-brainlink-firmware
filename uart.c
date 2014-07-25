@@ -22,8 +22,7 @@ void init_bt_uart() {
 
 	// Enable pins
 	USART_Rx_Enable(&BT_USART);
-	USART_Tx_Enable(&BT_USART);
-	
+	USART_Tx_Enable(&BT_USART);	
 }
 
 // Initializes auxiliary serial port - variables required to set baud rate are passed to the function
