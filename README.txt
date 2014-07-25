@@ -6,3 +6,9 @@ In order to customize the firmware, you will need to download a development envi
 http://www.brainlinksystem.com/tutorials
 
 The xboot folder contains the bootloader used to allow re-programming of the Brainlink's main firmware. You may modify the bootloader as well, but you will need to open Brainlink's case and attach hardware programmer (like the AVR-ISP mkII) to the ISP port to do so.
+
+Changes by Alexander Pruss:
+- remove delay in responding to '*' command
+- add serial bridge mode: sending 'Z' initiates a bridge between the Bluetooth and AUX Serial connections using current serial parameters.
+  Once bridge mode is initiated, it cannot be terminated except by powercycling the BrainLink.  (I may add a way to exit bridge mode in the future.)
+  Bridge mode makes for a much more reliable serial link.
