@@ -22,7 +22,7 @@ void init_bt_uart() {
 
 	// Enable pins
 	USART_Rx_Enable(&BT_USART);
-	USART_Tx_Enable(&BT_USART);	
+	USART_Tx_Enable(&BT_USART);
 }
 
 // Initializes auxiliary serial port - variables required to set baud rate are passed to the function
@@ -116,6 +116,19 @@ int uart_getchar_timeout(USART_t * usart) {
 char aux_uart_getchar(USART_t * usart) {
 	
 	return USART_RXBuffer_GetByte(&AUX_data);
+}
+
+// serial to Bluetooth bridge
+// currently does not return
+void serial_bridge(void) {
+    while(1) {
+        while (USART_RXBufferData_Available(&AUX_data)) {
+              uart_putchar(&BT_USART, USART_RXBuffer_GetByte(&AUX_data));
+        }
+        while (USART_RXBufferData_Available(&BT_data)) {
+              uart_putchar(&AUX_USART, USART_RXBuffer_GetByte(&BT_data));
+        }
+    }
 }
 
 /*! \brief Initializes buffer and selects what USART module to use.

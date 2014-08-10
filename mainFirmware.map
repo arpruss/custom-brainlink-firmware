@@ -134,7 +134,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x2c30
+.text           0x00000000     0x2c54
  *(.vectors)
  .vectors       0x00000000      0x178 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
                 0x00000000                __vectors
@@ -276,108 +276,109 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a
                 0x0000019c                __vector_42
                 0x0000019c                __vector_87
                 0x0000019c                __vector_65
- .text          0x000001a0     0x2a3e mainFirmware.o
-                0x000008f4                init_BT
-                0x000013ba                EEPROM_ReadByte
-                0x00000a18                TWI_MasterArbitrationLostBusErrorHandler
-                0x000005f8                stop_ir_timer
-                0x00000e8e                turn_off_pwm0
-                0x00000950                TWI_MasterReady
+ .text          0x000001a0     0x2a62 mainFirmware.o
+                0x00000956                init_BT
+                0x0000141c                EEPROM_ReadByte
+                0x00000a7a                TWI_MasterArbitrationLostBusErrorHandler
+                0x0000065a                stop_ir_timer
+                0x00000392                serial_bridge
+                0x00000ef0                turn_off_pwm0
+                0x000009b2                TWI_MasterReady
                 0x00000324                uart_getchar_timeout
-                0x0000040c                __vector_91
-                0x000005a8                set_ir0
-                0x0000166c                write_data_to_eeprom
-                0x000015c2                EEPROM_WaitForNVM
-                0x00000958                TWI_MasterWriteRead
-                0x00001746                EEPROM_LoadByte
+                0x0000046e                __vector_91
+                0x0000060a                set_ir0
+                0x000016ce                write_data_to_eeprom
+                0x00001624                EEPROM_WaitForNVM
+                0x000009ba                TWI_MasterWriteRead
+                0x000017a8                EEPROM_LoadByte
                 0x000001c2                init_led
-                0x00000d42                __vector_46
-                0x00000fbc                read_input
-                0x000009fa                TWI_MasterRead
+                0x00000da4                __vector_46
+                0x0000101e                read_input
+                0x00000a5c                TWI_MasterRead
                 0x000001a0                init_clock
-                0x00000a0c                TWI_MasterWrite
-                0x000003ce                USART_RXComplete
-                0x00001414                print_data_from_eeprom
-                0x00000e0e                disable_dac0
+                0x00000a6e                TWI_MasterWrite
+                0x00000430                USART_RXComplete
+                0x00001476                print_data_from_eeprom
+                0x00000e70                disable_dac0
                 0x0000020e                init_bt_uart
                 0x000001fa                set_led
-                0x00000e72                set_pwm
-                0x0000045c                __vector_25
-                0x00001170                ir_fail
-                0x00000dd6                set_dac0
+                0x00000ed4                set_pwm
+                0x000004be                __vector_25
+                0x000011d2                ir_fail
+                0x00000e38                set_dac0
                 0x000002ba                set_aux_baud_rate
                 0x00000300                uart_getchar
-                0x00000942                TWI_MasterState
-                0x00001820                EEPROM_SplitWritePage
-                0x0000126e                __vector_49
-                0x00000596                set_ir100
-                0x0000178c                EEPROM_AtomicWritePage
-                0x00000b72                TWI_MasterTransactionFinished
-                0x000011a0                disable_ir_read
-                0x00001764                EEPROM_LoadPage
-                0x0000186a                EEPROM_EraseAll
-                0x00000ea6                set_pwm0
-                0x00000536                read_internal_temperature
-                0x000008d0                BT_reset
-                0x000004ac                init_adc
+                0x000009a4                TWI_MasterState
+                0x00001882                EEPROM_SplitWritePage
+                0x000012d0                __vector_49
+                0x000005f8                set_ir100
+                0x000017ee                EEPROM_AtomicWritePage
+                0x00000bd4                TWI_MasterTransactionFinished
+                0x00001202                disable_ir_read
+                0x000017c6                EEPROM_LoadPage
+                0x000018cc                EEPROM_EraseAll
+                0x00000f08                set_pwm0
+                0x00000598                read_internal_temperature
+                0x00000932                BT_reset
+                0x0000050e                init_adc
                 0x000002dc                uart_getchar_nb
-                0x000011fe                __vector_47
-                0x00000b8c                newAccelData
-                0x00000aba                TWI_MasterReadHandler
-                0x00000880                BT_default_reset
-                0x000015cc                EEPROM_FlushBuffer
-                0x00001898                main
+                0x00001260                __vector_47
+                0x00000bee                newAccelData
+                0x00000b1c                TWI_MasterReadHandler
+                0x000008e2                BT_default_reset
+                0x0000162e                EEPROM_FlushBuffer
+                0x000018fa                main
                 0x00000260                init_aux_uart
-                0x000017d6                EEPROM_ErasePage
-                0x00000e9a                turn_off_pwm1
-                0x000005c4                start_ir_timer
-                0x00000df2                set_dac1
-                0x00001602                EEPROM_WriteByte
-                0x00001114                init_ir_read
-                0x00000b7a                getAccelData
-                0x00000a42                TWI_MasterWriteHandler
-                0x00000e26                init_buzzer
-                0x000003a2                USART_RXBufferData_Available
-                0x000005b6                set_ir_carrier
-                0x000003b6                USART_RXBuffer_GetByte
-                0x00000eee                set_output
-                0x00000c08                initAccel
-                0x00000d8e                init_dac
-                0x000014dc                read_data_from_eeprom
-                0x00000bb0                updateAccel
+                0x00001838                EEPROM_ErasePage
+                0x00000efc                turn_off_pwm1
+                0x00000626                start_ir_timer
+                0x00000e54                set_dac1
+                0x00001664                EEPROM_WriteByte
+                0x00001176                init_ir_read
+                0x00000bdc                getAccelData
+                0x00000aa4                TWI_MasterWriteHandler
+                0x00000e88                init_buzzer
+                0x00000404                USART_RXBufferData_Available
+                0x00000618                set_ir_carrier
+                0x00000418                USART_RXBuffer_GetByte
+                0x00000f50                set_output
+                0x00000c6a                initAccel
+                0x00000df0                init_dac
+                0x0000153e                read_data_from_eeprom
+                0x00000c12                updateAccel
                 0x00000378                aux_uart_getchar
-                0x00000b2c                TWI_MasterInterruptHandler
-                0x0000055a                init_ir
-                0x00000e5c                turn_off_buzzer
-                0x00000922                TWI_MasterInit
-                0x00000eca                set_pwm1
-                0x00000504                read_analog
-                0x00000392                USART_InterruptDriver_Initialize
-                0x000011b4                dump_data
-                0x00000e1a                disable_dac1
-                0x0000060c                __vector_20
+                0x00000b8e                TWI_MasterInterruptHandler
+                0x000005bc                init_ir
+                0x00000ebe                turn_off_buzzer
+                0x00000984                TWI_MasterInit
+                0x00000f2c                set_pwm1
+                0x00000566                read_analog
+                0x000003f4                USART_InterruptDriver_Initialize
+                0x00001216                dump_data
+                0x00000e7c                disable_dac1
+                0x0000066e                __vector_20
                 0x000002d0                uart_putchar
-                0x00000580                set_ir50
-                0x0000133e                read_data_from_serial
-                0x00000e44                set_buzzer
- .text          0x00002bde        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_divmodhi4.o)
- .text          0x00002bde        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
- .text          0x00002bde        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_clear_bss.o)
- .text          0x00002bde        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_udivmodhi4.o)
-                0x00002bde                . = ALIGN (0x2)
+                0x000005e2                set_ir50
+                0x000013a0                read_data_from_serial
+                0x00000ea6                set_buzzer
+ .text          0x00002c02        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_divmodhi4.o)
+ .text          0x00002c02        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
+ .text          0x00002c02        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_clear_bss.o)
+ .text          0x00002c02        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_udivmodhi4.o)
+                0x00002c02                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x00002bde       0x26 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_divmodhi4.o)
-                0x00002bde                __divmodhi4
-                0x00002bde                _div
- .text.libgcc   0x00002c04        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
- .text.libgcc   0x00002c04        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_clear_bss.o)
- .text.libgcc   0x00002c04       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_udivmodhi4.o)
-                0x00002c04                __udivmodhi4
-                0x00002c2c                . = ALIGN (0x2)
+ .text.libgcc   0x00002c02       0x26 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_divmodhi4.o)
+                0x00002c02                __divmodhi4
+                0x00002c02                _div
+ .text.libgcc   0x00002c28        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
+ .text.libgcc   0x00002c28        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x00002c28       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_udivmodhi4.o)
+                0x00002c28                __udivmodhi4
+                0x00002c50                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00002c2c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
-                0x00002c2c                exit
-                0x00002c2c                _exit
+ .fini9         0x00002c50        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
+                0x00002c50                exit
+                0x00002c50                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -396,11 +397,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00002c2c        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
+ .fini0         0x00002c50        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a(_exit.o)
  *(.fini0)
-                0x00002c30                _etext = .
+                0x00002c54                _etext = .
 
-.data           0x00802000        0x0 load address 0x00002c30
+.data           0x00802000        0x0 load address 0x00002c54
                 0x00802000                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00802000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avrxmega2/crtx16a4.o
@@ -445,8 +446,8 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a
                 0x008023ef                bitCounter
                 0x008023f0                onOffTracker
                 0x008023f2                PROVIDE (__bss_end, .)
-                0x00002c30                __data_load_start = LOADADDR (.data)
-                0x00002c30                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00002c54                __data_load_start = LOADADDR (.data)
+                0x00002c54                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x008023f2        0x0
                 0x008023f2                PROVIDE (__noinit_start, .)
@@ -510,36 +511,36 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a
                 0x00000000       0x20 mainFirmware.o
 
 .debug_pubnames
-                0x00000000      0x72b
+                0x00000000      0x73d
  *(.debug_pubnames)
  .debug_pubnames
-                0x00000000      0x72b mainFirmware.o
+                0x00000000      0x73d mainFirmware.o
 
-.debug_info     0x00000000     0x5a7e
+.debug_info     0x00000000     0x5acb
  *(.debug_info)
- .debug_info    0x00000000     0x5a7e mainFirmware.o
+ .debug_info    0x00000000     0x5acb mainFirmware.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev   0x00000000      0x466
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x466 mainFirmware.o
 
-.debug_line     0x00000000     0x3108
+.debug_line     0x00000000     0x315b
  *(.debug_line)
- .debug_line    0x00000000     0x3108 mainFirmware.o
+ .debug_line    0x00000000     0x315b mainFirmware.o
 
-.debug_frame    0x00000000      0x540
+.debug_frame    0x00000000      0x550
  *(.debug_frame)
- .debug_frame   0x00000000      0x540 mainFirmware.o
+ .debug_frame   0x00000000      0x550 mainFirmware.o
 
-.debug_str      0x00000000     0x2d35
+.debug_str      0x00000000     0x2d43
  *(.debug_str)
- .debug_str     0x00000000     0x2d35 mainFirmware.o
-                               0x2de9 (size before relaxing)
+ .debug_str     0x00000000     0x2d43 mainFirmware.o
+                               0x2df7 (size before relaxing)
 
-.debug_loc      0x00000000     0x1a20
+.debug_loc      0x00000000     0x1a3b
  *(.debug_loc)
- .debug_loc     0x00000000     0x1a20 mainFirmware.o
+ .debug_loc     0x00000000     0x1a3b mainFirmware.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -735,6 +736,7 @@ read_data_from_serial                             mainFirmware.o
 read_input                                        mainFirmware.o
 read_internal_temperature                         mainFirmware.o
 robotData                                         mainFirmware.o
+serial_bridge                                     mainFirmware.o
 set_aux_baud_rate                                 mainFirmware.o
 set_buzzer                                        mainFirmware.o
 set_dac0                                          mainFirmware.o

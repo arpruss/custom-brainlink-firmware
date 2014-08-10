@@ -11,4 +11,9 @@ Changes by Alexander Pruss:
 - remove delay in responding to '*' command
 - add serial bridge mode: sending 'Z' initiates a bridge between the Bluetooth and AUX Serial connections using current serial parameters.
   Once bridge mode is initiated, it cannot be terminated except by powercycling the BrainLink.  (I may add a way to exit bridge mode in the future.)
-  Bridge mode makes for a much more reliable serial link.
+  Bridge mode makes for a much more reliable serial link
+- add iRobot mode: sending 0x80 in unconnected mode (e.g., after turning on Brainlink but without sending the '*' command) switches port to 115200 baud
+  (for Roomba 500 and newer;  if you want to use the 57600 baud for older Roombas or Create, edit brainlink.h and recompile), passes the 0x80 to the 
+  robot and goes into serial bridge mode.  This lets you use the Brainlink as a transparent drop-in replacement for specialized Roomba-Bluetooth bridge
+  devices.  Note that Roomba control software that sends AT commands to a bridge and expects a response will not work.  (But as long as the AT commands 
+  don't contain a '*', the firmware will happily ignore them.)

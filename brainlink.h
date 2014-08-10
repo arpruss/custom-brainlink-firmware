@@ -39,3 +39,6 @@
 #include "ext_dio.c"
 #include "ir_reader.c"
 #include "eeprom_driver.c"
+
+#define ROOMBA_UART_SETTINGS    131, -3   // 115200 for Roomba 500
+//#define ROOMBA_UART_SETTINGS    135, -2   // 57600 for Roomba Create and older Roombas

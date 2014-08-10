@@ -65,14 +65,22 @@ int main(void)
 		choice = 0;
 		time_out = 0;
 		stop_ir_timer();
-		
+
 		// Sing a BL song in idle mode so you can be found. Stop as soon as you get a *
 		while(choice != 42) {
 			uart_putchar(&BT_USART, 'B');
 			uart_putchar(&BT_USART, 'L');
 			if (USART_RXBufferData_Available(&BT_data)) {
 				choice = USART_RXBuffer_GetByte(&BT_data);
-				uart_putchar(&BT_USART, choice);
+				if (choice == 128) {
+                                    // Something is trying to connect directly to an iRobot
+                                    set_aux_baud_rate( ROOMBA_UART_SETTINGS );
+                                    uart_putchar(&AUX_USART, 128); // pass through to iRobot
+                                    serial_bridge(); // currently never returns
+                                }
+                                else {
+				    uart_putchar(&BT_USART, choice);
+                                }
 			}
 			if (choice != 42)
                             _delay_ms(500);
@@ -204,7 +212,7 @@ int main(void)
 							uart_putchar(&BT_USART, blue);
 						}
 						set_led(red, green, blue);
-						break;		
+						break;
 					// Sets up the IR transmitter with signal characteristics
 					case 'I':
 						temph = uart_getchar_timeout(&BT_USART);
@@ -753,15 +761,8 @@ int main(void)
 						break;
 					// BT-serial high speed bridge mode
 					case 'Z':
-                                                while(1) {
-                                                    while (USART_RXBufferData_Available(&AUX_data)) {
-							uart_putchar(&BT_USART, USART_RXBuffer_GetByte(&AUX_data));
-						    }
-						    while (USART_RXBufferData_Available(&BT_data)) {
-				                        uart_putchar(&AUX_USART, USART_RXBuffer_GetByte(&BT_data));
-				                    }
-                                                }
-                                                // break;
+					        serial_bridge();
+					        break;
 					case 'r':
 						count_buff = 0;
 						while(USART_RXBufferData_Available(&AUX_data)) {
