@@ -533,10 +533,10 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avrxmega2\libgcc.a
  *(.debug_frame)
  .debug_frame   0x00000000      0x550 mainFirmware.o
 
-.debug_str      0x00000000     0x2d43
+.debug_str      0x00000000     0x2d3a
  *(.debug_str)
- .debug_str     0x00000000     0x2d43 mainFirmware.o
-                               0x2df7 (size before relaxing)
+ .debug_str     0x00000000     0x2d3a mainFirmware.o
+                               0x2dee (size before relaxing)
 
 .debug_loc      0x00000000     0x1a3b
  *(.debug_loc)

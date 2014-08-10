@@ -5144,9 +5144,9 @@
  5318               	.LBB791:
  5319               	.LBB792:
  5320               	.LM782:
- 5321 182a 53E8      		ldi r21,lo8(-125)
+ 5321 182a 57E8      		ldi r21,lo8(-121)
  5322 182c 5093 A608 		sts 2214,r21
- 5323 1830 60ED      		ldi r22,lo8(-48)
+ 5323 1830 60EE      		ldi r22,lo8(-32)
  5324 1832 6093 A708 		sts 2215,r22
  5325               	.L441:
  5326               	.LBE792:
@@ -9027,109 +9027,109 @@
  9898               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 mainFirmware.c
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2      *ABS*:0000003f __SREG__
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:3      *ABS*:0000003e __SP_H__
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:4      *ABS*:0000003d __SP_L__
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:5      *ABS*:00000034 __CCP__
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:18     .text:00000000 init_clock
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:46     .text:00000022 init_led
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:95     .text:0000005a set_led
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:122    .text:0000006e init_bt_uart
+C:\cygwin64\tmp/ccyqI0yR.s:2      *ABS*:0000003f __SREG__
+C:\cygwin64\tmp/ccyqI0yR.s:3      *ABS*:0000003e __SP_H__
+C:\cygwin64\tmp/ccyqI0yR.s:4      *ABS*:0000003d __SP_L__
+C:\cygwin64\tmp/ccyqI0yR.s:5      *ABS*:00000034 __CCP__
+C:\cygwin64\tmp/ccyqI0yR.s:6      *ABS*:00000000 __tmp_reg__
+C:\cygwin64\tmp/ccyqI0yR.s:7      *ABS*:00000001 __zero_reg__
+C:\cygwin64\tmp/ccyqI0yR.s:18     .text:00000000 init_clock
+C:\cygwin64\tmp/ccyqI0yR.s:46     .text:00000022 init_led
+C:\cygwin64\tmp/ccyqI0yR.s:95     .text:0000005a set_led
+C:\cygwin64\tmp/ccyqI0yR.s:122    .text:0000006e init_bt_uart
                             *COM*:00000104 BT_data
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:185    .text:000000c0 init_aux_uart
+C:\cygwin64\tmp/ccyqI0yR.s:185    .text:000000c0 init_aux_uart
                             *COM*:00000104 AUX_data
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:255    .text:0000011a set_aux_baud_rate
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:281    .text:00000130 uart_putchar
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:303    .text:0000013c uart_getchar_nb
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:341    .text:00000160 uart_getchar
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:385    .text:00000184 uart_getchar_timeout
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:490    .text:000001d8 aux_uart_getchar
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:521    .text:000001f2 serial_bridge
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:621    .text:00000254 USART_InterruptDriver_Initialize
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:646    .text:00000264 USART_RXBufferData_Available
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:675    .text:00000278 USART_RXBuffer_GetByte
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:704    .text:00000290 USART_RXComplete
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:764    .text:000002ce __vector_91
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:826    .text:0000031e __vector_25
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:888    .text:0000036e init_adc
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:966    .text:000003c6 read_analog
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:1007   .text:000003f8 read_internal_temperature
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:1038   .text:0000041c init_ir
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:1074   .text:00000442 set_ir50
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:1107   .text:00000458 set_ir100
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:1138   .text:0000046a set_ir0
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:1167   .text:00000478 set_ir_carrier
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:1198   .text:00000486 start_ir_timer
+C:\cygwin64\tmp/ccyqI0yR.s:255    .text:0000011a set_aux_baud_rate
+C:\cygwin64\tmp/ccyqI0yR.s:281    .text:00000130 uart_putchar
+C:\cygwin64\tmp/ccyqI0yR.s:303    .text:0000013c uart_getchar_nb
+C:\cygwin64\tmp/ccyqI0yR.s:341    .text:00000160 uart_getchar
+C:\cygwin64\tmp/ccyqI0yR.s:385    .text:00000184 uart_getchar_timeout
+C:\cygwin64\tmp/ccyqI0yR.s:490    .text:000001d8 aux_uart_getchar
+C:\cygwin64\tmp/ccyqI0yR.s:521    .text:000001f2 serial_bridge
+C:\cygwin64\tmp/ccyqI0yR.s:621    .text:00000254 USART_InterruptDriver_Initialize
+C:\cygwin64\tmp/ccyqI0yR.s:646    .text:00000264 USART_RXBufferData_Available
+C:\cygwin64\tmp/ccyqI0yR.s:675    .text:00000278 USART_RXBuffer_GetByte
+C:\cygwin64\tmp/ccyqI0yR.s:704    .text:00000290 USART_RXComplete
+C:\cygwin64\tmp/ccyqI0yR.s:764    .text:000002ce __vector_91
+C:\cygwin64\tmp/ccyqI0yR.s:826    .text:0000031e __vector_25
+C:\cygwin64\tmp/ccyqI0yR.s:888    .text:0000036e init_adc
+C:\cygwin64\tmp/ccyqI0yR.s:966    .text:000003c6 read_analog
+C:\cygwin64\tmp/ccyqI0yR.s:1007   .text:000003f8 read_internal_temperature
+C:\cygwin64\tmp/ccyqI0yR.s:1038   .text:0000041c init_ir
+C:\cygwin64\tmp/ccyqI0yR.s:1074   .text:00000442 set_ir50
+C:\cygwin64\tmp/ccyqI0yR.s:1107   .text:00000458 set_ir100
+C:\cygwin64\tmp/ccyqI0yR.s:1138   .text:0000046a set_ir0
+C:\cygwin64\tmp/ccyqI0yR.s:1167   .text:00000478 set_ir_carrier
+C:\cygwin64\tmp/ccyqI0yR.s:1198   .text:00000486 start_ir_timer
                             *COM*:00000002 startUpCounter
                             *COM*:00000002 onOffTracker
                             *COM*:00000001 bitCounter
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:1246   .text:000004ba stop_ir_timer
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:1283   .text:000004ce __vector_20
+C:\cygwin64\tmp/ccyqI0yR.s:1246   .text:000004ba stop_ir_timer
+C:\cygwin64\tmp/ccyqI0yR.s:1283   .text:000004ce __vector_20
                             *COM*:000000f0 robotData
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:1669   .text:00000742 BT_default_reset
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:1777   .text:00000792 BT_reset
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:1828   .text:000007b6 init_BT
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:1865   .text:000007e4 TWI_MasterInit
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:1899   .text:00000804 TWI_MasterState
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:1920   .text:00000812 TWI_MasterReady
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:1938   .text:0000081a TWI_MasterWriteRead
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2071   .text:000008bc TWI_MasterRead
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2095   .text:000008ce TWI_MasterWrite
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2114   .text:000008da TWI_MasterArbitrationLostBusErrorHandler
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2158   .text:00000904 TWI_MasterWriteHandler
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2263   .text:0000097c TWI_MasterReadHandler
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2361   .text:000009ee TWI_MasterInterruptHandler
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2429   .text:00000a34 TWI_MasterTransactionFinished
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2447   .text:00000a3c getAccelData
+C:\cygwin64\tmp/ccyqI0yR.s:1669   .text:00000742 BT_default_reset
+C:\cygwin64\tmp/ccyqI0yR.s:1777   .text:00000792 BT_reset
+C:\cygwin64\tmp/ccyqI0yR.s:1828   .text:000007b6 init_BT
+C:\cygwin64\tmp/ccyqI0yR.s:1865   .text:000007e4 TWI_MasterInit
+C:\cygwin64\tmp/ccyqI0yR.s:1899   .text:00000804 TWI_MasterState
+C:\cygwin64\tmp/ccyqI0yR.s:1920   .text:00000812 TWI_MasterReady
+C:\cygwin64\tmp/ccyqI0yR.s:1938   .text:0000081a TWI_MasterWriteRead
+C:\cygwin64\tmp/ccyqI0yR.s:2071   .text:000008bc TWI_MasterRead
+C:\cygwin64\tmp/ccyqI0yR.s:2095   .text:000008ce TWI_MasterWrite
+C:\cygwin64\tmp/ccyqI0yR.s:2114   .text:000008da TWI_MasterArbitrationLostBusErrorHandler
+C:\cygwin64\tmp/ccyqI0yR.s:2158   .text:00000904 TWI_MasterWriteHandler
+C:\cygwin64\tmp/ccyqI0yR.s:2263   .text:0000097c TWI_MasterReadHandler
+C:\cygwin64\tmp/ccyqI0yR.s:2361   .text:000009ee TWI_MasterInterruptHandler
+C:\cygwin64\tmp/ccyqI0yR.s:2429   .text:00000a34 TWI_MasterTransactionFinished
+C:\cygwin64\tmp/ccyqI0yR.s:2447   .text:00000a3c getAccelData
                             *COM*:00000004 _acc
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2464   .text:00000a4e newAccelData
+C:\cygwin64\tmp/ccyqI0yR.s:2464   .text:00000a4e newAccelData
                             *COM*:00000011 twiMaster
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2495   .text:00000a72 updateAccel
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2549   .text:00000aca initAccel
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2754   .text:00000c04 __vector_46
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2803   .text:00000c50 init_dac
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2863   .text:00000c98 set_dac0
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2891   .text:00000cb4 set_dac1
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2919   .text:00000cd0 disable_dac0
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2937   .text:00000cdc disable_dac1
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2955   .text:00000ce8 init_buzzer
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:2985   .text:00000d06 set_buzzer
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:3022   .text:00000d1e turn_off_buzzer
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:3046   .text:00000d34 set_pwm
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:9179   .bss:00000000 pwm_frequency
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:3073   .text:00000d50 turn_off_pwm0
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:3091   .text:00000d5c turn_off_pwm1
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:3109   .text:00000d68 set_pwm0
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:3142   .text:00000d8c set_pwm1
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:3175   .text:00000db0 set_output
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:3358   .text:00000e7e read_input
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:3603   .text:00000fd6 init_ir_read
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:9197   .bss:00000004 ir_read_flag
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:9185   .bss:00000002 signal_count
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:9191   .bss:00000003 ir_read_time_out
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:3669   .text:00001032 ir_fail
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:3719   .text:00001062 disable_ir_read
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:3745   .text:00001076 dump_data
+C:\cygwin64\tmp/ccyqI0yR.s:2495   .text:00000a72 updateAccel
+C:\cygwin64\tmp/ccyqI0yR.s:2549   .text:00000aca initAccel
+C:\cygwin64\tmp/ccyqI0yR.s:2754   .text:00000c04 __vector_46
+C:\cygwin64\tmp/ccyqI0yR.s:2803   .text:00000c50 init_dac
+C:\cygwin64\tmp/ccyqI0yR.s:2863   .text:00000c98 set_dac0
+C:\cygwin64\tmp/ccyqI0yR.s:2891   .text:00000cb4 set_dac1
+C:\cygwin64\tmp/ccyqI0yR.s:2919   .text:00000cd0 disable_dac0
+C:\cygwin64\tmp/ccyqI0yR.s:2937   .text:00000cdc disable_dac1
+C:\cygwin64\tmp/ccyqI0yR.s:2955   .text:00000ce8 init_buzzer
+C:\cygwin64\tmp/ccyqI0yR.s:2985   .text:00000d06 set_buzzer
+C:\cygwin64\tmp/ccyqI0yR.s:3022   .text:00000d1e turn_off_buzzer
+C:\cygwin64\tmp/ccyqI0yR.s:3046   .text:00000d34 set_pwm
+C:\cygwin64\tmp/ccyqI0yR.s:9179   .bss:00000000 pwm_frequency
+C:\cygwin64\tmp/ccyqI0yR.s:3073   .text:00000d50 turn_off_pwm0
+C:\cygwin64\tmp/ccyqI0yR.s:3091   .text:00000d5c turn_off_pwm1
+C:\cygwin64\tmp/ccyqI0yR.s:3109   .text:00000d68 set_pwm0
+C:\cygwin64\tmp/ccyqI0yR.s:3142   .text:00000d8c set_pwm1
+C:\cygwin64\tmp/ccyqI0yR.s:3175   .text:00000db0 set_output
+C:\cygwin64\tmp/ccyqI0yR.s:3358   .text:00000e7e read_input
+C:\cygwin64\tmp/ccyqI0yR.s:3603   .text:00000fd6 init_ir_read
+C:\cygwin64\tmp/ccyqI0yR.s:9197   .bss:00000004 ir_read_flag
+C:\cygwin64\tmp/ccyqI0yR.s:9185   .bss:00000002 signal_count
+C:\cygwin64\tmp/ccyqI0yR.s:9191   .bss:00000003 ir_read_time_out
+C:\cygwin64\tmp/ccyqI0yR.s:3669   .text:00001032 ir_fail
+C:\cygwin64\tmp/ccyqI0yR.s:3719   .text:00001062 disable_ir_read
+C:\cygwin64\tmp/ccyqI0yR.s:3745   .text:00001076 dump_data
                             *COM*:000000bf captured_signal
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:3814   .text:000010c0 __vector_47
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:3882   .text:00001130 __vector_49
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:3997   .text:00001200 read_data_from_serial
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:4103   .text:0000127c EEPROM_ReadByte
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:4182   .text:000012d6 print_data_from_eeprom
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:4340   .text:0000139e read_data_from_eeprom
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:4507   .text:00001484 EEPROM_WaitForNVM
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:4524   .text:0000148e EEPROM_FlushBuffer
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:4573   .text:000014c4 EEPROM_WriteByte
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:4661   .text:0000152e write_data_to_eeprom
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:4809   .text:00001608 EEPROM_LoadByte
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:4846   .text:00001626 EEPROM_LoadPage
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:4893   .text:0000164e EEPROM_AtomicWritePage
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:4962   .text:00001698 EEPROM_ErasePage
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:5031   .text:000016e2 EEPROM_SplitWritePage
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:5100   .text:0000172c EEPROM_EraseAll
-C:\Users\ALEXAN~1\AppData\Local\Temp/ccMu4fiE.s:5146   .text:0000175a main
+C:\cygwin64\tmp/ccyqI0yR.s:3814   .text:000010c0 __vector_47
+C:\cygwin64\tmp/ccyqI0yR.s:3882   .text:00001130 __vector_49
+C:\cygwin64\tmp/ccyqI0yR.s:3997   .text:00001200 read_data_from_serial
+C:\cygwin64\tmp/ccyqI0yR.s:4103   .text:0000127c EEPROM_ReadByte
+C:\cygwin64\tmp/ccyqI0yR.s:4182   .text:000012d6 print_data_from_eeprom
+C:\cygwin64\tmp/ccyqI0yR.s:4340   .text:0000139e read_data_from_eeprom
+C:\cygwin64\tmp/ccyqI0yR.s:4507   .text:00001484 EEPROM_WaitForNVM
+C:\cygwin64\tmp/ccyqI0yR.s:4524   .text:0000148e EEPROM_FlushBuffer
+C:\cygwin64\tmp/ccyqI0yR.s:4573   .text:000014c4 EEPROM_WriteByte
+C:\cygwin64\tmp/ccyqI0yR.s:4661   .text:0000152e write_data_to_eeprom
+C:\cygwin64\tmp/ccyqI0yR.s:4809   .text:00001608 EEPROM_LoadByte
+C:\cygwin64\tmp/ccyqI0yR.s:4846   .text:00001626 EEPROM_LoadPage
+C:\cygwin64\tmp/ccyqI0yR.s:4893   .text:0000164e EEPROM_AtomicWritePage
+C:\cygwin64\tmp/ccyqI0yR.s:4962   .text:00001698 EEPROM_ErasePage
+C:\cygwin64\tmp/ccyqI0yR.s:5031   .text:000016e2 EEPROM_SplitWritePage
+C:\cygwin64\tmp/ccyqI0yR.s:5100   .text:0000172c EEPROM_EraseAll
+C:\cygwin64\tmp/ccyqI0yR.s:5146   .text:0000175a main
                             *COM*:0000000e bt
                             *COM*:0000000e aux
 

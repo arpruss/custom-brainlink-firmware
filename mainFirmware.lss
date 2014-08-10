@@ -19,11 +19,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   7 .debug_frame  00000550  00000000  00000000  0000c4b4  2**2
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_str    00002d43  00000000  00000000  0000ca04  2**0
+  8 .debug_str    00002d3a  00000000  00000000  0000ca04  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_loc    00001a3b  00000000  00000000  0000f747  2**0
+  9 .debug_loc    00001a3b  00000000  00000000  0000f73e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 00000180  00000000  00000000  00011182  2**0
+ 10 .debug_ranges 00000180  00000000  00000000  00011179  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -5381,9 +5381,9 @@ bool USART_RXBufferData_Available(USART_data_t * usart_data)
 void set_aux_baud_rate(int baud, char scale) 
 {
 	USART_Baudrate_Set(&AUX_USART, baud, scale);
-    19ca:	53 e8       	ldi	r21, 0x83	; 131
+    19ca:	57 e8       	ldi	r21, 0x87	; 135
     19cc:	50 93 a6 08 	sts	0x08A6, r21
-    19d0:	60 ed       	ldi	r22, 0xD0	; 208
+    19d0:	60 ee       	ldi	r22, 0xE0	; 224
     19d2:	60 93 a7 08 	sts	0x08A7, r22
 void uart_putchar(USART_t * usart, char c) {
 
