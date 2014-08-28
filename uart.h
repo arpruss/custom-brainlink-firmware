@@ -157,3 +157,6 @@ void USART_InterruptDriver_Initialize(USART_data_t * usart_data, USART_t * usart
 bool USART_RXBufferData_Available(USART_data_t * usart_data);
 uint8_t USART_RXBuffer_GetByte(USART_data_t * usart_data);
 bool USART_RXComplete(USART_data_t * usart_data);
+void err(void);
+void USART_RXBuffer_Clear(USART_data_t * usart_data);
+void serial_bridge(void);

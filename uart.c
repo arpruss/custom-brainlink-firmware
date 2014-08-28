@@ -51,8 +51,11 @@ void init_aux_uart(int baud, char scale) {
 }
 
 // Sets the baud rate if the aux serial port is already set up
-void set_aux_baud_rate(int baud, char scale) 
+// Also clear the aux serial buffer as data was probably sent at the wrong rate
+void set_aux_baud_rate(int baud, char scale)
 {
+	AUX_data.buffer.RX_Tail = AUX_data.buffer.RX_Head;
+
 	USART_Baudrate_Set(&AUX_USART, baud, scale);
 }
 
@@ -213,7 +216,7 @@ bool USART_RXComplete(USART_data_t * usart_data)
 {
 	USART_Buffer_t * bufPtr;
 	bool ans;
-	
+
 	bufPtr = &usart_data->buffer;
 	/* Advance buffer head. */
 	uint8_t tempRX_Head = (bufPtr->RX_Head + 1) & USART_RX_BUFFER_MASK;
@@ -230,6 +233,14 @@ bool USART_RXComplete(USART_data_t * usart_data)
 		usart_data->buffer.RX_Head = tempRX_Head;
 	}
 	return ans;
+}
+
+
+/* Error message */
+void err(void) {
+     uart_putchar(&BT_USART, 'E');
+     uart_putchar(&BT_USART, 'R');
+     uart_putchar(&BT_USART, 'R');
 }
 
 

@@ -15,5 +15,15 @@ Changes by Alexander Pruss:
 - add iRobot mode: sending 0x80 in unconnected mode (e.g., after turning on Brainlink but without sending the '*' command) switches port to 115200 baud
   (for Roomba 500 and newer;  if you want to use the 57600 baud for older Roombas or Create, edit brainlink.h and recompile), passes the 0x80 to the 
   robot and goes into serial bridge mode.  This lets you use the Brainlink as a transparent drop-in replacement for specialized Roomba-Bluetooth bridge
-  devices.  Note that Roomba control software that sends AT commands to a bridge and expects a response will not work.  (But as long as the AT commands 
+  devices.  Note that Roomba control software that sends AT commands to a bridge and expects a response will not work.  (But as long as the AT commands
   don't contain a '*', the firmware will happily ignore them.)
+- add BrainFlex headset mode: sending 0x00 in unconnected mode automatically sets 57600 baud and passes the 0x00 through.
+- clear aux port receive buffer whenever the baud rate is changed
+- add human-readable aux port baud rate command 'u', followed by two ASCII digits indicating the baud rate.  Currently
+  valid commands are:
+  u12: 1200 baud
+  u96: 9600 baud
+  u19: 19200 baud
+  u57: 57600 baud
+  u11: 112500 baud
+- space optimizations 
