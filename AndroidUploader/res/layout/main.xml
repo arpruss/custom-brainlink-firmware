@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginBottom="18sp"
+        android:text="Pair your Brainlink and put it in firmware upgrade mode.  Select firmware version and Brainlink device." />
+    
+    <Spinner
+        android:id="@+id/firmware_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/firmwares"
+        />
+    
+    <Spinner
+        android:id="@+id/device_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        />
+    
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" 
+        />
+    
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginBottom="18sp"
+        android:text="" />
+
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <Button
+            android:id="@+id/go"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="clickedOn"
+            android:textSize="18sp"
+            android:text="Upload firmware to Brainlink" />
+    <Button
+            android:id="@+id/go"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="clickedLicense"
+            android:textSize="18sp"
+            android:text="License" />
+</LinearLayout>
+</LinearLayout>
