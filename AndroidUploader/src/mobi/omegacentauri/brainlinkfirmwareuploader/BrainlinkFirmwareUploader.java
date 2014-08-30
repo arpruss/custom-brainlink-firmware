@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Color;
 import android.graphics.drawable.StateListDrawable;
 import android.os.AsyncTask;
@@ -51,12 +52,10 @@ public class BrainlinkFirmwareUploader extends Activity {
 	private TextView message;
 	private SharedPreferences options;
 	private ArrayAdapter<String> deviceSelectionAdapter;
-	private boolean brainLinkMode = false;
 	private Spinner deviceSpinner;
 	private Spinner fwSpinner;
 	private ArrayList<BluetoothDevice> devs;
-	private static final byte[] UPSCALED02ALT = new byte[] {0x00, 0x7E, 0x00, 0x00, 0x00, (byte)0xF8};
-	private static final byte[] UPSCALED02 = new byte[] {0x00, (byte)0xF8, 0x00, 0x00, 0x00, (byte)0xE0};
+	private static final String PREF_DISCLAIMED_VERSION = "disclaimed";
 	private static final String[] firmwares = { "original.hex", "mainFirmware.hex", "57k-roomba.hex" };
 	
 	
@@ -96,6 +95,8 @@ public class BrainlinkFirmwareUploader extends Activity {
 				
 			}
 		});
+		
+		disclaimer();
 	}
 	
 	@Override
@@ -119,6 +120,38 @@ public class BrainlinkFirmwareUploader extends Activity {
 		b.setMessage("This work (The Brainlink Firmware) is copyright BirdBrain Technologies (with modifications by Alexander Pruss) and licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. "+
 "To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to "+
 "Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.");
+		b.create().show();
+	}
+	
+	public void disclaimer() {
+		int v;
+		try {
+			v = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+			if (v == options.getInt(PREF_DISCLAIMED_VERSION , 0));
+				return;
+		} catch (NameNotFoundException e) {
+			v = 0;
+		}
+
+		AlertDialog.Builder b = new AlertDialog.Builder(this);
+		b.setTitle("Disclaimer");
+		b.setMessage("USE THIS ONLY AT YOUR OWN RISK.  Omega Centauri Software takes no responsibility for any "+
+		"damage to data or hardware (including the Brainlink).  If your Brainlink becomes unresponsive, you can use the links at brainlinksystem.com/firmware-programming to try to reinstall the original firmware.  Do you agree?");
+		b.setNegativeButton("Disagree", new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				BrainlinkFirmwareUploader.this.finish();
+			}
+		});
+		final int v0 = v;
+		b.setPositiveButton("Agree",  new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				options.edit().putInt(PREF_DISCLAIMED_VERSION, v0);
+			}
+		});
 		b.create().show();
 	}
 	
@@ -194,30 +227,36 @@ public class BrainlinkFirmwareUploader extends Activity {
 		@Override
 		protected String doInBackground(String... firmware) {
 			BTDataLink link = null;
+			Butterfly butterfly = null;
 			
 			try {
 				publishProgress("Connecting");
 				link = new BTDataLink(device);
 				
 				publishProgress("Preparing firmware");
-				Butterfly butterfly = new Butterfly(link, 16384, 128);
+				butterfly = new Butterfly(link, 16384, 128);
 				byte[] flash = butterfly.getFlashFromHex(BrainlinkFirmwareUploader.this.getResources().getAssets().open(firmware[0]));
 				if (flash == null) 
 					throw new Exception("Problem reading .hex file.");
 
 				publishProgress("Uploading firmware");
 				if (! butterfly.writeFlash(flash)) 
-					throw new Exception("Error uploading firmware.");
+					throw new Exception("Error uploading firmware.  Brainlink may not function until you upload successfully.");
 				
 				publishProgress("Verifying firmware");
 				byte[] newFlash = butterfly.readFlash();
 				if (!Arrays.equals(newFlash, flash)) 
 					throw new Exception("Error verifying uploaded firmware.  Brainlink may not function until you upload successfully.");
+				
 			}
 			catch (Exception e) {
+				return e.toString();
+			}
+			finally {
+				if (butterfly != null)
+					butterfly.stop();
 				if (link != null)
 					link.stop();
-				return e.toString();
 			}
 			
 			return "Firmware successfully uploaded";

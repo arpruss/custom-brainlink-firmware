@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:textSize="14sp"
         android:layout_marginBottom="18sp"
-        android:text="1. Pair your Brainlink (code: 1234).\r\n2. Turn off Brainlink.\r\n3. Connect pins 2 (green wire) and 8 (black wire) on the eight-pin port.\r\n4. While holding them connected, turn on Brainlink.\r\n5. Select firmware version and Brainlink device.\r\n6. Upload!" />
+        android:text="1. Ensure Brainlink is fully charged.\r\n2. Pair your Brainlink (code: 1234).\r\n4. Turn off Brainlink.\r\n5. Connect pins 2 (green wire) and 8 (black wire) on the eight-pin port.\r\n6. While holding them connected, turn on Brainlink.\r\n7. Select firmware version and Brainlink device.\r\n8. Upload!" />
 
     <Spinner
         android:id="@+id/firmware_spinner"
