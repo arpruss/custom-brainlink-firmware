@@ -169,6 +169,9 @@ public class BrainlinkFirmwareUploader extends Activity {
 				
 			}
 		});
+		
+		if (devs.size() == 0)
+			message.setText("Bluetooth turned off or no devices paired.");
 	}
 	
 	class InitializeTask extends AsyncTask<String, String, String>{
