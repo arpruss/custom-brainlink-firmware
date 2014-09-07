@@ -209,6 +209,30 @@ int main(void)
 						}
 						set_led(red, green, blue);
 						break;
+				        // Switches serial between irDA and standard serial
+				        // Currently, this works over the same port numbers as
+				        // standard serial, instead of using the IR receiver
+				        // and IR LED.  This may change when I get the IR receiver
+				        // and LED working reliably, so don't count on this
+				        // functionality.
+				        case 'J':
+						temph = uart_getchar_timeout(&BT_USART);
+						if(temph == 256) {
+                                                        err();
+							break;
+						}
+						else {
+							uart_putchar(&BT_USART, temph);
+						}
+                                                disable_aux_uart();
+						if (temph == '1') {
+                                                    init_aux_uart_ir(829, -2); // 9600 baud
+                                                }
+                                                else {
+                                                    init_aux_uart(131, -3); // 115200 baud
+                                                }
+                                                break;
+
 					// Sets up the IR transmitter with signal characteristics
 					case 'I':
 						temph = uart_getchar_timeout(&BT_USART);

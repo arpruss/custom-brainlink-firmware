@@ -116,8 +116,8 @@ public class BrainlinkFirmwareUploader extends Activity {
 	
 	public void clickedLicense(View v) {
 		AlertDialog.Builder b = new AlertDialog.Builder(this);
-		b.setTitle("License");
-		b.setMessage("This work (The Brainlink Firmware) is copyright BirdBrain Technologies (with modifications by Alexander Pruss) and licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. "+
+		b.setTitle("License for Brainlink Firmware");
+		b.setMessage("This work is copyright BirdBrain Technologies (with modifications by Alexander Pruss) and licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. "+
 "To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to "+
 "Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.");
 		b.create().show();

@@ -43,6 +43,11 @@
 	(_usart)->CTRLC = (uint8_t) _charSize | _parityMode |                      \
 	                  (_twoStopBits ? USART_SBMODE_bm : 0)
 
+
+/* set mode */
+#define USART_SetMode(_usart, _usartMode)                                      \
+         ((_usart)->CTRLC = ((_usart)->CTRLC & (~USART_CMODE_gm)) | _usartMode)
+
 /*! \brief Set USART baud rate.
  *
  *  Sets the USART's baud rate register.
@@ -160,3 +165,5 @@ bool USART_RXComplete(USART_data_t * usart_data);
 void err(void);
 void USART_RXBuffer_Clear(USART_data_t * usart_data);
 void serial_bridge(void);
+void init_aux_uart_ir(int baud, char scale);
+void disable_aux_uart(void);

@@ -88,11 +88,9 @@ ISR(TCE0_OVF_vect) {
 }
 
 // Just prints ERR to serial to show that signal was not captured
-void ir_fail() 
+void ir_fail()
 {
-	uart_putchar(&BT_USART, 'E');
-	uart_putchar(&BT_USART, 'R');
-	uart_putchar(&BT_USART, 'R');
+        err();
 	ir_read_flag = 0;
 }
 
