@@ -48,18 +48,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
     <Button
-            android:id="@+id/go"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="clickedOn"
             android:textSize="18sp"
             android:text="Upload firmware!" />
     <Button
-            android:id="@+id/go"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="clickedFeatures"
+            android:textSize="18sp"
+            android:text="Features" />
+    <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="clickedLicense"
             android:textSize="18sp"
-            android:text="Licenses" />
+            android:text="License" />
 </LinearLayout>
 </LinearLayout>

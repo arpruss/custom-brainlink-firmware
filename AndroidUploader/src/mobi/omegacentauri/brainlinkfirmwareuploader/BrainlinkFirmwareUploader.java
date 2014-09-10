@@ -32,6 +32,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -123,6 +124,23 @@ public class BrainlinkFirmwareUploader extends Activity {
 		b.create().show();
 	}
 	
+	public void clickedFeatures(View v) {
+		AlertDialog.Builder b = new AlertDialog.Builder(this);
+		b.setTitle("Custom Brainlink Firmware 1.04");
+		b.setMessage(Html.fromHtml("1.04:<br/>"+
+				"- Fix nasty buffer overflow in 'r' command<br/>" + 
+				"- more easy-baud rate settings; now we have: 'u12' (1200 baud), 'u48' (4800), 'u96' (9600), "+
+				"'u19' (19200), 'u38' (38400), 'u57' (57600), 'u11' (112500)<br/>"+
+				"1.03:<br/>"+
+				"- 'J1' command to switch the aux uart to IrDA mode (9600 baud, IrDA 3/16 "+
+				"duty cycle pulse shaping); return to default uart settings with 'J0'<br/>"+
+				"1.01:<br/>"+
+				"- 'Z' command for faster bridge between serial and Bluetooth; no other commands will be accepted afterwards; powercycle to stop<br/>"+				
+				"- automatically enter bridge mode at the right baud rate when software attempts to connect to Roomba or Mindflex<br/>"+
+				"- easy baud rate setting ('uxx' command)<br/>"+
+				"- clear aux buffer when switching baud rate<br/>"));
+		b.create().show();
+	}
 	public void disclaimer() {
 		int v;
 		try {

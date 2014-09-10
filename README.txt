@@ -20,8 +20,7 @@ Changes by Alexander Pruss:
   don't contain a '*', the firmware will happily ignore them.)
 - add BrainFlex headset mode: sending 0x00 in unconnected mode automatically sets 57600 baud and passes the 0x00 through.
 - clear aux port receive buffer whenever the baud rate is changed
-- add human-readable aux port baud rate command 'u', followed by two ASCII digits indicating the baud rate.  Currently
-  valid commands are:
+- add human-usable aux port baud rate command 'u', followed by two ASCII digits indicating the baud rate.  Valid values are:
   u12: 1200 baud
   u48: 4800 baud
   u96: 9600 baud
