@@ -31,9 +31,6 @@ void init_aux_uart(int baud, char scale) {
 	PORTC.DIRSET = PIN3_bm;
 	PORTC.DIRCLR = PIN2_bm;
 
-	//PORTC.PIN2CTRL &= ~PORT_INVEN_bm;
-	PORTC.PIN3CTRL &= ~PORT_INVEN_bm;
-
 	/* USARTC0, 8 Data bits, No Parity, 1 Stop bit. */
 	USART_Format_Set(&AUX_USART, USART_CHSIZE_8BIT_gc, USART_PMODE_DISABLED_gc, false);
 
@@ -47,7 +44,7 @@ void init_aux_uart(int baud, char scale) {
 	USART_RxdInterruptLevel_Set(AUX_data.usart, USART_RXCINTLVL_MED_gc);
 	/* Enable PMIC interrupt level medium. */
 	PMIC.CTRL |= PMIC_MEDLVLEX_bm;
-	// Set baud rate to that selected by user (defaults to 115200)
+	// Set baud rate to that selected by user
 	USART_Baudrate_Set(&AUX_USART, baud, scale);
 
 	// Enable pins
@@ -58,44 +55,31 @@ void init_aux_uart(int baud, char scale) {
 	AUX_data.buffer.RX_Tail = AUX_data.buffer.RX_Head;
 }
 
-// Initializes auxiliary serial port - variables required to set baud rate are passed to the function
-void init_aux_uart_ir(int baud, char scale) {
-	// set rx and tx directionality
-	PORTC.DIRSET = PIN3_bm; // same pins, at least for now
+void set_irda_mode(char irda) {
 	PORTC.DIRCLR = PIN2_bm;
+	PORTC.DIRSET = PIN3_bm;
 
-        /* Invert ports */
-	PORTC.PIN3CTRL |= PORT_INVEN_bm;
-	PORTC.PIN4CTRL |= PORT_INVEN_bm;
-
-	/* USARTC0, 8 Data bits, No Parity, 1 Stop bit. */
-        USART_Format_Set(&AUX_USART, USART_CHSIZE_8BIT_gc, USART_PMODE_DISABLED_gc, false);
-
-        /* irDA mode */
-        USART_SetMode(&AUX_USART, USART_CMODE_IRDA_gc);
-
-	/* Use USARTC0 and initialize buffers. */
-	USART_InterruptDriver_Initialize(&AUX_data, &AUX_USART);
-
-	/* Enable RXC interrupt. */
-	USART_RxdInterruptLevel_Set(AUX_data.usart, USART_RXCINTLVL_MED_gc);
-	/* Enable PMIC interrupt level medium. */
-	PMIC.CTRL |= PMIC_MEDLVLEX_bm;
-	// Set baud rate to that selected by user (defaults to 9600)
-	USART_Baudrate_Set(&AUX_USART, baud, scale);
-
-	// Enable pins
-	USART_Rx_Enable(&AUX_USART);
-	USART_Tx_Enable(&AUX_USART);
+	if (irda == 0) {
+            PORTC.PIN2CTRL &= ~PORT_INVEN_bm;
+	    PORTC.PIN3CTRL &= ~PORT_INVEN_bm;
+	    USART_SetMode(&AUX_USART, USART_CMODE_ASYNCHRONOUS_gc);
+	    USART_Baudrate_Set(&AUX_USART, 131 , -3); // 115200
+	}
+        else {
+  	    PORTC.PIN2CTRL |= PORT_INVEN_bm;
+  	    PORTC.PIN3CTRL |= PORT_INVEN_bm;
+	    USART_SetMode(&AUX_USART, USART_CMODE_IRDA_gc);
+	    USART_Baudrate_Set(&AUX_USART, 829 , -2); // 9600
+        }
 
         // Clear buffer
 	AUX_data.buffer.RX_Tail = AUX_data.buffer.RX_Head;
 }
 
-void disable_aux_uart() {
-	USART_Rx_Disable(&AUX_USART);
-	USART_Tx_Disable(&AUX_USART);
-}
+//void disable_aux_uart() {
+//	USART_Rx_Disable(&AUX_USART);
+//	USART_Tx_Disable(&AUX_USART);
+//}
 
 // Sets the baud rate if the aux serial port is already set up
 // Also clear the aux serial buffer as data was probably sent at the wrong rate
@@ -148,9 +132,8 @@ char uart_getchar(USART_t * usart) {
 
 
 // Gets a character from the bluetooth buffer, blocks if none exists for roughly 300 ms, then times out and returns 256
-// Bug alert  - "USART_t * usart" is unnecessary and not used
-int uart_getchar_timeout(USART_t * usart) {
-	
+int bt_getchar_timeout() {
+
 	int timeout=0;
 	while(!USART_RXBufferData_Available(&BT_data) && timeout < 500) {
 		timeout++;
@@ -163,10 +146,9 @@ int uart_getchar_timeout(USART_t * usart) {
 }
 
 // Gets a character from the auxiliary uart buffer, not currently used.
-char aux_uart_getchar(USART_t * usart) {
-	
-	return USART_RXBuffer_GetByte(&AUX_data);
-}
+//char aux_uart_getchar(USART_t * usart) {
+//	return USART_RXBuffer_GetByte(&AUX_data);
+//}
 
 // serial to Bluetooth bridge
 // currently does not return

@@ -1,13 +1,12 @@
 /**
-  Main program running on the Brainlink. Initializes subsystems, and implements the communications protocol. 
-  
+  Main program running on the Brainlink. Initializes subsystems, and implements the communications protocol.
+
   Author: Tom Lauwers tlauwers@birdbraintechnologies.com
   */
 
 // Includes all header files for libraries/drivers
 #include "brainlink.h"
 
-#define TEMP_BUFFER_SIZE 31
 
 int main(void)
 {
@@ -27,10 +26,6 @@ int main(void)
 	int baud;   // Baud rate selection for auxiliary UART
 	char scale;  // For auxiliary UART
 
-//	uint8_t temp_array[TEMP_BUFFER_SIZE]; // Array to hold received bytes while we count how many are in the buffer
-//	uint8_t count_buff = 0; // Counter for receive buffer
-
-	
 	long int time_out=0; // Counter which counts to a preset level corresponding to roughly 1 minute
 	
 	// Initialize system
@@ -50,7 +45,7 @@ int main(void)
 
 	initAccel();
 
-	init_aux_uart(131, -3); // Set the auxiliary uart to 9600 8n1
+	init_aux_uart(131, -3); // Set the auxiliary uart to 115200 8n1
 
 	EEPROM_DisableMapping();
 
@@ -70,24 +65,24 @@ int main(void)
 
 		// Sing a BL song in idle mode so you can be found. Stop as soon as you get a *
 		while(choice != 42) {
-			uart_putchar(&BT_USART, 'B');
-			uart_putchar(&BT_USART, 'L');
+			bt_putchar('B');
+			bt_putchar('L');
 			if (USART_RXBufferData_Available(&BT_data)) {
 				choice = USART_RXBuffer_GetByte(&BT_data);
 				if (choice == 128) {
                                     // Something is trying to connect directly to an iRobot
                                     set_aux_baud_rate( ROOMBA_UART_SETTINGS ); // depends on model
-                                    uart_putchar(&AUX_USART, 128); // pass through to iRobot
+                                    aux_putchar( 128); // pass through to iRobot
                                     serial_bridge(); // currently never returns
                                 }
                                 else if (choice == 0) {
                                     // Something may be trying to connect directly to a MindFlex headset
                                     set_aux_baud_rate( 135, -2); // 57600
-                                    uart_putchar(&AUX_USART, 0); // pass through to headset
+                                    aux_putchar( 0); // pass through to headset
                                     serial_bridge(); // currently never returns;
                                 }
                                 else {
-				    uart_putchar(&BT_USART, choice);
+				    bt_putchar(choice);
                                 }
 			}
 			if (choice != 42)
@@ -115,36 +110,35 @@ int main(void)
 				// Reset the time out
 				time_out = 0;
 				// Return the command so the host knows we got it
-				uart_putchar(&BT_USART, choice);
+				bt_putchar(choice);
 
 				// Giant switch statement to decide what to do with the command
 				switch(choice) {
 					// Return the currect accelerometer data - X, Y, Z, and status (contains tapped and shaken bits)
 					case 'A':
 						updateAccel();
-						uart_putchar(&BT_USART, _acc.x);
-						uart_putchar(&BT_USART, _acc.y);
-						uart_putchar(&BT_USART, _acc.z);
-						uart_putchar(&BT_USART, _acc.status);
+						bt_putchar(_acc.x);
+						bt_putchar(_acc.y);
+						bt_putchar(_acc.z);
+						bt_putchar(_acc.status);
 						break;
 					// Set the buzzer
 					case 'B':
-						temph = uart_getchar_timeout(&BT_USART);
+						temph = bt_getchar_timeout();
 						// If temph is 256, it means we didn't get a follow up character and timed out, so respond with ERR
 						if(temph == 256) {
-                                                        err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, temph);
+							bt_putchar(temph);
 						}
-						templ = uart_getchar_timeout(&BT_USART);
+						templ = bt_getchar_timeout();
 						if(templ == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, templ);
+							bt_putchar(templ);
 						}
 						frequency = ((temph)<<8) + templ;
 						set_buzzer(frequency);
@@ -156,58 +150,58 @@ int main(void)
 					// Returns the value of the light sensor
 					case 'L':
 						sensor[0] = read_analog(LIGHT);
-						uart_putchar(&BT_USART, sensor[0]);
+						bt_putchar(sensor[0]);
 						break;
 					// Returns the Xmegas internal temperature read - this is undocumented because the value returned is very erratic
 					case 'T':
 						sensor[0] = read_internal_temperature();
-						uart_putchar(&BT_USART, sensor[0]);
+						bt_putchar(sensor[0]);
 						break;
 					// Returns the battery voltage
 					case 'V':
 						sensor[0] = read_analog(BATT_VOLT);
-						uart_putchar(&BT_USART, sensor[0]);
+						bt_putchar(sensor[0]);
 						break;
 					// Returns the readings on all six ADC ports
 					case 'X':
 						sensor[0] = read_analog(AUX0);
-						uart_putchar(&BT_USART, sensor[0]);
+						bt_putchar(sensor[0]);
 						sensor[1] = read_analog(AUX1);
-						uart_putchar(&BT_USART, sensor[1]);
+						bt_putchar(sensor[1]);
 						sensor[2] = read_analog(AUX2);
-						uart_putchar(&BT_USART, sensor[2]);
+						bt_putchar(sensor[2]);
 						sensor[3] = read_analog(AUX3);
-						uart_putchar(&BT_USART, sensor[3]);
+						bt_putchar(sensor[3]);
 						sensor[4] = read_analog(AUX4);
-						uart_putchar(&BT_USART, sensor[4]);
+						bt_putchar(sensor[4]);
 						sensor[5] = read_analog(AUX4);
-						uart_putchar(&BT_USART, sensor[5]);
+						bt_putchar(sensor[5]);
 						break;
 					// Sets the full-color LED
 					case 'O':
-						red = uart_getchar_timeout(&BT_USART);
+						red = bt_getchar_timeout();
 						if(red == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, red);
+							bt_putchar(red);
 						}
-						green = uart_getchar_timeout(&BT_USART);
+						green = bt_getchar_timeout();
 						if(green == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, green);
+							bt_putchar(green);
 						}
-						blue = uart_getchar_timeout(&BT_USART);
+						blue = bt_getchar_timeout();
 						if(blue == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, blue);
+							bt_putchar(blue);
 						}
 						set_led(red, green, blue);
 						break;
@@ -218,45 +212,39 @@ int main(void)
 				        // and LED working reliably, so don't count on this
 				        // functionality.
 				        case 'J':
-						temph = uart_getchar_timeout(&BT_USART);
-						if(temph == 256) {
+						temph = bt_getchar_timeout();
+						if(/*temph == 256 || */ temph < '0' || temph > '1') {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, temph);
+							bt_putchar(temph);
 						}
-                                                disable_aux_uart();
-						if (temph == '1') {
-                                                    init_aux_uart_ir(829, -2); // 9600 baud
-                                                }
-                                                else {
-                                                    init_aux_uart(131, -3); // 115200 baud
-                                                }
+						set_irda_mode(temph - '0');
                                                 break;
 
 					// Sets up the IR transmitter with signal characteristics
 					case 'I':
-						temph = uart_getchar_timeout(&BT_USART);
+						temph = bt_getchar_timeout();
 						if(temph == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, temph);
+							bt_putchar(temph);
 						}
-						templ = uart_getchar_timeout(&BT_USART);
+						templ = bt_getchar_timeout();
 						if(templ == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, templ);
+							bt_putchar(templ);
 						}
 						// Set the frequency of the IR carrier
 						robotData.frequency = ((temph)<<8) + templ;
 						set_ir_carrier(robotData.frequency);
-						templ = uart_getchar_timeout(&BT_USART);
+						templ = bt_getchar_timeout();
 						if(templ == 256) {
                                                         err();
 							break;
@@ -264,37 +252,37 @@ int main(void)
 						else {
 						// Set the length of the start up pulses
 							robotData.startUpPulseLength = templ;
-							uart_putchar(&BT_USART, robotData.startUpPulseLength);
+							bt_putchar(robotData.startUpPulseLength);
 						}
 						if(robotData.startUpPulseLength > 16) {
-							uart_putchar(&BT_USART, 'R');
+							bt_putchar('R');
 							break;
 						}
 
 						// Read in the start up pulse timing data
 						for(i=0; i < robotData.startUpPulseLength; i++) {
-							temph = uart_getchar_timeout(&BT_USART);
+							temph = bt_getchar_timeout();
 							if(temph == 256) {
                                                                 err();
 								break;
 							}
 							else {
-								uart_putchar(&BT_USART, temph);
+								bt_putchar(temph);
 							}
-							templ = uart_getchar_timeout(&BT_USART);
+							templ = bt_getchar_timeout();
 							if(templ == 256) {
                                                                 err();
 								break;
 							}
 							else {
-								uart_putchar(&BT_USART, templ);
+								bt_putchar(templ);
 							}
 							robotData.startUpPulse[i] = ((temph)<<8) + templ;
 						}
 						if(temph == 256 || templ == 256) {
 							break;
 						}
-						templ = uart_getchar_timeout(&BT_USART);
+						templ = bt_getchar_timeout();
 						if(templ == 256) {
                                                         err();
 							break;
@@ -302,71 +290,71 @@ int main(void)
 						else {
 						// Set the bit encoding to one of four pre-determined settings (see protocol instructions for more information)
 							robotData.bitEncoding = templ;
-							uart_putchar(&BT_USART, robotData.bitEncoding);
+							bt_putchar(robotData.bitEncoding);
 						}
-						templ = uart_getchar_timeout(&BT_USART);
+						templ = bt_getchar_timeout();
 						if(templ == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, templ);
+							bt_putchar(templ);
 						}
 						// Set the number of bits (and bytes) contained in an IR command
 						robotData.numBits = templ;
 						robotData.numBytes = (robotData.numBits-1)/8 + 1;
-						uart_putchar(&BT_USART, robotData.numBits);
-						temph = uart_getchar_timeout(&BT_USART);
+						bt_putchar(robotData.numBits);
+						temph = bt_getchar_timeout();
 						if(temph == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, temph);
+							bt_putchar(temph);
 						}
-						templ = uart_getchar_timeout(&BT_USART);
+						templ = bt_getchar_timeout();
 						if(templ == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, templ);
+							bt_putchar(templ);
 						}
 						// Set timing data for a high bit
 						robotData.highBitTime = ((temph)<<8) + templ;
-						temph = uart_getchar_timeout(&BT_USART);
+						temph = bt_getchar_timeout();
 						if(temph == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, temph);
+							bt_putchar(temph);
 						}
-						templ = uart_getchar_timeout(&BT_USART);
+						templ = bt_getchar_timeout();
 						if(templ == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, templ);
+							bt_putchar(templ);
 						}
 						// Set timing data for a low bit
 						robotData.lowBitTime = ((temph)<<8) + templ;
-						temph = uart_getchar_timeout(&BT_USART);
+						temph = bt_getchar_timeout();
 						if(temph == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, temph);
+							bt_putchar(temph);
 						}
-						templ = uart_getchar_timeout(&BT_USART);
+						templ = bt_getchar_timeout();
 						if(templ == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, templ);
+							bt_putchar(templ);
 						}
 						// Set timing data for on or off
 						robotData.offTime = ((temph)<<8) + templ;
@@ -375,34 +363,34 @@ int main(void)
 					case 'i':
 						// Get the signal data as one or more bytes
 						for(i = 0; i < robotData.numBytes; i++) {
-							templ = uart_getchar_timeout(&BT_USART);
+							templ = bt_getchar_timeout();
 							if(templ == 256) {
                                                                 err();
 								break;
 							}
 							else {
 								robotData.irBytes[i] = templ;
-								uart_putchar(&BT_USART, robotData.irBytes[i]);
+								bt_putchar(robotData.irBytes[i]);
 							}
 						}
 						if(templ == 256) {
 							break;
 						}
-						temph = uart_getchar_timeout(&BT_USART);
+						temph = bt_getchar_timeout();
 						if(temph == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, temph);
+							bt_putchar(temph);
 						}
-						templ = uart_getchar_timeout(&BT_USART);
+						templ = bt_getchar_timeout();
 						if(templ == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, templ);
+							bt_putchar(templ);
 						}
 						// Determine if the signal is repeated or not, and if so, with what frequency
 						robotData.repeatTime = ((temph)<<8) + templ;
@@ -427,9 +415,9 @@ int main(void)
 						break;
 					// Store the captured signal in an EEPROM location
 					case 'S':
-						location = uart_getchar_timeout(&BT_USART)-48; // Subtracing 48 converts from ASCII to numeric numbers
+						location = bt_getchar_timeout()-48; // Subtracing 48 converts from ASCII to numeric numbers
 						if((location >= 0) && (location < 5) && (signal_count > 4)) {
-							uart_putchar(&BT_USART, location+48);
+							bt_putchar(location+48);
 							write_data_to_eeprom(location);
 						}
 						else {
@@ -439,21 +427,21 @@ int main(void)
 					// Receive a raw IR signal over bluetooth and transmit it with the IR LED
 					case 's':
 						if(read_data_from_serial()) {
-							temph = uart_getchar_timeout(&BT_USART);
+							temph = bt_getchar_timeout();
 							if(temph == 256) {
                                                                 err();
 								break;
 							}
 							else {
-								uart_putchar(&BT_USART, temph);
+								bt_putchar(temph);
 							}
-							templ = uart_getchar_timeout(&BT_USART);
+							templ = bt_getchar_timeout();
 							if(templ == 256) {
                                                                 err();
 								break;
 							}
 							else {
-								uart_putchar(&BT_USART, templ);
+								bt_putchar(templ);
 							}
 							// Set if the signal should repeat and if so, with what frequency
 							robotData.repeatTime = ((temph)<<8) + templ;
@@ -476,24 +464,24 @@ int main(void)
 						break;
 					// Get a stored signal from an EEPROM location and transmit it over the IR LED (and repeat as desired)
 					case 'G':
-						location = uart_getchar_timeout(&BT_USART)-48;
+						location = bt_getchar_timeout()-48;
 						if(location >= 0 && location < 5) {
-							uart_putchar(&BT_USART, location+48);
-							temph = uart_getchar_timeout(&BT_USART);
+							bt_putchar(location+48);
+							temph = bt_getchar_timeout();
 							if(temph == 256) {
                                                                 err();
 								break;
 							}
 							else {
-								uart_putchar(&BT_USART, temph);
+								bt_putchar(temph);
 							}
-							templ = uart_getchar_timeout(&BT_USART);
+							templ = bt_getchar_timeout();
 							if(templ == 256) {
                                                                 err();
 								break;
 							}
 							else {
-								uart_putchar(&BT_USART, templ);
+								bt_putchar(templ);
 							}
 							robotData.repeatTime = ((temph)<<8) + templ;
 							if(robotData.repeatTime != 0) {
@@ -514,9 +502,9 @@ int main(void)
 						break;
 					// Get a stored signal from EEPROM and print it over bluetooth to the host
 					case 'g':
-						location = uart_getchar_timeout(&BT_USART)-48;
+						location = bt_getchar_timeout()-48;
 						if(location >= 0 && location < 5) {
-							uart_putchar(&BT_USART, location+48);
+							bt_putchar(location+48);
 							print_data_from_eeprom(location);
 						}
 						else {
@@ -526,57 +514,57 @@ int main(void)
 						// Output on digital I/O
 					case '>':
 						// Set port
-						temph = uart_getchar_timeout(&BT_USART);
+						temph = bt_getchar_timeout();
 						if(temph == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, temph);
+							bt_putchar(temph);
 						}
 						// Get value
-						templ = uart_getchar_timeout(&BT_USART);
+						templ = bt_getchar_timeout();
 						if(templ == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, templ);
+							bt_putchar(templ);
 						}
 						set_output(temph, (templ-48));
 						break;
 						// Input on digital I/O
 					case '<':
 						// Get port
-						temph = uart_getchar_timeout(&BT_USART);
+						temph = bt_getchar_timeout();
 						if(temph == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, temph);
+							bt_putchar(temph);
 						}
 						// Get value (1 or 0)
 						templ = read_input(temph)+48;
-						uart_putchar(&BT_USART, templ);
+						bt_putchar(templ);
 						break;
 					// Configure PWM frequency
 					case 'P':
-						temph = uart_getchar_timeout(&BT_USART);
+						temph = bt_getchar_timeout();
 						if(temph == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, temph);
+							bt_putchar(temph);
 						}
-						templ = uart_getchar_timeout(&BT_USART);
+						templ = bt_getchar_timeout();
 						if(templ == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, templ);
+							bt_putchar(templ);
 						}
 						// Stores the PWM frequency for use by set_pwm()
 						pwm_frequency = ((temph)<<8) + templ;
@@ -584,49 +572,49 @@ int main(void)
 					// Set PWM duty cycle for a specific port
 					case 'p':
 						set_pwm();
-						temph = uart_getchar_timeout(&BT_USART);
+						temph = bt_getchar_timeout();
 						if(temph == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, temph);
+							bt_putchar(temph);
 							if(temph == '0') {
-								temph = uart_getchar_timeout(&BT_USART);
+								temph = bt_getchar_timeout();
 								if(temph == 256) {
                                                                         err();
 									break;
 								}
 								else {
-									uart_putchar(&BT_USART, temph);
+									bt_putchar(temph);
 								}
-								templ = uart_getchar_timeout(&BT_USART);
+								templ = bt_getchar_timeout();
 								if(templ == 256) {
                                                                         err();
 									break;
 								}
 								else {
-									uart_putchar(&BT_USART, templ);
+									bt_putchar(templ);
 								}
 								duty = ((temph)<<8) + templ;
 								set_pwm0(duty);
 							}
 							else if(temph == '1') {
-								temph = uart_getchar_timeout(&BT_USART);
+								temph = bt_getchar_timeout();
 								if(temph == 256) {
                                                                         err();
 									break;
 								}
 								else {
-									uart_putchar(&BT_USART, temph);
+									bt_putchar(temph);
 								}
-								templ = uart_getchar_timeout(&BT_USART);
+								templ = bt_getchar_timeout();
 								if(templ == 256) {
                                                                         err();
 									break;
 								}
 								else {
-									uart_putchar(&BT_USART, templ);
+									bt_putchar(templ);
 								}
 								duty = ((temph)<<8) + templ;
 								set_pwm1(duty);
@@ -635,32 +623,32 @@ int main(void)
 						break;
 					// Set DAC voltage on one of the two DAC ports
 					case 'd':
-						temph = uart_getchar_timeout(&BT_USART);
+						temph = bt_getchar_timeout();
 						if(temph == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, temph);
+							bt_putchar(temph);
 							if(temph == '0') {
-								temph = uart_getchar_timeout(&BT_USART);
+								temph = bt_getchar_timeout();
 								if(temph == 256) {
                                                                         err();
 									break;
 								}
 								else {
-									uart_putchar(&BT_USART, temph);
+									bt_putchar(temph);
 									set_dac0(temph);
 								}
 							}
 							else if(temph == '1') {
-								temph = uart_getchar_timeout(&BT_USART);
+								temph = bt_getchar_timeout();
 								if(temph == 256) {
                                                                         err();
 									break;
 								}
 								else {
-									uart_putchar(&BT_USART, temph);
+									bt_putchar(temph);
 									set_dac1(temph);
 								}
 							}
@@ -672,21 +660,21 @@ int main(void)
 						break;
 						// Human-readable uart speed setting
 					case 'u':
-						temph = uart_getchar_timeout(&BT_USART);
+						temph = bt_getchar_timeout();
 						if(temph == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, temph);
+							bt_putchar(temph);
 						}
-						templ = uart_getchar_timeout(&BT_USART);
+						templ = bt_getchar_timeout();
 						if(templ == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, templ);
+							bt_putchar(templ);
 						}
 						baud = ((temph)<<8) + templ;
 						switch(baud) {
@@ -729,33 +717,33 @@ int main(void)
 
 					// Configures the baud rate of the auxiliary UART
 					case 'C':
-						temph = uart_getchar_timeout(&BT_USART);
+						temph = bt_getchar_timeout();
 						if(temph == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, temph);
+							bt_putchar(temph);
 						}
-						templ = uart_getchar_timeout(&BT_USART);
+						templ = bt_getchar_timeout();
 						if(templ == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, templ);
+							bt_putchar(templ);
 						}
 						baud = ((temph)<<8) + templ;
-						templ = uart_getchar_timeout(&BT_USART);
+						templ = bt_getchar_timeout();
 						if(templ == 256) {
                                                         err();
 							break;
 						}
 						else {
-							uart_putchar(&BT_USART, templ);
+							bt_putchar(templ);
 						}
 						scale = templ;
-						uart_putchar(&BT_USART, scale);
+						bt_putchar(scale);
 						set_aux_baud_rate(baud, scale);
 						break;
 					// BT-serial high speed bridge mode
@@ -764,25 +752,30 @@ int main(void)
 					        break;
 					case 'r':
 						i = USART_RXBufferData_AvailableCount(&AUX_data);
-						uart_putchar(&BT_USART, (uint8_t)(i+1));
+						bt_putchar((uint8_t)(i+1));
 						while(i-- > 0) {
-							uart_putchar(&BT_USART, USART_RXBuffer_GetByte(&AUX_data));
+							bt_putchar(USART_RXBuffer_GetByte(&AUX_data));
 						}
 						break;
 					// Transmit a stream of characters from bluetooth to auxiliary serial
 					case 't':
-						temph= uart_getchar_timeout(&BT_USART);
-						uart_putchar(&BT_USART, temph);
+						temph= bt_getchar_timeout();						
+						if (temph == 256) {
+                                                    err();
+                                                    break;
+                                                }
+
+						bt_putchar(temph);
 						for(int count = 0; count < temph; count++) {
-							templ= uart_getchar_timeout(&BT_USART);
+							templ= bt_getchar_timeout();
 
 							if(templ == 256) {
                                                                 err();
 								break;
 							}
 							else {
-								uart_putchar(&BT_USART, templ);
-								uart_putchar(&AUX_USART, templ);
+								bt_putchar(templ);
+								aux_putchar( templ);
 							}
 						}
 						break;

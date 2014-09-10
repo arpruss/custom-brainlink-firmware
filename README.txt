@@ -30,5 +30,4 @@ Changes by Alexander Pruss:
   u57: 57600 baud
   u11: 112500 baud
 - space optimizations
-- added J1 command to switch the aux uart to irDA mode (automatically set to 9600 baud, with irDA 3/16
-  duty cycle pulse shaping);  return to default uart settings with J0
+- added J1 command to switch the aux uart to irDA mode (with irDA 3/16 duty cycle pulse shaping);  return to default uart settings with J0

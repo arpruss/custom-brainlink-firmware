@@ -155,7 +155,7 @@ void init_aux_uart(int scale, char baud);
 void set_aux_baud_rate(int baud, char scale);
 void uart_putchar(USART_t * usart, char c);
 char uart_getchar(USART_t * usart);
-int uart_getchar_timeout(USART_t * usart);
+int bt_getchar_timeout(void);
 char aux_uart_getchar(USART_t * usart);
 char uart_getchar_nb(USART_t * usart);
 void USART_InterruptDriver_Initialize(USART_data_t * usart_data, USART_t * usart);
@@ -164,7 +164,10 @@ uint8_t USART_RXBuffer_GetByte(USART_data_t * usart_data);
 bool USART_RXComplete(USART_data_t * usart_data);
 void err(void);
 void USART_RXBuffer_Clear(USART_data_t * usart_data);
+void set_irda_mode(char irda);
 void serial_bridge(void);
 void init_aux_uart_ir(int baud, char scale);
-void disable_aux_uart(void);
 int USART_RXBufferData_AvailableCount(USART_data_t * usart_data);
+
+#define bt_putchar(c) uart_putchar(&BT_USART, (char)(c))
+#define aux_putchar(c) uart_putchar(&AUX_USART, (char)(c))
