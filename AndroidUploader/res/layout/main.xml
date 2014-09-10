@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:onClick="clickedFeatures"
             android:textSize="18sp"
-            android:text="Features" />
+            android:text="News" />
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
