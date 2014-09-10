@@ -54,6 +54,8 @@ void init_aux_uart(int baud, char scale) {
 	USART_Rx_Enable(&AUX_USART);
 	USART_Tx_Enable(&AUX_USART);
 
+        // Clear buffer
+	AUX_data.buffer.RX_Tail = AUX_data.buffer.RX_Head;
 }
 
 // Initializes auxiliary serial port - variables required to set baud rate are passed to the function
@@ -85,6 +87,9 @@ void init_aux_uart_ir(int baud, char scale) {
 	// Enable pins
 	USART_Rx_Enable(&AUX_USART);
 	USART_Tx_Enable(&AUX_USART);
+
+        // Clear buffer
+	AUX_data.buffer.RX_Tail = AUX_data.buffer.RX_Head;
 }
 
 void disable_aux_uart() {
@@ -216,6 +221,21 @@ bool USART_RXBufferData_Available(USART_data_t * usart_data)
 
 	/* There are data left in the buffer unless Head and Tail are equal. */
 	return (tempHead != tempTail);
+}
+
+
+
+/*! \brief See how much data there in the receive software buffer.
+ *
+ *  \param usart_data         The USART_data_t struct instance
+ */
+int USART_RXBufferData_AvailableCount(USART_data_t * usart_data)
+{
+	/* Make copies to make sure that volatile access is specified. */
+	uint8_t tempHead = usart_data->buffer.RX_Head;
+	uint8_t tempTail = usart_data->buffer.RX_Tail;
+
+        return (tempHead - tempTail) & USART_RX_BUFFER_MASK;
 }
 
 

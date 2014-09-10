@@ -27,8 +27,8 @@ int main(void)
 	int baud;   // Baud rate selection for auxiliary UART
 	char scale;  // For auxiliary UART
 
-	uint8_t temp_array[TEMP_BUFFER_SIZE]; // Array to hold received bytes while we count how many are in the buffer
-	uint8_t count_buff = 0; // Counter for receive buffer
+//	uint8_t temp_array[TEMP_BUFFER_SIZE]; // Array to hold received bytes while we count how many are in the buffer
+//	uint8_t count_buff = 0; // Counter for receive buffer
 
 	
 	long int time_out=0; // Counter which counts to a preset level corresponding to roughly 1 minute
@@ -763,14 +763,10 @@ int main(void)
 					        serial_bridge();
 					        break;
 					case 'r':
-						count_buff = 0;
-						while(USART_RXBufferData_Available(&AUX_data) && count_buff < TEMP_BUFFER_SIZE) {
-							temp_array[count_buff]= USART_RXBuffer_GetByte(&AUX_data);
-							count_buff++;
-						}
-						uart_putchar(&BT_USART, count_buff+1);
-						for(int i = 0; i < count_buff; i++) {
-							uart_putchar(&BT_USART, temp_array[i]);
+						i = USART_RXBufferData_AvailableCount(&AUX_data);
+						uart_putchar(&BT_USART, (uint8_t)(i+1));
+						while(i-- > 0) {
+							uart_putchar(&BT_USART, USART_RXBuffer_GetByte(&AUX_data));
 						}
 						break;
 					// Transmit a stream of characters from bluetooth to auxiliary serial

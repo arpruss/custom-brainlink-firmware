@@ -9,6 +9,7 @@ The xboot folder contains the bootloader used to allow re-programming of the Bra
 
 Changes by Alexander Pruss:
 - fix buffer overflow bug in 'r' command
+- reduced stack usage
 - remove delay in responding to '*' command
 - add serial bridge mode: sending 'Z' initiates a bridge between the Bluetooth and AUX Serial connections using current serial parameters.
   Once bridge mode is initiated, it cannot be terminated except by powercycling the BrainLink.  (I may add a way to exit bridge mode in the future.)

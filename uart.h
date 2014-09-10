@@ -167,3 +167,4 @@ void USART_RXBuffer_Clear(USART_data_t * usart_data);
 void serial_bridge(void);
 void init_aux_uart_ir(int baud, char scale);
 void disable_aux_uart(void);
+int USART_RXBufferData_AvailableCount(USART_data_t * usart_data);
