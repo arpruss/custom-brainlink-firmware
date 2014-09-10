@@ -7,6 +7,8 @@
 // Includes all header files for libraries/drivers
 #include "brainlink.h"
 
+#define TEMP_BUFFER_SIZE 31
+
 int main(void)
 {
 	uint8_t sensor[6]; // Stores analog readings for transmission
@@ -24,8 +26,8 @@ int main(void)
 
 	int baud;   // Baud rate selection for auxiliary UART
 	char scale;  // For auxiliary UART
-	
-	uint8_t temp_array[31]; // Array to hold received bytes while we count how many are in the buffer
+
+	uint8_t temp_array[TEMP_BUFFER_SIZE]; // Array to hold received bytes while we count how many are in the buffer
 	uint8_t count_buff = 0; // Counter for receive buffer
 
 	
@@ -692,6 +694,10 @@ int main(void)
                                                         baud = 6663;
                                                         scale = -2;
                                                         break;
+                                                    case ('4'<<8) + '8': // 4800
+                                                        baud = 3325;
+                                                        scale = -3;
+                                                        break;
                                                     case ('9'<<8) + '6': // 9600
                                                         baud = 829;
                                                         scale = -2;
@@ -699,6 +705,10 @@ int main(void)
                                                     case ('1'<<8) + '9': // 19200
                                                         baud = 825;
                                                         scale = -3;
+                                                        break;
+                                                    case ('3'<<8) + '8': // 38400
+                                                        baud = 204;
+                                                        scale = -2;
                                                         break;
                                                     case ('5'<<8) + '7': // 57600
                                                         baud = 135;
@@ -754,7 +764,7 @@ int main(void)
 					        break;
 					case 'r':
 						count_buff = 0;
-						while(USART_RXBufferData_Available(&AUX_data)) {
+						while(USART_RXBufferData_Available(&AUX_data) && count_buff < TEMP_BUFFER_SIZE) {
 							temp_array[count_buff]= USART_RXBuffer_GetByte(&AUX_data);
 							count_buff++;
 						}
