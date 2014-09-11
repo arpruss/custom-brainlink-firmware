@@ -109,6 +109,7 @@ void TWI_MasterInit(TWI_Master_t *twi,
  *  \retval TWI_MASTER_BUSSTATE_OWNER_gc   Bus state is owned by the master.
  *  \retval TWI_MASTER_BUSSTATE_BUSY_gc    Bus state is busy.
  */
+#ifdef COMPILE_UNUSED
 TWI_MASTER_BUSSTATE_t TWI_MasterState(TWI_Master_t *twi)
 {
 	TWI_MASTER_BUSSTATE_t twi_status;
@@ -116,6 +117,7 @@ TWI_MASTER_BUSSTATE_t TWI_MasterState(TWI_Master_t *twi)
 	                                      TWI_MASTER_BUSSTATE_gm);
 	return twi_status;
 }
+#endif
 
 
 /*! \brief Returns true if transaction is ready.
@@ -128,11 +130,13 @@ TWI_MASTER_BUSSTATE_t TWI_MasterState(TWI_Master_t *twi)
  *  \retval true  If transaction could be started.
  *  \retval false If transaction could not be started.
  */
+#ifdef COMPILE_UNUSED
 bool TWI_MasterReady(TWI_Master_t *twi)
 {
 	bool twi_status = (twi->status & TWIM_STATUS_READY);
 	return twi_status;
 }
+#endif
 
 
 /*! \brief TWI write transaction.
@@ -147,6 +151,7 @@ bool TWI_MasterReady(TWI_Master_t *twi)
  *  \retval true  If transaction could be started.
  *  \retval false If transaction could not be started.
  */
+#ifdef COMPILE_UNUSED
 bool TWI_MasterWrite(TWI_Master_t *twi,
                      uint8_t address,
                      uint8_t *writeData,
@@ -155,7 +160,7 @@ bool TWI_MasterWrite(TWI_Master_t *twi,
 	bool twi_status = TWI_MasterWriteRead(twi, address, writeData, bytesToWrite, 0);
 	return twi_status;
 }
-
+#endif
 
 /*! \brief TWI read transaction.
  *
@@ -168,6 +173,7 @@ bool TWI_MasterWrite(TWI_Master_t *twi,
  *  \retval true  If transaction could be started.
  *  \retval false If transaction could not be started.
  */
+#ifdef COMPILE_UNUSED
 bool TWI_MasterRead(TWI_Master_t *twi,
                     uint8_t address,
                     uint8_t bytesToRead)
@@ -175,6 +181,7 @@ bool TWI_MasterRead(TWI_Master_t *twi,
 	bool twi_status = TWI_MasterWriteRead(twi, address, 0, 0, bytesToRead);
 	return twi_status;
 }
+#endif
 
 
 /*! \brief TWI write and/or read transaction.

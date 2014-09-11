@@ -4,7 +4,7 @@
 void init_ir() {
 	// Set timer 0 clock to 32 MHz
 	TCC0.CTRLA = TC_CLKSEL_DIV1_gc;
-	
+
 	// Turn on single slope pwm waveform generation on CCA (IR Pin)
 	TCC0.CTRLB = TC0_CCAEN_bm | TC_WGMODE_SS_gc;
 
@@ -14,12 +14,12 @@ void init_ir() {
 
 	// Set IR pin to output
 	PORTC.DIRSET = IR_OUT;
-	
-	
+
+
 	// Set timer to count at 500 KHz - this timer is used to construct the IR signal
 	TCC1.CTRLA = TC_CLKSEL_DIV64_gc;
 	TCC1.INTCTRLA = TC_OVFINTLVL_OFF_gc;
-	
+
 }
 
 // Set the IR_LED to regular carrier frequency

@@ -109,6 +109,15 @@ public class Butterfly {
 		return flash;
 	}
 	
+	private boolean emptyPage(byte[] flash, int address) {
+		for(int i=0 ; i < flashPageSizeBytes ; i++)
+			if (flash[address + i] != (byte)0xFF)
+				return false;
+
+		//Log.v("BLFW", "empty page at "+Integer.toHexString(address));
+		return true;
+	}
+	
 	boolean writeFlash(byte[] flash) {
 		if (flash.length != flashSizeBytes) 
 			return false;
@@ -119,7 +128,7 @@ public class Butterfly {
 			int j;
 			
 			for (j = 0 ; j < RETRIES ; j++) {
-				if (writeFlashPageChecked(flash, address)) {
+				if (emptyPage(flash, address) || writeFlashPageChecked(flash, address)) {
 					break;
 				}
 			}

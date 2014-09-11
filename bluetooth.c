@@ -17,8 +17,8 @@ void init_BT() {
 }
 
 // Restores factory default settings on the module, not currently used
+#ifdef COMPILE_UNUSED
 void BT_default_reset() {
-
 	// Turns the pin on, and then does the reset by toggling the pin three times
 	BT_DEFAULT_RESET_PORT.OUTSET = BT_DEFAULT_RESET_PIN;
 	_delay_ms(10);
@@ -29,6 +29,7 @@ void BT_default_reset() {
 	BT_DEFAULT_RESET_PORT.OUTCLR = BT_DEFAULT_RESET_PIN;
 
 }
+#endif
 
 // Resets the module
 void BT_reset() {

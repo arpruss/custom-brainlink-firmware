@@ -183,6 +183,7 @@ void EEPROM_FlushBuffer( void )
  *  \param  byteAddr  EEPROM Byte address, between 0 and EEPROM_PAGESIZE.
  *  \param  value     Byte value to write to buffer.
  */
+#ifdef COMPILE_UNUSED
 void EEPROM_LoadByte( uint8_t byteAddr, uint8_t value )
 {
 	/* Wait until NVM is not busy and prepare NVM command.*/
@@ -197,6 +198,7 @@ void EEPROM_LoadByte( uint8_t byteAddr, uint8_t value )
 	/* Set data, which triggers loading of EEPROM page buffer. */
 	NVM.DATA0 = value;
 }
+#endif
 
 
 /*! \brief Load entire page into temporary EEPROM page buffer.
@@ -213,6 +215,7 @@ void EEPROM_LoadByte( uint8_t byteAddr, uint8_t value )
  *
  *  \param  values   Pointer to SRAM buffer containing an entire page.
  */
+#ifdef COMPILE_UNUSED
 void EEPROM_LoadPage( const uint8_t * values )
 {
 	/* Wait until NVM is not busy. */
@@ -232,6 +235,7 @@ void EEPROM_LoadPage( const uint8_t * values )
 		++values;
 	}
 }
+#endif
 
 /*! \brief Write already loaded page into EEPROM.
  *
@@ -245,6 +249,7 @@ void EEPROM_LoadPage( const uint8_t * values )
  *
  *  \param  pageAddr  EEPROM Page address, between 0 and EEPROM_SIZE/EEPROM_PAGESIZE
  */
+#ifdef COMPILE_UNUSED
 void EEPROM_AtomicWritePage( uint8_t pageAddr )
 {
 	/* Wait until NVM is not busy. */
@@ -262,7 +267,7 @@ void EEPROM_AtomicWritePage( uint8_t pageAddr )
 	NVM.CMD = NVM_CMD_ERASE_WRITE_EEPROM_PAGE_gc;
 	NVM_EXEC();
 }
-
+#endif
 
 /*! \brief Erase EEPROM page.
  *
@@ -270,6 +275,7 @@ void EEPROM_AtomicWritePage( uint8_t pageAddr )
  *
  *  \param  pageAddr  EEPROM Page address, between 0 and EEPROM_SIZE/EEPROM_PAGESIZE
  */
+#ifdef COMPILE_UNUSED
 void EEPROM_ErasePage( uint8_t pageAddr )
 {
 	/* Wait until NVM is not busy. */
@@ -287,6 +293,7 @@ void EEPROM_ErasePage( uint8_t pageAddr )
 	NVM.CMD = NVM_CMD_ERASE_EEPROM_PAGE_gc;
 	NVM_EXEC();
 }
+#endif
 
 
 /*! \brief Write (without erasing) EEPROM page.
@@ -299,6 +306,7 @@ void EEPROM_ErasePage( uint8_t pageAddr )
  *
  *  \param  pageAddr  EEPROM Page address, between 0 and EEPROM_SIZE/EEPROM_PAGESIZE
  */
+#ifdef COMPILE_UNUSED
 void EEPROM_SplitWritePage( uint8_t pageAddr )
 {
 	/* Wait until NVM is not busy. */
@@ -316,11 +324,13 @@ void EEPROM_SplitWritePage( uint8_t pageAddr )
 	NVM.CMD = NVM_CMD_WRITE_EEPROM_PAGE_gc;
 	NVM_EXEC();
 }
+#endif
 
 /*! \brief Erase entire EEPROM memory.
  *
  *  This function erases the entire EEPROM memory block to 0xFF.
  */
+#ifdef COMPILE_UNUSED
 void EEPROM_EraseAll( void )
 {
 	/* Wait until NVM is not busy. */
@@ -330,4 +340,4 @@ void EEPROM_EraseAll( void )
 	NVM.CMD = NVM_CMD_ERASE_EEPROM_gc;
 	NVM_EXEC();
 }
-
+#endif

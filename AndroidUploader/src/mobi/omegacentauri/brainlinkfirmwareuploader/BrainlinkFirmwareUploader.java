@@ -111,7 +111,7 @@ public class BrainlinkFirmwareUploader extends Activity {
 			Toast.makeText(this, "Select a device", Toast.LENGTH_LONG).show();
 		}
 		else {
-			new InitializeTask(this, devs.get(pos)).execute(firmwares[fwSpinner.getSelectedItemPosition()]);
+			new UploadTask(this, devs.get(pos)).execute(firmwares[fwSpinner.getSelectedItemPosition()]);
 		}
 	}
 	
@@ -225,11 +225,14 @@ public class BrainlinkFirmwareUploader extends Activity {
 			message.setText("Bluetooth turned off or no devices paired.");
 	}
 	
-	class InitializeTask extends AsyncTask<String, String, String>{
+	class UploadTask extends AsyncTask<String, String, String>{
 		private ProgressDialog progressDialog;
 		private BluetoothDevice device;
+		private static final int FLASH_SIZE_BYTES = 16384;
+		private static final int FLASH_PAGE_SIZE_WORDS = 128;
+		private String lastMessage = "";
 
-		public InitializeTask(Context c, BluetoothDevice device) {
+		public UploadTask(Context c, BluetoothDevice device) {
 			this.device = device;
 			progressDialog = new ProgressDialog(c);
 			progressDialog.setCancelable(false);
@@ -240,6 +243,22 @@ public class BrainlinkFirmwareUploader extends Activity {
 		@Override
 		public void onProgressUpdate(String... msg) {
 			progressDialog.setMessage(msg[0]);
+			if (msg.length <= 3) {
+				progressDialog.setProgress(ProgressDialog.STYLE_SPINNER);
+			}
+			else {
+				progressDialog.setProgress(ProgressDialog.STYLE_HORIZONTAL);
+				try {
+					progressDialog.setMax(Integer.parseInt(msg[2]));
+					progressDialog.setProgress(Integer.parseInt(msg[3]));
+				}
+				catch (Exception e) {					
+				}
+			}
+		}
+		
+		public void progressValue(int current, int max) {
+			publishProgress(lastMessage, ""+current, ""+max);
 		}
 	
 		@Override
@@ -252,7 +271,7 @@ public class BrainlinkFirmwareUploader extends Activity {
 				link = new BTDataLink(device);
 				
 				publishProgress("Preparing firmware");
-				butterfly = new Butterfly(link, 16384, 128);
+				butterfly = new Butterfly(link, FLASH_SIZE_BYTES, FLASH_PAGE_SIZE_WORDS);
 				byte[] flash = butterfly.getFlashFromHex(BrainlinkFirmwareUploader.this.getResources().getAssets().open(firmware[0]));
 				if (flash == null) 
 					throw new Exception("Problem reading .hex file.");
