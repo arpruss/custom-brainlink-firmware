@@ -1,5 +1,6 @@
 /* Functions for manipulating the Xmega's DAC, for use with Brainlink's auxiliary ports */
 
+#include "sine.c"
 
 // Set up the DAC to dual channel mode, 8 bit operation, VCC reference.
 void init_dac() {
@@ -15,10 +16,10 @@ void init_dac() {
 void set_dac0(uint8_t val) {
 	// enable the DAC
 	DACB.CTRLA |= DAC_CH0EN_bm;
-	
+
 	// Wait for data register to be open
 	while(!(DACB.STATUS & DAC_CH0DRE_bm));
-	
+
 	DACB.CH0DATAH = val;
 }
 
@@ -26,10 +27,10 @@ void set_dac0(uint8_t val) {
 void set_dac1(uint8_t val) {
 	// enable the DAC
 	DACB.CTRLA |= DAC_CH1EN_bm;
-	
+
 	// Wait for data register empty
 	while(!(DACB.STATUS & DAC_CH1DRE_bm));
-	
+
 	DACB.CH1DATAH = val;
 }
 
@@ -42,3 +43,8 @@ void disable_dac0() {
 void disable_dac1() {
 	DACB.CTRLA &= (~DAC_CH1EN_bm);
 }
+
+void play_wave_dac(uint8_t channel, int8_t* waveform, int len, unsigned long int freq) {
+  
+}
+

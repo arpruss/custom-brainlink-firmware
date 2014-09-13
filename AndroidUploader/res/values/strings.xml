@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-     <string-array name="firmwares">
-        <item>Original firmware</item>
+     <string-array name="bts">
+        <item>Don\'t configure Bluetooth mode</item> 
+        <item>Low Bluetooth connectivity (OEM)</item>
+		<item>Medium Bluetooth connectivity</item>
+		<item>High Bluetooth connectivity</item>
+     </string-array>
+    <string-array name="firmwares">
+        <item>Don\'t change firwmare</item> 
+        <item>Original firmware (OEM)</item>
         <item>Custom with Roomba 500+ support</item>
         <item>Custom with Roomba 400/create support</item>
      </string-array>

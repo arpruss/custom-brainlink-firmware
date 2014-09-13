@@ -54,11 +54,12 @@ public class BrainlinkFirmwareUploader extends Activity {
 	private SharedPreferences options;
 	private ArrayAdapter<String> deviceSelectionAdapter;
 	private Spinner deviceSpinner;
+	private Spinner btSpinner;
 	private Spinner fwSpinner;
 	private ArrayList<BluetoothDevice> devs;
 	private static final String PREF_DISCLAIMED_VERSION = "disclaimed";
-	private static final String[] firmwares = { "original.hex", "mainFirmware.hex", "57k-roomba.hex" };
-	
+	private static final String[] firmwares = { "", "original.hex", "mainFirmware.hex", "57k-roomba.hex" };
+	private static final String[] bts = { "", "0100", "0200", "0300" };
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -72,8 +73,10 @@ public class BrainlinkFirmwareUploader extends Activity {
 		
 		message = (TextView)findViewById(R.id.message);
 		deviceSpinner = (Spinner)findViewById(R.id.device_spinner);
+		btSpinner = (Spinner)findViewById(R.id.bt_spinner);
+		btSpinner.setSelection(0);
 		fwSpinner = (Spinner)findViewById(R.id.firmware_spinner);
-		String fw = options.getString(PREF_FIRMWARE, firmwares[1]);
+		String fw = options.getString(PREF_FIRMWARE, firmwares[2]);
 		int fwIndex = 1;
 		for (int i = 0 ; i < firmwares.length ; i++) {
 			if (firmwares[i].equals(fw)) {
@@ -87,7 +90,7 @@ public class BrainlinkFirmwareUploader extends Activity {
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int position, long arg3) {
-				options.edit().putString(PREF_FIRMWARE, firmwares[position]);
+				options.edit().putString(PREF_FIRMWARE, firmwares[position]).commit();
 			}
 
 			@Override
@@ -110,8 +113,13 @@ public class BrainlinkFirmwareUploader extends Activity {
 		if (pos < 0) {
 			Toast.makeText(this, "Select a device", Toast.LENGTH_LONG).show();
 		}
+		else if (fwSpinner.getSelectedItemPosition() == 0 &&
+				btSpinner.getSelectedItemPosition() == 0) {
+			Toast.makeText(this, "Select Bluetooth mode or firmware", Toast.LENGTH_LONG).show();
+		}
 		else {
-			new UploadTask(this, devs.get(pos)).execute(firmwares[fwSpinner.getSelectedItemPosition()]);
+			new UploadTask(this, devs.get(pos)).execute(firmwares[fwSpinner.getSelectedItemPosition()],
+					bts[btSpinner.getSelectedItemPosition()]);
 		}
 	}
 	
@@ -260,9 +268,50 @@ public class BrainlinkFirmwareUploader extends Activity {
 		public void progressValue(int current, int max) {
 			publishProgress(lastMessage, ""+current, ""+max);
 		}
+		
+		private boolean setRN42Connectivity(BTDataLink link, String mode) {
+			link.clearBuffer();
+			link.transmit((byte)'$', (byte)'$', (byte)'$');
+			byte[] response = new byte[5];
+			if (!link.readBytes(response, 2000)) { 
+				Log.v("BLFW", "no response to dollar signs");
+				return false;
+			}
+
+			if(! new String(response).contains("CMD")) {
+				Log.v("BLFW", "got "+response);
+				return false;
+			}
+			
+			link.transmit((byte)'S', (byte)'J', (byte)',');
+			link.transmit(mode.getBytes());
+			link.transmit((byte)13, (byte)10);
+		
+			sleep(100);
+
+			link.clearBuffer();
+			
+			link.transmit((byte)'S', (byte)'I', (byte)',');
+			link.transmit(mode.getBytes());
+			link.transmit((byte)13, (byte)10);
+
+			sleep(100);
+		
+			link.clearBuffer();
+
+			link.transmit((byte)13, (byte)10, (byte)'-', (byte)'-', (byte)'-');
+
+			sleep(100);
+		
+			link.clearBuffer();
+			
+			return true;
+		}
 	
 		@Override
-		protected String doInBackground(String... firmware) {
+		protected String doInBackground(String... args) {
+			String firmware = args[0];
+			String bt = args[1];
 			BTDataLink link = null;
 			Butterfly butterfly = null;
 			
@@ -270,21 +319,29 @@ public class BrainlinkFirmwareUploader extends Activity {
 				publishProgress("Connecting");
 				link = new BTDataLink(device);
 				
-				publishProgress("Preparing firmware");
-				butterfly = new Butterfly(link, FLASH_SIZE_BYTES, FLASH_PAGE_SIZE_WORDS);
-				byte[] flash = butterfly.getFlashFromHex(BrainlinkFirmwareUploader.this.getResources().getAssets().open(firmware[0]));
-				if (flash == null) 
-					throw new Exception("Problem reading .hex file.");
-
-				publishProgress("Uploading firmware");
-				if (! butterfly.writeFlash(flash)) 
-					throw new Exception("Error uploading firmware.  Brainlink may not function until you upload successfully.");
+				if (bt.length() > 0) {
+					publishProgress("Setting Bluetooth connectivity");
+					if (!setRN42Connectivity(link, bt)) {
+						throw new Exception("Error setting connectivity.");
+					}
+				}
 				
-				publishProgress("Verifying firmware");
-				byte[] newFlash = butterfly.readFlash();
-				if (!Arrays.equals(newFlash, flash)) 
-					throw new Exception("Error verifying uploaded firmware.  Brainlink may not function until you upload successfully.");
-				
+				if (firmware.length() > 0) {
+					publishProgress("Preparing firmware");
+					butterfly = new Butterfly(link, FLASH_SIZE_BYTES, FLASH_PAGE_SIZE_WORDS);
+					byte[] flash = butterfly.getFlashFromHex(BrainlinkFirmwareUploader.this.getResources().getAssets().open(firmware));
+					if (flash == null) 
+						throw new Exception("Problem reading .hex file.");
+	
+					publishProgress("Uploading firmware");
+					if (! butterfly.writeFlash(flash)) 
+						throw new Exception("Error uploading firmware.  Brainlink may not function until you upload successfully.");
+					
+					publishProgress("Verifying firmware");
+					byte[] newFlash = butterfly.readFlash();
+					if (!Arrays.equals(newFlash, flash)) 
+						throw new Exception("Error verifying uploaded firmware.  Brainlink may not function until you upload successfully.");
+				}
 			}
 			catch (Exception e) {
 				return e.toString();
@@ -296,7 +353,7 @@ public class BrainlinkFirmwareUploader extends Activity {
 					link.stop();
 			}
 			
-			return "Firmware successfully uploaded";
+			return "Successful programming.";
 		}
 
 		@Override

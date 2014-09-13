@@ -213,7 +213,7 @@ int main(void)
 				        // functionality.
 				        case 'J':
 						temph = bt_getchar_timeout();
-						if(/*temph == 256 || */ temph < '0' || temph > '1') {
+						if(/*temph == 256 || */ temph < '0' || temph > '5') {
                                                         err();
 							break;
 						}

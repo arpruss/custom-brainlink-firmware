@@ -56,6 +56,9 @@ void init_aux_uart(int baud, char scale) {
 }
 
 void set_irda_mode(char irda) {
+        USART_Rx_Disable(&AUX_USART);
+	USART_Tx_Disable(&AUX_USART);
+
 	PORTC.DIRCLR = PIN2_bm;
 	PORTC.DIRSET = PIN3_bm;
 
@@ -65,14 +68,45 @@ void set_irda_mode(char irda) {
 	    USART_SetMode(&AUX_USART, USART_CMODE_ASYNCHRONOUS_gc);
 	    USART_Baudrate_Set(&AUX_USART, 131 , -3); // 115200
 	}
-        else {
+        else if (irda == 1) {
   	    PORTC.PIN2CTRL |= PORT_INVEN_bm;
   	    PORTC.PIN3CTRL |= PORT_INVEN_bm;
+  	    IRCOM_CTRL = 0;
+  	    IRCOM_TXPLCTRL = 0;
 	    USART_SetMode(&AUX_USART, USART_CMODE_IRDA_gc);
 	    USART_Baudrate_Set(&AUX_USART, 829 , -2); // 9600
         }
+ #ifdef NOT_WORKING
+        else if (irda == 2) {
+	    USART_SetMode(&AUX_USART, USART_CMODE_IRDA_gc);
+	    USART_Baudrate_Set(&AUX_USART, 829, -2); // 9600
 
-        // Clear buffer
+  	PORTC.DIRCLR = PIN4_bm;
+  	// Invert the signal so we start with a rising edge
+  	PORTC.PIN2CTRL = PORT_INVEN_bm | (PORTC.PIN2CTRL & ~PORT_ISC_gm) | PORT_ISC_LEVEL_gc ;
+  	// Set event channel 0 to register events from port C pin 4
+  	EVSYS.CH0MUX = EVSYS_CHMUX_PORTC_PIN2_gc; //
+  	//EVSYS.CH0CTRL = EVSYS_DIGFILT_2SAMPLES_gc;
+  	IRCOM_CTRL = 8;
+        }
+        else if (irda == 3) {
+	    USART_SetMode(&AUX_USART, USART_CMODE_IRDA_gc);
+	    USART_Baudrate_Set(&AUX_USART, 829, -2); // 9600
+
+  	PORTC.DIRCLR = PIN4_bm;
+  	// Invert the signal so we start with a rising edge
+  	PORTC.PIN4CTRL = PORT_INVEN_bm | (PORTC.PIN4CTRL & ~PORT_ISC_gm) | PORT_ISC_LEVEL_gc ;
+  	// Set event channel 0 to register events from port C pin 4
+  	EVSYS.CH0MUX = EVSYS_CHMUX_PORTC_PIN4_gc; //
+  	//EVSYS.CH0CTRL = EVSYS_DIGFILT_2SAMPLES_gc;
+  	IRCOM_CTRL = 8;
+        }
+#endif
+
+	USART_Rx_Enable(&AUX_USART);
+	USART_Tx_Enable(&AUX_USART);
+
+        // Clear buffer                                                                                            7
 	AUX_data.buffer.RX_Tail = AUX_data.buffer.RX_Head;
 }
 
