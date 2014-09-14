@@ -20,14 +20,16 @@ int main(void)
 	unsigned int temph=0;  // Temporary variable (typically stores high byte of a 16-bit int )
 	unsigned int templ=0;  // Temporary variable (typically stores low byte of a 16-bit int)
 	uint8_t location = 0;  // Holds the EEPROM location of a stored IR signal
-	unsigned int frequency; // For PWM control - PWM frequency, also used to set buzzer frequency
+	unsigned int frequency = 0; // For PWM control - PWM frequency, also used to set buzzer frequency
+        unsigned long frequency_l;
+        int amplitude;
 	unsigned int duty;      // For PWM control - PWM duty cycle
 
 	int baud;   // Baud rate selection for auxiliary UART
 	char scale;  // For auxiliary UART
 
 	long int time_out=0; // Counter which counts to a preset level corresponding to roughly 1 minute
-	
+
 	// Initialize system
 	init_clock();
 
@@ -213,7 +215,7 @@ int main(void)
 				        // functionality.
 				        case 'J':
 						temph = bt_getchar_timeout();
-						if(/*temph == 256 || */ temph < '0' || temph > '5') {
+						if(/*temph == 256 || */ temph < '0' || temph > '1') {
                                                         err();
 							break;
 						}
@@ -225,6 +227,7 @@ int main(void)
 
 					// Sets up the IR transmitter with signal characteristics
 					case 'I':
+					        init_ir();
 						temph = bt_getchar_timeout();
 						if(temph == 256) {
                                                         err();
@@ -361,6 +364,7 @@ int main(void)
 						break;
 					// Transmit an IR signal according to the previously determined configuration
 					case 'i':
+					        init_ir();
 						// Get the signal data as one or more bytes
 						for(i = 0; i < robotData.numBytes; i++) {
 							templ = bt_getchar_timeout();
@@ -750,6 +754,64 @@ int main(void)
 					case 'Z':
 					        serial_bridge();
 					        break;
+                                        case 'w':
+						temph = bt_getchar_timeout(); // wave type ('s', 't' or 'q')
+						if(temph == 256) {
+                                                        err();
+							break;
+						}
+						else {
+                                                        bt_putchar(temph);
+                                                }
+                                                duty = bt_getchar_timeout(); // duty cycle (for square wave)
+						if(duty == 256 || duty > WAVEFORM_SIZE) {
+                                                        err();
+							break;
+						}
+						else {
+							bt_putchar(duty);
+						}
+                                                amplitude = bt_getchar_timeout(); // duty cycle (for square wave)
+						if(amplitude == 256) {
+                                                        err();
+							break;
+						}
+						else {
+							bt_putchar(amplitude);
+						}
+                                                templ = bt_getchar_timeout(); // frequency, 3 bytes
+						if(templ == 256) {
+                                                        err();
+							break;
+						}
+						else {
+							bt_putchar(templ);
+						}
+						frequency_l = (uint32_t)templ << 16;
+                                                templ = bt_getchar_timeout(); // frequency, 3 bytes
+						if(templ == 256) {
+                                                        err();
+							break;
+						}
+						else {
+							bt_putchar(templ);
+						}
+						frequency_l |= (uint32_t)templ << 8;
+                                                templ = bt_getchar_timeout(); // frequency, 3 bytes
+						if(templ == 256) {
+                                                        err();
+							break;
+						}
+						else {
+							bt_putchar(templ);
+						}
+						frequency_l |= templ;
+
+                                                play_wave_dac0(temph, duty, amplitude, frequency_l);
+                                                break;
+                                        case 'W':
+                                                disable_waveform();
+                                                break;
 					case 'r':
 						i = USART_RXBufferData_AvailableCount(&AUX_data);
 						bt_putchar((uint8_t)(i+1));

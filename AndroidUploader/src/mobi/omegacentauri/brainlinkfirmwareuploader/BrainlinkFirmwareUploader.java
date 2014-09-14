@@ -135,7 +135,11 @@ public class BrainlinkFirmwareUploader extends Activity {
 	public void clickedFeatures(View v) {
 		AlertDialog.Builder b = new AlertDialog.Builder(this);
 		b.setTitle("Custom Brainlink Firmware 1.04");
-		b.setMessage(Html.fromHtml("<b>1.04:</b><br/>"+
+		b.setMessage(Html.fromHtml(
+				"<b>1.05:</b><br/>"+
+				"- Option to increase Bluetooth connectivity settings.  Higher settings use more battery life, but make it "+
+				"easier for devices to connect to the Brainlink.  You only need to do this once.<br/>"+ 
+				"<b>1.04:</b><br/>"+
 				"- Fix nasty buffer overflow in 'r' command<br/>" + 
 				"- more easy baud rate settings; now we have: 'u12' (1200 baud), 'u48' (4800), 'u96' (9600), "+
 				"'u19' (19200), 'u38' (38400), 'u57' (57600), 'u11' (112500)<br/>"+
@@ -299,7 +303,7 @@ public class BrainlinkFirmwareUploader extends Activity {
 		
 			link.clearBuffer();
 
-			link.transmit((byte)13, (byte)10, (byte)'-', (byte)'-', (byte)'-');
+			link.transmit((byte)'-', (byte)'-', (byte)'-', (byte)13, (byte)10);
 
 			sleep(100);
 		

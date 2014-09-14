@@ -7,7 +7,7 @@
 		<item>High Bluetooth connectivity</item>
      </string-array>
     <string-array name="firmwares">
-        <item>Don\'t change firwmare</item> 
+        <item>Don\'t change firmware</item> 
         <item>Original firmware (OEM)</item>
         <item>Custom with Roomba 500+ support</item>
         <item>Custom with Roomba 400/create support</item>

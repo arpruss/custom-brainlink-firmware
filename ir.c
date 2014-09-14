@@ -19,7 +19,6 @@ void init_ir() {
 	// Set timer to count at 500 KHz - this timer is used to construct the IR signal
 	TCC1.CTRLA = TC_CLKSEL_DIV64_gc;
 	TCC1.INTCTRLA = TC_OVFINTLVL_OFF_gc;
-
 }
 
 // Set the IR_LED to regular carrier frequency
@@ -46,7 +45,7 @@ void set_ir0() {
 
 // Sets the frequency of the IR carrier
 void set_ir_carrier(int frequency) {
-	
+
 	cli();
 	TCC0.PERBUF = frequency;
 	sei();
@@ -55,7 +54,7 @@ void set_ir_carrier(int frequency) {
 // Starts timer 1, used to construct the IR signal
 void start_ir_timer() {
     // Reset counters
-	startUpCounter = 0; 
+	startUpCounter = 0;
 	onOffTracker = 0;
 	bitCounter = 0;
 
@@ -77,7 +76,7 @@ void stop_ir_timer() {
 
 // The timer overflow on TCC1 - this is where most of the action is.
 ISR(TCC1_OVF_vect) {
-	
+
 	// The following if-else basically alternates the signal each time the interrupt is triggered
 	// If the signal should be low right now, set it that way
 	if(onOffTracker == 1) {
@@ -118,7 +117,7 @@ ISR(TCC1_OVF_vect) {
 		}
 		// Else, send data according to encoding format
 		else {
-			// If format is alternating (0): 
+			// If format is alternating (0):
 			if(robotData.bitEncoding == 0x00) {
 				// If the bit should be a logical 1, interrupt again in time specified by highBitTime
 				if(robotData.irBytes[bitCounter/8] & (0x01<<(7-(bitCounter%8)))) {

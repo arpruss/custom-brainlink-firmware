@@ -23,14 +23,14 @@ void init_ir_read() {
 
 	//set PER to a value that will cut things off if no signal after 16 MS or so
 	TCE0.PERBUF = 0x1F40;//TCE0.PERBUF = 0x7FFF;
-	
+
 	// Reset signal_count and time out
 	signal_count = 0;
 	ir_read_time_out = 0;
-	
+
 	// Enable interrupts on CCA and Overflow
 	TCE0.INTCTRLA = TC_OVFINTLVL_HI_gc;
-	TCE0.INTCTRLB = TC_CCAINTLVL_HI_gc; 
+	TCE0.INTCTRLB = TC_CCAINTLVL_HI_gc;
 	PMIC.CTRL |= PMIC_HILVLEN_bm;
 
 	/* Currently used timers
@@ -38,14 +38,16 @@ void init_ir_read() {
 	Buzzer: TCD1
 	LED: TCD0
 	PWM: TCE0
-	IR Reading: TCE0 */
-	
+	IR Reading: TCE0
+	Waveform (DACB, Channel 0): TCD1
+         */
+
 }
 
 // All the fun stuff happens here - this interrupt is triggered when the input signal rises or falls
 ISR(TCE0_CCA_vect) {
 	TCE0.CNT = 0; // Reset the counter
-	
+
 	// If the number of edges is greater than 191, the signal is longer than we can store - so stop and return failure
 	if(signal_count > 191) {
 		disable_ir_read();
