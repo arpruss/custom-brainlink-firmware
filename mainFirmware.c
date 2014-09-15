@@ -23,6 +23,7 @@ int main(void)
 	unsigned int frequency = 0; // For PWM control - PWM frequency, also used to set buzzer frequency
         unsigned long frequency_l;
         int amplitude;
+        int channel;
 	unsigned int duty;      // For PWM control - PWM duty cycle
 
 	int baud;   // Baud rate selection for auxiliary UART
@@ -755,6 +756,12 @@ int main(void)
 					        serial_bridge();
 					        break;
                                         case 'w':
+                                                channel = bt_getchar_timeout();
+                                                if(channel != '0' && channel != '1') {
+                                                        err();
+                                                        break;
+                                                }
+                                                channel -= '0';
 						temph = bt_getchar_timeout(); // wave type ('s', 't' or 'q')
 						if(temph == 256) {
                                                         err();
@@ -807,10 +814,19 @@ int main(void)
 						}
 						frequency_l |= templ;
 
-                                                play_wave_dac0(temph, duty, amplitude, frequency_l);
+						if (frequency_l <= 131072u)
+                                                    play_wave_dac(channel, temph, duty, amplitude, frequency_l);
+                                                else
+                                                    err();
                                                 break;
                                         case 'W':
-                                                disable_waveform();
+                                                channel = bt_getchar_timeout();
+                                                if (channel == '0')
+                                                    disable_waveform0();
+                                                else if (channel == '1')
+                                                    disable_waveform1();
+                                                else
+                                                    err();
                                                 break;
 					case 'r':
 						i = USART_RXBufferData_AvailableCount(&AUX_data);

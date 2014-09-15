@@ -2,7 +2,7 @@
 
 
 static void tcd1_set(void) {
-        disable_waveform(); // disable waveform generator if it's active
+        disable_waveform0(); // disable waveform generator if it's active
 	// Set frequency maximum to 62,500 - clockspeed/256
 	TCD1.CTRLA = TC_CLKSEL_DIV256_gc;
 	// Set counter to frequency mode, this lets us vary frequency and keeps duty cycle at 50%

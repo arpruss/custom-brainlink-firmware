@@ -39,7 +39,9 @@ void init_ir_read() {
 	LED: TCD0
 	PWM: TCE0
 	IR Reading: TCE0
-	Waveform (DACB, Channel 0): TCD1
+	Waveform 0 (DACB, Channel 0): TCD1
+	Waveform 1 (DACB, Channel 1): TCC1
+
          */
 
 }

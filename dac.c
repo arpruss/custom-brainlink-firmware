@@ -45,12 +45,13 @@ void set_dac1(uint8_t val) {
 
 // Turn off the DAC on channel 0 to use the pin as regular I/O
 void disable_dac0() {
-        disable_waveform();
+        disable_waveform0();
 	DACB.CTRLA &= (~DAC_CH0EN_bm);
 }
 
 // Turn off the DAC on channel 1 to use the pin as regular I/O
 void disable_dac1() {
+        disable_waveform1();
 	DACB.CTRLA &= (~DAC_CH1EN_bm);
 }
 
@@ -87,17 +88,16 @@ void generate_waveform(uint8_t* waveform, char waveType, uint8_t dutyCycle, uint
      }
 }
 
-void play_wave_dac0(char waveType, uint8_t dutyCycle, uint8_t amplitude, uint32_t frequency) {
+void play_wave_dac(uint8_t channel, char waveType, uint8_t dutyCycle, uint8_t amplitude, uint32_t frequency) {
      for (uint8_t waveShift = 0 ; waveShift < 4 ; waveShift++ ) {
           for (uint8_t clockShiftIndex = 0 ; clockShiftIndex < CLOCK_SHIFT_COUNT; clockShiftIndex++) {
                unsigned long period = (CPU_FREQUENCY >> clockShifts[clockShiftIndex]) / (WAVEFORM_SIZE >> waveShift) / frequency;
-               if (32 <= period && period < 65535u) {
-//                    bt_putchar(period>>8);
-//                    bt_putchar(period&0xff);
-//                    bt_putchar(clockShiftIndex);
-//                    bt_putchar(waveShift);
-                    generate_waveform(waveform, waveType, dutyCycle, amplitude, waveShift);
-                    play_arb_wave_dac0(waveform, WAVEFORM_SIZE >> waveShift, clockShiftIndex, (uint16_t)period);
+               if (16 <= period && period < 65535u) {
+                    generate_waveform(waveform[channel], waveType, dutyCycle, amplitude, waveShift);
+                    if (channel == 0)
+                         play_arb_wave_dac0(waveform[channel], WAVEFORM_SIZE >> waveShift, clockShiftIndex, (uint16_t)period);
+                    else
+                         play_arb_wave_dac1(waveform[channel], WAVEFORM_SIZE >> waveShift, clockShiftIndex, (uint16_t)period);
                     return;
                }
           }
@@ -107,12 +107,8 @@ void play_wave_dac0(char waveType, uint8_t dutyCycle, uint8_t amplitude, uint32_
 
 void play_arb_wave_dac0(const uint8_t* waveform, uint8_t len, uint8_t clockShiftIndex, uint16_t period) {
      turn_off_buzzer(); // just in case
-     cli();
 
-//                    bt_putchar(period>>8);
-//                    bt_putchar(period&0xff);
-//                    bt_putchar(clockShiftIndex);
-//                    bt_putchar(len);
+     cli();
 
      DACB.TIMCTRL = DAC_CONINTVAL_32CLK_gc;
 
@@ -120,19 +116,22 @@ void play_arb_wave_dac0(const uint8_t* waveform, uint8_t len, uint8_t clockShift
 
      DMA.CH0.CTRLA = 0;
 
+     TCD1.INTCTRLA = 0;
      TCD1.CTRLA = 1 + clockShiftIndex;
      TCD1.CTRLB = 0;
      TCD1.PER = period;
+     TCD1.CNT = 0;
      EVSYS.CH1MUX = EVSYS_CHMUX_TCD1_OVF_gc;
 
-     DACB.EVCTRL = DAC_EVSEL_1_gc;
+     //DACB.EVCTRL = DAC_EVSEL_1_gc;
 
-     DACB.CTRLB |= DAC_CH0TRIG_bm;
+     //DACB.CTRLB |= DAC_CH0TRIG_bm;
+     DACB.CTRLB &= ~DAC_CH0TRIG_bm;
      DACB.CTRLA |= DAC_CH0EN_bm | DAC_ENABLE_bm;
 
-     DMA.CH0.TRIGSRC = DMA_CH_TRIGSRC_DACB_CH0_gc;
+     DMA.CH0.TRIGSRC = DMA_CH_TRIGSRC_EVSYS_CH1_gc;
 
-     DMA.CH0.ADDRCTRL = DMA_CH_DESTDIR_FIXED_gc | DMA_CH_DESTRELOAD_TRANSACTION_gc | DMA_CH_SRCDIR_INC_gc | DMA_CH_SRCRELOAD_TRANSACTION_gc;
+     DMA.CH0.ADDRCTRL = DMA_CH_DESTDIR_FIXED_gc | DMA_CH_DESTRELOAD_NONE_gc | DMA_CH_SRCDIR_INC_gc | DMA_CH_SRCRELOAD_TRANSACTION_gc;
      DMA.CH0.TRFCNT = len;
      DMA.CH0.SRCADDR0  =(((uint16_t)waveform)) & 0xFF;
      DMA.CH0.SRCADDR1  =(((uint16_t)waveform)>>8) & 0xFF;
@@ -148,8 +147,54 @@ void play_arb_wave_dac0(const uint8_t* waveform, uint8_t len, uint8_t clockShift
      sei();
 }
 
-void disable_waveform() {
+void play_arb_wave_dac1(const uint8_t* waveform, uint8_t len, uint8_t clockShiftIndex, uint16_t period) {
+     set_ir0(); // just in case
+
+     cli();
+
+     DACB.TIMCTRL = DAC_CONINTVAL_32CLK_gc;
+
+     DACB.CTRLC = DAC_REFSEL_AVCC_gc | DAC_LEFTADJ_bm;
+
+     DMA.CH1.CTRLA = 0;
+
+     TCC1.INTCTRLA = 0;
+     TCC1.CTRLA = 1 + clockShiftIndex;
+     TCC1.CTRLB = 0;
+     TCC1.PER = period;
+     TCC1.CNT = 0;
+     EVSYS.CH2MUX = EVSYS_CHMUX_TCC1_OVF_gc;
+
+     //DACB.EVCTRL = DAC_EVSEL_1_gc;
+
+     //DACB.CTRLB |= DAC_CH0TRIG_bm;
+     DACB.CTRLB &= ~DAC_CH1TRIG_bm;
+     DACB.CTRLA |= DAC_CH1EN_bm | DAC_ENABLE_bm;
+
+     DMA.CH1.TRIGSRC = DMA_CH_TRIGSRC_EVSYS_CH2_gc;
+
+     DMA.CH1.ADDRCTRL = DMA_CH_DESTDIR_FIXED_gc | DMA_CH_DESTRELOAD_NONE_gc | DMA_CH_SRCDIR_INC_gc | DMA_CH_SRCRELOAD_TRANSACTION_gc;
+     DMA.CH1.TRFCNT = len;
+     DMA.CH1.SRCADDR0  =(((uint16_t)waveform)) & 0xFF;
+     DMA.CH1.SRCADDR1  =(((uint16_t)waveform)>>8) & 0xFF;
+     DMA.CH1.SRCADDR2  =0;
+
+     DMA.CH1.DESTADDR0 =(((uint16_t)(&DACB.CH1DATAH)))&0xFF;
+     DMA.CH1.DESTADDR1 =(((uint16_t)(&DACB.CH1DATAH))>>8)&0xFF;
+     DMA.CH1.DESTADDR2 =0;
+
+     DMA.CH1.CTRLA = DMA_CH_BURSTLEN_1BYTE_gc | DMA_CH_SINGLE_bm | DMA_CH_REPEAT_bm | DMA_CH_ENABLE_bm;
+     DMA.CTRL = DMA_ENABLE_bm;
+
+     sei();
+}
+
+void disable_waveform0() {
      DMA.CH0.CTRLA = 0;
      EVSYS.CH1MUX = 0;
-     TCD1.CTRLA = 0;
+}
+
+void disable_waveform1() {
+     DMA.CH1.CTRLA = 0;
+     EVSYS.CH2MUX = 0;
 }
