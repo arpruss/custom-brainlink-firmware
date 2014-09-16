@@ -15,7 +15,7 @@ const uint8_t clockShifts[] = { 0, 1, 2, 3, 6, 8, 10 };
 void init_dac() {
 	DACB.CTRLB = DAC_CHSEL_DUAL_gc; // Dual channel mode
 	DACB.CTRLC = DAC_REFSEL_AVCC_gc | 0x01;  // Set Analog voltage to reference, Left adjust to use just top 8 bits
-	DACB.TIMCTRL = DAC_CONINTVAL_32CLK_gc | DAC_REFRESH_64CLK_gc; // 64 clock cycles per conversion, 256 per refresh
+	DACB.TIMCTRL = DAC_CONINTVAL_32CLK_gc | DAC_REFRESH_64CLK_gc; // 32 clock cycles per conversion, 64 per refresh
 	DACB.CTRLA = DAC_ENABLE_bm;	// Enable channels 0 and 1 and enable DAC
 	set_dac0(0); // Set both DACs to 0
 	set_dac1(0);
@@ -88,19 +88,48 @@ void generate_waveform(uint8_t* waveform, char waveType, uint8_t dutyCycle, uint
      }
 }
 
+
+/* returns 1 on success; 0 on frequency too high or too low for the length */
+uint8_t play_arb_wave(uint8_t channel, uint8_t* waveform, uint8_t length, uint32_t frequency) {
+    for (uint8_t clockShiftIndex = 0 ; clockShiftIndex < CLOCK_SHIFT_COUNT; clockShiftIndex++) {
+         unsigned long period = (CPU_FREQUENCY >> clockShifts[clockShiftIndex]) / length / frequency;
+         if (16 <= period && period < 65535u) {
+              if (channel == 0)
+                   play_arb_wave_dac0(waveform, length, clockShiftIndex, (uint16_t)period);
+              else
+                   play_arb_wave_dac1(waveform, length, clockShiftIndex, (uint16_t)period);
+              return 1;
+         }
+    }
+
+    return 0;
+}
+
 void play_wave_dac(uint8_t channel, char waveType, uint8_t dutyCycle, uint8_t amplitude, uint32_t frequency) {
-     for (uint8_t waveShift = 0 ; waveShift < 4 ; waveShift++ ) {
-          for (uint8_t clockShiftIndex = 0 ; clockShiftIndex < CLOCK_SHIFT_COUNT; clockShiftIndex++) {
-               unsigned long period = (CPU_FREQUENCY >> clockShifts[clockShiftIndex]) / (WAVEFORM_SIZE >> waveShift) / frequency;
-               if (16 <= period && period < 65535u) {
-                    generate_waveform(waveform[channel], waveType, dutyCycle, amplitude, waveShift);
-                    if (channel == 0)
-                         play_arb_wave_dac0(waveform[channel], WAVEFORM_SIZE >> waveShift, clockShiftIndex, (uint16_t)period);
-                    else
-                         play_arb_wave_dac1(waveform[channel], WAVEFORM_SIZE >> waveShift, clockShiftIndex, (uint16_t)period);
-                    return;
-               }
-          }
+     uint8_t waveShift = 0;
+     uint8_t maxWaveShift = 3;
+
+     if (waveType == 'q') {
+         if (dutyCycle == WAVEFORM_SIZE / 2) {
+              waveShift = 5; // two points only
+              maxWaveShift = 5;
+         }
+         else if (dutyCycle == WAVEFORM_SIZE / 4 || dutyCycle == 3 * WAVEFORM_SIZE / 4) {
+              waveShift = 4; // four points only
+              maxWaveShift = 4;
+         }
+     }
+     else if (waveType == 't') {
+         maxWaveShift = 4;
+     }
+
+     disable_waveform(channel);
+
+     /* try temporal rescalings of wave until it's within the xmega's ability to play it without too much distortion */
+     for (; waveShift <= maxWaveShift ; waveShift++ ) {
+          generate_waveform(waveform[channel], waveType, dutyCycle, amplitude, waveShift);
+          if(play_arb_wave(channel, waveform[channel], WAVEFORM_SIZE >> waveShift, frequency))
+              return;
      }
      err();
 }
@@ -189,12 +218,21 @@ void play_arb_wave_dac1(const uint8_t* waveform, uint8_t len, uint8_t clockShift
      sei();
 }
 
+void disable_waveform(uint8_t channel) {
+     if (channel == 0)
+         disable_waveform0();
+     else
+         disable_waveform1();
+}
+
 void disable_waveform0() {
      DMA.CH0.CTRLA = 0;
      EVSYS.CH1MUX = 0;
+     set_dac0(0);
 }
 
 void disable_waveform1() {
      DMA.CH1.CTRLA = 0;
      EVSYS.CH2MUX = 0;
+     set_dac1(0);
 }

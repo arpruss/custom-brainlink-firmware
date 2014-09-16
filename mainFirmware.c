@@ -7,6 +7,37 @@
 // Includes all header files for libraries/drivers
 #include "brainlink.h"
 
+#define MAX_ARGUMENTS 7
+
+uint8_t arguments[MAX_ARGUMENTS];
+
+// Caller has the responsibility of ensuring count <= MAX_ARGUMENTS
+uint8_t bt_to_buffer(uint8_t* buffer, uint8_t count) {
+    for (uint8_t i = 0 ; i < count ; i++) {
+         int x = bt_getchar_timeout();;
+         if (x == 256) {
+             err();
+             return 0;
+         }
+         bt_putchar(x);
+         buffer[i] = (uint8_t)x;
+    }
+
+    return count;
+}
+
+// Caller has the responsibility of ensuring count <= MAX_ARGUMENTS
+uint8_t get_arguments(uint8_t count) {
+    return bt_to_buffer(arguments, count);
+}
+
+uint32_t get_24bit_argument(uint8_t position) {
+    return ((uint32_t)arguments[position] << 16) |
+           ((uint32_t)arguments[position+1] << 8) |
+           ((uint32_t)arguments[position+2]);
+}
+
+#define GET_16BIT_ARGUMENT(position) ( ((uint16_t)arguments[(position)] << 8) | ((uint16_t)arguments[(position)+1]) )
 
 int main(void)
 {
@@ -21,7 +52,6 @@ int main(void)
 	unsigned int templ=0;  // Temporary variable (typically stores low byte of a 16-bit int)
 	uint8_t location = 0;  // Holds the EEPROM location of a stored IR signal
 	unsigned int frequency = 0; // For PWM control - PWM frequency, also used to set buzzer frequency
-        unsigned long frequency_l;
         int amplitude;
         int channel;
 	unsigned int duty;      // For PWM control - PWM duty cycle
@@ -126,7 +156,12 @@ int main(void)
 						bt_putchar(_acc.status);
 						break;
 					// Set the buzzer
-					case 'B':
+					case 'B': // frequency_divider(2)
+					        if (get_arguments(2)) {
+                                                    set_buzzer(GET_16BIT_ARGUMENT(0));
+                                                }
+                                                break;
+#if 0
 						temph = bt_getchar_timeout();
 						// If temph is 256, it means we didn't get a follow up character and timed out, so respond with ERR
 						if(temph == 256) {
@@ -145,6 +180,7 @@ int main(void)
 						}
 						frequency = ((temph)<<8) + templ;
 						set_buzzer(frequency);
+#endif
 						break;
 					// Turn off the buzzer
 					case 'b':
@@ -181,7 +217,12 @@ int main(void)
 						bt_putchar(sensor[5]);
 						break;
 					// Sets the full-color LED
-					case 'O':
+					case 'O': // red(1) green(1) blue(1);
+					        if (get_arguments(3)) {
+                                                    set_led(arguments[0], arguments[1], arguments[2]);
+                                                }
+                                                break;
+#if 0
 						red = bt_getchar_timeout();
 						if(red == 256) {
                                                         err();
@@ -207,13 +248,13 @@ int main(void)
 							bt_putchar(blue);
 						}
 						set_led(red, green, blue);
+#endif
 						break;
 				        // Switches serial between irDA and standard serial
 				        // Currently, this works over the same port numbers as
 				        // standard serial, instead of using the IR receiver
 				        // and IR LED.  This may change when I get the IR receiver
-				        // and LED working reliably, so don't count on this
-				        // functionality.
+				        // and LED working reliably.
 				        case 'J':
 						temph = bt_getchar_timeout();
 						if(/*temph == 256 || */ temph < '0' || temph > '1') {
@@ -420,7 +461,7 @@ int main(void)
 						break;
 					// Store the captured signal in an EEPROM location
 					case 'S':
-						location = bt_getchar_timeout()-48; // Subtracing 48 converts from ASCII to numeric numbers
+						location = bt_getchar_timeout()-48; // Subtracting 48 converts from ASCII to numeric numbers
 						if((location >= 0) && (location < 5) && (signal_count > 4)) {
 							bt_putchar(location+48);
 							write_data_to_eeprom(location);
@@ -721,7 +762,13 @@ int main(void)
                                                 break;
 
 					// Configures the baud rate of the auxiliary UART
-					case 'C':
+					case 'C': // baud(2) scale(1)
+					        if (! get_arguments(3))
+                                                    break;
+
+                                                set_aux_baud_rate( GET_16BIT_ARGUMENT(0), arguments[2]);
+                                                break;
+#if 0
 						temph = bt_getchar_timeout();
 						if(temph == 256) {
                                                         err();
@@ -751,11 +798,22 @@ int main(void)
 						bt_putchar(scale);
 						set_aux_baud_rate(baud, scale);
 						break;
+#endif
 					// BT-serial high speed bridge mode
 					case 'Z':
 					        serial_bridge();
 					        break;
-                                        case 'w':
+                                        case 'w': // channel(1) type(1) duty(1) amplitude(1) frequency(3)
+                                                if (!get_arguments(7))
+                                                     break;
+                                                if (arguments[0] < '0' || arguments[0] > '1' || arguments[1] > WAVEFORM_SIZE) {
+                                                     err();
+                                                     break;
+                                                }
+
+                                                play_wave_dac(arguments[0]-'0', (char)arguments[1], arguments[2], arguments[3], get_24bit_argument(4));
+
+#if 0
                                                 channel = bt_getchar_timeout();
                                                 if(channel != '0' && channel != '1') {
                                                         err();
@@ -813,13 +871,24 @@ int main(void)
 							bt_putchar(templ);
 						}
 						frequency_l |= templ;
-
-						if (frequency_l <= 131072u)
-                                                    play_wave_dac(channel, temph, duty, amplitude, frequency_l);
-                                                else
-                                                    err();
+                                                play_wave_dac(channel, temph, duty, amplitude, frequency_l);
+#endif
                                                 break;
-                                        case 'W':
+                                        case 'W': // channel(1) length(1) frequency(3) data(length)
+                                                if (!get_arguments(5))
+                                                    break;
+                                                if (arguments[0] < '0' || arguments[0] > '1' || arguments[1] > WAVEFORM_SIZE || arguments[1] == 0 ) {
+                                                        err();
+                                                        break;
+                                                }
+                                                channel = arguments[0] - '0';
+                                                if (bt_to_buffer(waveform[channel], arguments[1])) {
+                                                     disable_waveform(channel);
+                                                     play_arb_wave(channel, waveform[channel], arguments[1], get_24bit_argument(2));
+                                                }
+                                                break;
+
+                                        case '@':
                                                 channel = bt_getchar_timeout();
                                                 if (channel == '0')
                                                     disable_waveform0();
@@ -837,7 +906,7 @@ int main(void)
 						break;
 					// Transmit a stream of characters from bluetooth to auxiliary serial
 					case 't':
-						temph= bt_getchar_timeout();						
+						temph= bt_getchar_timeout();
 						if (temph == 256) {
                                                     err();
                                                     break;

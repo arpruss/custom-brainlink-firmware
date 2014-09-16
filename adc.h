@@ -12,6 +12,9 @@
 #define AUX4       ADC_CH_MUXPOS_PIN4_gc
 #define AUX5       ADC_CH_MUXPOS_PIN5_gc
 
+#define 	ADCACAL0_offset   0x20
+#define 	ADCACAL1_offset   0x21
+
 #define START_CH2 0b00010000;
 #define START_CH1 0b00001000;
 #define START_CH0 0b00000100;
@@ -192,6 +195,8 @@
 #define ADC_Ch_Conversion_Complete(_adc_ch)                                    \
 	(((_adc_ch)->INTFLAGS & ADC_CH_CHIF_bm) != 0x00)
 	
+	
+#include "adc_driver.h"	
 
 void init_adc(void);
 int read_analog(ADC_CH_MUXPOS_t sensor);
