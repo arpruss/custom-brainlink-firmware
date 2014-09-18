@@ -166,7 +166,7 @@ char uart_getchar(USART_t * usart) {
 
 
 // Gets a character from the bluetooth buffer, blocks if none exists for roughly 300 ms, then times out and returns 256
-int bt_getchar_timeout() {
+int bt_getchar_timeout_echo() {
 
 	int timeout=0;
 	while(!USART_RXBufferData_Available(&BT_data) && timeout < 500) {
@@ -175,8 +175,11 @@ int bt_getchar_timeout() {
 	}
 	if(timeout >= 500)
 		return 256;
-	else
-		return USART_RXBuffer_GetByte(&BT_data);
+	else {
+             int c = USART_RXBuffer_GetByte(&BT_data);
+             bt_putchar(c);
+             return c;
+	}
 }
 
 // Gets a character from the auxiliary uart buffer, not currently used.

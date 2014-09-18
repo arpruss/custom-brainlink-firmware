@@ -211,18 +211,15 @@ void print_data_from_eeprom(int position)
 // Reads raw data from the host into the robotData structure, where it can be used to re-transmit the data.
 int read_data_from_serial()
 {
-	int signal_length = bt_getchar_timeout();
+	int signal_length = bt_getchar_timeout_echo();
 	int temp = 0;
 
-	uart_putchar(&BT_USART, signal_length);
-	
 	for(int i = 0; i < signal_length-1; i++) {
-		temp = bt_getchar_timeout();
+		temp = bt_getchar_timeout_echo();
 		if(temp == 256) {
 			return 0;
 		}
 		else {
-			uart_putchar(&BT_USART, temp);
 			robotData.irBytes[i] = (char)temp;
 		}
 	}

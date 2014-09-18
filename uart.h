@@ -155,7 +155,7 @@ void init_aux_uart(int scale, char baud);
 void set_aux_baud_rate(int baud, char scale);
 void uart_putchar(USART_t * usart, char c);
 char uart_getchar(USART_t * usart);
-int bt_getchar_timeout(void);
+int bt_getchar_timeout_echo(void);
 char aux_uart_getchar(USART_t * usart);
 char uart_getchar_nb(USART_t * usart);
 void USART_InterruptDriver_Initialize(USART_data_t * usart_data, USART_t * usart);

@@ -14,7 +14,7 @@ const uint8_t clockShifts[] = { 0, 1, 2, 3, 6, 8, 10 };
 // Set up the DAC to dual channel mode, 8 bit operation, VCC reference.
 void init_dac() {
 	DACB.CTRLB = DAC_CHSEL_DUAL_gc; // Dual channel mode
-	DACB.CTRLC = DAC_REFSEL_AVCC_gc | 0x01;  // Set Analog voltage to reference, Left adjust to use just top 8 bits
+	DACB.CTRLC = DAC_REFSEL_AVCC_gc | DAC_LEFTADJ_bm;  // Set Analog voltage to reference, Left adjust to use just top 8 bits
 	DACB.TIMCTRL = DAC_CONINTVAL_32CLK_gc | DAC_REFRESH_64CLK_gc; // 32 clock cycles per conversion, 64 per refresh
 	DACB.CTRLA = DAC_ENABLE_bm;	// Enable channels 0 and 1 and enable DAC
 	set_dac0(0); // Set both DACs to 0
@@ -92,7 +92,8 @@ void generate_waveform(uint8_t* waveform, char waveType, uint8_t dutyCycle, uint
 /* returns 1 on success; 0 on frequency too high or too low for the length */
 uint8_t play_arb_wave(uint8_t channel, uint8_t* waveform, uint8_t length, uint32_t frequency) {
     for (uint8_t clockShiftIndex = 0 ; clockShiftIndex < CLOCK_SHIFT_COUNT; clockShiftIndex++) {
-         unsigned long period = (CPU_FREQUENCY >> clockShifts[clockShiftIndex]) / length / frequency;
+         unsigned long add_for_rounding = (frequency * length * (1 << clockShifts[clockShiftIndex])) / 2;
+         unsigned long period = ( (CPU_FREQUENCY + add_for_rounding) >> clockShifts[clockShiftIndex]) / length / frequency;
          if (16 <= period && period < 65535u) {
               if (channel == 0)
                    play_arb_wave_dac0(waveform, length, clockShiftIndex, (uint16_t)period);
@@ -139,9 +140,8 @@ void play_arb_wave_dac0(const uint8_t* waveform, uint8_t len, uint8_t clockShift
 
      cli();
 
-     DACB.TIMCTRL = DAC_CONINTVAL_32CLK_gc;
-
-     DACB.CTRLC = DAC_REFSEL_AVCC_gc | DAC_LEFTADJ_bm;
+//     DACB.TIMCTRL = DAC_CONINTVAL_32CLK_gc;
+//     DACB.CTRLC = DAC_REFSEL_AVCC_gc | DAC_LEFTADJ_bm;
 
      DMA.CH0.CTRLA = 0;
 
@@ -171,8 +171,8 @@ void play_arb_wave_dac0(const uint8_t* waveform, uint8_t len, uint8_t clockShift
      DMA.CH0.DESTADDR2 =0;
 
      DMA.CH0.CTRLA = DMA_CH_BURSTLEN_1BYTE_gc | DMA_CH_SINGLE_bm | DMA_CH_REPEAT_bm | DMA_CH_ENABLE_bm;
-     DMA.CTRL = DMA_ENABLE_bm;
 
+     DMA.CTRL = DMA_ENABLE_bm;
      sei();
 }
 
@@ -181,9 +181,8 @@ void play_arb_wave_dac1(const uint8_t* waveform, uint8_t len, uint8_t clockShift
 
      cli();
 
-     DACB.TIMCTRL = DAC_CONINTVAL_32CLK_gc;
-
-     DACB.CTRLC = DAC_REFSEL_AVCC_gc | DAC_LEFTADJ_bm;
+//     DACB.TIMCTRL = DAC_CONINTVAL_32CLK_gc;
+//     DACB.CTRLC = DAC_REFSEL_AVCC_gc | DAC_LEFTADJ_bm;
 
      DMA.CH1.CTRLA = 0;
 
