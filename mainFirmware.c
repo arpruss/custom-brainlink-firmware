@@ -700,6 +700,7 @@ int main(void)
                                                 serial_bridge();
                                                 break;
                                         case 'w': // channel(1) type(1) duty(1) amplitude(1) frequency(3)
+                                                  // w0s\x20\xFF\x02\x00\x00
                                                 if (!get_arguments(7))
                                                      break;
                                                 if (arguments[0] < '0' || arguments[0] > '1' || arguments[2] > WAVEFORM_SIZE) {

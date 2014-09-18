@@ -23,6 +23,10 @@ void init_dac() {
 
 // Sets DAC Ch0
 void set_dac0(uint8_t val) {
+        DMA.CH0.CTRLA = 0;
+        EVSYS.CH1MUX = 0;
+	DACB.TIMCTRL = DAC_CONINTVAL_32CLK_gc | DAC_REFRESH_64CLK_gc; // 32 clock cycles per conversion, 64 per refresh
+
 	// enable the DAC
 	DACB.CTRLA |= DAC_CH0EN_bm;
 
@@ -34,6 +38,10 @@ void set_dac0(uint8_t val) {
 
 // Sets DAC Ch1
 void set_dac1(uint8_t val) {
+        DMA.CH1.CTRLA = 0;
+        EVSYS.CH2MUX = 0;
+	DACB.TIMCTRL = DAC_CONINTVAL_32CLK_gc | DAC_REFRESH_64CLK_gc; // 32 clock cycles per conversion, 64 per refresh
+
 	// enable the DAC
 	DACB.CTRLA |= DAC_CH1EN_bm;
 
@@ -140,7 +148,8 @@ void play_arb_wave_dac0(const uint8_t* waveform, uint8_t len, uint8_t clockShift
 
      cli();
 
-//     DACB.TIMCTRL = DAC_CONINTVAL_32CLK_gc;
+     DACB.TIMCTRL = DAC_CONINTVAL_32CLK_gc | DAC_REFRESH_OFF_gc; // 32 clock cycles per conversion, no refresh
+
 //     DACB.CTRLC = DAC_REFSEL_AVCC_gc | DAC_LEFTADJ_bm;
 
      DMA.CH0.CTRLA = 0;
@@ -180,6 +189,8 @@ void play_arb_wave_dac1(const uint8_t* waveform, uint8_t len, uint8_t clockShift
      set_ir0(); // just in case
 
      cli();
+
+     DACB.TIMCTRL = DAC_CONINTVAL_32CLK_gc | DAC_REFRESH_OFF_gc; // 32 clock cycles per conversion, no refresh
 
 //     DACB.TIMCTRL = DAC_CONINTVAL_32CLK_gc;
 //     DACB.CTRLC = DAC_REFSEL_AVCC_gc | DAC_LEFTADJ_bm;
