@@ -657,6 +657,7 @@ int main(void)
 
                                         // Configures the baud rate of the auxiliary UART
                                         case 'C': // baud(2) scale(1)
+                                          // e.g., 9600 = C\x03\x3D\xFE
                                                 if (! get_arguments(3))
                                                     break;
                                                     
@@ -771,17 +772,17 @@ int main(void)
                                                 play_wave_dac(channel, temph, duty, amplitude, frequency_l);
 #endif
                                                 break;
-                                        case 'W': // channel(1) length(1) frequency(3) data(length)
+                                        case 'W': // channel(1) frequency(3) length(1) data(length)
                                                 if (!get_arguments(5))
                                                     break;
-                                                if (arguments[0] < '0' || arguments[0] > '1' || arguments[1] > WAVEFORM_SIZE || arguments[1] == 0 ) {
+                                                if (arguments[0] < '0' || arguments[0] > '1' || arguments[4] > WAVEFORM_SIZE || arguments[1] == 0 ) {
                                                         err();
                                                         break;
                                                 }
                                                 channel = arguments[0] - '0';
-                                                if (bt_to_buffer(waveform[channel], arguments[1])) {
+                                                if (bt_to_buffer(waveform[channel], arguments[4])) {
                                                      disable_waveform(channel);
-                                                     play_arb_wave(channel, waveform[channel], arguments[1], get_24bit_argument(2));
+                                                     play_arb_wave(channel, waveform[channel], arguments[4], get_24bit_argument(1));
                                                 }
                                                 break;
 
