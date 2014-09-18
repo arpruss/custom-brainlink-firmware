@@ -9,7 +9,34 @@ The xboot folder contains the bootloader used to allow re-programming of the Bra
 
 Changes by Alexander Pruss:
 - load calibration data for ADC before use
-- arbitrary wave generator
+- add wave generator APIs:
+
+  w channel(1 byte) type(1 byte) duty(1 byte) amplitude(1 byte) frequency(3 bytes)
+    Initate wave generation.
+  Where:
+    channel: '0' or '1' (goes out via the two analog outputs)
+    type: 's' (sine), 'q' (square) or 't' (traingle)
+    duty: duty cycle between 0x00 and 0x3F, for square wave only
+    amplitude: unsigned value between 0 and 0xFF (0 to 3.3V)
+    frequency: in Hz, with maximum practicable frequency 250000, and lower precision for higher frequencies
+
+  @ channel(1 byte)
+    Terminate wave generation
+  Where:
+     channel: '0' or '1'.
+
+  W channel(1 byte) frequency(3 bytes) numpoints(1 byte) data(numpoints bytes)
+    Initiate arbitrary wave generation.
+  Where:
+    channel: '0' or '1'
+    frequency: in Hz, with maximum practicable frequency 250000, and lower precision for higher frequencies;
+        longer sequences require lower frequencies
+    numpoints: between 0x00 and 0x3F
+    data: unsigned values between 0x00 and 0xFF (0 to 3.3V)
+
+  Note: Waveform on channel 0 incompatible with buzzer.
+        Waveform on channel 1 incompatible with IR transmission.
+
 - fix buffer overflow bug in 'r' command
 - reduced stack usage
 - remove delay in responding to '*' command
