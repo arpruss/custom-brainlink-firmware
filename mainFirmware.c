@@ -775,7 +775,7 @@ int main(void)
                                         case 'W': // channel(1) frequency(3) length(1) data(length)
                                                 if (!get_arguments(5))
                                                     break;
-                                                if (arguments[0] < '0' || arguments[0] > '1' || arguments[4] > WAVEFORM_SIZE || arguments[1] == 0 ) {
+                                                if (arguments[0] < '0' || arguments[0] > '1' || arguments[4] > WAVEFORM_SIZE || arguments[4] == 0 ) {
                                                         err();
                                                         break;
                                                 }

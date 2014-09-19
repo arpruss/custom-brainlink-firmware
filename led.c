@@ -23,5 +23,4 @@ void set_led(int red, int green, int blue) {
 	TCD0.CCABUFH = 255-red;
 	TCD0.CCBBUFH = 255-blue;
 	TCD0.CCCBUFH = 255-green;
-
 }

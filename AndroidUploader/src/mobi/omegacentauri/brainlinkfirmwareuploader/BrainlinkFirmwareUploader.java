@@ -134,8 +134,10 @@ public class BrainlinkFirmwareUploader extends Activity {
 	
 	public void clickedFeatures(View v) {
 		AlertDialog.Builder b = new AlertDialog.Builder(this);
-		b.setTitle("Custom Brainlink Firmware 1.04");
+		b.setTitle("Custom Brainlink Firmware 1.06");
 		b.setMessage(Html.fromHtml(
+				"<b>1.06:</b><br/>"+
+				"- Sine/triangle/square/arbitrary wave generator.  See tinyurl.com/blfirm for syntax or get Brainlink Wave app.<br/>"+		
 				"<b>1.05:</b><br/>"+
 				"- Option to increase Bluetooth connectivity settings.  Higher settings use more battery life, but make it "+
 				"easier for devices to connect to the Brainlink.  You only need to do this once.<br/>"+ 
@@ -363,7 +365,10 @@ public class BrainlinkFirmwareUploader extends Activity {
 		@Override
 		protected void onPostExecute(String message) {
 			BrainlinkFirmwareUploader.this.message.setText(message);
-			progressDialog.dismiss();
+			try {
+				progressDialog.dismiss();
+			} catch(Exception e) {
+			}
 		}
 		
 	}
