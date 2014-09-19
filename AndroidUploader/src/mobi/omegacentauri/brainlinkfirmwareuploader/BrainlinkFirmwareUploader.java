@@ -159,7 +159,7 @@ public class BrainlinkFirmwareUploader extends Activity {
 		int v;
 		try {
 			v = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
-			if (v == options.getInt(PREF_DISCLAIMED_VERSION , 0));
+			if (v == options.getInt(PREF_DISCLAIMED_VERSION , 0))
 				return;
 		} catch (NameNotFoundException e) {
 			v = 0;
@@ -181,7 +181,7 @@ public class BrainlinkFirmwareUploader extends Activity {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				options.edit().putInt(PREF_DISCLAIMED_VERSION, v0);
+				options.edit().putInt(PREF_DISCLAIMED_VERSION, v0).commit();
 			}
 		});
 		b.create().show();
