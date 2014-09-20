@@ -164,27 +164,6 @@ int main(void)
                                                     set_buzzer(GET_16BIT_ARGUMENT(0));
                                                 }
                                                 break;
-#if 0
-                                                temph = bt_getchar_timeout();
-                                                // If temph is 256, it means we didn't get a follow up character and timed out, so respond with ERR
-                                                if(temph == 256) {
-                                                        break;
-                                                }
-                                                else {
-                                                        bt_putchar(temph);
-                                                }
-                                                templ = bt_getchar_timeout();
-                                                if(templ == 256) {
-                                                        err();
-                                                        break;
-                                                }
-                                                else {
-                                                        bt_putchar(templ);
-                                                }
-                                                frequency = ((temph)<<8) + templ;
-                                                set_buzzer(frequency);
-#endif
-                                                break;
                                         // Turn off the buzzer
                                         case 'b':
                                                 turn_off_buzzer();
@@ -224,34 +203,6 @@ int main(void)
                                                 if (get_arguments(3)) {
                                                     set_led(arguments[0], arguments[1], arguments[2]);
                                                 }
-                                                break;
-#if 0
-                                                red = bt_getchar_timeout();
-                                                if(red == 256) {
-                                                        err();
-                                                        break;
-                                                }
-                                                else {
-                                                        bt_putchar(red);
-                                                }
-                                                green = bt_getchar_timeout();
-                                                if(green == 256) {
-                                                        err();
-                                                        break;
-                                                }
-                                                else {
-                                                        bt_putchar(green);
-                                                }
-                                                blue = bt_getchar_timeout();
-                                                if(blue == 256) {
-                                                        err();
-                                                        break;
-                                                }
-                                                else {
-                                                        bt_putchar(blue);
-                                                }
-                                                set_led(red, green, blue);
-#endif
                                                 break;
                                         // Switches serial between irDA and standard serial
                                         // Currently, this works over the same port numbers as
@@ -665,37 +616,6 @@ int main(void)
 
                                                 set_aux_baud_rate( GET_16BIT_ARGUMENT(0), arguments[2]);
                                                 break;
-#if 0
-                                                temph = bt_getchar_timeout();
-                                                if(temph == 256) {
-                                                        err();
-                                                        break;
-                                                }
-                                                else {
-                                                        bt_putchar(temph);
-                                                }
-                                                templ = bt_getchar_timeout();
-                                                if(templ == 256) {
-                                                        err();
-                                                        break;
-                                                }
-                                                else {
-                                                        bt_putchar(templ);
-                                                }
-                                                baud = ((temph)<<8) + templ;
-                                                templ = bt_getchar_timeout();
-                                                if(templ == 256) {
-                                                        err();
-                                                        break;
-                                                }
-                                                else {
-                                                        bt_putchar(templ);
-                                                }
-                                                scale = templ;
-                                                bt_putchar(scale);
-                                                set_aux_baud_rate(baud, scale);
-                                                break;
-#endif
                                         // BT-serial high speed bridge mode
                                         case 'Z':
                                                 serial_bridge();
@@ -711,66 +631,6 @@ int main(void)
 
                                                 play_wave_dac(arguments[0]-'0', (char)arguments[1], arguments[2], arguments[3], get_24bit_argument(4));
 
-#if 0
-                                                channel = bt_getchar_timeout();
-                                                if(channel != '0' && channel != '1') {
-                                                        err();
-                                                        break;
-                                                }
-                                                channel -= '0';
-                                                temph = bt_getchar_timeout(); // wave type ('s', 't' or 'q')
-                                                if(temph == 256) {
-                                                        err();
-                                                        break;
-                                                }
-                                                else {
-                                                        bt_putchar(temph);
-                                                }
-                                                duty = bt_getchar_timeout(); // duty cycle (for square wave)
-                                                if(duty == 256 || duty > WAVEFORM_SIZE) {
-                                                        err();
-                                                        break;
-                                                }
-                                                else {
-                                                        bt_putchar(duty);
-                                                }
-                                                amplitude = bt_getchar_timeout(); // duty cycle (for square wave)
-                                                if(amplitude == 256) {
-                                                        err();
-                                                        break;
-                                                }
-                                                else {
-                                                        bt_putchar(amplitude);
-                                                }
-                                                templ = bt_getchar_timeout(); // frequency, 3 bytes
-                                                if(templ == 256) {
-                                                        err();
-                                                        break;
-                                                }
-                                                else {
-                                                        bt_putchar(templ);
-                                                }
-                                                frequency_l = (uint32_t)templ << 16;
-                                                templ = bt_getchar_timeout(); // frequency, 3 bytes
-                                                if(templ == 256) {
-                                                        err();
-                                                        break;
-                                                }
-                                                else {
-                                                        bt_putchar(templ);
-                                                }
-                                                frequency_l |= (uint32_t)templ << 8;
-                                                templ = bt_getchar_timeout(); // frequency, 3 bytes
-                                                if(templ == 256) {
-                                                        err();
-                                                        break;
-                                                }
-                                                else {
-                                                        bt_putchar(templ);
-                                                }
-                                                frequency_l |= templ;
-                                                play_wave_dac(channel, temph, duty, amplitude, frequency_l);
-#endif
                                                 break;
                                         case 'W': // channel(1) frequency(3) length(1) data(length)
                                                 if (!get_arguments(5))
