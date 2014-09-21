@@ -170,7 +170,7 @@ int main(void)
                                                 break;
                                         // Returns the value of the light sensor
                                         case 'L':
-                                                sensor[0] = read_analog(LIGHT);
+                                                sensor[0] = read_analog(LIGHT, 0);
                                                 bt_putchar(sensor[0]);
                                                 break;
                                         // Returns the Xmegas internal temperature read - this is undocumented because the value returned is very erratic
@@ -180,24 +180,84 @@ int main(void)
                                                 break;
                                         // Returns the battery voltage
                                         case 'V':
-                                                sensor[0] = read_analog(BATT_VOLT);
+                                                sensor[0] = read_analog(BATT_VOLT, 0);
                                                 bt_putchar(sensor[0]);
+                                                break;
+                                        // Differential ADC mode
+                                        case 'D': // active(1) numgainstages(1)
+                                                if (get_arguments(2)) {
+                                                    if (arguments[0] == '0') {
+                                                        adcResolution = ADC_RESOLUTION_8BIT_gc;
+                                                        adcConvMode = ADC_ConvMode_Unsigned;
+                                                        adcGain = ADC_DRIVER_CH_GAIN_NONE;
+                                                        adcInputMode = ADC_CH_INPUTMODE_SINGLEENDED_gc;
+                                                        init_adc();
+                                                    }
+                                                    else if (arguments[0] == '1') {
+                                                        adcResolution = ADC_RESOLUTION_12BIT_gc;
+                                                        adcConvMode = ADC_ConvMode_Signed;
+                                                
+                                                        if (arguments[1] >= '1' && arguments[1] <= '6') { // number of gain stages
+                                                            adcGain = (arguments[1] - '0') << ADC_CH_GAINFAC_gp;
+                                                            adcInputMode = ADC_CH_INPUTMODE_DIFFWGAIN_gc;
+                                                            init_adc();
+                                                        }
+                                                        else if (arguments[1] == '0') {
+                                                            adcGain = ADC_DRIVER_CH_GAIN_NONE;
+                                                            adcInputMode = ADC_CH_INPUTMODE_DIFF_gc;
+                                                            init_adc();
+                                                        }
+                                                        else {
+                                                            err();
+                                                        }
+                                                    }
+                                                    else {
+                                                        err();
+                                                    }
+                                                }
                                                 break;
                                         // Returns the readings on all six ADC ports
                                         case 'X':
-                                                sensor[0] = read_analog(AUX0);
+                                                sensor[0] = read_analog(AUX0, 0);
                                                 bt_putchar(sensor[0]);
-                                                sensor[1] = read_analog(AUX1);
+                                                sensor[1] = read_analog(AUX1, 0);
                                                 bt_putchar(sensor[1]);
-                                                sensor[2] = read_analog(AUX2);
+                                                sensor[2] = read_analog(AUX2, 0);
                                                 bt_putchar(sensor[2]);
-                                                sensor[3] = read_analog(AUX3);
+                                                sensor[3] = read_analog(AUX3, 0);
                                                 bt_putchar(sensor[3]);
-                                                sensor[4] = read_analog(AUX4);
+                                                sensor[4] = read_analog(AUX4, 0);
                                                 bt_putchar(sensor[4]);
-                                                sensor[5] = read_analog(AUX4);
+                                                sensor[5] = read_analog(AUX5, 0);
                                                 bt_putchar(sensor[5]);
                                                 break;
+                                        // Returns differential measurement on pair of ADC ports
+                                        // Assumes we are in differential mode with gain
+                                        case 'x':
+                                                if (get_arguments(2)) {
+                                                    i = read_differential(arguments[0], arguments[1]);
+                                                    bt_putchar(0xFF&(i >> 8));
+                                                    bt_putchar(0xFF&i);
+                                                }
+                                                break;
+
+                                        case 'e': // this is a bit of testing code, which will eventually be changed
+                                                  // do not rely on it
+                                                if (get_arguments(2)) {
+                                                  char a1 = arguments[0];
+                                                  char a2 = arguments[1];
+                                                  while(1) {
+                                                      _delay_ms(2);
+                                                      i = read_differential(a1, a2);
+                                                      itoa((i<<4)>>4, arguments, 10);
+                                                      for (i=0; arguments[i]; i++)
+                                                          bt_putchar(arguments[i]);
+                                                      bt_putchar('\r');
+                                                      bt_putchar('\n');
+                                                  }
+                                                }
+                                                break;
+
                                         // Sets the full-color LED
                                         case 'O': // red(1) green(1) blue(1);
                                                 if (get_arguments(3)) {

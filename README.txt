@@ -8,6 +8,7 @@ http://www.brainlinksystem.com/tutorials
 The xboot folder contains the bootloader used to allow re-programming of the Brainlink's main firmware. You may modify the bootloader as well, but you will need to open Brainlink's case and attach hardware programmer (like the AVR-ISP mkII) to the ISP port to do so.
 
 Changes by Alexander Pruss:
+- fix bug reading ADC AUX5
 - load calibration data for ADC before use
 - add wave generator APIs:
 

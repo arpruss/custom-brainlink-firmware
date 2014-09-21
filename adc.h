@@ -196,8 +196,9 @@
 	(((_adc_ch)->INTFLAGS & ADC_CH_CHIF_bm) != 0x00)
 	
 	
-#include "adc_driver.h"	
+#include "adc_driver.h"
 
 void init_adc(void);
-int read_analog(ADC_CH_MUXPOS_t sensor);
+int read_analog(ADC_CH_MUXPOS_t sensor, ADC_CH_MUXNEG_t compareSensor);
 int read_internal_temperature(void);
+uint16_t read_differential(char port1, char port2);
