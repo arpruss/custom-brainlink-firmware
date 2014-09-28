@@ -537,50 +537,19 @@ int main(void)
                                                 break;
                                         // Configure PWM frequency
                                         case 'P':
-                                                temph = bt_getchar_timeout_echo();
-                                                if(temph == 256) {
-                                                        err();
-                                                        break;
-                                                }
-                                                templ = bt_getchar_timeout_echo();
-                                                if(templ == 256) {
-                                                        err();
-                                                        break;
-                                                }
-                                                // Stores the PWM frequency for use by set_pwm()
-                                                pwm_frequency = ((temph)<<8) + templ;
+                                                if (get_arguments(2))
+                                                    pwm_frequency = GET_16BIT_ARGUMENT(0);
                                                 break;
                                         // Set PWM duty cycle for a specific port
                                         case 'p':
-                                                set_pwm();
-                                                temph = bt_getchar_timeout_echo();
-                                                if(temph == '0') {
-                                                        temph = bt_getchar_timeout_echo();
-                                                        if(temph == 256) {
-                                                            err();
-                                                                break;
-                                                        }
-                                                        templ = bt_getchar_timeout_echo();
-                                                        if(templ == 256) {
-                                                            err();
-                                                                break;
-                                                        }
-                                                        duty = ((temph)<<8) + templ;
+                                                if (get_arguments(3)) {
+                                                    set_pwm();
+                                                    duty = GET_16BIT_ARGUMENT(1);
+                                                    if (arguments[0] == '0')
                                                         set_pwm0(duty);
-                                                }
-                                                else if(temph == '1') {
-                                                        temph = bt_getchar_timeout_echo();
-                                                        if(temph == 256) {
-                                                            err();
-                                                                break;
-                                                        }
-                                                        templ = bt_getchar_timeout_echo();
-                                                        if(templ == 256) {
-                                                            err();
-                                                                break;
-                                                        }
-                                                        duty = ((temph)<<8) + templ;
+                                                    else if (arguments[1] == '1')
                                                         set_pwm1(duty);
+                                                    // could add else err();, but original firmware doesn't do this
                                                 }
                                                 break;
                                         // Set DAC voltage on one of the two DAC ports
