@@ -65,6 +65,11 @@ int main(void)
         long int time_out=0; // Counter which counts to a preset level corresponding to roughly 1 minute
 
         // Initialize system
+        
+        // Turn off JTAG to save a bit of battery life
+        CCP = CCP_IOREG_gc;    
+        MCU.MCUCR = 1;
+
         init_clock();
 
         init_led();
@@ -249,7 +254,7 @@ int main(void)
                                                   while(1) {
                                                       _delay_ms(2);
                                                       i = read_differential(a1, a2);
-                                                      itoa((i<<4)>>4, arguments, 10);
+                                                      itoa((i<<4)>>4, (char*)arguments, 10);
                                                       for (i=0; arguments[i]; i++)
                                                           bt_putchar(arguments[i]);
                                                       bt_putchar('\r');
