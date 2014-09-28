@@ -30,12 +30,14 @@ void set_ir50() {
 }
 
 
+#ifdef COMPILE_UNUSED
 // Set the IR_LED to full on
 void set_ir100() {
 	cli();
 	TCC0.CCA = TCC0.PER;
 	sei();
 }
+#endif
 
 // Turn the IR LED off
 void set_ir0() {

@@ -1,9 +1,9 @@
 // Helper functions to control Brainlink's full color LED
 
-void init_led() {
+static void init_led() {
 	// Set clock to 4 MHz
 	TCD0.CTRLA = TC_CLKSEL_DIV8_gc;
-	
+
 	// Turn on single slope pwm waveform generation on CCA, B, and C (LED pins)
 	TCD0.CTRLB = (TC0_CCCEN_bm | TC0_CCBEN_bm | TC0_CCAEN_bm) | TC_WGMODE_SS_gc;
 

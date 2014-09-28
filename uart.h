@@ -150,24 +150,24 @@ USART_data_t BT_data;
 USART_data_t AUX_data;
 
 
-void init_bt_uart(void);
+static void init_bt_uart(void);
 void init_aux_uart(int scale, char baud);
-void set_aux_baud_rate(int baud, char scale);
-void uart_putchar(USART_t * usart, char c);
-char uart_getchar(USART_t * usart);
-int bt_getchar_timeout_echo(void);
-char aux_uart_getchar(USART_t * usart);
-char uart_getchar_nb(USART_t * usart);
-void USART_InterruptDriver_Initialize(USART_data_t * usart_data, USART_t * usart);
-bool USART_RXBufferData_Available(USART_data_t * usart_data);
-uint8_t USART_RXBuffer_GetByte(USART_data_t * usart_data);
-bool USART_RXComplete(USART_data_t * usart_data);
-void err(void);
-void USART_RXBuffer_Clear(USART_data_t * usart_data);
-void set_irda_mode(char irda);
-void serial_bridge(void);
-void init_aux_uart_ir(int baud, char scale);
-int USART_RXBufferData_AvailableCount(USART_data_t * usart_data);
+static void set_aux_baud_rate(int baud, char scale);
+static void uart_putchar(USART_t * usart, char c);
+#ifdef COMPILE_UNUSED
+static char uart_getchar(USART_t * usart);
+static char aux_uart_getchar(USART_t * usart);
+static char uart_getchar_nb(USART_t * usart);
+#endif
+static int bt_getchar_timeout_echo(void);
+static void USART_InterruptDriver_Initialize(USART_data_t * usart_data, USART_t * usart);
+static bool USART_RXBufferData_Available(USART_data_t * usart_data);
+static uint8_t USART_RXBuffer_GetByte(USART_data_t * usart_data);
+static bool USART_RXComplete(USART_data_t * usart_data);
+static void err(void);
+static void set_irda_mode(char irda);
+static void serial_bridge(void);
+static int USART_RXBufferData_AvailableCount(USART_data_t * usart_data);
 
 #define bt_putchar(c) uart_putchar(&BT_USART, (char)(c))
 #define aux_putchar(c) uart_putchar(&AUX_USART, (char)(c))

@@ -106,29 +106,31 @@ typedef struct TWI_Master {
 
 
 
-void TWI_MasterInit(TWI_Master_t *twi,
+static void TWI_MasterInit(TWI_Master_t *twi,
                     TWI_t *module,
                     TWI_MASTER_INTLVL_t intLevel,
                     uint8_t baudRateRegisterSetting);
-TWI_MASTER_BUSSTATE_t TWI_MasterState(TWI_Master_t *twi);
-bool TWI_MasterReady(TWI_Master_t *twi);
-bool TWI_MasterWrite(TWI_Master_t *twi,
+#ifdef COMPILE_UNUSED                    
+static TWI_MASTER_BUSSTATE_t TWI_MasterState(TWI_Master_t *twi);
+static bool TWI_MasterReady(TWI_Master_t *twi);
+static bool TWI_MasterWrite(TWI_Master_t *twi,
                      uint8_t address,
                      uint8_t * writeData,
                      uint8_t bytesToWrite);
-bool TWI_MasterRead(TWI_Master_t *twi,
+static bool TWI_MasterRead(TWI_Master_t *twi,
                     uint8_t address,
                     uint8_t bytesToRead);
-bool TWI_MasterWriteRead(TWI_Master_t *twi,
+#endif
+static bool TWI_MasterWriteRead(TWI_Master_t *twi,
                          uint8_t address,
                          uint8_t *writeData,
                          uint8_t bytesToWrite,
                          uint8_t bytesToRead);
-void TWI_MasterInterruptHandler(TWI_Master_t *twi);
-void TWI_MasterArbitrationLostBusErrorHandler(TWI_Master_t *twi);
-void TWI_MasterWriteHandler(TWI_Master_t *twi);
-void TWI_MasterReadHandler(TWI_Master_t *twi);
-void TWI_MasterTransactionFinished(TWI_Master_t *twi, uint8_t result);
+static void TWI_MasterInterruptHandler(TWI_Master_t *twi);
+static void TWI_MasterArbitrationLostBusErrorHandler(TWI_Master_t *twi);
+static void TWI_MasterWriteHandler(TWI_Master_t *twi);
+static void TWI_MasterReadHandler(TWI_Master_t *twi);
+static void TWI_MasterTransactionFinished(TWI_Master_t *twi, uint8_t result);
 
 
 /*! TWI master interrupt service routine.

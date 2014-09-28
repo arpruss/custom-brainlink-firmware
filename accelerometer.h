@@ -56,8 +56,9 @@ AccelData 	getAccelData(void);	// returns a copy of the raw accel data for user 
 //
 
 
-void 		initAccel(void);				// initialization
-void 		updateAccel(void);			// Updates the raw accel data from the I2C buffer
-int 		newAccelData(void);			// returns 1 if new data in I2C buffer, 0 if not or error
-
+static void 		initAccel(void);				// initialization
+static void 		updateAccel(void);			// Updates the raw accel data from the I2C buffer
+#ifdef COMPILE_UNUSED
+static int 		newAccelData(void);			// returns 1 if new data in I2C buffer, 0 if not or error
+#endif
 #endif

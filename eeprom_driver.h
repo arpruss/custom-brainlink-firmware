@@ -130,15 +130,16 @@
 			    )
 
 /* Prototyping of functions. */
-void EEPROM_WriteByte( uint8_t pageAddr, uint8_t byteAddr, uint8_t value );
-uint8_t EEPROM_ReadByte( uint8_t pageAddr, uint8_t byteAddr );
-void EEPROM_WaitForNVM( void );
-void EEPROM_FlushBuffer( void );
-void EEPROM_LoadByte( uint8_t byteAddr, uint8_t value );
-void EEPROM_LoadPage( const uint8_t * values );
-void EEPROM_AtomicWritePage( uint8_t pageAddr );
-void EEPROM_ErasePage( uint8_t pageAddress );
-void EEPROM_SplitWritePage( uint8_t pageAddr );
-void EEPROM_EraseAll( void );
-
+static void EEPROM_WriteByte( uint8_t pageAddr, uint8_t byteAddr, uint8_t value );
+static uint8_t EEPROM_ReadByte( uint8_t pageAddr, uint8_t byteAddr );
+static void EEPROM_WaitForNVM( void );
+static void EEPROM_FlushBuffer( void );
+#ifdef COMPILE_UNUSED
+static void EEPROM_LoadByte( uint8_t byteAddr, uint8_t value );
+static void EEPROM_LoadPage( const uint8_t * values );
+static void EEPROM_AtomicWritePage( uint8_t pageAddr );
+static void EEPROM_ErasePage( uint8_t pageAddress );
+static void EEPROM_SplitWritePage( uint8_t pageAddr );
+static void EEPROM_EraseAll( void );
+#endif
 #endif

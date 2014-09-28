@@ -1,6 +1,6 @@
 
 // Just sets up the Xmega clock to 32 MHz (defaults to 2 MHz without this)
-void init_clock()
+static void init_clock()
 {
 	OSC.CTRL |= _BV(OSC_RC32MEN_bp);		// turn on 32MHz internal RC oscillator
 	while(!(OSC.STATUS & OSC_RC32MRDY_bm));  	// wait for it to be ready

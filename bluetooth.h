@@ -5,5 +5,4 @@
 #define BT_DEFAULT_RESET_PORT  PORTD
 
 void init_BT(void);
-void BT_default_reset(void);
 void BT_reset(void);

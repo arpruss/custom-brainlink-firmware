@@ -200,5 +200,5 @@
 
 void init_adc(void);
 int read_analog(ADC_CH_MUXPOS_t sensor, ADC_CH_MUXNEG_t compareSensor);
-int read_internal_temperature(void);
+static int read_internal_temperature(void);
 uint16_t read_differential(char port1, char port2);

@@ -2,8 +2,8 @@
 
 volatile int pwm_frequency = 0;
 
-void set_pwm(void);
-void turn_off_pwm0(void);
-void turn_off_pwm1(void);
-void set_pwm0(unsigned int duty);
-void set_pwm1(unsigned int duty);
+static void set_pwm(void);
+static void turn_off_pwm0(void);
+static void turn_off_pwm1(void);
+static void set_pwm0(unsigned int duty);
+static void set_pwm1(unsigned int duty);

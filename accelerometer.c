@@ -20,12 +20,13 @@ AccelData getAccelData()
 	return _acc;
 }
 
+#ifdef COMPILE_UNUSED
 // Tells you if new data is ready
 int newAccelData()
 {
-	
 	return (twiMaster.result == TWIM_RESULT_OK && twiMaster.status == TWIM_STATUS_READY);
 }
+#endif
 
 // this is currently non-blocking. Blocking was attempted (commented out) but seemed to block forever.
 void updateAccel()

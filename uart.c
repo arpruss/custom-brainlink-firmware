@@ -135,6 +135,7 @@ void uart_putchar(USART_t * usart, char c) {
 	usart->DATA = c;
 }
 
+#ifdef COMPILE_UNUSED
 // Gets a character without blocking
 char uart_getchar_nb(USART_t * usart) {
 
@@ -143,7 +144,7 @@ char uart_getchar_nb(USART_t * usart) {
 	/* Wait until data received or a timeout.*/
 	timeout--;
 	}while(((usart->STATUS & USART_RXCIF_bm) == 0) && timeout!=0);
-	
+
 	if(timeout==0) {
 		return 0;
 	}
@@ -151,10 +152,12 @@ char uart_getchar_nb(USART_t * usart) {
 		return usart->DATA;
 	}
 }
+#endif
 
+#ifdef COMPILE_UNUSED
 // Gets a character from the bluetooth buffer, blocks if none exists. Not currently used.
 char uart_getchar(USART_t * usart) {
-	
+
 //	do{
 //	}while((usart->STATUS & USART_RXCIF_bm) == 0);
 //	uart_putchar(usart, (usart->STATUS&0x18));//
@@ -163,6 +166,7 @@ char uart_getchar(USART_t * usart) {
 	//uart_putchar(usart, (usart->STATUS&0x18));//
 	return USART_RXBuffer_GetByte(&BT_data);
 }
+#endif
 
 
 // Gets a character from the bluetooth buffer, blocks if none exists for roughly 300 ms, then times out and returns 256

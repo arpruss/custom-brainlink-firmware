@@ -24,16 +24,18 @@ uint8_t bitCounter;
 int onOffTracker;
 
 // Initializes the IR transmitter
-void init_ir(void);
+static void init_ir(void);
 // Set the IR_LED to regular carrier frequency
-void set_ir50(void);
+static void set_ir50(void);
+#ifdef COMPILE_UNUSED
 // Set the IR_LED to full on - not used
-void set_ir100(void);
+static void set_ir100(void);
+#endif
 // Turn the IR LED off - not used
-void set_ir0(void);
+static void set_ir0(void);
 // Sets up the IR carrier frequency
-void set_ir_carrier(int frequency);
+static void set_ir_carrier(int frequency);
 // Starts the timer using the signal characteristics in robotIRData - the actual timer code is in ir.c
-void start_ir_timer(void);
+static void start_ir_timer(void);
 // Stops the timer, ending the signal
-void stop_ir_timer(void);
+static void stop_ir_timer(void);

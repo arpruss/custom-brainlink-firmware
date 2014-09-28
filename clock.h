@@ -1,2 +1,2 @@
 // Sets up Xmega clock, see clock.c for more
-void init_clock(void);
+static void init_clock(void);

@@ -6,5 +6,5 @@
 #define BLUELED   PIN1_bm
 #define LEDPORT   PORTD
 
-void init_led(void);
+static void init_led(void);
 void set_led(uint8_t red, uint8_t green, uint8_t blue);
