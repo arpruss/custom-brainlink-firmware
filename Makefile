@@ -102,7 +102,7 @@ CSTANDARD = -std=gnu99
 
 
 # Place -D or -U options here
-CDEFS = -DF_CPU=$(F_CPU)UL
+CDEFS = -DF_CPU=$(F_CPU)UL $(ROOMBADEFS)
 
 
 # Place -I options here

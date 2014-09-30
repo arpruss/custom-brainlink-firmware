@@ -7,7 +7,7 @@
 
 #define CPU_FREQUENCY 32000000ul
 
-const uint8_t clockShifts[] = { 0, 1, 2, 3, 6, 8, 10 };
+prog_uchar clockShifts[] PROGMEM = { 0, 1, 2, 3, 6, 8, 10 };
 
 #define CLOCK_SHIFT_COUNT (sizeof clockShifts / sizeof *clockShifts)
 
@@ -100,8 +100,9 @@ void generate_waveform(uint8_t* waveform, char waveType, uint8_t dutyCycle, uint
 /* returns 1 on success; 0 on frequency too high or too low for the length */
 uint8_t play_arb_wave(uint8_t channel, uint8_t* waveform, uint8_t length, uint32_t frequency) {
     for (uint8_t clockShiftIndex = 0 ; clockShiftIndex < CLOCK_SHIFT_COUNT; clockShiftIndex++) {
-         unsigned long add_for_rounding = (frequency * length * (1 << clockShifts[clockShiftIndex])) / 2;
-         unsigned long period = ( (CPU_FREQUENCY + add_for_rounding) >> clockShifts[clockShiftIndex]) / length / frequency;
+         uint8_t clockShift = pgm_read_byte_near(clockShifts + clockShiftIndex);
+         unsigned long add_for_rounding = (frequency * length * (1 << clockShift)) / 2;
+         unsigned long period = ( (CPU_FREQUENCY + add_for_rounding) >> clockShift) / length / frequency;
          if (16 <= period && period < 65535u) {
               if (channel == 0)
                    play_arb_wave_dac0(waveform, length, clockShiftIndex, (uint16_t)period);
