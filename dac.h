@@ -1,7 +1,7 @@
 // Sets up the Xmega DAC for use with the two auxiliary outputs. See dac.c for more details.
 
 #define WAVEFORM_SIZE 64
-static uint8_t waveform[2][WAVEFORM_SIZE];
+uint8_t waveform[2][WAVEFORM_SIZE];
 
 static void init_dac(void);
 void set_dac0(uint8_t val);

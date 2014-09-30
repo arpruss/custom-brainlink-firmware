@@ -44,7 +44,7 @@ uint32_t get_24bit_argument(uint8_t position) {
 
 int main(void)
 {
-        uint8_t sensor[6]; // Stores analog readings for transmission
+        uint8_t sensor; // Stores analog readings for transmission
         int i; // multipurpose counter
         char choice = 0; // Holds the top-level menu character
 //      int red = 0;     // For the red LED intensity
@@ -175,18 +175,18 @@ int main(void)
                                                 break;
                                         // Returns the value of the light sensor
                                         case 'L':
-                                                sensor[0] = read_analog(LIGHT, 0);
-                                                bt_putchar(sensor[0]);
+                                                sensor = read_analog(LIGHT, 0);
+                                                bt_putchar(sensor);
                                                 break;
                                         // Returns the Xmegas internal temperature read - this is undocumented because the value returned is very erratic
                                         case 'T':
-                                                sensor[0] = read_internal_temperature();
-                                                bt_putchar(sensor[0]);
+                                                sensor = read_internal_temperature();
+                                                bt_putchar(sensor);
                                                 break;
                                         // Returns the battery voltage
                                         case 'V':
-                                                sensor[0] = read_analog(BATT_VOLT, 0);
-                                                bt_putchar(sensor[0]);
+                                                sensor = read_analog(BATT_VOLT, 0);
+                                                bt_putchar(sensor);
                                                 break;
                                         // Differential ADC mode
                                         case 'D': // active(1) numgainstages(1)
@@ -201,7 +201,7 @@ int main(void)
                                                     else if (arguments[0] == '1') {
                                                         adcResolution = ADC_RESOLUTION_12BIT_gc;
                                                         adcConvMode = ADC_ConvMode_Signed;
-                                                
+
                                                         if (arguments[1] >= '1' && arguments[1] <= '6') { // number of gain stages
                                                             adcGain = (arguments[1] - '0') << ADC_CH_GAINFAC_gp;
                                                             adcInputMode = ADC_CH_INPUTMODE_DIFFWGAIN_gc;
@@ -223,21 +223,13 @@ int main(void)
                                                 break;
                                         // Returns the readings on all six ADC ports
                                         case 'X':
-                                                sensor[0] = read_analog(AUX0, 0);
-                                                bt_putchar(sensor[0]);
-                                                sensor[1] = read_analog(AUX1, 0);
-                                                bt_putchar(sensor[1]);
-                                                sensor[2] = read_analog(AUX2, 0);
-                                                bt_putchar(sensor[2]);
-                                                sensor[3] = read_analog(AUX3, 0);
-                                                bt_putchar(sensor[3]);
-                                                sensor[4] = read_analog(AUX4, 0);
-                                                bt_putchar(sensor[4]);
-                                                sensor[5] = read_analog(AUX5, 0);
-                                                bt_putchar(sensor[5]);
+                                                for (i=0; i<6; i++) {
+                                                    sensor = read_analog(pgm_read_byte_near(muxPosPins+i), 0);
+                                                    bt_putchar(sensor);
+                                                }
                                                 break;
                                         // Returns differential measurement on pair of ADC ports
-                                        // Assumes we are in differential mode with gain
+                                        // Assumes we are in differential mode
                                         case 'x':
                                                 if (get_arguments(2)) {
                                                     i = read_differential(arguments[0], arguments[1]);
@@ -645,7 +637,7 @@ int main(void)
                                           // e.g., 9600 = C\x03\x3D\xFE
                                                 if (! get_arguments(3))
                                                     break;
-                                                    
+
                                                 bt_putchar(arguments[2]); // duplicate buggy behavior from official firmware; delete if unwanted
 
                                                 set_aux_baud_rate( GET_16BIT_ARGUMENT(0), arguments[2]);

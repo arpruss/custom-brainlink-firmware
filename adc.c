@@ -1,5 +1,8 @@
 #include "adc_driver.c"
 
+prog_uchar muxPosPins[6] PROGMEM = { ADC_CH_MUXPOS_PIN0_gc, ADC_CH_MUXPOS_PIN1_gc, ADC_CH_MUXPOS_PIN2_gc, ADC_CH_MUXPOS_PIN3_gc, ADC_CH_MUXPOS_PIN4_gc, ADC_CH_MUXPOS_PIN5_gc };
+prog_uchar muxNegPins[6] PROGMEM = { ADC_CH_MUXNEG_PIN0_gc, ADC_CH_MUXNEG_PIN1_gc, ADC_CH_MUXNEG_PIN2_gc, ADC_CH_MUXNEG_PIN3_gc, ADC_CH_MUXNEG_PIN4_gc, ADC_CH_MUXNEG_PIN5_gc };
+
 uint8_t adcResolution = ADC_RESOLUTION_8BIT_gc;
 uint8_t adcConvMode = ADC_ConvMode_Unsigned;
 uint8_t adcGain = ADC_DRIVER_CH_GAIN_NONE;
@@ -42,61 +45,15 @@ void init_adc() {
 }
 
 uint16_t read_differential(char port1, char port2) {
-    ADC_CH_MUXPOS_t sensor;
-    ADC_CH_MUXNEG_t compareSensor;
 
-    switch(port1) {
-        case '0':
-            sensor = ADC_CH_MUXPOS_PIN0_gc;
-            break;
-        case '1':
-            sensor = ADC_CH_MUXPOS_PIN1_gc;
-            break;
-        case '2':
-            sensor = ADC_CH_MUXPOS_PIN2_gc;
-            break;
-        case '3':
-            sensor = ADC_CH_MUXPOS_PIN3_gc;
-            break;
-        case '4':
-            sensor = ADC_CH_MUXPOS_PIN4_gc;
-            break;
-        case '5':
-            sensor = ADC_CH_MUXPOS_PIN5_gc;
-            break;
-        default:
-            return 0xFFFF;
-    }
-
-    if ((port2 < '4' && adcInputMode == ADC_CH_INPUTMODE_DIFFWGAIN_gc) ||
-         (port2 >= '4' && adcInputMode == ADC_CH_INPUTMODE_DIFF_gc)) {
+    if (port1 < '0' || port1 > '5' ||
+         (port2 < '4' && adcInputMode == ADC_CH_INPUTMODE_DIFFWGAIN_gc) ||
+         (port2 >= '4' && adcInputMode == ADC_CH_INPUTMODE_DIFF_gc) ||
+         port2 < '0' || port2 > '5') {
          return 0xFFFF;
     }
 
-    switch(port2) {
-        case '0':
-            compareSensor = ADC_CH_MUXNEG_PIN0_gc;
-            break;
-        case '1':
-            compareSensor = ADC_CH_MUXNEG_PIN1_gc;
-            break;
-        case '2':
-            compareSensor = ADC_CH_MUXNEG_PIN2_gc;
-            break;
-        case '3':
-            compareSensor = ADC_CH_MUXNEG_PIN3_gc;
-            break;
-        case '4':
-            compareSensor = ADC_CH_MUXNEG_PIN4_gc;
-            break;
-        case '5':
-            compareSensor = ADC_CH_MUXNEG_PIN5_gc;
-            break;
-        default:
-            return 0;
-    }
-
-    return read_analog(sensor, compareSensor);
+    return read_analog(pgm_read_byte_near(muxPosPins+port1-'0'), pgm_read_byte_near(muxNegPins+port2-'0'));
 }
 
 // Used by mainFirmware to read the analog sensors - light, battery voltage, and auxiliary

@@ -30,7 +30,9 @@ typedef struct accel_data_struct
 
 } AccelData;
 
-AccelData 	getAccelData(void);	// returns a copy of the raw accel data for user inspection
+#ifdef COMILE_UNUSED
+static AccelData 	getAccelData(void);	// returns a copy of the raw accel data for user inspection
+#endif
 
 //------------ User Macros ---------------------------
 //  Returns 0 when false, non-zero when true

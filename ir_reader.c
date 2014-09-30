@@ -223,8 +223,7 @@ int read_data_from_serial()
 			robotData.irBytes[i] = (char)temp;
 		}
 	}
-	
+
 	robotData.numBits = signal_length-1;
 	return 1;
-}	
-	
+}

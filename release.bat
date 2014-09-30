@@ -1,3 +1,4 @@
+touch brainlink.h mainFirmware.c
 C:\WinAVR-20100110\utils\bin\make.exe -f Makefile-57k-roomba
 if errorlevel 1 goto end
 copy mainFirmware.hex 57k-roomba
