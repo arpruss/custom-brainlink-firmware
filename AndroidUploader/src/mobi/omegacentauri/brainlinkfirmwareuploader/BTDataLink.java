@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.os.Build;
@@ -16,6 +17,7 @@ public class BTDataLink extends DataLink {
 	private OutputStream os;
 	private InputStream is;
 
+	@SuppressLint("NewApi")
 	public BTDataLink(BluetoothDevice dev) throws IOException {
 		for (int i = 0 ; i < 3 ; i++) {
 			try {

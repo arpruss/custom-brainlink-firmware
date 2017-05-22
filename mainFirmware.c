@@ -708,6 +708,20 @@ int main(void)
                                                         }
                                                 }
                                                 break;
+                                        case 'U':
+                                            if (get_arguments(2)) {
+                                                set_pull_mode(arguments[0], arguments[1]);
+                                            }
+                                            break;
+                                        case 'a':
+                                                if (get_arguments(3)) {
+                                                    // first 16-bit argument is a bitmap representing pins to monitor as analog
+                                                    // second 8-bit argument represents pins to monitor as digital
+                                                    // the output is dumped as a sequence of 'a' followed by hex data (in capital letters)
+                                                    // ends upon receipt of a '*'
+                                                    dump_sensors(GET_16BIT_ARGUMENT(0), arguments[2]);
+                                                }
+                                                break;
                                         default:
                                                 break;
                                 }

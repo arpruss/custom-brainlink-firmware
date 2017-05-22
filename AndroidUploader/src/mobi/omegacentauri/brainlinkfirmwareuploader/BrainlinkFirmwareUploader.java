@@ -192,7 +192,8 @@ public class BrainlinkFirmwareUploader extends Activity {
 		super.onResume();
 		btAdapter = BluetoothAdapter.getDefaultAdapter();
 		devs = new ArrayList<BluetoothDevice>();
-		devs.addAll(btAdapter.getBondedDevices());
+		if (btAdapter != null)
+			devs.addAll(btAdapter.getBondedDevices());
 		Collections.sort(devs, new Comparator<BluetoothDevice>(){
 			@Override
 			public int compare(BluetoothDevice lhs, BluetoothDevice rhs) {

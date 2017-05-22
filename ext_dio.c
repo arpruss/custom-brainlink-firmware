@@ -162,5 +162,51 @@ char read_input(char port) {
 			return -48;
 			break;
 	}
-
 }
+    
+// mode: 'u': pull-up, 'd': pull-down, '0': float
+void set_pull_mode(uint8_t port, char mode) {
+    uint8_t control;
+    if (mode == 'u')
+        control = PORT_OPC_PULLUP_gc;
+    else if (mode == 'd')
+        control = PORT_OPC_PULLDOWN_gc;
+    else
+        control = 0;
+    
+	switch(port) {
+		case '0':
+			PORTA.PIN0CTRL = control;
+			break;
+		case '1':
+			PORTA.PIN1CTRL = control;
+			break;
+		case '2':
+			PORTA.PIN2CTRL = control;
+			break;
+		case '3':
+			PORTA.PIN3CTRL = control;
+			break;
+		case '4':
+			PORTA.PIN4CTRL = control;
+			break;
+		case '5':
+			PORTA.PIN5CTRL = control;
+			break;
+		case '6':
+			PORTA.PIN6CTRL = control;
+			break;
+		case '7':
+			PORTA.PIN7CTRL = control;
+			break;
+		case '8':
+			turn_off_pwm0();
+			PORTE.PIN2CTRL = control;
+			break;
+		case '9':
+			turn_off_pwm1();
+			PORTE.PIN3CTRL = control;
+			break;
+    }
+}
+
