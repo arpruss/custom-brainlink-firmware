@@ -8,9 +8,20 @@ http://www.brainlinksystem.com/tutorials
 The xboot folder contains the bootloader used to allow re-programming of the Brainlink's main firmware. You may modify the bootloader as well, but you will need to open Brainlink's case and attach hardware programmer (like the AVR-ISP mkII) to the ISP port to do so.
 
 Changes by Alexander Pruss:
+- add data streaming
 - fix bug reading ADC AUX5
 - load calibration data for ADC before use
 - add wave generator APIs:
+
+  a digitalports(2 bytes) analogports(1 byte)
+    Continuously (every 5 ms) stream data from the digital and analog ports. digitalports and analogports are binary bitmasks indicating which ports
+    to stream: e.g., digitalports=0x0011 says to stream ports 0 and 8. The ports are streamed in packets that start with ':', then are followed
+    by ASCII '0' or '1' for each of the digital ports, and then are followed by ASCII hex 8-bit data of the analog port data. The port data is
+    given in order of pin number. Send '*' to terminate the stream.
+    
+  u pin(1 byte) pull(1 byte)
+    Specified pull-up/pull-down/float for the specified digital pin. Default is float (and this may be needed for some other functions).
+    The pin is specified in ASCII ('0' through '9'); the pull is 'u' (up), 'd' (down) or 'f' (float).
 
   w channel(1 byte) type(1 byte) duty(1 byte) amplitude(1 byte) frequency(3 bytes)
     Initate wave generation.

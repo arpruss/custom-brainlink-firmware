@@ -720,6 +720,7 @@ int main(void)
                                                     // the output is dumped as a sequence of 'a' followed by hex data (in capital letters)
                                                     // ends upon receipt of a '*'
                                                     dump_sensors(GET_16BIT_ARGUMENT(0), arguments[2]);
+                                                    time_out = 0;
                                                 }
                                                 break;
                                         default:
