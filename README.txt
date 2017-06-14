@@ -48,6 +48,11 @@ Changes by Alexander Pruss:
 
   Note: Waveform on channel 0 incompatible with buzzer.
         Waveform on channel 1 incompatible with IR transmission.
+        
+  # state(1 byte)
+    Set whether timeout is active.
+  Where:
+    state: '0' or '1'
 
 - fix buffer overflow bug in 'r' command
 - reduced stack usage
