@@ -75,6 +75,8 @@ static uint8_t get_gamecube_data(uint8_t rumble) {
             if (curbitmap == 0) {
                 curbitmap = 1;
                 curpos++;
+                // there is a stop bit coming while the data is being
+                // written to Bluetooth: we just ignore it
                 if (curpos >= 8) {
                     bt_putchar('G');
                     for(curpos=0;curpos<8;curpos++)
