@@ -94,8 +94,9 @@ void dump_gamecube(char pin) {
             timeout = 96;
             // wait for high
             while(--timeout && !(port->IN & bitmap));
-            if (timeout==0) 
+            if (timeout==0) {
                 break;
+            }
             timeout = 255;
         }
         asm("nop");
