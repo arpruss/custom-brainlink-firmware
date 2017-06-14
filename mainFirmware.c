@@ -51,6 +51,7 @@ int main(void)
 //      int green = 0;   // For the green LED intensity
 //      int blue = 0;    // For the blue LED intensity
         uint8_t exit = 0;    // Flag that gets set if we need to go back to idle mode.
+        uint8_t ignore_timeout = 0;
         unsigned int temph=0;  // Temporary variable (typically stores high byte of a 16-bit int )
         unsigned int templ=0;  // Temporary variable (typically stores low byte of a 16-bit int)
         uint8_t location = 0;  // Holds the EEPROM location of a stored IR signal
@@ -133,10 +134,12 @@ int main(void)
                 // Active part of the program - listens for commands and responds as necessary
                 while(exit == 0) {
                         // Checks if we haven't heard anything for a long time, in which case we exit loop and go back to idle mode
-                        time_out++;
-                        // Corresponds to roughly 60 seconds
-                        if(time_out > 33840000) {
-                                exit = 1;
+                        if(! ignore_timeout) {
+                            time_out++;
+                            // Corresponds to roughly 60 seconds
+                            if(time_out > 33840000) {
+                                    exit = 1;
+                            }
                         }
 
                         // Check for a command character
@@ -723,6 +726,23 @@ int main(void)
                                                     time_out = 0;
                                                 }
                                                 break;
+                                        case 'c':
+                                            temph = bt_getchar_timeout_echo();
+                                            if(temph == 256) {
+                                                    err();
+                                                    break;
+                                            }
+                                            dump_gamecube(temph);
+                                            break;
+                                        case '#':
+                                            temph = bt_getchar_timeout_echo();
+                                            if(temph == 256) {
+                                                    err();
+                                                    break;
+                                            }
+                                            ignore_timeout = temph-'0';
+                                            time_out = 0;
+                                            break;
                                         default:
                                                 break;
                                 }

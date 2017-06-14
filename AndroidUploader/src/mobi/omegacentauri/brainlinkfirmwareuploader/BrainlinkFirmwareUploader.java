@@ -136,6 +136,8 @@ public class BrainlinkFirmwareUploader extends Activity {
 		AlertDialog.Builder b = new AlertDialog.Builder(this);
 		b.setTitle("Custom Brainlink Firmware 1.06");
 		b.setMessage(Html.fromHtml(
+				"<b>1.07:</b><br/>"+
+				"- Digital/analog pin streaming. Pin float/pull-up/pull-down. See tinyurl.com/blfirm for syntax.<br/>"+
 				"<b>1.06:</b><br/>"+
 				"- Sine/triangle/square/arbitrary wave generator.  See tinyurl.com/blfirm for syntax or get Brainlink Wave app.<br/>"+		
 				"<b>1.05:</b><br/>"+

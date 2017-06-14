@@ -25,6 +25,7 @@
 #include "ir_reader.h"
 #include "eeprom_driver.h"
 #include "dump_sensors.h"
+#include "dump_gamecube.h"
 
 #include "clock.c"
 #include "led.c"
@@ -41,6 +42,7 @@
 #include "ir_reader.c"
 #include "eeprom_driver.c"
 #include "dump_sensors.c"
+#include "dump_gamecube.c"
 
 #ifdef ROOMBA_57K
 # define ROOMBA_UART_SETTINGS    135, -2   // 57600 for Roomba Create and older Roombas

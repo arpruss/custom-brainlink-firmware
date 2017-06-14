@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      android:versionCode="8"
-      android:versionName="1.07" package="mobi.omegacentauri.brainlinkfirmwareuploader">
+      android:versionCode="9"
+      android:versionName="1.07.1" package="mobi.omegacentauri.brainlinkfirmwareuploader">
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <!--  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/> -->
     <application android:label="Brainlink Firmware Uploader"
