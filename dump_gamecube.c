@@ -61,6 +61,7 @@ static uint8_t get_gamecube_data(uint8_t rumble) {
         gamecube_one();
     else
         gamecube_zeroes(1);
+    gamecube_one(); // stop bit
     
     port->DIRCLR = bitmap;
 
