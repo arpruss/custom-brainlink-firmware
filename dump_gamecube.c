@@ -38,30 +38,13 @@ static void gamecube_zeroes(uint8_t count) {
     }
 }
 
-void dump_gamecube(char pin) {
-    port = port_from_pin(pin);
-    uint8_t bit = bit_from_pin(pin);
-    bitmap = (uint8_t)1 << bit;
-    
-    if (port == NULL) {
-        err();
-        return;
-    }
-        
-    
-    if (pin == '6')
-        disable_dac0();
-    else if (pin == '7')
-        disable_dac1();
-    else if (pin == '8')
-        turn_off_pwm0();
-    else if (pin == '9')
-        turn_off_pwm1();
-
+static uint8_t get_gamecube_data(uint8_t rumble) {
     uint8_t timeout = 255;
-    uint8_t curpos ;
+    uint8_t curpos;
+    
     for(curpos=0; curpos<8; curpos++)
         buffer8[curpos] = 0;
+    
     curpos = 0;
     uint8_t curbitmap = 1;
 
@@ -74,7 +57,10 @@ void dump_gamecube(char pin) {
     gamecube_one();
     gamecube_zeroes(6);
     gamecube_one();
-    gamecube_zeroes(2);
+    if (rumble)
+        gamecube_one();
+    else
+        gamecube_zeroes(1);
     
     port->DIRCLR = bitmap;
 
@@ -88,14 +74,18 @@ void dump_gamecube(char pin) {
             if (curbitmap == 0) {
                 curbitmap = 1;
                 curpos++;
-                if (curpos >= 8)
-                    break;
+                if (curpos >= 8) {
+                    bt_putchar('G');
+                    for(curpos=0;curpos<8;curpos++)
+                        bt_putchar(buffer8[curpos]);
+                    return 1;
+                }
             }
             timeout = 96;
             // wait for high
             while(--timeout && !(port->IN & bitmap));
             if (timeout==0) {
-                break;
+                return 0;
             }
             timeout = 255;
         }
@@ -103,13 +93,46 @@ void dump_gamecube(char pin) {
         asm("nop");
     }
     
-    if (timeout==0) {
+    return 0;
+}
+
+void dump_gamecube(char pin, uint8_t stream, uint8_t rumble) {
+    port = port_from_pin(pin);
+    uint8_t bit = bit_from_pin(pin);
+    bitmap = (uint8_t)1 << bit;
+    
+    if (port == NULL) {
         err();
+        return;
+    }
+    
+    if (pin == '6')
+        disable_dac0();
+    else if (pin == '7')
+        disable_dac1();
+    else if (pin == '8')
+        turn_off_pwm0();
+    else if (pin == '9')
+        turn_off_pwm1();
+    
+    if (!stream) {
+        if (! get_gamecube_data(rumble)) {
+            err();
+        }
     }
     else {
-        bt_putchar('G');
-        bt_putchar('C');
-        for(curpos=0;curpos<8;curpos++)
-            bt_putchar(buffer8[curpos]);
+        while(1) {
+            if (USART_RXBufferData_Available(&BT_data)) {
+                char c = USART_RXBuffer_GetByte(&BT_data);
+                if (c=='*')
+                    return;
+                else if (c=='r')
+                    rumble = 0;
+                else if (c=='R')
+                    rumble = 1;
+            }
+            get_gamecube_data(rumble);
+            _delay_ms(5);
+        }
     }
 }

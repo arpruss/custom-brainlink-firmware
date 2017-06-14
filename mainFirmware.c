@@ -151,8 +151,6 @@ int main(void)
                         }
                         // If it exists, act on command
                         if(choice != 0) {
-                                // Reset the time out
-                                time_out = 0;
                                 // Return the command so the host knows we got it
                                 bt_putchar(choice);
 
@@ -726,13 +724,14 @@ int main(void)
                                                     time_out = 0;
                                                 }
                                                 break;
-                                        case 'c':
-                                            temph = bt_getchar_timeout_echo();
-                                            if(temph == 256) {
-                                                    err();
-                                                    break;
+                                        case 'c': 
+                                            // argument 1: pin (ASCII)
+                                            // argument 2: stream ('1') or single-shot ('0')
+                                            // argument 3: rumble ('1' or '0')
+
+                                            if (get_arguments(3)) {
+                                                dump_gamecube(arguments[0], arguments[1], arguments[2]);
                                             }
-                                            dump_gamecube(temph);
                                             break;
                                         case '#':
                                             temph = bt_getchar_timeout_echo();
@@ -746,6 +745,8 @@ int main(void)
                                         default:
                                                 break;
                                 }
+                                // Reset the time out
+                                time_out = 0;
                         }
                 }
 

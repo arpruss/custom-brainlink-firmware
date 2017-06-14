@@ -9,7 +9,6 @@ void dump_sensors(uint16_t digital, uint8_t analog) {
     uint8_t pin;
     uint8_t value;
     while(1) {
-        _delay_ms(5);
         if (USART_RXBufferData_Available(&BT_data) && '*' == USART_RXBuffer_GetByte(&BT_data))
             return;
         bt_putchar(':');
@@ -22,5 +21,6 @@ void dump_sensors(uint16_t digital, uint8_t analog) {
                 put_hex_nibble(value>>4);
                 put_hex_nibble(value&0xF);
             }
+        _delay_ms(5);
     }
 }
