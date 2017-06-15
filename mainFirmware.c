@@ -726,7 +726,7 @@ int main(void)
                                                 break;
                                         case 'c': 
                                             // argument 1: pin (ASCII)
-                                            // argument 2: stream ('1') or single-shot ('0')
+                                            // argument 2: stream delay (0: single-shot)
                                             // argument 3: rumble ('1' or '0')
 
                                             if (get_arguments(3)) {

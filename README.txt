@@ -20,9 +20,9 @@ Changes by Alexander Pruss:
     given in order of pin number. Send '*' to terminate the stream.
     
   c pin(1 byte) stream(1 byte) rumble(1 byte)
-    Get a data report from a GameCube controller on the specified digital pin (ASCII '0' through '9'). If stream is other than '0', then the data
-    is continuously streamed. If rumble is other than '1', then the rumble motor is turned on. In streaming mode, you can send '*' to exit streaming,
-    'R' to rumble, and 'r' to turn off rumble.
+    Get a data report from a GameCube controller on the specified digital pin (ASCII '0' through '9'). If stream is bigger than zero, then the data
+    is continuously streamed, with a delay in milliseconds specified by stream. At least 2 is recommended. If rumble is other than '1', then the 
+    rumble motor is turned on. In streaming mode, you can send '*' to exit streaming, 'R' to rumble, and 'r' to turn off rumble.
     
   u pin(1 byte) pull(1 byte)
     Specified pull-up/pull-down/float for the specified digital pin. Default is float (and this may be needed for some other functions).

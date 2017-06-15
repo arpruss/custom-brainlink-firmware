@@ -1,1 +1,1 @@
-void dump_gamecube(char pin, char stream, char rumble);
+void dump_gamecube(char pin, uint8_t stream, char rumble);

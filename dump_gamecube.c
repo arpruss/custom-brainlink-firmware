@@ -115,12 +115,11 @@ static uint8_t get_gamecube_data(uint8_t rumble) {
     return 0;
 }
 
-void dump_gamecube(char pin, char stream, char rumble) {
+void dump_gamecube(char pin, uint8_t stream, char rumble) {
     gcPin = pin - '0';
     port = port_from_pin(pin);
     uint8_t bit = bit_from_pin(pin);
     bitmap = (uint8_t)1 << bit;
-    stream = stream != '0';
     rumble = rumble != '0';
     
     if (port == NULL) {
@@ -137,7 +136,7 @@ void dump_gamecube(char pin, char stream, char rumble) {
     else if (pin == '9')
         turn_off_pwm1();
     
-    if (!stream) {
+    if (stream==0) {
         if (! get_gamecube_data(rumble)) {
             err();
         }
@@ -154,7 +153,7 @@ void dump_gamecube(char pin, char stream, char rumble) {
                     rumble = 1;
             }
             get_gamecube_data(rumble);
-            _delay_ms(5);
+            _delay_ms(stream);
         }
     }
 }

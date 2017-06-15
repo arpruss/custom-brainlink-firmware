@@ -9,6 +9,7 @@ from platform import system
 
 if system() == 'Windows':
     from ctypes import windll, Structure, c_ulong, c_ushort, POINTER, Union, byref, c_int, sizeof, c_long
+    import numbers
 
     LBUTTON = 1
     RBUTTON = 2
@@ -169,8 +170,19 @@ if system() == 'Windows':
     KEY_CLOSE_BRACKET = 0xDD
     KEY_APOSTROPHE = 0xDE
     
-    KEYEVENT_KEYUP = 0x0002
-        
+    KEYEVENTF_KEYUP = 0x0002
+    MOUSEEVENTF_LEFTDOWN = 0x0002
+    MOUSEEVENTF_RIGHTDOWN = 0x0008
+    MOUSEEVENTF_MIDDLEDOWN = 0x0020
+    MOUSEEVENTF_LEFTUP = 0x0004
+    MOUSEEVENTF_RIGHTUP = 0x0010
+    MOUSEEVENTF_MIDDLEUP = 0x0040
+    MOUSEEVENTF_MOVE = 0x0001        
+    MOUSEEVENTF_ABSOLUTE = 0x8000
+    
+    MOUSE_RELATIVE = 0
+    MOUSE_ABSOLUTE = 1
+    
     class KeybdInputType(Structure):
         _fields_ = [('wVk', c_ushort), 
                     ('wScan', c_ushort),
@@ -197,14 +209,39 @@ if system() == 'Windows':
     class InputType(Structure):
         _fields_ = [('type', c_ulong),
                     ('union', InputUnionType)]
+
+    def sendData(data):
+        if isinstance(data, KeybdInputType):
+            outData = InputType(1, InputUnionType(ki=data))
+        elif isinstance(data,MouseInputType):
+            outData = InputType(0, InputUnionType(mi=data))
+        elif isinstance(data,HardwareInputType):
+            outData = InputType(2, InputUnionType(hi=data))
+        else:
+            raise Exception("Unsupported")
+        outData2 = (InputType*1)(outData)
+        windll.user32.SendInput(1, outData2, c_int(sizeof(outData2)))
                     
-    def pressKey(key):
-        data = (InputType*1)(InputType(1, InputUnionType(ki=KeybdInputType(key,key,0,0,None))))
-        windll.user32.SendInput(1, data, c_int(sizeof(data)))
+    def doKey(key, press):
+        if isinstance(key, numbers.Number):
+            if key == LBUTTON or key == MBUTTON or key == RBUTTON:
+                if press:
+                    flags = {LBUTTON:MOUSEEVENTF_LEFTDOWN,MBUTTON:MOUSEEVENTF_MIDDLEDOWN,RBUTTON:MOUSEEVENTF_RIGHTDOWN}[key]
+                else:
+                    flags = {LBUTTON:MOUSEEVENTF_LEFTUP,MBUTTON:MOUSEEVENTF_MIDDLEUP,RBUTTON:MOUSEEVENTF_RIGHTUP}[key]
+                sendData( MouseInputType(0,0,0,flags,0,None) )
+            else:
+                sendData( KeybdInputType(key,key,0 if press else KEYEVENTF_KEYUP,0,None) )
+        else:
+            # assume key is mouse offsets
+            if press:
+                sendData( MouseInputType(key[1],key[2],0,MOUSEEVENTF_MOVE | (MOUSEEVENTF_ABSOLUTE if key[0]==MOUSE_ABSOLUTE else 0),0,None) )
         
     def releaseKey(key):
-        data = (InputType*1)(InputType(1, InputUnionType(ki=KeybdInputType(key,key,KEYEVENT_KEYUP,0,None))))
-        windll.user32.SendInput(1, data, c_int(sizeof(data)))
+        doKey(key, False)
+        
+    def pressKey(key):
+        doKey(key, True)
         
     def getPressState(key):
         v = windll.user32.GetAsyncKeyState(int(key))
