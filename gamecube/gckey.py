@@ -30,7 +30,6 @@ def err(message):
 port = "com3"    
 map = maps["arrow"]   
 delay = 5
-command = b'**#1c0'+bytes(bytearray([delay]))+b'0'
 
 for item in sys.argv[1:]:
     if item in maps:
@@ -41,9 +40,12 @@ for item in sys.argv[1:]:
         except:
             port = item
     
+command = b'**#1c0'+bytes(bytearray([delay]))+b'0'
+
 ser = serial.Serial("com3", baudrate=115200, timeout=0.1)
 print("Connected")
 ser.write(command)
+
 
 lastState = GameCubeControllerState()
 count = 0
