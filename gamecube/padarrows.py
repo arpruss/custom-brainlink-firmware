@@ -40,4 +40,3 @@ while True:
             break
     if time.time() - t0 >= 1:
         print("Timeout")
-    time.sleep(0.5)
