@@ -42,7 +42,7 @@ for item in sys.argv[1:]:
     
 command = b'**#1c0'+bytes(bytearray([delay]))+b'0'
 
-ser = serial.Serial("com3", baudrate=115200, timeout=0.1)
+ser = serial.Serial(port, baudrate=115200, timeout=0.1)
 print("Connected")
 ser.write(command)
 
