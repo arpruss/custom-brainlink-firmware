@@ -60,23 +60,24 @@ class GameCubeControllerState(object):
         out.append("Shoulder=(%d,%d)"%(self.leftbutton,self.rightbutton))
         return " ".join(out)
 
-ser = serial.Serial("com3", baudrate=115200, timeout=0.1)
-ser.write(b'*#1')
+if __name__ == '__main__':                
+    ser = serial.Serial("com3", baudrate=115200, timeout=0.1)
+    ser.write(b'*#1')
 
-while True:
-    ser.reset_input_buffer()
-    ser.write(b'c000')
-    t0 = time.time()
-    while time.time() - t0 < 1:
-        c = ser.read()
-        if c == b'E':
-            ser.reset_input_buffer()
-            print("Error")
-            break
-        elif c == b'G':
-            print(GameCubeControllerState(ser.read(8)))
-            break
-    if time.time() - t0 >= 1:
-        print("Timeout")
-    time.sleep(0.5)
+    while True:
+        ser.reset_input_buffer()
+        ser.write(b'c000')
+        t0 = time.time()
+        while time.time() - t0 < 1:
+            c = ser.read()
+            if c == b'E':
+                ser.reset_input_buffer()
+                print("Error")
+                break
+            elif c == b'G':
+                print(GameCubeControllerState(ser.read(8)))
+                break
+        if time.time() - t0 >= 1:
+            print("Timeout")
+        time.sleep(0.5)
     
