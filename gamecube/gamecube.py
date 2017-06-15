@@ -1,10 +1,9 @@
-import serial
-import sys
-import time
 import struct
 
 class GameCubeControllerState(object):
-    def __init__(self, data):
+    def __init__(self, data=None):
+        if data is None:
+            data = b'\0\0\0\0\0\0\0\0'
         self.bytes = struct.unpack('BBBBBBBB', data)
         self.noOriginGet = self.getBit(0,7-2)
         self.start = self.getBit(0,7-3)
@@ -61,6 +60,10 @@ class GameCubeControllerState(object):
         return " ".join(out)
 
 if __name__ == '__main__':                
+    import serial
+    import sys
+    import time
+
     ser = serial.Serial("com3", baudrate=115200, timeout=0.1)
     ser.write(b'*#1')
 
