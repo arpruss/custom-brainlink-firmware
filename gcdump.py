@@ -6,18 +6,19 @@ import struct
 class GameCubeControllerState(object):
     def __init__(self, data):
         self.bytes = struct.unpack('BBBBBBBB', data)
-        self.start = self.getBit(0,3)
-        self.y = self.getBit(0,4)
-        self.x = self.getBit(0,5)
-        self.b = self.getBit(0,6)
-        self.a = self.getBit(0,7)
-        self.l = self.getBit(1,1)
-        self.r = self.getBit(1,2)
-        self.z = self.getBit(1,3)
-        self.dup = self.getBit(1,4)
-        self.ddown = self.getBit(1,5)
-        self.dright = self.getBit(1,6)
-        self.dleft = self.getBit(1,7)
+        self.noOriginGet = self.getBit(0,7-2)
+        self.start = self.getBit(0,7-3)
+        self.y = self.getBit(0,7-4)
+        self.x = self.getBit(0,7-5)
+        self.b = self.getBit(0,7-6)
+        self.a = self.getBit(0,7-7)
+        self.l = self.getBit(1,7-1)
+        self.r = self.getBit(1,7-2)
+        self.z = self.getBit(1,7-3)
+        self.dup = self.getBit(1,7-4)
+        self.ddown = self.getBit(1,7-5)
+        self.dright = self.getBit(1,7-6)
+        self.dleft = self.getBit(1,7-7)
         self.joyx = self.bytes[2]
         self.joyy = self.bytes[3]
         self.cx = self.bytes[4]
@@ -64,7 +65,7 @@ ser.write(b'*#1')
 
 while True:
     ser.reset_input_buffer()
-    ser.write(b'c8')
+    ser.write(b'c000')
     t0 = time.time()
     while time.time() - t0 < 1:
         c = ser.read()
@@ -72,7 +73,7 @@ while True:
             ser.reset_input_buffer()
             print("Error")
             break
-        elif c == b'G' and ser.read() == b'C':
+        elif c == b'G':
             print(GameCubeControllerState(ser.read(8)))
             break
     if time.time() - t0 >= 1:

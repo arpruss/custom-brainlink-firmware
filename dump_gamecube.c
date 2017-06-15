@@ -1,3 +1,8 @@
+#define SEND_PERIOD 5.
+
+// The best protocol data seems to be here: https://github.com/NicoHood/Nintendo/tree/master/src
+// Our send timings aren't perfect, but are good enough
+
 static volatile PORT_t* port_from_pin(char pin) {
     if ('0' <= pin && pin <= '5')
         return &PORTA;
@@ -18,23 +23,25 @@ static uint8_t bit_from_pin(char pin) {
         return 3;
 }
 
+uint8_t gcPin;
 uint8_t bitmap;
 volatile PORT_t* port;
 uint8_t buffer8[8];
+uint16_t initializedGCOnPin = 0;
 
 static void gamecube_one(void) {
     port->OUTCLR = bitmap;
-    _delay_us(5.*0.25);
+    _delay_us(SEND_PERIOD*0.25);
     port->OUTSET = bitmap;
-    _delay_us(5.*0.75);
+    _delay_us(SEND_PERIOD*0.75);
 }
 
 static void gamecube_zeroes(uint8_t count) {
     while(count--) {
         port->OUTCLR = bitmap;
-        _delay_us(5.*0.75);
+        _delay_us(SEND_PERIOD*0.75);
         port->OUTSET = bitmap;
-        _delay_us(5.*0.25);
+        _delay_us(SEND_PERIOD*0.25);
     }
 }
 
@@ -46,17 +53,25 @@ static uint8_t get_gamecube_data(uint8_t rumble) {
         buffer8[curpos] = 0;
     
     curpos = 0;
-    uint8_t curbitmap = 1;
+    uint8_t curbitmap = 0x80;
 
     port->DIRSET = bitmap;
+    
+    if (! (initializedGCOnPin & (1<<gcPin)) ) {
+        gamecube_zeroes(8);
+        gamecube_one();
+        _delay_us(400);
+        initializedGCOnPin |= 1<<gcPin;
+    }
     
     gamecube_zeroes(1);
     gamecube_one();
     gamecube_zeroes(12);
     gamecube_one();
     gamecube_one();
-    gamecube_zeroes(6);
-    gamecube_one();
+
+    gamecube_zeroes(7);
+//    gamecube_one();
     if (rumble)
         gamecube_one();
     else
@@ -71,9 +86,9 @@ static uint8_t get_gamecube_data(uint8_t rumble) {
             _delay_us(14./16.*2);
             if(port->IN & bitmap)
                 buffer8[curpos] |= curbitmap;
-            curbitmap <<= 1;
+            curbitmap >>= 1;
             if (curbitmap == 0) {
-                curbitmap = 1;
+                curbitmap = 0x80;
                 curpos++;
                 // there is a stop bit coming while the data is being
                 // written to Bluetooth: we just ignore it
@@ -88,7 +103,7 @@ static uint8_t get_gamecube_data(uint8_t rumble) {
             // wait for high
             while(--timeout && !(port->IN & bitmap));
             if (timeout==0) {
-                return 0;
+                break;
             }
             timeout = 255;
         }
@@ -96,13 +111,17 @@ static uint8_t get_gamecube_data(uint8_t rumble) {
         asm("nop");
     }
     
+    initializedGCOnPin &= ~(1<<gcPin);
     return 0;
 }
 
-void dump_gamecube(char pin, uint8_t stream, uint8_t rumble) {
+void dump_gamecube(char pin, char stream, char rumble) {
+    gcPin = pin - '0';
     port = port_from_pin(pin);
     uint8_t bit = bit_from_pin(pin);
     bitmap = (uint8_t)1 << bit;
+    stream = stream != '0';
+    rumble = rumble != '0';
     
     if (port == NULL) {
         err();
