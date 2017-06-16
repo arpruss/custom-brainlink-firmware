@@ -9,9 +9,11 @@ from gamecube import GameCubeControllerState
 DEBUG = True
 
 maps = {
+    "a-ctrl":
+        { "a":input.CONTROL, "b":input.SPACE, "dleft":input.LEFT, "dright":input.RIGHT, "dup":input.UP, "ddown":input.DOWN, "z":input.KEY_MINUS, "start":input.KEY_PLUS },
     "arrow":
         { "a":input.SPACE, "b":input.BACK, "dleft":input.LEFT, "dright":input.RIGHT, "dup":input.UP, "ddown":input.DOWN, "z":input.KEY_MINUS, "start":input.KEY_PLUS },
-    "mc":
+    "mcpad":
         { "a":input.SPACE, "b":input.LSHIFT, "dleft":(input.MOUSE_RELATIVE,-50,0), "dright":(input.MOUSE_RELATIVE,50,0), "dup":input.KEY_W, "ddown":input.KEY_S, 
             "z":input.LBUTTON, "start":input.RBUTTON}
     }
