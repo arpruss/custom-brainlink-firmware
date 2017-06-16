@@ -1,10 +1,13 @@
+from __future__ import print_function
 import struct
+import time
 
 class GameCubeControllerState(object):
     def __init__(self, data=None):
         if data is None:
-            data = b'\0\0\0\0\0\0\0\0'
-        self.bytes = struct.unpack('BBBBBBBB', data)
+            self.bytes = tuple(0 for i in range(16))
+        else:
+            self.bytes = tuple(int(data[i:i+2],16) for i in range(0,16,2))
         self.noOriginGet = self.getBit(0,7-2)
         self.start = self.getBit(0,7-3)
         self.y = self.getBit(0,7-4)
@@ -14,16 +17,25 @@ class GameCubeControllerState(object):
         self.l = self.getBit(1,7-1)
         self.r = self.getBit(1,7-2)
         self.z = self.getBit(1,7-3)
-        self.dup = self.getBit(1,7-4)
-        self.ddown = self.getBit(1,7-5)
-        self.dright = self.getBit(1,7-6)
-        self.dleft = self.getBit(1,7-7)
-        self.joyx = self.bytes[2]
-        self.joyy = self.bytes[3]
-        self.cx = self.bytes[4]
-        self.cy = self.bytes[5]
-        self.leftbutton = self.bytes[6]
-        self.rightbutton = self.bytes[7]
+        self.dUp = self.getBit(1,7-4)
+        self.dDown = self.getBit(1,7-5)
+        self.dRight = self.getBit(1,7-6)
+        self.dLeft = self.getBit(1,7-7)
+        self.joyX = self.bytes[2]
+        self.joyY = self.bytes[3]
+        self.cX = self.bytes[4]
+        self.cY = self.bytes[5]
+        self.shoulderLeft = self.bytes[6]
+        self.shoulderRight = self.bytes[7]
+        
+    @staticmethod
+    def isValid(data):
+        if data is None or len(data) != 16:
+            return False
+        for x in data:
+            if not (ord('0')<=x<=ord('9') or ord('A')<=x<=ord('F')):
+                return False
+        return True
         
     def getBit(self,byteNum,bitNum):
         return (self.bytes[byteNum] & (1<<bitNum))>>bitNum
@@ -46,18 +58,53 @@ class GameCubeControllerState(object):
             out.append("L")
         if self.r:
             out.append("R")
-        if self.dup:
+        if self.dUp:
             out.append("D-Up")
-        if self.ddown:
+        if self.dDown:
             out.append("D-Down")
-        if self.dleft:
+        if self.dLeft:
             out.append("D-Left")
-        if self.dright:
+        if self.dRight:
             out.append("D-Right")
-        out.append("Joy=(%d,%d)"%(self.joyx,self.joyy))
-        out.append("C-Stick=(%d,%d)"%(self.cx,self.cy))
-        out.append("Shoulder=(%d,%d)"%(self.leftbutton,self.rightbutton))
+        out.append("Joy=(%d,%d)"%(self.joyX,self.joyY))
+        out.append("C-Stick=(%d,%d)"%(self.cX,self.cY))
+        out.append("Shoulder=(%d,%d)"%(self.shoulderLeft,self.shoulderRight))
         return " ".join(out)
+        
+def processGameCubeController(ser, delay, processor, quiet=False, debug=False):
+    command = b'**#1c0'+bytes(bytearray([delay]))+b'0'
+    ser.reset_input_buffer()
+    ser.write(command)
+
+    lastState = GameCubeControllerState()
+    count = 0
+    startt = time.time()
+
+    while True:
+        t0 = time.time()
+        while time.time() - t0 < 1:
+            c = ser.read()
+            if c == b'E':
+                ser.reset_input_buffer()
+                if not quiet: print("Error 1")
+                break
+            elif c == b'G':
+                data = ser.read(16)
+                if GameCubeControllerState.isValid(data):
+                    newState = GameCubeControllerState(data)
+                    processor(lastState, newState)
+                    lastState = newState
+                    count += 1
+                    if debug and count%1000 == 0: print("freq %f"%(count/(time.time()-startt)))
+                else:
+                    if not quiet: print("Error 2: "+str(data))
+                    ser.write(command)
+                    ser.reset_input_buffer()
+                break
+        if time.time() - t0 >= 1:
+            if not quiet: print("Timeout")
+            ser.write(command)
+            ser.reset_input_buffer()
 
 if __name__ == '__main__':                
     import serial
@@ -65,22 +112,6 @@ if __name__ == '__main__':
     import time
 
     ser = serial.Serial("com3", baudrate=115200, timeout=0.1)
-    ser.write(b'*#1')
-
-    while True:
-        ser.reset_input_buffer()
-        ser.write(b'c000')
-        t0 = time.time()
-        while time.time() - t0 < 1:
-            c = ser.read()
-            if c == b'E':
-                ser.reset_input_buffer()
-                print("Error")
-                break
-            elif c == b'G':
-                print(GameCubeControllerState(ser.read(8)))
-                break
-        if time.time() - t0 >= 1:
-            print("Timeout")
-        time.sleep(0.5)
-    
+    def show(s0,s1):
+        print(s1)
+    gamecubeProcess(ser, 255, show, debug=True)

@@ -15,7 +15,7 @@ class KeyRepeatThread(threading.Thread):
         self.stoprequest = threading.Event()
 
     def press(self, key, repeat=True):
-        if key == input.LBUTTON or key == input.RBUTTON or key == input.MBUTTON or not instanceof(key,numbers.Number):
+        if key == LBUTTON or key == RBUTTON or key == MBUTTON or not isinstance(key,numbers.Number):
             repeat=False
         self.repeatingKey = key if repeat else None
         self.timePressed = time.time()
