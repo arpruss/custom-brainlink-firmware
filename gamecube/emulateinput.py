@@ -2,6 +2,7 @@ from input import *
 import time
 import threading
 import atexit
+import numbers
 
 class KeyRepeatThread(threading.Thread):
     def __init__(self):
@@ -14,6 +15,8 @@ class KeyRepeatThread(threading.Thread):
         self.stoprequest = threading.Event()
 
     def press(self, key, repeat=True):
+        if key == input.LBUTTON or key == input.RBUTTON or key == input.MBUTTON or not instanceof(key,numbers.Number):
+            repeat=False
         self.repeatingKey = key if repeat else None
         self.timePressed = time.time()
         pressKey(key)
@@ -32,7 +35,7 @@ class KeyRepeatThread(threading.Thread):
                 if time.time() >= self.timePressed + self.repeatDelay:
                     releaseKey(self.repeatingKey)
                     pressKey(self.repeatingKey)
-            time.sleep(self.repeatDelay)
+            time.sleep(self.repeatTime)
 
 keyRepeatThread = None
 
