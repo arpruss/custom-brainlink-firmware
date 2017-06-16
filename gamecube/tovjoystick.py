@@ -80,6 +80,8 @@ if __name__ == '__main__':
     os.system(r'"c:\Program Files\vJoy\x64\vJoyConfig" 2 -f -a X Y     Sl0 Sl1 -b 16 -p 2')
     os.system(r'"c:\Program Files\vJoy\x64\vJoyConfig" enable on')
     atexit.register(disable)
+    
+    print("Running")
 
     joy = pyvjoy.VJoyDevice(2)
     ser.reset_input_buffer()
