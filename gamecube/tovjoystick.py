@@ -5,6 +5,8 @@ import time
 
 DEBUG = True
 GC_BUTTONS = ("a", "b", "x", "y", "z", "start", "l", "r")
+maps = {"normal": GC_BUTTONS, 
+        "jetset": ("a", "b", "x", "z", "start", "y", "l", "r") }
 
 def toVJoystick(joy, state, buttons=GC_BUTTONS):
     joy.data.lButtons = sum(1<<i for i in range(len(buttons)) if getattr(state, buttons[i]))
@@ -53,7 +55,7 @@ if __name__ == '__main__':
         if DEBUG: print(message)
 
     port = "com3"    
-    maps = {}
+    map = GC_BUTTONS
     delay = 5
 
     for item in sys.argv[1:]:
@@ -85,4 +87,4 @@ if __name__ == '__main__':
     print("Running")
 
     joy = pyvjoy.VJoyDevice(2)
-    processGameCubeController(ser, delay, lambda s0,s1: toVJoystick(joy, s1))
+    processGameCubeController(ser, delay, lambda s0,s1: toVJoystick(joy, s1, buttons=map))
