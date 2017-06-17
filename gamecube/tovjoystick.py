@@ -6,7 +6,7 @@ import time
 DEBUG = True
 GC_BUTTONS = ("a", "b", "x", "y", "z", "start", "l", "r")
 maps = {"normal": GC_BUTTONS, 
-        "jetset": ("a", "b", "x", "z", "start", "y", "l", "r") }
+        "jetset": ("a", "b", "y", "z", "x", "r", "l", "start") }
 
 def toVJoystick(joy, state, buttons=GC_BUTTONS):
     joy.data.lButtons = sum(1<<i for i in range(len(buttons)) if getattr(state, buttons[i]))
@@ -57,10 +57,13 @@ if __name__ == '__main__':
     port = "com3"    
     map = GC_BUTTONS
     delay = 5
+    startVJoy = True
 
     for item in sys.argv[1:]:
         if item in maps:
             map = maps[item]
+        elif item == "skip-vjoy":
+            startVJoy = False
         else:
             try:
                 delay = int(item)
@@ -77,12 +80,14 @@ if __name__ == '__main__':
         time.sleep(0.5)
         ser.reset_input_buffer()
         ser.close()
-        os.system(r'"c:\Program Files\vJoy\x64\vJoyConfig" enable off')
+        if startVJoy:
+            os.system(r'"c:\Program Files\vJoy\x64\vJoyConfig" enable off')
     
-    print("Enabling vjoystick")
-    os.system(r'"c:\Program Files\vJoy\x64\vJoyConfig" 2 -f -a X Y RY RZ Sl0 Sl1 -b 16 -p 2')
-    os.system(r'"c:\Program Files\vJoy\x64\vJoyConfig" enable on')
-    atexit.register(disable)
+    if startVJoy:
+        print("Enabling vjoystick")
+        os.system(r'"c:\Program Files\vJoy\x64\vJoyConfig" 2 -f -a X Y RY RZ Sl0 Sl1 -b 16 -p 2')
+        os.system(r'"c:\Program Files\vJoy\x64\vJoyConfig" enable on')
+        atexit.register(disable)
     
     print("Running")
 
