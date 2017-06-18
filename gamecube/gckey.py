@@ -16,6 +16,8 @@ maps = {
     "mc":
         { "a":input.SPACE, "b":input.LSHIFT, "dLeft":(input.MOUSE_RELATIVE,-50,0), "dRight":(input.MOUSE_RELATIVE,50,0), "dUp":input.KEY_W, "dDown":input.KEY_S, 
             "z":input.LBUTTON, "start":input.RBUTTON},
+    "wasd":
+        { "a":input.SPACE, "b":input.LSHIFT, "dLeft":input.KEY_A, "dRight":input.KEY_D, "dUp":input.KEY_W, "dDown":input.KEY_S},
     "qbert":
         { "a":input.KEY_1, "b":input.KEY_2, "dLeft":input.LEFT, "dRight":input.RIGHT, "dUp":input.UP, "dDown":input.DOWN, 
           "z":input.KEY_MINUS, "start":input.KEY_5 },
