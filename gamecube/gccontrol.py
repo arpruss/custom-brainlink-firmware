@@ -11,7 +11,7 @@ class GameCubeToDesktop(object):
         self.buttonsToVJoystick = buttonsToVJoystick
         self.combineShoulders = combineShoulders
         self.threshold = threshold
-        self.vJoystick = buttonsToVJoystick is not None
+        self.useVJoystick = buttonsToVJoystick is not None
         self.previous = GameCubeControllerState()
         
     def buttonActive(self, state, button):
@@ -20,9 +20,9 @@ class GameCubeToDesktop(object):
             return value
         return value >= self.threshold
         
-    def setVJoystick(self, joy):
+    def setVJoy(self, joy):
         self.joy = joy
-        self.vJoystick = True
+        self.useVJoystick = True
       
     @staticmethod
     def remapAxis(value):
@@ -30,7 +30,7 @@ class GameCubeToDesktop(object):
         return min(max(int(v1),1),32768)
         
     def process(self, state):
-        if self.vJoystick:
+        if self.useVJoystick:
             self.toVJoystick(state)
         if self.buttonsToDesktop:
             self.processButtonDifferences(state)
@@ -89,7 +89,7 @@ PAD_OPTIONS_DEFAULT = GameCubeToDesktop(buttonsToVJoystick=GC_BUTTONS)
 maps = {
     "normal": PAD_OPTIONS_DEFAULT,
     "jetset": GameCubeToDesktop(buttonsToVJoystick=("a", "b", "y", "z", "x", "shoulderRight", "shoulderLeft", "start")),
-    "a-ctrl":
+    "arrow-ctrl":
         GameCubeToDesktop(buttonsToDesktop={ "a":input.CONTROL, "b":input.SPACE, "dleft":input.LEFT, "dright":input.RIGHT, "dup":input.UP, "ddown":input.DOWN, "z":input.KEY_MINUS, "start":input.KEY_PLUS }),
     "arrow":
         GameCubeToDesktop(buttonsToDesktop={ "a":input.SPACE, "b":input.BACK, "dLeft":input.LEFT, "dRight":input.RIGHT, "dUp":input.UP, "dDown":input.DOWN, "z":input.KEY_MINUS, "start":input.KEY_PLUS }),
@@ -118,8 +118,6 @@ if __name__ == '__main__':
     delay = 5
     startVJoy = True
     
-    options = {}
-
     for item in sys.argv[1:]:
         if item in maps:
             map = maps[item]
@@ -139,6 +137,9 @@ if __name__ == '__main__':
         
     print("Connecting to serial on "+port)
     ser = serial.Serial(port, baudrate=115200, timeout=0.2)
+    
+    if not map.useVJoystick:
+        startVJoy = False
 
     def disable():
         print("Exiting tovjoystick")
@@ -146,10 +147,10 @@ if __name__ == '__main__':
         time.sleep(0.5)
         ser.reset_input_buffer()
         ser.close()
-        if startVJoy and map.vJoystick:
+        if startVJoy:
             os.system(r'"c:\Program Files\vJoy\x64\vJoyConfig" enable off')
     
-    if startVJoy and map.vJoystick:
+    if startVJoy:
         print("Enabling vjoystick")
         os.system(r'"c:\Program Files\vJoy\x64\vJoyConfig" 2 -f -a X Y RZ RY Sl0 Sl1 -b 16 -p 2')
 #        os.system(r'"c:\Program Files\vJoy\x64\vJoyConfig" 2 -f -a Sl0 Sl1 -b 16')
@@ -158,7 +159,7 @@ if __name__ == '__main__':
     
     print("Running")
 
-    if map.vJoystick:
+    if map.useVJoystick:
         joy = pyvjoy.VJoyDevice(2)
-        map.setVJoystick(joy)
+        map.setVJoy(joy)
     processGameCubeController(ser, delay, map.process)
