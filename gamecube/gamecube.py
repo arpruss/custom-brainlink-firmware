@@ -92,7 +92,7 @@ def processGameCubeController(ser, delay, processor, quiet=False, debug=False):
                 data = ser.read(16)
                 if GameCubeControllerState.isValid(data):
                     newState = GameCubeControllerState(data)
-                    processor(lastState, newState)
+                    processor(newState)
                     lastState = newState
                     count += 1
                     if debug and count%1000 == 0: print("freq %f"%(count/(time.time()-startt)))
