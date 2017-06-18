@@ -5,17 +5,29 @@ import time
 
 DEBUG = True
 GC_BUTTONS = ("a", "b", "x", "y", "z", "start", "l", "r")
-maps = {"normal": GC_BUTTONS, 
-        "jetset": ("a", "b", "y", "z", "x", "r", "l", "start") }
+        
+class PadOptions(object):
+    def __init__(self, buttonMap, combineShoulders = False):
+        self.buttonMap = buttonMap
+        self.combineShoulders = combineShoulders
+        
+PAD_OPTIONS_DEFAULT = PadOptions(GC_BUTTONS)
+        
+maps = {
+    "normal": PAD_OPTIONS_DEFAULT,
+    "normal-combined": PadOptions(GC_BUTTONS, combineShoulders = True),
+    "jetset": PadOptions(("a", "b", "y", "z", "x", "rightShoulder", "leftShoulder", "start"))
+    }
 
-def toVJoystick(joy, state, buttons=GC_BUTTONS):
-    joy.data.lButtons = sum(1<<i for i in range(len(buttons)) if getattr(state, buttons[i]))
+def toVJoystick(joy, state, map=PAD_OPTIONS_DEFAULT):
+    joy.data.lButtons = sum(1<<i for i in range(len(map.buttonMap)) if getattr(state, map.buttonMap[i]))
     joy.data.wAxisX = state.joyX-128
     joy.data.wAxisY = 128-state.joyY
     joy.data.wAxisZRot = state.cX
     joy.data.wAxisYRot = state.cY
-    joy.data.wSlider = 255-state.shoulderRight
-    joy.data.wDial = 255-state.shoulderLeft
+    if map.combineShoulders:
+        joy.data.wSlider = state.shoulderLeft - state.shoulderRight
+        joy.data.wDial = 255-state.shoulderLeft
     joy.update()
     
     rid = joy.rID
@@ -55,15 +67,19 @@ if __name__ == '__main__':
         if DEBUG: print(message)
 
     port = "com3"    
-    map = GC_BUTTONS
+    map = maps["normal"]
     delay = 5
     startVJoy = True
+    
+    options = {}
 
     for item in sys.argv[1:]:
         if item in maps:
             map = maps[item]
         elif item == "skip-vjoy":
             startVJoy = False
+        elif item == "combine-shoulders":
+            map.combineShoulders = True
         else:
             try:
                 delay = int(item)
@@ -92,4 +108,5 @@ if __name__ == '__main__':
     print("Running")
 
     joy = pyvjoy.VJoyDevice(2)
-    processGameCubeController(ser, delay, lambda s0,s1: toVJoystick(joy, s1, buttons=map))
+    padOptions = PadOptions(map)
+    processGameCubeController(ser, delay, lambda s0,s1: toVJoystick(joy, s1, padOptions))

@@ -111,7 +111,7 @@ if __name__ == '__main__':
     import sys
     import time
 
-    ser = serial.Serial("com3", baudrate=115200, timeout=0.1)
+    ser = serial.Serial("com3" if len(sys.argv)<2 else sys.argv[1], baudrate=115200, timeout=0.1)
     def show(s0,s1):
         print(s1)
-    gamecubeProcess(ser, 255, show, debug=True)
+    processGameCubeController(ser, 255, show, debug=True)
