@@ -1,13 +1,20 @@
 from __future__ import print_function
 import struct
 import time
+import sys
+
+byteToInt = int if sys.version_info[0] >= 3 else ord
 
 class GameCubeControllerState(object):
     def __init__(self, data=None):
         if data is None:
-            self.bytes = tuple(0 for i in range(16))
-        else:
+            self.bytes = tuple(0 for i in range(8))
+        elif len(data)==16:
             self.bytes = tuple(int(data[i:i+2],16) for i in range(0,16,2))
+        elif len(data)==8:
+            self.bytes = tuple(byteToInt(a) for a in data)
+        else:
+            raise Exception("Invalid data")
         self.noOriginGet = self.getBit(0,7-2)
         self.start = self.getBit(0,7-3)
         self.y = self.getBit(0,7-4)
@@ -29,7 +36,7 @@ class GameCubeControllerState(object):
         self.shoulderRight = self.bytes[7]
         
     @staticmethod
-    def isValid(data):
+    def isValidHex(data):
         if data is None or len(data) != 16:
             return False
         for x in data:
