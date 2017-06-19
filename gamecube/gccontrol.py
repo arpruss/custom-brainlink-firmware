@@ -3,7 +3,7 @@ import math
 from gamecube import *
 import sysinput
 import time
-from future.builtins.misc import input
+from builtins import input
 
 DEBUG = True
         
@@ -105,18 +105,25 @@ maps = {
     
 menu = ( ("Default mapping (vJoystick)", maps["default"]),
          ("Arrow keys with A=CTRL, B=SPACE", maps["arrow-ctrl"]),
+         ("Arrow keys with A=SPACE, B=BACKSPACE", maps["arrow"]),
          ("DPad=WASD", maps["wasd"]),
          ("Jet Set Radio (vJoystick)", maps["jetset"]),
          ("Minecraft", maps["mc"]),
          ("QBert (archive.org)", maps["qbert"]) )
             
 def getFromMenu(menu):
-    for i,label in enumerate(menu):
-        print("%d. %s" % (i,label))
     while True:
-        selection = raw_input("Choose:")
-        if selection == ""
-    
+        for i,item in enumerate(menu):
+            print("%d. %s" % (i,item[0]))
+        selection = input("Choose:")
+        if selection == "":
+            print(menu[0][0])
+            return menu[0][1]
+        try:
+            print(menu[int(selection)][0])
+            return menu[int(selection)][1]
+        except:
+            print("Invalid")               
     
 if __name__ == '__main__':
     import sys
@@ -129,12 +136,14 @@ if __name__ == '__main__':
         if DEBUG: print(message)
 
     port = None
-    map = maps["default"]
+    map = None
     delay = 5
     startVJoy = True
     
     for item in sys.argv[1:]:
-        if item in maps:
+        if item == "menu":
+            map = getFromMenu(menu)
+        elif item in maps:
             map = maps[item]
         elif item == "no-vjoy-start":
             startVJoy = False
@@ -145,7 +154,10 @@ if __name__ == '__main__':
                 delay = int(item)
             except:
                 port = item
-        
+                
+    if map is None:
+        map = getFromMenu(menu)
+                
     if port is None:
         port = serial.tools.list_ports.comports()[0].device
         
