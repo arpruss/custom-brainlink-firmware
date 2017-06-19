@@ -1,8 +1,9 @@
 import pyvjoy
 import math
 from gamecube import *
-import input
+import sysinput
 import time
+from future.builtins.misc import input
 
 DEBUG = True
         
@@ -39,9 +40,9 @@ class GameCubeToDesktop(object):
         for key in self.buttonsToDesktop:
             if getattr(newState, key) and not getattr(self.previous, key):
                 if DEBUG: print("press "+key)
-                emulateinput.emulatePress(self.buttonsToDesktop[key])
+                emulatesysinput.emulatePress(self.buttonsToDesktop[key])
             elif not getattr(newState, key) and getattr(self.previous, self.buttonsToDesktop):
-                emulateinput.emulateRelease(self.buttonsToDesktop[key])
+                emulatesysinput.emulateRelease(self.buttonsToDesktop[key])
                             
     def toVJoystick(self, state):
         self.joy.data.lButtons = sum(1<<i for i in range(len(self.buttonsToVJoystick)) if self.buttonActive(state, self.buttonsToVJoystick[i]))
@@ -84,24 +85,38 @@ class GameCubeToDesktop(object):
         self.joy._sdk.SetContPov(pov2,rid,2)
         
 GC_BUTTONS = ("a", "b", "x", "y", "z", "start", "l", "r")
-PAD_OPTIONS_DEFAULT = GameCubeToDesktop(buttonsToVJoystick=GC_BUTTONS)
         
 maps = {
-    "normal": PAD_OPTIONS_DEFAULT,
+    "default": GameCubeToDesktop(buttonsToVJoystick=GC_BUTTONS),
     "jetset": GameCubeToDesktop(buttonsToVJoystick=("a", "b", "y", "z", "x", "shoulderRight", "shoulderLeft", "start")),
     "arrow-ctrl":
-        GameCubeToDesktop(buttonsToDesktop={ "a":input.CONTROL, "b":input.SPACE, "dleft":input.LEFT, "dright":input.RIGHT, "dup":input.UP, "ddown":input.DOWN, "z":input.KEY_MINUS, "start":input.KEY_PLUS }),
+        GameCubeToDesktop(buttonsToDesktop={ "a":sysinput.CONTROL, "b":sysinput.SPACE, "dleft":sysinput.LEFT, "dright":sysinput.RIGHT, "dup":sysinput.UP, "ddown":sysinput.DOWN, "z":sysinput.KEY_MINUS, "start":sysinput.KEY_PLUS }),
     "arrow":
-        GameCubeToDesktop(buttonsToDesktop={ "a":input.SPACE, "b":input.BACK, "dLeft":input.LEFT, "dRight":input.RIGHT, "dUp":input.UP, "dDown":input.DOWN, "z":input.KEY_MINUS, "start":input.KEY_PLUS }),
+        GameCubeToDesktop(buttonsToDesktop={ "a":sysinput.SPACE, "b":sysinput.BACK, "dLeft":sysinput.LEFT, "dRight":sysinput.RIGHT, "dUp":sysinput.UP, "dDown":sysinput.DOWN, "z":sysinput.KEY_MINUS, "start":sysinput.KEY_PLUS }),
     "mc":
-        GameCubeToDesktop(buttonsToDesktop={ "a":input.SPACE, "b":input.LSHIFT, "dLeft":(input.MOUSE_RELATIVE,-50,0), "dRight":(input.MOUSE_RELATIVE,50,0), "dUp":input.KEY_W, "dDown":input.KEY_S, 
-            "z":input.LBUTTON, "start":input.RBUTTON}),
+        GameCubeToDesktop(buttonsToDesktop={ "a":sysinput.SPACE, "b":sysinput.LSHIFT, "dLeft":(sysinput.MOUSE_RELATIVE,-50,0), "dRight":(sysinput.MOUSE_RELATIVE,50,0), "dUp":sysinput.KEY_W, "dDown":sysinput.KEY_S, 
+            "z":sysinput.LBUTTON, "start":sysinput.RBUTTON}),
     "wasd":
-        GameCubeToDesktop(buttonsToDesktop={ "a":input.SPACE, "b":input.LSHIFT, "dLeft":input.KEY_A, "dRight":input.KEY_D, "dUp":input.KEY_W, "dDown":input.KEY_S}),
+        GameCubeToDesktop(buttonsToDesktop={ "a":sysinput.SPACE, "b":sysinput.LSHIFT, "dLeft":sysinput.KEY_A, "dRight":sysinput.KEY_D, "dUp":sysinput.KEY_W, "dDown":sysinput.KEY_S}),
     "qbert":
-        GameCubeToDesktop(buttonsToDesktop={ "a":input.KEY_1, "b":input.KEY_2, "dLeft":input.LEFT, "dRight":input.RIGHT, "dUp":input.UP, "dDown":input.DOWN, 
-          "z":input.KEY_MINUS, "start":input.KEY_5 }),
+        GameCubeToDesktop(buttonsToDesktop={ "a":sysinput.KEY_1, "b":sysinput.KEY_2, "dLeft":sysinput.LEFT, "dRight":sysinput.RIGHT, "dUp":sysinput.UP, "dDown":sysinput.DOWN, 
+          "z":sysinput.KEY_MINUS, "start":sysinput.KEY_5 }),
     }
+    
+menu = ( ("Default mapping (vJoystick)", maps["default"]),
+         ("Arrow keys with A=CTRL, B=SPACE", maps["arrow-ctrl"]),
+         ("DPad=WASD", maps["wasd"]),
+         ("Jet Set Radio (vJoystick)", maps["jetset"]),
+         ("Minecraft", maps["mc"]),
+         ("QBert (archive.org)", maps["qbert"]) )
+            
+def getFromMenu(menu):
+    for i,label in enumerate(menu):
+        print("%d. %s" % (i,label))
+    while True:
+        selection = raw_input("Choose:")
+        if selection == ""
+    
     
 if __name__ == '__main__':
     import sys
@@ -114,7 +129,7 @@ if __name__ == '__main__':
         if DEBUG: print(message)
 
     port = None
-    map = maps["normal"]
+    map = maps["default"]
     delay = 5
     startVJoy = True
     
@@ -130,7 +145,6 @@ if __name__ == '__main__':
                 delay = int(item)
             except:
                 port = item
-                print (port)
         
     if port is None:
         port = serial.tools.list_ports.comports()[0].device

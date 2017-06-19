@@ -1,4 +1,4 @@
-from input import *
+from sysinput import *
 import time
 import threading
 import atexit
