@@ -3,6 +3,7 @@ import math
 from gamecube import *
 import sysinput
 import time
+import emulateinput
 from builtins import input
 
 DEBUG = True
@@ -10,6 +11,7 @@ DEBUG = True
 class GameCubeToDesktop(object):
     def __init__(self, buttonsToVJoystick=None, buttonsToDesktop=None, combineShoulders = False, threshold=1):
         self.buttonsToVJoystick = buttonsToVJoystick
+        self.buttonsToDesktop = buttonsToDesktop
         self.combineShoulders = combineShoulders
         self.threshold = threshold
         self.useVJoystick = buttonsToVJoystick is not None
@@ -40,9 +42,10 @@ class GameCubeToDesktop(object):
         for key in self.buttonsToDesktop:
             if getattr(newState, key) and not getattr(self.previous, key):
                 if DEBUG: print("press "+key)
-                emulatesysinput.emulatePress(self.buttonsToDesktop[key])
-            elif not getattr(newState, key) and getattr(self.previous, self.buttonsToDesktop):
-                emulatesysinput.emulateRelease(self.buttonsToDesktop[key])
+                emulateinput.emulatePress(self.buttonsToDesktop[key])
+            elif not getattr(newState, key) and getattr(self.previous, key):
+                emulateinput.emulateRelease(self.buttonsToDesktop[key])
+        self.previous = newState
                             
     def toVJoystick(self, state):
         self.joy.data.lButtons = sum(1<<i for i in range(len(self.buttonsToVJoystick)) if self.buttonActive(state, self.buttonsToVJoystick[i]))
@@ -159,7 +162,7 @@ if __name__ == '__main__':
         map = getFromMenu(menu)
                 
     if port is None:
-        port = serial.tools.list_ports.comports()[0].device
+        port = sorted(a.device for a in serial.tools.list_ports.comports())[0]
         
     print("Connecting to serial on "+port)
     ser = serial.Serial(port, baudrate=115200, timeout=0.2)

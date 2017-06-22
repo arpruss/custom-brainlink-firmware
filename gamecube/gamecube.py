@@ -97,7 +97,7 @@ def processGameCubeController(ser, delay, processor, quiet=False, debug=False):
                 break
             elif c == b'G':
                 data = ser.read(16)
-                if GameCubeControllerState.isValid(data):
+                if GameCubeControllerState.isValidHex(data):
                     newState = GameCubeControllerState(data)
                     processor(newState)
                     lastState = newState
@@ -119,6 +119,7 @@ if __name__ == '__main__':
     import time
 
     ser = serial.Serial("com3" if len(sys.argv)<2 else sys.argv[1], baudrate=115200, timeout=0.1)
-    def show(s0,s1):
+    def show(s1):
         print(s1)
+    print("Running...")
     processGameCubeController(ser, 255, show, debug=True)
