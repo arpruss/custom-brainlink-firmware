@@ -36,13 +36,15 @@ class GameCubeControllerState(object):
         self.shoulderRight = self.bytes[7]
         
     @staticmethod
-    def isValidHex(data):
-        if data is None or len(data) != 16:
+    def isValidHex(inData):
+        if inData is None:
             return False
-        for x in data:
-            if not (ord('0')<=x<=ord('9') or ord('A')<=x<=ord('F')):
-                return False
-        return True
+        elif len(inData)==16:
+            return True
+        elif len(inData)==8:
+            return True
+        else:
+            return False
         
     def getBit(self,byteNum,bitNum):
         return (self.bytes[byteNum] & (1<<bitNum))>>bitNum
@@ -118,7 +120,7 @@ if __name__ == '__main__':
     import sys
     import time
 
-    ser = serial.Serial("com3" if len(sys.argv)<2 else sys.argv[1], baudrate=115200, timeout=0.1)
+    ser = serial.Serial("com4" if len(sys.argv)<2 else sys.argv[1], baudrate=115200, timeout=0.1)
     def show(s1):
         print(s1)
     print("Running...")
