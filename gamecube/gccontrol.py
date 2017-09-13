@@ -48,20 +48,31 @@ class GameCubeToDesktop(object):
         self.previous = newState
                             
     def toVJoystick(self, state):
-        self.joy.data.lButtons = sum(1<<i for i in range(len(self.buttonsToVJoystick)) if self.buttonActive(state, self.buttonsToVJoystick[i]))
-        self.joy.data.wAxisX = GameCubeToDesktop.remapAxis(state.joyX)
-        self.joy.data.wAxisY = GameCubeToDesktop.remapAxis(255-state.joyY)
-        self.joy.data.wAxisZRot = GameCubeToDesktop.remapAxis(state.cX)
-        self.joy.data.wAxisYRot = GameCubeToDesktop.remapAxis(255-state.cY)
-        if self.combineShoulders:
-            self.joy.data.wSlider = GameCubeToDesktop.remapAxis((255+state.shoulderLeft - state.shoulderRight)/2)
-        else:
-            self.joy.data.wSlider = GameCubeToDesktop.remapAxis(255-state.shoulderRight)
-        self.joy.data.wDial = GameCubeToDesktop.remapAxis(255-state.shoulderLeft)
-        self.joy.update()
-        
+#        self.joy.data.lButtons = sum(1<<i for i in range(len(self.buttonsToVJoystick)) if self.buttonActive(state, self.buttonsToVJoystick[i]))
+#        self.joy.data.wAxisX = GameCubeToDesktop.remapAxis(state.joyX)
+#        self.joy.data.wAxisY = GameCubeToDesktop.remapAxis(255-state.joyY)
+#        self.joy.data.wAxisZRot = GameCubeToDesktop.remapAxis(state.cX)
+#        self.joy.data.wAxisYRot = GameCubeToDesktop.remapAxis(255-state.cY)
+#        if self.combineShoulders:
+#            self.joy.data.wSlider = GameCubeToDesktop.remapAxis((255+state.shoulderLeft - state.shoulderRight)/2)
+#        else:
+#            self.joy.data.wSlider = GameCubeToDesktop.remapAxis(255-state.shoulderRight)
+#        self.joy.data.wDial = GameCubeToDesktop.remapAxis(255-state.shoulderLeft)
+#        self.joy.update()
         rid = self.joy.rID
         
+        for i in range(len(self.buttonsToVJoystick)):
+            self.joy.set_button(i+1, self.buttonActive(state, self.buttonsToVJoystick[i]))
+        self.joy.set_axis(pyvjoy.HID_USAGE_X, GameCubeToDesktop.remapAxis(state.joyX))
+        self.joy.set_axis(pyvjoy.HID_USAGE_Y, GameCubeToDesktop.remapAxis(255-state.joyY))
+        self.joy.set_axis(pyvjoy.HID_USAGE_RZ, GameCubeToDesktop.remapAxis(state.cX))
+        self.joy.set_axis(pyvjoy.HID_USAGE_RY, GameCubeToDesktop.remapAxis(255-state.cY))
+        if self.combineShoulders:
+            self.joy.set_axis(pyvjoy.HID_USAGE_SL0, GameCubeToDesktop.remapAxis((255+state.shoulderLeft - state.shoulderRight)/2))
+        else:
+            self.joy.set_axis(pyvjoy.HID_USAGE_SL0, GameCubeToDesktop.remapAxis(255-state.shoulderRight))
+        self.joy.set_axis(pyvjoy.HID_USAGE_WHL, GameCubeToDesktop.remapAxis(255-state.shoulderLeft))
+            
         vector = [0,0]
         if state.dUp:
             vector[1] += 1
